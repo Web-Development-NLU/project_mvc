@@ -1,0 +1,43 @@
+.bgr-red {
+  background-color: var(--ctb-09);
+  color: var(--cta-02);
+}
+
+.bgr-trans {
+  background-color: none;
+}
+
+.bgr-black {
+  background-color: var(--cta-09);
+  color: var(--cta-02);
+}
+
+.bgr-white {
+  background-color: var(--cta-01);
+  color: var(--cta-09)
+}
+
+.bgr-white-02 {
+  background-color: var(--cta-02);
+}
+
+.bgr-blue {
+  background: var(--ctd-02);
+  color: var(--cta-01);
+}
+
+.bgr-gray {
+  background-color: var(--cta-05);
+}
+
+.color-red {
+  color: var(--ctb-09);
+}
+
+.color-black {
+  color: var(--cta-09);
+}
+
+.color-white {
+  color: var(--cta-01);
+}

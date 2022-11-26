@@ -1,0 +1,44 @@
+#checkout-content {
+  max-width: 1470px;
+}
+
+#checkout-content .checkout-detail {
+  margin: 0;
+}
+
+#checkout-content .checkout-other-action {
+  max-width: 680px;
+  margin: auto;
+}
+
+#checkout-content .checkout-detail .checkout-billing > div {
+  margin-bottom: 35px;
+}
+
+#checkout-content .checkout-detail .checkout-action {
+  border: 1px solid var(--cta-09);
+  height: fit-content;
+  padding: 20px 40px;
+}
+
+#checkout-content .checkout-detail .checkout-action .action-item-title {
+  font-weight: 600;
+  font-size: 0.8rem;
+}
+
+#checkout-content .checkout-detail .checkout-action-item.totals .current-price {
+  font-size: 1rem;
+  font-weight: 600;
+}
+
+#checkout-content .checkout-detail .checkout-action .checkout-action-item {
+  display: flex;
+  justify-content: space-between;
+  padding: 30px 0 ;
+}
+
+#checkout-content .checkout-detail .checkout-billing_title,
+#checkout-content .checkout-detail .checkout-additional-info_title {
+  font-size: 1.3rem;
+  font-weight: 500;
+}

@@ -1,0 +1,94 @@
+.card-store-empty-container,.card-store-whishlist-container {
+    padding: 2.1875rem 0;
+}
+.card-store-swap {
+    padding: 0 1.875rem;
+    margin: 0 auto;
+    max-width: 1470px;
+}
+.container-content-swap {
+    padding: 0.625rem;
+}
+.card-store-empty-container .card-store-swap .content-area > p {
+    padding: 0.5rem 1rem;
+    color: var(--cta-10);
+    border-style: solid;
+    border-width: 0 0 0 2px;
+    line-height: 1.5;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    line-height: 1.3125rem;
+    font-size: 0.875rem;
+    background-color: var(--ctf-01);
+    margin-bottom: 1.75rem;
+}
+.card-store-empty-container .content-area .btn-return-shop {
+    margin-bottom: 1rem;
+}
+.card-store-swap .content-area .btn-return-shop span {
+    display: inline-flex;
+}
+.card-store-swap .content-area .btn-return-shop a {
+    letter-spacing: 2px;
+    padding: 0.9375rem 1.5625rem;
+    font-size: 0.875rem;
+    font-weight: 500;
+    text-transform: uppercase;
+    font-family: var(--f-poppins);
+    position: relative;
+    height: 50px;
+
+}
+
+.card-store-swap .content-area .header-cards-whishlist {
+    margin-bottom: 1.875rem;
+}
+.card-store-swap .content-area .header-cards-whishlist > h2 {
+    font-size: 2rem;
+    font-weight: 500;
+    line-height: 3rem;
+}
+.card-store-whishlist-container .card-store-swap .content-area .text-content {
+    position: relative;
+}
+.card-store-whishlist-container .card-store-swap .content-area .text-content i{
+    position: absolute;
+    z-index: 1;
+    top: 1.1rem;
+    left: 1rem;
+    font-size: 1.25rem;
+    line-height: 1.5rem;
+    color: var(--ctd-03);
+}
+.card-store-whishlist-container .card-store-swap .content-area .text-content > p {
+    padding: 0.875rem 1.75rem 0.875rem 3.0625rem;
+    margin: 0 0 1.75rem;
+    position: relative;
+    background-color: #f7f6f7;
+    color: #515151;
+    border-top: 3px solid var(--ctd-03);
+    list-style: none outside;
+    width: auto;
+    word-wrap: break-word;
+    font-size: 0.875rem;
+    font-weight: 400;
+    line-height: 1.5rem;
+}
+@media only screen and (max-width: 767px){
+    .card-store-swap{
+        padding: 0 0.9375rem;
+    }
+    .card-store-whishlist-container .container-content-swap {
+        padding: 0;
+    }
+    .card-store-swap .content-area .header-cards-whishlist > h2 {
+        font-size: 1.375rem;
+        line-height: 2.0625rem;
+        text-align: center;
+    }
+    .card-store-swap .content-area .btn-return-shop a {
+        padding: 0.75rem 0.9375rem;
+        font-size: 0.875rem;
+    }
+}

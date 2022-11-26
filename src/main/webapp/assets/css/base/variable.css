@@ -1,0 +1,45 @@
+:root {
+  --cta-01: #fff;
+  --cta-02: #ededed;
+  --cta-03: #cccccc;
+  --cta-04: #c0c0c0;
+  --cta-05: #a0a0a0;
+  --cta-06: #808080;
+  --cta-07: #515151;
+  --cta-08: #222222;
+  --cta-09: #1a1a1a;
+  --cta-10: #0a0a0a;
+
+  --ctb-01: #f5f5dc;
+  --ctb-02: #ffe5d4;
+  --ctb-03: #eded31;
+  --ctb-04: #ffd015;
+  --ctb-05: #faaf21;
+  --ctb-06: #f78c1d;
+  --ctb-07: #f96407;
+  --ctb-08: #fe5819;
+  --ctb-09: #ff3636;
+  --ctb-10: #ff0000;
+  --ctb-11: #dd3333;
+
+  --ctc-01: #81d742;
+  --ctc-02: #3ebc40;
+  --ctc-03: #55a61d;
+
+  --ctd-01: #6ec1e4;
+  --ctd-02: #1e73be;
+  --ctd-03: #007aff;
+  --ctd-04: #292f38;
+  --ctd-05: #232529;
+
+  --cte-01: #886628;
+  --cte-01: #4e4128;
+  --cte-01: #29241b; 
+
+
+  --ctf-01: #f7f6f7;
+  --ctf-02: #f5f5f5;
+  /* fonts */
+  --f-roboto: 'Roboto', sans-serif;
+  --f-poppins: 'Poppins', sans-serif;
+}

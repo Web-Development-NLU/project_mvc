@@ -1,0 +1,67 @@
+.br-50 {
+  border-radius: 50%;
+}
+
+.bd-black {
+  border: 2px solid var(--cta-09);
+}
+
+.bd-black-01 {
+  border: 1px solid var(--cta-05);
+}
+
+.outline-black {
+  outline: 2px solid var(--cta-09);
+  outline-offset: -2px;
+}
+
+.bd-white-02 {
+  border: 2px solid var(--cta-01);
+}
+
+.bd-white {
+  border: 1px solid var(--cta-02);
+}
+
+.shadow-01 {
+  box-shadow: 0 3px 10px rgb(0 0 0 / 8%);
+}
+
+/* HOVER */
+/* HOVER TO BG RED */
+.hover-bg-red:hover {
+  background-color: var(--ctb-09);
+  outline: none;
+  color: var(--cta-02);
+}
+
+.hover-bg-red:hover .fw-500 {
+  color: var(--cta-02);
+  font-weight: 550;
+}
+
+/* HOVER TO BG TRANS */
+
+.hover-bg-trans:hover {
+  background-color: transparent;
+  outline: 2px solid var(--cta-01);
+  outline-offset: -2px;
+  color: var(--cta-01);
+}
+
+.hover-text-red:hover {
+  color: var(--ctb-09);
+  transition: 0.3s;
+}
+
+/* HOVER TO BORDER BLACK */
+
+.hover-bd-black:hover {
+  border: 1px solid var(--cta-09);
+  color: var(--cta-09);
+}
+
+.hover-bg-black:hover {
+  background-color: var(--cta-09);
+  color: var(--cta-02);
+}

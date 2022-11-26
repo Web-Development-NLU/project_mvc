@@ -1,0 +1,35 @@
+.rd-red .radio-bg{
+  background: var(--ctb-09);
+}
+
+.rd-yellow .radio-bg{
+  background: var(--ctb-04);
+}
+
+.input-radio {
+  margin-right: 15px;
+  height: 2rem;
+  width: 2rem;
+}
+
+.input-radio label {
+  margin: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.input-radio input[type="radio"]{
+  display: none;
+}
+
+.input-radio .radio-bg {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  cursor: pointer;
+  margin: 0;
+}
+
+.input-radio input[type="radio"]:checked ~ .radio-bg{
+  border: 2px solid var(--cta-06);
+}

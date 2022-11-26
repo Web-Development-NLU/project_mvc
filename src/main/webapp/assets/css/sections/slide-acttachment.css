@@ -1,0 +1,41 @@
+.slide-acttachment {
+  position: relative;
+  height: fit-content;
+
+}
+
+.slide-acttachment .background-acttachment {
+  background-image: url('https://caston.familab.net/wp-content/uploads/2021/12/h1_banner_1.jpg');
+  background-attachment: fixed;
+  height: 100vh;
+}
+
+.slide-acttachment .slide_mark-icon {
+  width: fit-content;
+  height: fit-content;
+  font-size: 2.5em;
+  line-height: 0;
+  padding: 1em;
+  margin: auto;
+  margin-top: -1.5em;
+}
+
+.slide-acttachment .slider_item-content {
+  padding-top: 0;
+}
+
+@media screen and (max-width: 1024px) {
+  .slide-acttachment .background-acttachment {
+    background-attachment: unset;
+    height: 550px;
+  }
+}
+
+@media screen and (max-width: 767px) {
+  .slide-acttachment {
+    font-size: 13px;
+  }
+  .slide-acttachment .background-acttachment {
+    height: 450px;
+  }
+}

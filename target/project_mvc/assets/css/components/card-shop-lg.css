@@ -1,0 +1,67 @@
+.card-shop-lg {
+  width: fit-content;
+  position: relative;
+  overflow: hidden;
+}
+
+.card-shop-lg:hover img {
+  transform: scale(1.1, 1.1);
+}
+
+.card-shop-lg-list .card-shop-lg img {
+  width: 100%;
+  object-fit: cover;
+  height: 626px;
+  transition: 1s;
+}
+
+.card-shop-lg .card-shop-lg_content {
+  width: fit-content;
+  position: absolute;
+  height: fit-content;
+  top: 0;
+  bottom: 0;
+  left: 100px;
+  margin: auto;
+}
+
+.card-shop-lg .card-shop-lg_content .card-title {
+  font-size: 2.5em;
+  font-weight: 300;
+  line-height: 2.1rem;
+}
+
+.card-shop-lg .card-shop-lg_content .card-subtitle {
+  font-size: 3.123em;
+  font-weight: 300;
+}
+
+.card-shop-lg .card-shop-lg_content .card-line-decor {
+  width: 35%;
+  height: 1px;
+  margin: 1em 0 2.5em 0;
+} 
+
+.card-shop-lg .card-shop-lg_content .card-action {
+  width: 80%;
+}
+
+@media screen and (max-width: 1024px) {
+  .card-shop-lg .card-shop-lg_content .card-action {
+    width: 90%;
+  }
+  .card-shop-lg-list .card-shop-lg img {
+    height: 400px;
+  }
+
+  .card-shop-lg .card-shop-lg_content {
+    left: 40px;
+    font-size: 11.2px;
+  }
+}
+
+@media screen and (max-width: 767px) {
+  .card-shop-lg-list .card-shop-lg img {
+    height: 350px;
+  }
+}

@@ -1,0 +1,120 @@
+#wishlist-content {
+  max-width: 1200px;
+}
+
+#wishlist-content .wishlist-content_title {
+  font-size: 1.5em;
+  font-weight: 600;
+  margin-bottom: 20px;
+}
+
+#wishlist-content table thead tr th:first-child input {
+  margin-right: 5px;
+}
+
+#wishlist-content table tr td,
+#wishlist-content table tr th {
+  padding: 0;
+  vertical-align: middle;
+  padding: 20px;
+}
+
+table .smart-cell {
+  width: 1px;
+  white-space: nowrap;
+  padding: 10px;
+}
+
+#wishlist-content table tbody .wishlist_img-product img {
+  width: 69px;
+}
+
+#wishlist-content table tbody .wishlist_action-remove button{
+  border-radius: 50%;
+  padding: 0 0 1px 1px;
+  width: 20px;
+  height: 20px;
+  line-height: 0;
+  font-size: 0.7rem;
+  transition: 0.3s;
+}
+
+#wishlist-content table tbody .wishlist_label div {
+  width: fit-content;
+  border: 2px solid var(--cta-09);
+  font-size: 0.7rem;
+  padding: 0 1rem;
+  font-weight: 700;
+}
+
+#wishlist-content tfoot .wishlist_action-group {
+  width: 100%;
+  justify-content: flex-end;
+  margin: 0;
+}
+#wishlist-content tfoot .wishlist_action-group a {
+  width: 30%;
+  margin-left: 20px;
+}
+
+@media screen and (max-width: 767px) {
+  #wishlist-content table thead tr th:not(:first-child) {
+    display: none;
+    
+  }
+
+  #wishlist-content table thead tr th:first-child {
+    padding: 10px 0 10px 10px;
+  }
+
+
+  #wishlist-content table tr {
+    padding-top: 20px;
+    border-bottom: 1px solid var(--cta-02);
+  }
+  #wishlist-content table tbody tr td,
+  #wishlist-content table tbody tr th{
+    border: none;
+    padding: 0 10px 15px 0;
+  }
+
+  #wishlist-content table .wishlist_item{
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    padding-left: 100px;
+  }
+  #wishlist-content table .smart-cell {
+    padding: 0;
+  }
+  #wishlist-content table .wishlist_item .wishlist_img-product img{
+    position: absolute;
+    left: 20px;
+    top: 0;
+    bottom: 0;
+    margin-top: auto;
+    margin-bottom: auto;
+  }
+
+  #wishlist-content table .wishlist_item .wishlist-choice {
+    position: absolute;
+    left: 20px;
+    top: 10px;
+  }
+
+  #wishlist-content table .wishlist_item .wishlist_action-remove button{
+    position: absolute;
+    right: 20px;
+    top: 10px;
+  }
+
+  #wishlist-content table .wishlist_item .wishlist_action-add-to-cart {
+    max-width: 180px;
+  }
+
+  #wishlist-content tfoot .wishlist_action-group a {
+    width: 100%;
+    margin: 0;
+    margin-top: 10px;
+  }
+}

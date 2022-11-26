@@ -1,0 +1,8 @@
+.button-color {
+  width: 20px;
+  height: 30px;
+  background: var(--color);
+  border-radius: 50%;
+  margin: 10px;
+  margin-left: 0;
+}

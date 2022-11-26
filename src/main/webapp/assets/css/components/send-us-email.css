@@ -1,0 +1,102 @@
+.send-us-email-container {
+    padding: 3.75rem 0 6.25rem;
+    box-shadow: 0px 0px 10px 0px var(--ctb-02);
+    display: flex;
+    flex-direction: column;
+}
+.header-send-us {
+    margin-bottom: 2.1875rem;
+}
+.header-send-us .icon-email {
+    margin-bottom: 0.9375rem;
+}
+.header-send-us .title-content-swap {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+.header-send-us .icon-email i{
+    font-size: 3.125rem;
+    font-weight: 500;
+    line-height: 1.5rem;
+    height: 50px;
+    display: inline-block;
+}
+.header-send-us .title-head {
+    font-size: 1.625rem;
+    font-weight: 500;
+    line-height: 1.5rem;
+}
+.form-send-us-container .form-send-us-swap {
+    padding: 0 4.375rem;
+}
+.form-send-us-container .form-send-us-swap .form-container {
+    margin-bottom: 1.5rem;
+    margin-left: auto;
+    margin-right: auto;
+}
+.form-send-us-container .form-send-us-swap .form-container .field-ip-container {
+    display: flex;
+}
+.field-ip-container > div {
+    padding: 0.625rem 0;
+    width: 100%;
+}
+.field-ip-container > div:last-child {
+    margin-left: 1.1875rem;
+}
+.field-area-container {
+    padding: 0.625rem 0;
+}
+.form-container .submit-container {
+    padding-top: 0.625rem;
+}
+.form-container .submit-container a button {
+    width: 100%;
+    border: none;
+    height: 50px;
+    font-size: 0.875rem;
+    font-weight: 500;
+    letter-spacing: 2px;
+    padding: 0.625rem 0.9375rem;
+    line-height: 1.25rem;
+}
+@media only screen and (max-width: 767px) {
+    .send-us-email-container{
+        box-shadow: none;
+        padding: 0 0 0.9375rem;
+        margin: 0 0 1.875rem;
+    }
+    .header-send-us {
+        margin-bottom: 0.625rem;
+    }
+    .header-send-us .icon-email {
+        margin-bottom: 0.375rem;
+        height: 30px;
+        width: 30px;
+    }
+    .header-send-us .icon-email i{
+        font-size: 1.875rem;
+        height: 30px;
+        width: 30px;
+        display: inline-block;
+    }
+    .header-send-us .title-head {
+        font-size: 1.25rem;
+    }
+    .form-send-us-container .form-send-us-swap {
+        padding: 0;
+    }
+    .form-send-us-container .form-send-us-swap .form-container {
+        margin-bottom: 1.5rem;
+        margin-left: auto;
+        margin-right: auto;
+    }
+    .form-send-us-container .form-send-us-swap .form-container .field-ip-container {
+        display: block;
+    }
+    .field-ip-container > div:last-child {
+        margin-left: 0;
+    }
+}

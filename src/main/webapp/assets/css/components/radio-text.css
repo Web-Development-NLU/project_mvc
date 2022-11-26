@@ -1,0 +1,17 @@
+.input-radio-text {
+  margin-right: 15px;
+}
+
+.input-radio-text input[type="radio"] {
+  display: none;
+}
+
+.input-radio-text .radio-btn {
+  border: 2px solid var(--cta-03);
+  padding: 0.5rem;
+  cursor: pointer;
+}
+
+.input-radio-text input[type="radio"]:checked ~ .radio-btn {
+  border: 2px solid var(--cta-10);
+}

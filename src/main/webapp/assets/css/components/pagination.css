@@ -1,0 +1,14 @@
+.pagination-item:not(:first-child) {
+  margin-left: 10px;
+}
+
+.pagination-item {
+  width: 2.5rem;
+  height: 2.5rem;
+  text-align: center;
+}
+
+.pg-action {
+  outline: 1px solid var(--cta-09);
+  outline-offset: -1px;
+}

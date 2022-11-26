@@ -1,0 +1,42 @@
+.card-category {
+    padding: 0 1em;
+    text-align: center;
+    background-color: transparent;
+}
+.card-category .img-category img {
+    max-width: 100px;
+    max-height: 100px;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    margin-bottom: 0.625rem;
+    cursor: pointer;
+}
+.card-category >h5{
+    margin: 0;
+    display: inline-flex;
+    justify-content: center;
+}
+.card-category >h5 a{
+    color: var(--cta-01);
+    font-size: 0.8125rem;
+    font-weight: 500;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    line-height: 1.21875rem;
+    font-family: var(--f-poppins);
+    border-bottom: 1px solid transparent;
+    text-decoration: none;
+    transition: all 0.3s linear 0s;
+}
+.card-category:hover >h5 a{
+    border-color: var(--cta-01);
+}
+@media only screen and (max-width: 767px){
+    .card-category .img-category img {
+        max-width: 50px;
+        max-height: 50px;
+        margin-bottom: 0;
+        cursor: pointer;
+    }
+}

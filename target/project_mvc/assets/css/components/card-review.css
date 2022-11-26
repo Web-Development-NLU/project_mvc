@@ -1,0 +1,48 @@
+.card-review {
+  border: 1px solid var(--cta-02);
+  padding: 1.9em;
+  margin-top: 20px;
+}
+
+.card-review .avatar {
+  border-radius: 50%;
+  width: 3.125em;
+  height: 3.125em;
+  margin-right: 15px;
+}
+
+.card-review .card-review-info {
+  display: flex;
+  width: 100%;
+  position: relative;
+}
+
+.card-review .card-review-info .info_personal-name {
+  font-size: 0.9375rem;
+  font-weight: 500;
+  display: flex;
+  align-items: center;
+}
+.card-review .card-review-info .info_personal-name .star-rate {
+  margin-left: 12px;
+}
+
+.card-review .card-review-info .info_personal-date {
+  font-size: 0.8125rem;
+}
+
+.card-review .card-review-content {
+  font-size: 0.9375rem;
+  margin-top: 20px;
+}
+
+.card-review .card-review-content p {
+  margin: 0;
+  font-family: var(--f-poppins);
+}
+
+@media screen and (max-width: 767px) {
+  .card-review {
+    font-size: 11.52px;
+  }
+}

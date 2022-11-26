@@ -1,0 +1,10 @@
+#login-content {
+  max-width: 1440px;
+  margin: 5rem auto;
+}
+
+@media screen and (max-width: 767px) {
+  #login-content .row > div:last-child {
+    margin-top: 5rem;
+  }
+}

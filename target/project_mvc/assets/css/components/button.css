@@ -1,0 +1,81 @@
+button {
+  border: none;
+}
+
+button:focus{
+  outline: none;
+}
+
+/* BUTTON ICONS */
+
+.btn-icon {
+  width: 2.5rem;
+  height: 2.5rem;
+  font-size: 1.1rem;
+  line-height: 2.5rem;
+  font-weight: bold;
+  transition: 0.3s;
+}
+/* BUTTON TEXT */
+
+.btn-text {
+  padding: 0.8rem 0;
+  width: 100%;
+  font-weight: 600;
+  transition: 0.3s;
+  font-size: 0.875rem;
+  letter-spacing: 2px;
+}
+
+.btn-text-lg {
+  padding: 0.8rem 0;
+  width: 100%;
+  font-weight: 600;
+  transition: 0.3s;
+}
+
+/* BUTTON ICON COMBINE TEXT */
+
+.btn-icon-cb-text {
+  padding: 0.5rem 2rem;
+  background: transparent;
+  font-size: 0.8em;
+  font-weight: 600;
+  font-family: var(--f-poppins);
+}
+
+.btn-icon-cb-text a:hover {
+  color: var(--cta-01);
+  text-decoration: none;
+}
+
+.btn-icon-cb-text .btn-content {
+  margin-left: 5px;
+  letter-spacing: 1px;
+}
+
+/* BUTTON BADGE */
+
+.btn-badge {
+  background: transparent;
+  font-weight: bold;
+  font-size: 1rem;
+}
+
+.btn-badge a:hover {
+  color: var(--cta-01);
+}
+
+/* LINK */
+
+.btn-link {
+  font-weight: bold;
+  font-size: 0.8em;
+  transition: 0.3s;
+  cursor: pointer;
+  letter-spacing: 1px;
+}
+
+.btn-link:hover {
+  text-decoration: none;
+}

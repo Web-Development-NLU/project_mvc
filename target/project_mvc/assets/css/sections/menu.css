@@ -1,0 +1,187 @@
+menu {
+  position: fixed;
+  padding: 2rem 0;
+  width: 100%;
+  z-index: 1;
+  transform-origin: top;
+  transition: 0.3s;
+}
+
+menu .container_menu{
+  max-width: 1470px;
+}
+
+menu a {
+  color: var(--cta-01);
+}
+
+menu a:hover {
+  color: var(--cta-01)
+}
+
+menu ul li {
+  list-style-type: none;
+}
+
+menu .menu_list, menu .menu_action {
+  display: flex;
+  align-items: center;
+  margin: 0;
+}
+
+menu .menu_logo {
+  text-align: center;
+  height: fit-content;
+  margin: auto 0;
+}
+
+menu .menu_logo h2 {
+  font-size: 1.5em;
+  margin: 0;
+}
+
+menu .menu_logo .poppins {
+  font-weight: 600;
+}
+
+menu .menu_action {
+  justify-content: flex-end;
+}
+
+menu .menu_list .menu_list_item{
+  margin-right: 2rem;
+  font-weight: bold;
+  font-family: var(--f-poppins);
+  letter-spacing: 2px;
+}
+
+menu .menu_action .menu_action_item {
+  margin-left: 1rem;
+}
+
+menu .menu_btn-responsive {
+  display: none;
+  font-size: 1.5em;
+  color: var(--cta-01);
+  margin: auto 0;
+  cursor: pointer;
+}
+
+menu .menu_list .hidden_item {
+  display: none;
+}
+
+.hidden_menu {
+  transform: rotateX(90deg);
+}
+
+.menu-white a, .menu-white .menu_btn-responsive,
+.scroll_menu a, .scroll_menu .menu_btn-responsive {
+  color: var(--cta-09);
+}
+
+.menu-white, .scroll_menu {
+  background: var(--cta-01) !important;
+}
+
+.menu-trans {
+  background: rgba(0, 0, 0, 0.418)  
+}
+
+.menu-white a:hover, .scroll_menu a:hover {
+  color: var(--cta-09);
+}
+
+.sticky-menu {
+  position: sticky;
+  top: 0;
+}
+
+menu .menu_list-search {
+  width: 90%;
+}
+
+.menu_list-search input,
+.menu_list-search button {
+  font-size: 1rem;
+}
+
+menu ~ .search-bar {
+  display: none;
+  position: absolute;
+  inset: 0;
+  top: 100px;
+  width: 100%;
+  z-index: 1;
+  text-align: center;
+  height: fit-content;
+  padding: 50px;
+  background: var(--cta-01);
+}
+
+menu ~ .search-bar.display-search-bar {
+  display: block;
+}
+
+@media screen and (max-width: 1024px) {
+
+  menu {
+    border-bottom: 1px solid var(--cta-05);
+    padding: 1rem 0;
+  }
+  menu .menu_btn-responsive {
+    display: block;
+  }
+
+  menu .menu_list {
+    position: absolute;
+    top: 90px;
+    flex-direction: column;
+    margin: 0;
+    height: 100vh;
+    background: var(--cta-01);
+    transition: 0.5s;
+    transform-origin: top;
+    transform: rotateX(90deg);
+    z-index: 1;
+  }
+
+  menu .menu_list_block {
+    transform: rotateX(0);
+  }
+
+  menu .menu_list .menu_list_item {
+    margin: 0;
+    padding: 1rem 0;
+  }
+
+  menu .menu_list .menu_list_item a{
+    color: var(--cta-09);
+  }
+}
+
+@media screen and (max-width: 767px) {
+  header menu ~ div.search-bar {
+    display: none;
+  }
+  
+  menu {
+    font-size: 13px;
+  }
+
+  menu .menu_list {
+    top: 65px;
+  }
+
+  menu .menu_action .menu_search button {
+    display: none;
+  }
+  
+  menu .menu_action .menu_login {
+    display: none;
+  }
+
+  menu .menu_list .hidden_item {
+    display: block;
+  }
+}

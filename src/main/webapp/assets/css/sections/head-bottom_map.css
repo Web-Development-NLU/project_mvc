@@ -1,0 +1,15 @@
+.head_bottom-map {
+  height: 682px;
+}
+
+@media screen and (max-width: 1024px) {
+  .head_bottom-map {
+    height: 450px;
+  }
+}
+
+@media screen and (max-width: 767px) {
+  .head_bottom-map {
+    height: 350px;
+  }
+}

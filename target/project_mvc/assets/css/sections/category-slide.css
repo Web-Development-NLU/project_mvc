@@ -1,0 +1,19 @@
+.container-slide {
+  position: relative;
+}
+
+.container-slide .control-slide {
+  position: absolute;
+  margin: auto;
+  z-index: 1;
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
+  height: 80%;
+  align-items: center;
+}
+
+.container-slide .control-slide .control-slide-action {
+  font-size: 1.5rem;
+  cursor: pointer;
+}

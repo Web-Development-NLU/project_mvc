@@ -1,0 +1,102 @@
+.tabs-container {
+  position: relative;
+  width: 100%;
+  border-bottom: 1px solid var(--cta-02);
+  margin-bottom: 100px ;
+}
+
+.tabs-info-product {
+  position: relative;
+  margin-top: 100px;
+  max-width: 1200px;
+}
+
+.tabs-info-product .tab-info-product_list {
+  width: fit-content;
+  margin-bottom: 24px;
+  height: fit-content;
+  margin: auto;
+  position: relative;
+  justify-content: center;
+  background-color: var(--cta-01);
+}
+
+.tabs-container::before{
+  content: "";
+  top: 10px;
+  width:  100%;
+  overflow: hidden;
+  z-index: 0;
+  border-top: 1px solid var(--cta-02);
+  position: absolute;
+  z-index: -1;
+}
+
+.tabs-info-product .tab-info-product_list .tab-item {
+  margin: 0 20px;
+  font-size: 0.875rem;
+  font-family: var(--f-poppins);
+  font-weight: 600;
+  letter-spacing: 1px;
+  padding-bottom: 10px;
+  cursor: pointer;
+  color: var(--cta-06);
+}
+
+.tabs-info-product .tab-info-product_list {
+  border: none;
+}
+
+.tabs-info-product .tab-info-product_list .tab-item.active,
+.tabs-info-product .tab-info-product_list .tab-item:hover {
+  border-bottom: 2px solid var(--ctb-09);
+  color: var(--cta-09);
+}
+
+.tabs-info-product .content-list {
+  margin: auto;
+  padding-top: 24px;
+  padding-bottom: 50px;
+}
+
+.tabs-info-product .content-list #content-des {
+  font-size: 0.875rem;
+  line-height: 24px;
+  font-weight: 400;
+  color: var(--cta-06);
+}
+
+.tabs-info-product .content-list #content-des p {
+  font-family: var(--f-poppins);
+}
+
+.tabs-info-product .content-list #content-info {
+  max-width: 800px;
+  margin: auto;
+}
+
+
+@media screen and (max-width: 767px) {
+  .tabs-info-product .tab-info-product_list {
+    justify-content: flex-start;
+    margin: 0;
+    flex-direction: column;
+    width: 100%;
+  }
+
+  .tabs-info-product .tab-info-product_list::before {
+    content: unset;
+  }
+
+  .tabs-info-product .tab-info-product_list .tab-item.active,
+  .tabs-info-product .tab-info-product_list .tab-item:hover {
+    border-bottom: 1px solid var(--ctb-09);
+  }
+
+  .tabs-info-product .tab-info-product_list .tab-item {
+    margin: 0;
+    width: 100%;
+    margin-top: 12px;
+    border-bottom: 1px solid var(--cta-02);
+  }
+}

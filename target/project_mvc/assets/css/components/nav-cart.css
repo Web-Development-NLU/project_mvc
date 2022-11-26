@@ -1,0 +1,28 @@
+.cart-menu {
+  display: flex;
+  justify-content: center;
+}
+
+.cart-menu .cart-menu_item {
+  padding: 20px;
+  font-size: 1.5em;
+  color: var(--cta-05);
+  font-weight: 600;
+  font-family: var(--f-poppins);
+}
+
+.cart-menu .cart-menu_item.selected {
+  color: var(--cta-09);
+  border-bottom: 2px solid var(--cta-09);
+  width: fit-content;
+}
+
+@media screen and (max-width: 767px) {
+  .cart-menu {
+    flex-direction: column;
+  }
+
+  .cart-menu .cart-menu_item {
+    padding: 10px 0 ;
+  }
+}

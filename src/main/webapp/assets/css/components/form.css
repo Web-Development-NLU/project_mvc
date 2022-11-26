@@ -1,0 +1,119 @@
+.login-container, .register-container {
+    padding: 0 0.9375rem;
+    position: relative;
+    width: 100%;
+}
+
+.login-container > h2, .register-container > h2 {
+    font-size: 0.875rem;
+    text-transform: uppercase;
+    font-weight: 600;
+    text-align: center;
+    height: 40px;
+    line-height: 40px;
+    padding: 0 1.875rem;
+    z-index: 1;
+    width: 200px;
+    display: flex;
+    justify-content: center;
+    position: relative;
+    margin: 0 auto -1.25rem;
+    border: 2px solid;
+    background-color: var(--cta-01);
+}
+
+.form-swap {
+    padding: 4.0625rem 1.5625rem 1.875rem 1.5625rem;
+    border: 1px solid var(--cta-02);
+    border-radius: 0;
+    margin: 0 auto;
+    max-width: 450px;
+}
+
+.login-container .ip_user-name, .login-container .ip_password, .register-container .ip_user-name, .register-container .ip_email {
+    position: relative;
+    margin-bottom: 1.25rem;
+    padding: 0.1875rem 0;
+}
+
+.form-swap > div > label {
+    font-size: 0.9375rem;
+    color: var(--cta-06);
+    position: absolute;
+    left: 8px;
+    top: 2px;
+    transform: translateY(-50%);
+    margin: 0;
+    background: var(--cta-01);
+    padding: 00.5rem;
+    line-height: 1.25rem;
+    z-index: 1;
+}
+
+.form-swap > div > input {
+    width: 100%;
+    outline: 0;
+    height: 50px;
+    padding: 0 1.25rem;
+    border: 1px solid var( --cta-02);
+    transition: border-color 0.5s linear 0s;
+}
+.form-swap > div > input:focus {
+    border-color: var(--cta-10);
+    outline: none;
+}
+
+.form-swap .ip_password-login {
+    padding-right: 2.5rem;
+}
+
+.form-swap .lost-password-container {
+    margin-bottom: 1rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.login-container .btn-login,.register-container .btn-register {
+    margin-bottom: 1.25rem;
+    padding: 0.1875rem 0;
+}
+.form-swap .btn-login a button,.form-swap .btn-register a button{
+    padding: 0.9375rem 1.5625rem;
+    font-size: 0.875rem;
+    font-family: var(--f-poppins);
+    font-weight: 500;
+    height: 50px;
+}
+
+.register-container .form-swap >p {
+    margin-bottom: 1rem;
+    font-size: 0.875rem;
+    font-weight: 400;
+    color: var(--cta-05);
+    line-height: 1.5rem;
+}
+.register-container .form-swap .privacy-policy-text >p {
+    font-size: 0.9375rem;
+    font-weight: 400;
+    line-height: 1.5rem;
+    margin-bottom: 1rem;
+    color: var(--cta-05);
+}
+.register-container .form-swap .privacy-policy-text >p a {
+    color: var(--ctb-09);
+}
+.register-container .form-swap .privacy-policy-text {
+    margin-bottom: 1.5625rem;
+}
+.show-password {
+    position: absolute;
+    right: 0.6125rem;
+    top: 0.9375rem;
+    cursor: pointer;
+}
+@media only screen and (max-width: 767px) {
+    .form-swap .btn-login a button,.form-swap .btn-register a button{
+        padding: 0.75rem 0.9375rem;
+    }
+}

@@ -1,0 +1,23 @@
+.about-benefit {
+  max-width: 1170px;
+  margin: 4rem auto;
+  margin-bottom: 10rem;
+}
+
+.about-benefit .subscribe-section {
+  margin-bottom: 10rem ;
+}
+
+@media screen and (max-width: 991px) and (min-width: 768px) {
+  .about-benefit .card-benefit:last-child {
+    display: none;
+  }
+
+  
+}
+
+@media screen and (max-width: 767px){
+  .about-benefit .card-benefit {
+    margin: 10px 0;
+  }
+}

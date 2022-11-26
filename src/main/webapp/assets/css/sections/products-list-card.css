@@ -1,0 +1,20 @@
+.products-container {
+  padding: 50px 0;
+  width: 100%;
+}
+
+.products-container .products {
+  max-width: 1500px;
+  margin: auto;
+}
+
+.products-container .products .product_title {
+  font-weight: 300;
+  font-size: 2rem;
+  width: fit-content;
+  margin: auto;
+}
+
+.products-container .products .product-list > *{
+  margin-top: 50px;
+}

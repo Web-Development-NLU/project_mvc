@@ -1,0 +1,95 @@
+.filter-price-container .filter-bar-container{
+    position: relative;
+    height: 3px;
+    margin: 1.125rem 0.4375rem 1.5625rem;
+    background-color: var(--cta-09);
+    border-radius: 0.875rem;
+}
+
+.filter-price-container .filter-bar-container .slider-range {
+    height: 3px;
+    background-color: var(--ctb-09);
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    border-radius: 10px;
+    z-index: 1;
+}
+.filter-price-container .filter-bar-container > span {
+    width: 17px;
+    height: 17px;
+    background-color: var(--cta-01);
+    border: 6px solid var(--ctb-10);
+    border-radius: 90px;
+    position: absolute;
+    z-index: 2;
+    top: -7px;
+    margin-left: -7px;
+}
+
+.filter-price-container .price-slider-amount {
+    display: flex;
+    flex-direction: column;
+    position: relative;
+}
+
+.filter-price-container .price-slider-amount > input {
+    width: 100%;
+    height: 3px;
+    appearance: none;
+    pointer-events: none;
+    position: absolute;
+    z-index: 3;
+    top: -28px;
+    opacity: 0;
+    margin: 0;
+}
+/*for firefox*/
+.filter-price-container .price-slider-amount > input::-moz-range-thumb{
+    width: 6px;
+    height: 6px;
+    appearance: none;
+    -webkit-appearance: none;
+    pointer-events: all;
+    background-color: var(--cta-01);
+    border: 6px solid var(--ctb-10);
+    border-radius: 90px;
+    cursor: ew-resize;
+}
+/*for chrome*/
+.filter-price-container .price-slider-amount > input::-webkit-slider-thumb {
+    width: 17px;
+    height: 17px;
+    appearance: none;
+    -webkit-appearance: none;
+    pointer-events: all;
+    background-color: var(--cta-01);
+    border: 6px solid var(--ctb-10);
+    border-radius: 90px;
+    cursor: ew-resize;
+}
+.filter-price-container .filter-bar-container .state-filter-left {
+    left: -0px;
+}
+.filter-price-container .filter-bar-container .state-filter-right {
+    right: -10px;
+}
+.filter-price-container .price-slider-amount a button {
+    height: 36px;
+    font-size: 0.6875rem;
+    padding: 0 1.25rem;
+    max-width: 100px;
+    margin-bottom: 0.875rem;
+    letter-spacing: 2px;
+    font-weight: 500;
+    line-height: 0.6875rem;
+}
+.filter-price-container .price-slider-amount .price-label {
+    margin-bottom: 0.9375rem;
+    font-size: 0.875rem;
+    font-weight: 400;
+    line-height: 2.1rem;
+    color: var(--cta-06);
+}
+

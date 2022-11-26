@@ -1,0 +1,118 @@
+.input-primary {
+    padding: 0.9375rem;
+    width: 100%;
+    height: 50px;
+    border: 1px solid var(--cta-02);
+    outline: none;
+    transition: border-color 0.5s linear 0s;
+}
+.input-primary::placeholder,.text-area::placeholder{
+    color: var(--cta-05);
+    font-size: 1rem;
+    font-weight: 400;
+}
+.input-primary:focus,.input-secondary:focus ,.text-area:focus {
+    border-color:var(--ctb-10);
+}
+
+.input-line {
+    position: relative;
+    /*max-width: 600px;*/
+    width: 100%;
+    display: flex;
+    background-color: var(--cta-01);
+    transition: all 0.3s;
+}
+.input-line >input{
+    padding-bottom: 0.4375rem;
+    border: none;
+    border-bottom: 2px solid var(--cta-09);
+    font-size: 0.75em;
+    line-height: 2em;
+    outline: none;
+    color: var(--cta-10);
+    font-weight: 400;
+    font-family: var(--f-poppins);
+    width: 100%;
+}
+.input-line >input::placeholder{
+    color: var(--cta-10);
+    font-weight: 400;
+}
+.input-line >input:focus {
+    border-color: var(--ctb-10);
+}
+.input-line >button {
+    font-size: 0.75em;
+    line-height: 1.666em;
+    font-weight: 600;
+    color: var(--cta-10);
+    background-color: transparent;
+    border-bottom: 2px solid var(--cta-09);
+    letter-spacing: 3px;
+    padding-bottom: 0.4375rem;
+    display: flex;
+    transition: all 0.3s;
+}
+
+.input-line >button:hover {
+    border-color: var(--ctb-10);
+}
+.input-line >button i {
+    width: 1em;
+    height: 1em;
+    position: relative;
+    top: 3px;
+    font-size: 0.9167em;
+    font-weight: 600;
+    margin-left: 3px;
+}
+.input-secondary {
+    position: relative;
+}
+.input-secondary > input {
+    padding: 0 1.25rem;
+    border: 1px solid var(--cta-02);
+    outline: none;
+    height: 50px;
+    width: 100%;
+    transition: border-color 0.5s linear 0s;
+    font-size: 0.875rem;
+    font-family: var(--f-poppins);
+    font-weight: 400;
+}
+.input-secondary > label {
+    position: absolute;
+    font-size: 0.875rem;
+    left: 10px;
+    top: 0px;
+    line-height: 1.25rem;
+    padding: 0 0.625rem;
+    background-color: var(--cta-01);
+    font-family: var(--f-poppins);
+    font-weight: 400;
+    transform: translateY(-50%);
+    color: var(--cta-10);
+}
+.input-secondary > input:focus{
+    border-color: var(--cta-10);
+}
+.text-area {
+    width: 100%;
+    padding: 0.9375em;
+    font-size: 1rem;
+    outline: none;
+    transition: border-color 0.5s linear 0s;
+    border: 1px solid var(--cta-02);
+    min-height: 190px;
+}
+.checkbox {
+    font-size: 0.8125rem;
+    color: var(--cta-06);
+}
+.checkbox label {
+    font-family: var(--f-poppins);
+    font-weight: 500;
+    margin-bottom: 0;
+    line-height: 1.5rem;
+}

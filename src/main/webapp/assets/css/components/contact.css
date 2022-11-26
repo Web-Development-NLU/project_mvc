@@ -1,0 +1,86 @@
+
+.contact-info {
+    width: 40%;
+    color: var(--cta-08);
+}
+.contact-info .big_title {
+    font-size: 1.625em;
+    font-weight: 500;
+    margin-bottom: 1.875rem;
+    font-family: var(--f-poppins);
+    X-Content-Type-Options: nosniff;
+}
+.contact-info > span {
+    font-size: 0.875em;
+    font-weight: 400;
+    line-height: 1.714em;
+    margin-bottom: 2.8125rem;
+    display: inline-block;
+    letter-spacing: normal;
+    font-family: var(--f-poppins);
+    color: rgb(36,36,36);
+}
+.contact-info .main-content {
+    /*margin-top: 1.875em;*/
+}
+
+.contact-info .main-content div .icon_contact {
+    margin-right: 1.5625rem;
+    font-size: 1em;
+    line-height: 1.5rem;
+    font-family: var(--f-poppins);
+}
+.contact-info .main-content div .icon_contact >span {
+    font-size: 2.14285em;
+    font-weight: 400;
+    line-height: 1em;
+}
+
+.contact-info .main-content div .icon_contact >span i {
+    width: 1em;
+    height: 1em;
+    max-width: 100%;
+    display: block;
+    position: relative;
+    top: 5px;
+}
+.contact-info .main-content> div {
+    padding-bottom: 1.5625rem;
+    display: flex;
+    font-weight: 400;
+    font-size: 0.875rem;
+    line-height: 1.5rem;
+}
+.contact-info .main-content div .container-content-contact> h3 {
+    font-size: 1em;
+    font-weight: 400;
+    line-height: 1.5em;
+    margin: 0;
+    padding: 0;
+}
+.contact-info .main-content div .container-content-contact h3 .title_contact {
+    font-size: 1rem;
+    font-weight: 400;
+    line-height: 1.5em;
+    font-family: var(--f-poppins);
+}
+.contact-info .main-content div .container-content-contact .content-contact {
+    font-size: 0.8125rem;
+    color: var(--cta-07);
+    line-height: 1.23em;
+    margin: 0;
+    font-family: var(--f-poppins);
+}
+@media only screen and (max-width: 767px){
+    .contact-info {
+        width: 100%;
+    }
+    .contact-info .main-content> div{
+        display: block;
+    }
+    .contact-info .main-content div .icon_contact >span i{
+        top: 0;
+        margin-bottom: 0.55rem;
+    }
+}
+

@@ -1,0 +1,78 @@
+.head-bottom-page {
+  height: 500px;
+  background-image: url("https://caston.familab.net/wp-content/uploads/2022/03/bn_blog.jpg");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  text-align: center;
+  position: relative;
+}
+
+.head-bottom-page .head-page-title {
+  font-size: 3em;
+  font-weight: 400;
+  line-height: 0.8em;
+}
+
+.head-bottom-page .head-page-content {
+  width: fit-content;
+  height: fit-content;
+  position: absolute;
+  inset: 0;
+  margin: auto;
+  padding-top: 120px;
+}
+
+.head-bottom-page .breadcrumb {
+  width: fit-content;
+}
+
+.head-bottom-breadcrumb {
+  max-width: 1470px;
+  margin: auto;
+  margin-top: 10px;
+}
+
+.head_bottom-shop {
+  background: url("https://caston.familab.net/wp-content/uploads/2021/11/shop_banner.jpg");
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+  height: 465px;
+  width: 100%;
+  position: relative;
+}
+
+.head_bottom-shop .head_bottom-content {
+  max-width: 800px;
+  height: fit-content;
+  position: absolute;
+  inset: 0;
+  margin: auto;
+  text-align: center;
+  padding-top: 50px;
+}
+
+.head_bottom-shop .head_bottom-content .head_bottom-title h1{
+  font-size: 2.5em;
+  font-weight: 400;
+  margin-bottom: 1em;
+}
+
+@media screen and (max-width: 767px) {
+  .head-bottom-page {
+    font-size: 10px;
+  }
+
+  .head-bottom-page .breadcrumb {
+    font-size: 13px;
+  }
+
+  .head_bottom-shop {
+    height: 250px;
+  }
+
+  .head_bottom-shop .head_bottom-content{
+    font-size: 10px;
+  }
+}

@@ -1,0 +1,28 @@
+.radio-icon {
+  position: relative;
+  margin-right: 3px;
+  height: fit-content;
+}
+
+.radio-icon label {
+  margin: 0;
+  cursor: pointer;
+}
+
+.radio-icon:hover ~ .radio-icon i,
+.radio-icon:hover > label i {
+  font-weight: 600;
+} 
+
+.radio-icon:hover {
+  color: var(--ctb-09);
+}
+
+.radio-icon input[type="radio"] {
+  display: none;
+}
+
+.isChecked ~ .radio-icon label i,
+.isChecked label i {
+  font-weight: 600;
+}
