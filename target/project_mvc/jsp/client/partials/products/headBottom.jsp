@@ -9,7 +9,7 @@
 <div class="head_bottom-shop">
   <div class="head_bottom-content container-fluid">
     <div class="head_bottom-title color-white">
-      <h1 class="poppins">The Shop</h1>
+      <h1 class="monts">The Shop</h1>
     </div>
 
     <div class="container-slide">

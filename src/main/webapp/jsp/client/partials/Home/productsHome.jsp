@@ -8,7 +8,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <div class="products-container bgr-white-02">
   <div class="products">
-    <div class="product_title poppins">New arrivvals</div>
+    <div class="product_title monts">New arrivvals</div>
     <div class="container-fluid">
       <div class="product-list row mb-5 ">
         <jsp:include page="../../common/card.jsp">

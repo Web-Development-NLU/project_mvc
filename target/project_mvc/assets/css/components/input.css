@@ -32,7 +32,7 @@
     outline: none;
     color: var(--cta-10);
     font-weight: 400;
-    font-family: var(--f-poppins);
+    font-family: var(--f-monts);
     width: 100%;
 }
 .input-line >input::placeholder{
@@ -78,7 +78,7 @@
     width: 100%;
     transition: border-color 0.5s linear 0s;
     font-size: 0.875rem;
-    font-family: var(--f-poppins);
+    font-family: var(--f-monts);
     font-weight: 400;
 }
 .input-secondary > label {
@@ -89,7 +89,7 @@
     line-height: 1.25rem;
     padding: 0 0.625rem;
     background-color: var(--cta-01);
-    font-family: var(--f-poppins);
+    font-family: var(--f-monts);
     font-weight: 400;
     transform: translateY(-50%);
     color: var(--cta-10);
@@ -111,7 +111,7 @@
     color: var(--cta-06);
 }
 .checkbox label {
-    font-family: var(--f-poppins);
+    font-family: var(--f-monts);
     font-weight: 500;
     margin-bottom: 0;
     line-height: 1.5rem;

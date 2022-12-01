@@ -8,7 +8,7 @@
     margin-right: 0.9375rem;
     flex-shrink: 1;
     flex-basis: auto;
-    font-family: var(--f-poppins);
+    font-family: var(--f-monts);
     font-size: 0.875rem;
 }
 .text-icon-benefit .img_benefit svg {
@@ -25,7 +25,7 @@
     letter-spacing: 2.7px;
     font-size: 0.875rem;
     font-weight: 600;
-    font-family: var(--f-poppins);
+    font-family: var(--f-monts);
     text-transform: uppercase;
     line-height: 1.25rem;
     margin-bottom: 0.3125rem;
@@ -35,7 +35,7 @@
     color: var(--cta-06);
     font-weight: 400;
     line-height: 1.75rem;
-    font-family: var(--f-poppins);
+    font-family: var(--f-monts);
 }
 @media only screen and (max-width: 767px){
     .text-icon-benefit{

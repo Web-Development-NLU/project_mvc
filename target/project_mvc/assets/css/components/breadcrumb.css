@@ -1,12 +1,12 @@
 .breadcrumb {
   background: transparent;
   font-weight: 400;
-  font-family: var(--f-poppins);
+  font-family: var(--f-monts);
   margin: auto;
 }
 
 .breadcrumb a {
-  font-family:  var(--f-poppins);
+  font-family:  var(--f-monts);
   transition: 0.3s;
 }
 

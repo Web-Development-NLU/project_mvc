@@ -31,25 +31,25 @@
           <c:when test="${param.logged}">
             <li class="menu_list_item hidden_item"><a href="#">
               <i class="fa-regular fa-user action-icon color-red"></i>
-              <span class="btn-content poppins">My Account</span>
+              <span class="btn-content monts">My Account</span>
             </a>
             </li>
             <li class="menu_list_item hidden_item"><a href="#">
               <i class="fa-solid fa-right-from-bracket action-icon color-red"></i>
-              <span class="btn-content poppins">Logout</span>
+              <span class="btn-content monts">Logout</span>
             </a>
             </li>
           </c:when>
           <c:otherwise>
             <li class="menu_list_item hidden_item"><a href="${pageContext.request.contextPath}/login">
               <i class="fa-regular fa-user action-icon color-red"></i>
-              <span class="btn-content poppins">Login</span>
+              <span class="btn-content monts">Login</span>
             </a></li>
           </c:otherwise>
         </c:choose>
       </ul>
       <div class="menu_logo col">
-        <h2><a class="poppins" href="#">FURNITURE</a></h2>
+        <h2><a class="monts" href="#">FURNITURE</a></h2>
       </div>
       <ul class="menu_action col">
         <li class="menu_search menu_action_item">
@@ -76,7 +76,7 @@
               <button class="btn-icon-cb-text bd-white-02 rounded-pill">
                 <a href="${pageContext.request.contextPath}/login" class="color-white">
                   <i class="fa-regular fa-user action-icon"></i>
-                  <span class="btn-content poppins">Login</span>
+                  <span class="btn-content monts">Login</span>
                 </a>
               </button>
             </c:otherwise>

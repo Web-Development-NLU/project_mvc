@@ -38,7 +38,7 @@
 
 .card-review .card-review-content p {
   margin: 0;
-  font-family: var(--f-poppins);
+  font-family: var(--f-monts);
 }
 
 @media screen and (max-width: 767px) {

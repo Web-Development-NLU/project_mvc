@@ -46,7 +46,7 @@
                   <input type="checkbox" id="check_box">
                   <label for="check_box">Remember me</label>
                 </div>
-                <a class="btn-link hover-text-red color-black poppins">Lost your password?</a>
+                <a class="btn-link hover-text-red color-black monts">Lost your password?</a>
               </div>
               <div class="btn-login">
                 <a href="#"><button class="btn-text-lg bgr-black hover-bg-red">LOG IN</button></a>
@@ -67,11 +67,11 @@
                 <input id="ip_email-register" type="email">
                 <label for="ip_email-register">Email address *</label>
               </div>
-              <p class="poppins">A password will be sent to your email address.</p>
+              <p class="monts">A password will be sent to your email address.</p>
               <div class="privacy-policy-text">
-                <p class="poppins">Your personal data will be used to support your experience throughout this website,
+                <p class="monts">Your personal data will be used to support your experience throughout this website,
                   to
-                  manage access to your account, and for other purposes described in our <a class="poppins"
+                  manage access to your account, and for other purposes described in our <a class="monts"
                                                                                             href="#">privacy
                     policy.</a></p>
               </div>

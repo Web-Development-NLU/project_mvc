@@ -79,11 +79,11 @@
                   <input id="range-min" type="range" min="140" max="969" value="140">
                   <input id="range-max" type="range" min="140" max="969" value="969">
                   <div class="price-slider-amount">
-                    <div class="price-label poppins">
+                    <div class="price-label monts">
                       Price:
-                      <span class="from-price poppins" id="min-price">140.00$</span>
+                      <span class="from-price monts" id="min-price">140.00$</span>
                       -
-                      <span class="toPrice poppins" id="max-price">969.00$</span>
+                      <span class="toPrice monts" id="max-price">969.00$</span>
                     </div>
                     <a href="#"><button class="btn-text-lg bgr-black hover-bg-red">FILTER</button></a>
                   </div>

@@ -12,9 +12,9 @@
       <img src="/assets/imgs/card-shop/banner-shop-1.jpg">
     </a>
     <div class="card-shop_text">
-      <div class="card-shop_title poppins">Storage</div>
+      <div class="card-shop_title monts">Storage</div>
       <a href="#">
-        <div class="card-shop_action hover-text-red poppins">Show now</div>
+        <div class="card-shop_action hover-text-red monts">Show now</div>
       </a>
     </div>
   </div>
@@ -23,7 +23,7 @@
       <img src="/assets/imgs/card-shop/banner-shop-1.jpg">
     </a>
     <div class="card-shop_text">
-      <h2 class="card-shop_title poppins">Storage</h2>
+      <h2 class="card-shop_title monts">Storage</h2>
       <a href="#">
         <div class="card-shop_action">Show now</div>
       </a>
@@ -34,7 +34,7 @@
       <img src="/assets/imgs/card-shop/banner-shop-1.jpg">
     </a>
     <div class="card-shop_text">
-      <h2 class="card-shop_title poppins">Storage</h2>
+      <h2 class="card-shop_title monts">Storage</h2>
       <a href="#">
         <div class="card-shop_action">Show now</div>
       </a>

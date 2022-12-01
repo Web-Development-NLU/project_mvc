@@ -10,7 +10,7 @@
   <div class="background-acttachment"></div>
   <div class="slider_item-content">
     <div class="slider_item-title color-white">NEW ARRIVALS</div>
-    <div class="slider_item-head color-white poppins">Design your home</div>
+    <div class="slider_item-head color-white monts">Design your home</div>
     <div class="slider_item-action">
       <a href="#"><button class="btn-text bgr-white hover-bg-trans">Shop now</button></a>
     </div>

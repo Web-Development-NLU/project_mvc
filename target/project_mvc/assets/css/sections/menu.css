@@ -40,7 +40,7 @@ menu .menu_logo h2 {
   margin: 0;
 }
 
-menu .menu_logo .poppins {
+menu .menu_logo .monts {
   font-weight: 600;
 }
 
@@ -51,7 +51,7 @@ menu .menu_action {
 menu .menu_list .menu_list_item{
   margin-right: 2rem;
   font-weight: bold;
-  font-family: var(--f-poppins);
+  font-family: var(--f-monts);
   letter-spacing: 2px;
 }
 
