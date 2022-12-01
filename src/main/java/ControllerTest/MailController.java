@@ -1,4 +1,4 @@
-package Controller;
+package ControllerTest;
 
 import Model.MailContent;
 import Services.MailService;
@@ -9,7 +9,7 @@ import javax.servlet.http.*;
 import javax.servlet.annotation.*;
 import java.io.IOException;
 
-@WebServlet(name = "MailController", value = "/mail")
+@WebServlet(name = "MailController", value = "/test/mail")
 public class MailController extends HttpServlet {
     private MailService mailService;
     @Override
