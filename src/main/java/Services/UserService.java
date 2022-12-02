@@ -23,9 +23,9 @@ public class UserService extends BaseService<User>{
 
     @Override
     public boolean update(String id, BaseDTO model){
-        Optional<User> user = this.findById(id, User.class);
+        User user = this.findById(id, User.class);
 
-        if(user.isPresent()) {
+        if(user != null) {
             this.jdbi.useHandle(handle -> {
                 handle.createUpdate("UPDATE " + this.tableName +
                         " SET firstName = :firstName, " +
@@ -39,7 +39,7 @@ public class UserService extends BaseService<User>{
             });
         }
 
-        return user.isPresent();
+        return user != null;
     }
 
 }
