@@ -13,13 +13,13 @@
     <title>Title</title>
 </head>
 <body>
-    <% String error = request.getAttribute("error").toString(); %>
+    <% String error = (String) request.getAttribute("error"); %>
 
     <c:if test="<%= error != null %>">
         <p><%= error %></p>
     </c:if>
 
-    <form action="/test/upload" method="post" enctype="multipart/form-data">
+    <form action="${pageContext.request.contextPath}/test/upload" method="post" enctype="multipart/form-data">
         <input type="file" name="fileName">
         <button type="submit" value="Upload">submit</button>
     </form>

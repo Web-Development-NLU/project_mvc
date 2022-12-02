@@ -13,7 +13,7 @@
     <title>Title</title>
 </head>
 <body>
-    <% String error = request.getAttribute("error").toString(); %>
+    <% String error = (String) request.getAttribute("error"); %>
 
     <c:if test="<%= error != null %>">
         <p><%= error %></p>
