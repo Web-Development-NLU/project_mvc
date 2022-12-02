@@ -12,7 +12,7 @@
         <div aria-label="breadcrumb">
             <ol class="breadcrumb color-white">
                 <li class="breadcrumb-item monts" aria-current="page"><a href="#" class="color-white">Home</a></li>
-                <li class="breadcrumb-item monts" aria-current="page"><%= request.getAttribute("page") %></li>
+                <li class="breadcrumb-item monts" aria-current="page"><%= request.getParameter("page") %></li>
             </ol>
         </div>
     </div>

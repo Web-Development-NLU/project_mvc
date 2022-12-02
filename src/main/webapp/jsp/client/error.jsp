@@ -26,6 +26,7 @@
             <jsp:include page="common/searchBarMenu.jsp"/>
             <jsp:include page="common/head-bottom-page.jsp">
                 <jsp:param name="title" value="Page Not Found"/>
+                <jsp:param name="page" value="notfound"/>
             </jsp:include>
         </header>
         <div id="error-content" class="container-fluid">

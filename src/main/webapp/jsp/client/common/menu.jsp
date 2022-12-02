@@ -8,7 +8,7 @@
 <%@ taglib prefix = "c" uri = "http://java.sun.com/jsp/jstl/core" %>
 <%@ page isELIgnored = "false" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<menu class="head_top">
+<menu class="head_top ${param.classes}">
   <div class="container-fluid container_menu">
     <div class="row">
       <div id="menu_btn-responsive" class="menu_btn-responsive col"><i class="fa-solid fa-bars"></i></div>
@@ -25,8 +25,8 @@
         </li>
         <li class="menu_list_item"><a href="${pageContext.request.contextPath}/">Home</a></li>
         <li class="menu_list_item"><a href="${pageContext.request.contextPath}/products">Products</a></li>
-        <li class="menu_list_item"><a href="#">About Us</a> </li>
-        <li class="menu_list_item"><a href="#">Contact</a></li>
+        <li class="menu_list_item"><a href="${pageContext.request.contextPath}/about">About Us</a> </li>
+        <li class="menu_list_item"><a href="${pageContext.request.contextPath}/contact">Contact</a></li>
         <c:choose>
           <c:when test="${param.logged}">
             <li class="menu_list_item hidden_item"><a href="#">
