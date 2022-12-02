@@ -20,10 +20,13 @@
     %>
     <div id="error-container">
         <header>
-            <jsp:include page="common/menu.jsp"/>
+            <jsp:include page="common/menu.jsp">
+                <jsp:param name="logged" value="<%= false %>"/>
+            </jsp:include>
             <jsp:include page="common/searchBarMenu.jsp"/>
             <jsp:include page="common/head-bottom-page.jsp">
                 <jsp:param name="title" value="Page Not Found"/>
+                <jsp:param name="page" value="notfound"/>
             </jsp:include>
         </header>
         <div id="error-content" class="container-fluid">

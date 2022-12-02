@@ -8,11 +8,11 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <div class="head-bottom-page">
     <div class="head-page-content">
-        <h2 class="head-page-title poppins color-white"><%= request.getParameter("title") %></h2>
+        <h2 class="head-page-title monts color-white"><%= request.getParameter("title") %></h2>
         <div aria-label="breadcrumb">
             <ol class="breadcrumb color-white">
-                <li class="breadcrumb-item poppins" aria-current="page"><a href="#" class="color-white">Home</a></li>
-                <li class="breadcrumb-item poppins" aria-current="page"><%= request.getAttribute("page") %></li>
+                <li class="breadcrumb-item monts" aria-current="page"><a href="#" class="color-white">Home</a></li>
+                <li class="breadcrumb-item monts" aria-current="page"><%= request.getParameter("page") %></li>
             </ol>
         </div>
     </div>

@@ -7,21 +7,21 @@
     margin-bottom: 0.5rem;
     font-weight: 600;
     line-height: 18.75rem;
-    font-family: var(--f-poppins);
+    font-family: var(--f-monts);
 }
 .status-error> h2 {
     margin-bottom: 0.5rem;
     font-weight: 500;
     font-size: 1.75rem;
     line-height: 2.625rem;
-    font-family: var(--f-poppins);
+    font-family: var(--f-monts);
 }
 .status-error> span {
     color: var(--cta-06);
     font-size: 0.875rem;
     margin-bottom: 1rem;
     line-height: 1.5rem;
-    font-family: var(--f-poppins);
+    font-family: var(--f-monts);
 }
 @media only screen and (max-width: 767px){
     .status-error> h1{

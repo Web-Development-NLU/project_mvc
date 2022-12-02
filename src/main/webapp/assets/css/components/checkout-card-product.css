@@ -30,7 +30,7 @@
     font-size: 0.8125rem;
     font-weight: 400;
     margin: 0 0.203125rem 0 0.375rem;
-    font-family: var(--f-poppins);
+    font-family: var(--f-monts);
     color: var(--cta-05);
     line-height: 1.3125rem;
 }
@@ -41,7 +41,7 @@
 .material .value-color, .material .value-pattern, .material .value-size{
     font-size: 0.8125rem;
     font-weight: 400;
-    font-family: var(--f-poppins);
+    font-family: var(--f-monts);
     color: var(--cta-05);
     line-height: 1.3125rem;
 }
@@ -55,7 +55,7 @@
 .checkout-card-product  .product-total-cost .total-cost {
     font-size: 0.9375rem;
     font-weight: 400;
-    font-family: var(--f-poppins);
+    font-family: var(--f-monts);
     margin-right: 0.6em;
 }
 @media only screen and (max-width: 575px) {

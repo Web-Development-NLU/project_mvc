@@ -41,7 +41,7 @@ button:focus{
   background: transparent;
   font-size: 0.8em;
   font-weight: 600;
-  font-family: var(--f-poppins);
+  font-family: var(--f-monts);
 }
 
 .btn-icon-cb-text a:hover {
