@@ -38,7 +38,7 @@
         </div>
     </div>
 </c:if>
-<c:if test="${param.type == 2}">
+<c:if test="${param.type == '1'}">
     <div class="card-product-1 col-6 col-md-4 col-lg-3">
         <div class="product-item-wrap">
             <div class="img-product-container">

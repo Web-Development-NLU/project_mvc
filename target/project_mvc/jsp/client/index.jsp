@@ -8,9 +8,7 @@
 <body>
     <div id="home-container">
         <header>
-            <jsp:include page="common/menu.jsp">
-                <jsp:param name="logged" value="<%= false %>"/>
-            </jsp:include>
+            <jsp:include page="common/menu.jsp"/>
             <jsp:include page="common/searchBarMenu.jsp"/>
             <div class="head_bottom">
                 <div id="slider" class="head_bottom-slider">

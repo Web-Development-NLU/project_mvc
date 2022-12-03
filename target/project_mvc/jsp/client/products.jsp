@@ -17,9 +17,7 @@
 <body>
     <div id="shop-container">
         <header>
-            <jsp:include page="common/menu.jsp">
-                <jsp:param name="logged" value="<%= false %>"/>
-            </jsp:include>
+            <jsp:include page="common/menu.jsp"/>
             <jsp:include page="common/searchBarMenu.jsp"/>
             <jsp:include page="partials/products/headBottom.jsp"/>
         </header>
