@@ -6,6 +6,8 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib prefix = "c" uri = "http://java.sun.com/jsp/jstl/core" %>
+<%@ page isELIgnored = "false" %>
 <html>
 <head>
     <jsp:include page="common/head.jsp">
@@ -13,6 +15,10 @@
     </jsp:include>
 </head>
 <body>
+  <%
+    String error = (request.getAttribute("error") == null) ? "" : request.getAttribute("error").toString() ;
+    String email = (request.getAttribute("email") == null) ? "" : request.getAttribute("email").toString();
+  %>
   <div id="authen-container">
     <header>
       <jsp:include page="common/menu.jsp">
@@ -32,7 +38,7 @@
             <form class="form-swap" action="">
               <div class="ip_user-name">
                 <input id="ip_name-account" type="text">
-                <label for="ip_name-account">Username or email address *</label>
+                <label for="ip_name-account">Email address *</label>
               </div>
               <div id="ip_password" class="ip_password">
                 <input class="ip_password-login" id="ip_password-login" type="password">
@@ -58,25 +64,30 @@
         <div class="col-12 col-md">
           <div class="register-container">
             <h2>REGISTER</h2>
-            <form class="form-swap" action="">
+            <form class="form-swap" action="${pageContext.request.contextPath}/signup" method="post">
+              <c:if test="<%= !error.isEmpty() %>">
+                <div class="color-red mb-3 overflow-hidden">
+                  <%= error %>
+                </div
+              </c:if>
+
               <div class="ip_user-name">
-                <input id="ip_new-name" type="text">
-                <label for="ip_new-name">Username *</label>
+                <input id="ip_new-name" type="email" required value="<%=email%>">
+                <label for="ip_new-name">Email *</label>
               </div>
               <div class="ip_email">
-                <input id="ip_email-register" type="email">
-                <label for="ip_email-register">Email address *</label>
+                <input id="ip_password_register" type="password" required>
+                <label for="ip_password_register">Password *</label>
               </div>
               <p class="monts">A password will be sent to your email address.</p>
               <div class="privacy-policy-text">
                 <p class="monts">Your personal data will be used to support your experience throughout this website,
                   to
-                  manage access to your account, and for other purposes described in our <a class="monts"
-                                                                                            href="#">privacy
+                  manage access to your account, and for other purposes described in our <a class="monts" href="#">privacy
                     policy.</a></p>
               </div>
               <div class="btn-register">
-                <a href="#"><button class="btn-text-lg bgr-black hover-bg-red">REGISTER</button></a>
+                <button class="btn-text-lg bgr-black hover-bg-red">REGISTER</button>
               </div>
             </form>
           </div>

@@ -3,6 +3,8 @@ package Services;
 import DTO.BaseDTO;
 import DTO.UpdateUserDTO;
 import Model.User;
+import org.jdbi.v3.core.Handle;
+import org.jdbi.v3.core.HandleCallback;
 
 import java.util.Optional;
 
@@ -40,6 +42,24 @@ public class UserService extends BaseService<User>{
         }
 
         return user != null;
+    }
+
+    public boolean checkEmailExists(String email) throws Exception {
+        String data = this.jdbi.withHandle(new HandleCallback<String, Exception>() {
+            public String withHandle(Handle handle) throws Exception{
+                try {
+                    return handle.createQuery(
+                                    "SELECT email FROM " + tableName + " WHERE email = ?")
+                            .bind(0, email)
+                            .mapTo(String.class).first();
+                }catch (IllegalStateException exception) {
+                    return null;
+                }
+
+            }
+        });
+
+        return data != null;
     }
 
 }
