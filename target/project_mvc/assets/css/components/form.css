@@ -81,7 +81,7 @@
 .form-swap .btn-login a button,.form-swap .btn-register a button{
     padding: 0.9375rem 1.5625rem;
     font-size: 0.875rem;
-    font-family: var(--f-poppins);
+    font-family: var(--f-fonts);
     font-weight: 500;
     height: 50px;
 }

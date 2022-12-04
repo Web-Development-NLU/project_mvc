@@ -1,10 +1,10 @@
 .card-price {
     line-height: 1.05rem;
-    font-family: var(--f-poppins);
+    font-family: var(--f-monts);
     margin-bottom: 2px;
 }
 .card-price .current-price{
-    font-family: var(--f-poppins);
+    font-family: var(--f-monts);
     font-size: 0.875rem;
     margin-right: 0.6em;
     line-height: 1.05rem;
@@ -13,7 +13,7 @@
     font-size: 0.875rem;
     position: relative;
     background-color: transparent;
-    font-family: var(--f-poppins);
+    font-family: var(--f-monts);
     line-height: 1.05rem;
 }
 .cl-text-price {

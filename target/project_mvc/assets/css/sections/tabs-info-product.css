@@ -35,7 +35,7 @@
 .tabs-info-product .tab-info-product_list .tab-item {
   margin: 0 20px;
   font-size: 0.875rem;
-  font-family: var(--f-poppins);
+  font-family: var(--f-monts);
   font-weight: 600;
   letter-spacing: 1px;
   padding-bottom: 10px;
@@ -67,7 +67,7 @@
 }
 
 .tabs-info-product .content-list #content-des p {
-  font-family: var(--f-poppins);
+  font-family: var(--f-monts);
 }
 
 .tabs-info-product .content-list #content-info {

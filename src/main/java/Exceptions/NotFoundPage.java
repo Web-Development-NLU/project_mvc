@@ -12,7 +12,6 @@ public class NotFoundPage extends HttpServlet {
         request.setAttribute("statusCode", 404);
         request.setAttribute("messageTitle", "Oops! That page can't be found.");
         request.setAttribute("message", "Nothing was found at this location. Try searching or check out the links below");
-        request.setAttribute("page", "NotFoundPage");
         request.getRequestDispatcher("jsp/client/error.jsp").forward(request, response);
     }
 
