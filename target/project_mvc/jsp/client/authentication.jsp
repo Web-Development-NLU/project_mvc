@@ -16,8 +16,10 @@
 </head>
 <body>
   <%
-    String error = (request.getAttribute("error") == null) ? "" : request.getAttribute("error").toString() ;
+    String error = (request.getAttribute("error") == null) ? "" : request.getAttribute("error").toString();
     String email = (request.getAttribute("email") == null) ? "" : request.getAttribute("email").toString();
+    String emailLogin = (request.getAttribute("emailLogin") == null) ? "" : request.getAttribute("emailLogin").toString();
+    String errorLogin = (request.getAttribute("errorLogin") == null) ? "" : request.getAttribute("errorLogin").toString();
   %>
   <div id="authen-container">
     <header>
@@ -35,23 +37,24 @@
         <div class="col-12 col-md">
           <div class="login-container">
             <h2>Login</h2>
-            <form class="form-swap" action="">
+            <form class="form-swap" action="${pageContext.request.contextPath}/login" method="post">
+              <c:if test="<%= !errorLogin.isEmpty() %>">
+                <div class="color-red mb-3 overflow-hidden">
+                  <%= errorLogin %>
+                </div>
+              </c:if>
               <div class="ip_user-name">
-                <input id="ip_name-account" type="text">
+                <input id="ip_name-account" type="text" name="email" value="<%= emailLogin %>">
                 <label for="ip_name-account">Email address *</label>
               </div>
               <div id="ip_password" class="ip_password">
-                <input class="ip_password-login" id="ip_password-login" type="password">
+                <input class="ip_password-login" id="ip_password-login" name="password" type="password">
                 <label for="ip_password-login">Password *</label>
                 <span class="show-password" id="show-password">
                   <i class="bi bi-eye-slash"></i>
                 </span>
               </div>
               <div class="lost-password-container">
-                <div class="checkbox">
-                  <input type="checkbox" id="check_box">
-                  <label for="check_box">Remember me</label>
-                </div>
                 <a class="btn-link hover-text-red color-black monts">Lost your password?</a>
               </div>
               <div class="btn-login">
@@ -68,15 +71,15 @@
               <c:if test="<%= !error.isEmpty() %>">
                 <div class="color-red mb-3 overflow-hidden">
                   <%= error %>
-                </div
+                </div>
               </c:if>
 
               <div class="ip_user-name">
-                <input id="ip_new-name" type="email" required value="<%=email%>">
+                <input id="ip_new-name" name="email" type="email" required value="<%=email%>">
                 <label for="ip_new-name">Email *</label>
               </div>
               <div class="ip_email">
-                <input id="ip_password_register" type="password" required>
+                <input id="ip_password_register" name="password" type="password" required>
                 <label for="ip_password_register">Password *</label>
               </div>
               <p class="monts">A password will be sent to your email address.</p>

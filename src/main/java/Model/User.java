@@ -17,7 +17,7 @@ public class User extends BaseModelUUID{
     public User() {
     }
 
-    public User(String email, String password, int isGuess, int status, int type) {
+    public User(String email, String password, int status, int type) {
         super();
         this.email = email;
         this.password = password;

@@ -1,12 +1,9 @@
 package Services;
 
 import DTO.BaseDTO;
-import DTO.UpdateUserDTO;
 import Model.User;
 import org.jdbi.v3.core.Handle;
 import org.jdbi.v3.core.HandleCallback;
-
-import java.util.Optional;
 
 public class UserService extends BaseService<User>{
     public UserService(String tableName) {
@@ -14,12 +11,16 @@ public class UserService extends BaseService<User>{
     }
 
     @Override
-    public void create(User model) {
-        this.jdbi.useHandle(handle -> {
+    public String create(User model) {
+        return this.jdbi.withHandle(handle -> {
+            String id = handle.createQuery("SELECT UUID()").mapTo(String.class).first();
+            model.setId(id);
             handle.createUpdate(
-                    "INSERT INTO " + this.tableName + " (id, email, password, isGuess, status, type, createdAt) " +
-                            "VALUES (UUID(), :email, :password, :isGuess, :status, :type, :createdAt)"
+                    "INSERT INTO " + this.tableName + " (id, email, password, status, type, createdAt) " +
+                            "VALUES (:id, :email, :password, :status, :type, :createdAt)"
             ).bindBean(model).execute();
+
+            return id;
         });
     }
 
@@ -29,6 +30,7 @@ public class UserService extends BaseService<User>{
 
         if(user != null) {
             this.jdbi.useHandle(handle -> {
+
                 handle.createUpdate("UPDATE " + this.tableName +
                         " SET firstName = :firstName, " +
                         "lastName = :lastName, " +
@@ -36,7 +38,8 @@ public class UserService extends BaseService<User>{
                         "country = :country, " +
                         "city = :city, " +
                         "district = :district, " +
-                        "address = :address" + " WHERE id = :id"
+                        "address = :address, " +
+                        "status = :status" + " WHERE id = :id "
                 ).bind("id", id).bindBean(model).execute();
             });
         }
@@ -44,22 +47,24 @@ public class UserService extends BaseService<User>{
         return user != null;
     }
 
-    public boolean checkEmailExists(String email) throws Exception {
-        String data = this.jdbi.withHandle(new HandleCallback<String, Exception>() {
-            public String withHandle(Handle handle) throws Exception{
-                try {
-                    return handle.createQuery(
-                                    "SELECT email FROM " + tableName + " WHERE email = ?")
-                            .bind(0, email)
-                            .mapTo(String.class).first();
-                }catch (IllegalStateException exception) {
-                    return null;
+    public User findByEmail(String email) {
+        try {
+            return this.jdbi.withHandle(new HandleCallback<User, Exception>() {
+                public User withHandle(Handle handle) throws Exception{
+                    try {
+                        return handle.createQuery(
+                                        "SELECT * FROM " + tableName + " WHERE email = ?")
+                                .bind(0, email)
+                                .mapToBean(User.class).first();
+                    }catch (IllegalStateException exception) {
+                        return null;
+                    }
+
                 }
-
-            }
-        });
-
-        return data != null;
+            });
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
     }
 
 }
