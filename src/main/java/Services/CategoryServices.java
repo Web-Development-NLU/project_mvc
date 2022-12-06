@@ -12,7 +12,7 @@ public class CategoryServices extends BaseService<Category> {
         return this.jdbi.withHandle(handle -> {
                        handle.createUpdate(
                     "INSERT INTO " + this.tableName + " (name,createAt) " +
-                            "VALUES (:name,:createAt)"
+                            "VALUES (:name, :createAt) "
             ).bindBean(model).execute();
 
             return model.getName();
@@ -25,7 +25,7 @@ public class CategoryServices extends BaseService<Category> {
             this.jdbi.useHandle(handle -> {
                 handle.createUpdate("UPDATE " + this.tableName +
                                 " SET  name = :name, " +
-                                "updateAt=:updateAt, "+
+                                "updateAt = :updateAt, "+
                                 " WHERE id = :id "
                 ).bind("id", id).bindBean(model).execute();
             });
