@@ -23,7 +23,7 @@
 </form>
 <h2>Delete</h2>
 <form method="post" action="/test/category">
-    <input name="name" placeholder="name">
+    <input name="id" value="ed286d7f-715f-11ed-8c95-6018955a5f6c" readonly>
     <button type="submit" name="action" value="DELETE">Submit</button>
 </form>
 </body>
