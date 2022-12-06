@@ -33,7 +33,7 @@ public class UserTest extends HttpServlet {
 
         switch (action) {
             case "CREATE":
-                User model = new User(email, password, 1, 0, 0);
+                User model = new User(email, password, 0, 0);
                 this.userService.create(model);
                 break;
             case "UPDATE":

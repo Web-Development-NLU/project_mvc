@@ -1,23 +1,37 @@
 package Services;
 
 import DTO.BaseDTO;
-import DTO.UpdateUserDTO;
 import Model.User;
-
-import java.util.Optional;
+import at.favre.lib.crypto.bcrypt.BCrypt;
+import org.jdbi.v3.core.Handle;
+import org.jdbi.v3.core.HandleCallback;
 
 public class UserService extends BaseService<User>{
     public UserService(String tableName) {
         super(tableName);
     }
 
+    public void resetPassword(String id, String password) {
+        String hashPassword = BCrypt.withDefaults().hashToString(8, password.toCharArray());
+
+        this.jdbi.useHandle(handle -> handle.createUpdate(
+                "UPDATE " + this.tableName +
+                        " SET password = :password" +
+                        " WHERE id = :id"
+                ).bind("id", id)
+                .bind("password", hashPassword).execute());
+    }
     @Override
-    public void create(User model) {
-        this.jdbi.useHandle(handle -> {
+    public String create(User model) {
+        return this.jdbi.withHandle(handle -> {
+            String id = handle.createQuery("SELECT UUID()").mapTo(String.class).first();
+            model.setId(id);
             handle.createUpdate(
-                    "INSERT INTO " + this.tableName + " (id, email, password, isGuess, status, type, createdAt) " +
-                            "VALUES (UUID(), :email, :password, :isGuess, :status, :type, :createdAt)"
+                    "INSERT INTO " + this.tableName + " (id, email, password, status, type, createdAt) " +
+                            "VALUES (:id, :email, :password, :status, :type, :createdAt)"
             ).bindBean(model).execute();
+
+            return id;
         });
     }
 
@@ -27,6 +41,7 @@ public class UserService extends BaseService<User>{
 
         if(user != null) {
             this.jdbi.useHandle(handle -> {
+
                 handle.createUpdate("UPDATE " + this.tableName +
                         " SET firstName = :firstName, " +
                         "lastName = :lastName, " +
@@ -34,12 +49,33 @@ public class UserService extends BaseService<User>{
                         "country = :country, " +
                         "city = :city, " +
                         "district = :district, " +
-                        "address = :address" + " WHERE id = :id"
+                        "address = :address, " +
+                        "status = :status" + " WHERE id = :id "
                 ).bind("id", id).bindBean(model).execute();
             });
         }
 
         return user != null;
+    }
+
+    public User findByEmail(String email) {
+        try {
+            return this.jdbi.withHandle(new HandleCallback<User, Exception>() {
+                public User withHandle(Handle handle) throws Exception{
+                    try {
+                        return handle.createQuery(
+                                        "SELECT * FROM " + tableName + " WHERE email = ?")
+                                .bind(0, email)
+                                .mapToBean(User.class).first();
+                    }catch (IllegalStateException exception) {
+                        return null;
+                    }
+
+                }
+            });
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
     }
 
 }
