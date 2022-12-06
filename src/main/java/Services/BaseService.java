@@ -7,8 +7,6 @@ import org.jdbi.v3.core.Handle;
 import org.jdbi.v3.core.HandleCallback;
 import org.jdbi.v3.core.Jdbi;
 
-import java.util.Optional;
-
 public abstract class BaseService<M extends IModel> {
     protected Jdbi jdbi;
     protected String tableName;
@@ -53,7 +51,7 @@ public abstract class BaseService<M extends IModel> {
         return data != null;
     };
 
-    protected abstract void create(M model);
+    protected abstract String create(M model);
     protected abstract boolean update(String id, BaseDTO model) throws Exception;
 
 }

@@ -1,5 +1,7 @@
 package DTO;
 
+import Model.User;
+
 import java.time.LocalDate;
 
 public class UpdateUserDTO implements BaseDTO{
@@ -11,7 +13,7 @@ public class UpdateUserDTO implements BaseDTO{
     private String district;
     private String address;
     private LocalDate updatedAt;
-
+    private int status;
     public UpdateUserDTO(String firstName, String lastName, String phone, String country, String city, String district, String address) {
         this.firstName = firstName;
         this.lastName = lastName;
@@ -20,6 +22,19 @@ public class UpdateUserDTO implements BaseDTO{
         this.city = city;
         this.district = district;
         this.address = address;
+        this.status = 0;
+        this.updatedAt = LocalDate.now();
+    }
+
+    public  UpdateUserDTO(User model) {
+        this.firstName = model.getFirstName();
+        this.lastName = model.getLastName();
+        this.phone = model.getPhone();
+        this.country = model.getPhone();
+        this.city = model.getCity();
+        this.district = model.getDistrict();
+        this.address = model.getAddress();
+        this.status = model.getStatus();
         this.updatedAt = LocalDate.now();
     }
 
@@ -53,5 +68,9 @@ public class UpdateUserDTO implements BaseDTO{
 
     public LocalDate getUpdatedAt() {
         return updatedAt;
+    }
+
+    public int getStatus() {
+        return status;
     }
 }

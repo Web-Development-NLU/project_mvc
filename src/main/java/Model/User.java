@@ -11,18 +11,16 @@ public class User extends BaseModelUUID{
     private String district;
     private String address;
     private String avatar;
-    private int isGuess;
     private int status;
     private int type;
 
     public User() {
     }
 
-    public User(String email, String password, int isGuess, int status, int type) {
+    public User(String email, String password, int status, int type) {
         super();
         this.email = email;
         this.password = password;
-        this.isGuess = isGuess; // 0, 1
         this.status = status;
         this.type = type; // 0, 1, 2
     }
@@ -65,10 +63,6 @@ public class User extends BaseModelUUID{
 
     public String getAvatar() {
         return avatar;
-    }
-
-    public int getIsGuess() {
-        return isGuess;
     }
 
     public int getStatus() {
@@ -119,10 +113,6 @@ public class User extends BaseModelUUID{
         this.avatar = avatar;
     }
 
-    public void setIsGuess(int isGuess) {
-        this.isGuess = isGuess;
-    }
-
     public void setStatus(int status) {
         this.status = status;
     }
@@ -144,7 +134,6 @@ public class User extends BaseModelUUID{
                 ", district='" + district + '\'' +
                 ", address='" + address + '\'' +
                 ", avatar='" + avatar + '\'' +
-                ", isGuess=" + isGuess +
                 ", status=" + status +
                 ", type=" + type +
                 '}';
