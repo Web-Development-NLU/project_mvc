@@ -55,10 +55,10 @@
                 </span>
               </div>
               <div class="lost-password-container">
-                <a class="btn-link hover-text-red color-black monts">Lost your password?</a>
+                <a href="${pageContext.request.contextPath}/forgotPassword" class="btn-link hover-text-red color-black monts">Lost your password?</a>
               </div>
               <div class="btn-login">
-                <a href="#"><button class="btn-text-lg bgr-black hover-bg-red">LOG IN</button></a>
+                <button class="btn-text-lg bgr-black hover-bg-red">LOG IN</button>
               </div>
             </form>
           </div>

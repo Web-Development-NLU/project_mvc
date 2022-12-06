@@ -2,6 +2,7 @@ package Services;
 
 import DTO.BaseDTO;
 import Model.User;
+import at.favre.lib.crypto.bcrypt.BCrypt;
 import org.jdbi.v3.core.Handle;
 import org.jdbi.v3.core.HandleCallback;
 
@@ -10,6 +11,16 @@ public class UserService extends BaseService<User>{
         super(tableName);
     }
 
+    public void resetPassword(String id, String password) {
+        String hashPassword = BCrypt.withDefaults().hashToString(8, password.toCharArray());
+
+        this.jdbi.useHandle(handle -> handle.createUpdate(
+                "UPDATE " + this.tableName +
+                        " SET password = :password" +
+                        " WHERE id = :id"
+                ).bind("id", id)
+                .bind("password", hashPassword).execute());
+    }
     @Override
     public String create(User model) {
         return this.jdbi.withHandle(handle -> {

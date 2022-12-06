@@ -1,5 +1,6 @@
 package Filter;
 
+import DTO.AuthorizationData;
 import Model.User;
 import Services.AuthenticationService;
 import Services.UserService;
@@ -32,15 +33,15 @@ public class CheckAuthentication implements Filter {
     public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws ServletException, IOException {
         HttpServletRequest httpRequest = (HttpServletRequest) request;
         HttpSession session = ((HttpServletRequest) request).getSession(true);
-        String id = (String) session.getAttribute("authorization");
-        User user = userService.findById(id, User.class);
+        AuthorizationData data = (AuthorizationData) session.getAttribute("authorization");
+        User user = (data != null) ? userService.findById(data.getId() , User.class) : null;
         request.setAttribute("logged", user != null);
         if(httpRequest.getMethod().equalsIgnoreCase("GET")){
 
             if ((user != null) && (user.getStatus() == 0)) {
                 String rand = RandomStringUtils.randomAlphabetic(6);
                 this.authenticationService.sendVerify(rand, user.getEmail());
-                session.setAttribute("id", id);
+                session.setAttribute("id", data.getId());
                 session.setAttribute(user.getEmail(), rand);
                 httpRequest.getRequestDispatcher("/jsp/client/verifyAccount.jsp").forward(request,response);
                 return;

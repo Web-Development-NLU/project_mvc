@@ -1,14 +1,10 @@
 package Controller;
 
-import DTO.AuthorizationData;
 import DTO.UpdateUserDTO;
-import Model.MailContent;
 import Model.User;
 import Services.AuthenticationService;
-import Services.MailService;
 import Services.UserService;
-import com.mailjet.client.errors.MailjetException;
-import com.mailjet.client.errors.MailjetSocketTimeoutException;
+import at.favre.lib.crypto.bcrypt.BCrypt;
 import org.apache.commons.lang3.RandomStringUtils;
 
 import javax.servlet.*;
@@ -17,8 +13,8 @@ import javax.servlet.annotation.*;
 import java.io.IOException;
 import java.util.Objects;
 
-@WebServlet(name = "VerifyController", value = "/verify")
-public class VerifyController extends HttpServlet {
+@WebServlet(name = "VerifyForgotPassword", value = "/verifyForgotPassword")
+public class VerifyForgotPassword extends HttpServlet {
 
     private UserService userService;
     private AuthenticationService authenticationService;
@@ -31,8 +27,9 @@ public class VerifyController extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        request.getRequestDispatcher("/jsp/client/verifyAccount.jsp").forward(request, response);
+        request.getRequestDispatcher("/jsp/client/verifyForgotPassword.jsp").forward(request, response);
     }
+
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         HttpSession session = request.getSession(true);
@@ -47,27 +44,24 @@ public class VerifyController extends HttpServlet {
                 this.authenticationService.sendVerify(rand, user.getEmail());
                 session.setAttribute("id", id);
                 session.setAttribute(user.getEmail(), rand);
-                response.sendRedirect("/verify");
+                response.sendRedirect("/verifyForgotPassword");
             }break;
             case "verify":
             {
                 String code = request.getParameter("code");
                 String verify = (String) session.getAttribute(user.getEmail());
+                String newPassword = request.getParameter("password");
 
                 if(!Objects.equals(code, verify)) {
                     request.setAttribute("error", "Mã xác minh sai hãy nhập lại!!");
-                    request.getRequestDispatcher("/jsp/client/verifyAccount.jsp").forward(request, response);
+                    request.getRequestDispatcher("/jsp/client/verifyForgotPassword.jsp").forward(request, response);
                 }else {
-                    user.setStatus(1);
-                    UpdateUserDTO dto = new UpdateUserDTO(user);
-                    this.userService.update(id, dto);
+                    this.userService.resetPassword(user.getId(), newPassword);
                     session.removeAttribute("id");
                     session.removeAttribute(user.getEmail());
-                    session.setAttribute("authorization", new AuthorizationData(id, user.getType()));
-                    response.sendRedirect("/");
+                    response.sendRedirect("/CompleteForgotPassword");
                 }
             }break;
         }
-
     }
 }
