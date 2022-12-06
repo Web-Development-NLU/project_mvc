@@ -1,8 +1,8 @@
 package Model;
 
-public class Catagory extends BaseModel {
+public class Category extends BaseModel {
     private String name;
-   public Catagory(String name){
+   public Category(String name){
        super();
        this.name =name;
    }

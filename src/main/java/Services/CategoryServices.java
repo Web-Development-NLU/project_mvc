@@ -1,15 +1,14 @@
 package Services;
 
 import DTO.BaseDTO;
-import Model.Catagory;
-import org.jdbi.v3.core.Jdbi;
+import Model.Category;
 
-public class CatagoryServices extends BaseService<Catagory> {
-    public CatagoryServices(String tableName){
+public class CategoryServices extends BaseService<Category> {
+    public CategoryServices(String tableName){
         super(tableName);
     }
     @Override
-    public String create(Catagory model) {
+    public String create(Category model) {
         return this.jdbi.withHandle(handle -> {
                        handle.createUpdate(
                     "INSERT INTO " + this.tableName + " (name) " +
@@ -20,19 +19,18 @@ public class CatagoryServices extends BaseService<Catagory> {
         });
     }
     public boolean update(String id, BaseDTO model){
-        Catagory catagory = this.findById(id, Catagory.class);
+        Category category = this.findById(id, Category.class);
 
-        if(catagory != null) {
+        if(category != null) {
             this.jdbi.useHandle(handle -> {
                 handle.createUpdate("UPDATE " + this.tableName +
-                                " SET idCa = :idCa, " +
-                                "name = :name, " +
+                                " SET  name = :name, " +
                                 " WHERE id = :id "
                 ).bind("id", id).bindBean(model).execute();
             });
         }
 
-        return user != null;
+        return category != null;
     }
 
 }
