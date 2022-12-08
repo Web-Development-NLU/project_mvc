@@ -2,11 +2,14 @@ package Model;
 
 public class Category extends BaseModel {
     private String name;
+    public Category(){
+
+    }
+
    public Category(String name){
        super();
        this.name =name;
    }
-
 
     public int getId() {
         return id;
