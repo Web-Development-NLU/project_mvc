@@ -33,15 +33,22 @@ public class SignupController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         HttpSession session = request.getSession(true);
+
         try {
-            if(this.userService.findByEmail(request.getParameter("email")) != null){
+            String email = request.getParameter("email");
+            String password = request.getParameter("password");
+            if(email.isEmpty() || password.isEmpty()) {
+                request.setAttribute ("error", "Email và mật khẩu không được bỏ trống");
+                request.getRequestDispatcher("/jsp/client/authentication.jsp").forward(request, response);
+                return;
+            }
+            if(this.userService.findByEmail(email) != null){
                 request.setAttribute ("error", "Email của bạn đã được sử dụng");
                 request.setAttribute("email", request.getParameter("email"));
                 request.getRequestDispatcher("/jsp/client/authentication.jsp").forward(request, response);
             }else {
-                String email = request.getParameter("email");
-                String password = BCrypt.withDefaults().hashToString(8, request.getParameter("password").toCharArray());
-                User model = new User(email, password, 0, 0);
+                String passwordHash = BCrypt.withDefaults().hashToString(8, password.toCharArray());
+                User model = new User(email, passwordHash, 0, 0);
 
                 String id = this.userService.create(model);
                 String rand = RandomStringUtils.randomAlphabetic(6);
