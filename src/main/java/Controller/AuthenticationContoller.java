@@ -30,6 +30,11 @@ public class AuthenticationContoller extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String email = request.getParameter("email");
         String password = request.getParameter("password");
+        if(email.isEmpty() || password.isEmpty()) {
+            request.setAttribute("errorLogin", "Email và mật khẩu không được bỏ trống");
+            request.getRequestDispatcher("/jsp/client/authentication.jsp").forward(request, response);
+            return;
+        }
         User user = userService.findByEmail(email);
         HttpSession session = request.getSession(true);
         try {
