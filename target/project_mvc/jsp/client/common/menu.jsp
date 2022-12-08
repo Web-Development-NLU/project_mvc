@@ -11,6 +11,7 @@
 
 <%
   Boolean logged = (Boolean) request.getAttribute("logged");
+  int cartNumber = Integer.parseInt(request.getAttribute("cartNumber").toString());
 %>
 <menu class="head_top ${param.classes}">
   <div class="container-fluid container_menu">
@@ -89,9 +90,9 @@
 
         <li class="menu_cart menu_action_item">
           <button class="btn-badge">
-            <a href="#" class="color-white">
+            <a href="${pageContext.request.contextPath}/cart" class="color-white">
               <i class="bi bi-bag"></i>
-              <span class="badge">4</span>
+              <span class="badge"><%=cartNumber%></span>
             </a>
           </button>
         </li>

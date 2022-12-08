@@ -11,7 +11,7 @@ public class CartDTO {
         this.name = name;
         this.amount = 1;
         this.id = id;
-        this.price = price * amount;
+        this.price = price;
     }
 
     public String getName() {
@@ -26,13 +26,16 @@ public class CartDTO {
         return id;
     }
 
+    public double getPrice() {
+        return price;
+    }
+
     public void setName(String name) {
         this.name = name;
     }
 
     public void setAmount(int amount) {
         this.amount = amount;
-        this.price *= amount;
     }
 
     public void setId(String id) {

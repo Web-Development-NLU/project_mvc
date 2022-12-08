@@ -17,6 +17,10 @@ public abstract class BaseService<M extends IModel> {
     }
 
     public M findById(String id, Class<M> classes) {
+        if(id.isEmpty()) {
+            return null;
+        }
+
         try {
             M data;
             data = this.jdbi.withHandle(new HandleCallback<M, Exception>() {
