@@ -13,18 +13,20 @@
 <body>
 
 <form method="post" action="/test/category">
+    <input name="id" value="ed286d7f-715f-11ed-8c95-6018955a5f6c" readonly>
     <input name="name" type="text" placeholder="name">
         <button type="submit" name="action" value="CREATE">Submit</button>
 </form>
-<%--<h2>Update</h2>--%>
-<%--<form method="post" action="/test/category">--%>
-<%--    <input name="name" placeholder="name">--%>
-<%--    <button type="submit" name="action" value="UPDATE">Submit</button>--%>
-<%--</form>--%>
-<%--<h2>Delete</h2>--%>
-<%--<form method="post" action="/test/category">--%>
-<%--    <input name="id" value="ed286d7f-715f-11ed-8c95-6018955a5f6c" readonly>--%>
-<%--    <button type="submit" name="action" value="DELETE">Submit</button>--%>
-<%--</form>--%>
+<h2>Update</h2>
+<form method="post" action="/test/category">
+    <input name="id" value="ed286d7f-715f-11ed-8c95-6018955a5f6c" readonly>
+    <input name="name" placeholder="name">
+    <button type="submit" name="action" value="UPDATE">Submit</button>
+</form>
+<h2>Delete</h2>
+<form method="post" action="/test/category">
+    <input name="id" value="ed286d7f-715f-11ed-8c95-6018955a5f6c" readonly>
+    <button type="submit" name="action" value="DELETE">Submit</button>
+</form>
 </body>
 </html>
