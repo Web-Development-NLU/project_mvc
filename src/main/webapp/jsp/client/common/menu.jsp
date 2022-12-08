@@ -10,7 +10,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 
 <%
-  boolean logged = false;
+  Boolean logged = (Boolean) request.getAttribute("logged");
 %>
 <menu class="head_top ${param.classes}">
   <div class="container-fluid container_menu">
@@ -72,7 +72,7 @@
                 </button>
                 <div class="dropdown-menu">
                   <a class="dropdown-item" href="#">My Account</a>
-                  <a class="dropdown-item" href="#">Logout <span><i class="fa-solid fa-right-from-bracket"></i></span></a>
+                  <a class="dropdown-item" href="/logout">Logout <span><i class="fa-solid fa-right-from-bracket"></i></span></a>
                 </div>
               </div>
             </c:when>

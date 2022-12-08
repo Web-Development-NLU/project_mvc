@@ -5,12 +5,11 @@ import javax.servlet.http.*;
 import javax.servlet.annotation.*;
 import java.io.IOException;
 
-@WebServlet("")
-public class MainController extends HttpServlet {
+@WebServlet(name = "CompleteForgotPassword", value = "/CompleteForgotPassword")
+public class CompleteForgotPassword extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        request.setAttribute("data", "Hello Servlet");
-        request.getRequestDispatcher("/jsp/client/index.jsp").forward(request, response);
+        request.getRequestDispatcher("/jsp/client/CompleteResetPassword.jsp").forward(request, response);
     }
 
     @Override
