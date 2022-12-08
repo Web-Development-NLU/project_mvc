@@ -6,6 +6,8 @@ import at.favre.lib.crypto.bcrypt.BCrypt;
 import org.jdbi.v3.core.Handle;
 import org.jdbi.v3.core.HandleCallback;
 
+import java.time.LocalDate;
+
 public class UserService extends BaseService<User>{
     public UserService(String tableName) {
         super(tableName);
@@ -16,9 +18,11 @@ public class UserService extends BaseService<User>{
 
         this.jdbi.useHandle(handle -> handle.createUpdate(
                 "UPDATE " + this.tableName +
-                        " SET password = :password" +
-                        " WHERE id = :id"
+                        " SET password = :password," +
+                        " updatedAt = :updatedAt" +
+                        " WHERE id = :id "
                 ).bind("id", id)
+                .bind("updatedAt", LocalDate.now())
                 .bind("password", hashPassword).execute());
     }
     @Override
