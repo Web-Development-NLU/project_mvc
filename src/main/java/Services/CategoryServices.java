@@ -25,7 +25,7 @@ public class CategoryServices extends BaseService<Category> {
             this.jdbi.useHandle(handle -> {
                 handle.createUpdate("UPDATE " + this.tableName +
                                 " SET  name = :name, " +
-                                "updatedAt = :updatedAt, "+
+                                "updatedAt = :updatedAt "+
                                 " WHERE id = :id "
                 ).bind("id", id).bindBean(model).execute();
             });
