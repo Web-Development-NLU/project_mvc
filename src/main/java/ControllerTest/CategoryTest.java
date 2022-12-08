@@ -2,6 +2,7 @@ package ControllerTest;
 
 import DTO.UpdateCategoryDTO;
 import Model.Category;
+import Model.User;
 import Services.CategoryServices;
 
 import javax.servlet.ServletException;
@@ -11,7 +12,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
-@WebServlet(name = "categoryTest", value = "/test/category")
+@WebServlet(name = "CategoryTest", value = "/test/category")
 public class CategoryTest extends HttpServlet {
     private CategoryServices categoryService;
 
