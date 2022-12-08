@@ -3,7 +3,9 @@ package Controller;
 import DTO.AuthorizationData;
 import DTO.CartDTO;
 import Model.Product;
+import Model.User;
 import Services.ProductService;
+import Services.UserService;
 
 import javax.servlet.*;
 import javax.servlet.http.*;
@@ -15,11 +17,13 @@ import java.util.ArrayList;
 public class AddToCartController extends HttpServlet {
 
     private ProductService productService;
+    private UserService userService;
 
     @Override
     public void init() throws ServletException {
         super.init();
         this.productService = new ProductService("product");
+        this.userService = new UserService("users");
     }
 
     @Override
@@ -29,9 +33,12 @@ public class AddToCartController extends HttpServlet {
         Product product = this.productService.findById(id, Product.class);
 
         HttpSession session = request.getSession(true);
-        AuthorizationData authorizationData = (session.getAttribute("authorization") == null) ? new AuthorizationData() : (AuthorizationData) session.getAttribute("authorization");
+        AuthorizationData authorizationData = (session.getAttribute("authorization") == null)
+                ? new AuthorizationData() : (AuthorizationData) session.getAttribute("authorization");
         if((boolean) request.getAttribute("logged")) {
-            authorizationData.addToCart(new CartDTO(product.getName(), product.getId(), product.getPrice()));
+            CartDTO cart = new CartDTO(product.getName(), product.getId(), product.getPrice());
+            authorizationData.addToCart(cart);
+            this.userService.setCart(authorizationData.getId(), cart.getId(), cart.getAmount());
         }else {
             authorizationData.addToCart(new CartDTO(product.getName(), product.getId(), product.getPrice()));
 

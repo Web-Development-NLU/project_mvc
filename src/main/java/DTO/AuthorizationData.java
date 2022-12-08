@@ -4,15 +4,13 @@ import java.util.ArrayList;
 import java.util.Objects;
 
 public class AuthorizationData {
-    private String id;
-    private int type;
+    private String id = "";
+    private int type = 0;
 
     private ArrayList<CartDTO> carts;
 
     public AuthorizationData() {
         this.carts = new ArrayList<>();
-        this.id = "";
-        this.type = 0;
     }
 
     public AuthorizationData(String id, int type) {
@@ -31,8 +29,6 @@ public class AuthorizationData {
 
     public void setCarts(ArrayList<CartDTO> carts) {
         this.carts = carts;
-        this.id = "";
-        this.type = 0;
     }
 
     public ArrayList<CartDTO> getCarts() {
