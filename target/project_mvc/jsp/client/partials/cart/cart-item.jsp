@@ -1,4 +1,4 @@
-<%--
+<%@ page import="DTO.CartDTO" %><%--
   Created by IntelliJ IDEA.
   User: Quang Tho
   Date: 03/12/2022
@@ -12,13 +12,26 @@
     double price = Double.parseDouble(request.getParameter("price"));
     String name = request.getParameter("name");
     int amount = Integer.parseInt(request.getParameter("amount"));
+    String pattern = request.getParameter("pattern");
+    String color = request.getParameter("color");
+    String size = request.getParameter("size");
 %>
 <tr class="cart-item">
     <td class="cart-item_img"><img
             src="https://caston.familab.net/wp-content/uploads/2021/09/product_pilke-18-natural-birch-with-light-hr_2-420x420.jpg">
     </td>
-    <td><a href="#"><%=name%>
-    </a></td>
+    <td>
+        <div><a href="#"><h4><%=name%></h4></a></div>
+        <c:if test="<%= !pattern.isEmpty() %>">
+            <div class="mb-1"><%=pattern%></div>
+        </c:if>
+        <c:if test="<%= !color.isEmpty() %>">
+            <div class="mb-1"><%=color%></div>
+        </c:if>
+        <c:if test="<%= !size.isEmpty() %>">
+            <div class="mb-1"><%=size%></div>
+        </c:if>
+    </td>
     <td class="cart-price">
         <div class="card-price">
             <span class="current-price"><%=price%> VNĐ</span>
