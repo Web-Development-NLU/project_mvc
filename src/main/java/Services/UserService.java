@@ -1,12 +1,14 @@
 package Services;
 
 import DTO.BaseDTO;
+import DTO.CartDTO;
 import Model.User;
 import at.favre.lib.crypto.bcrypt.BCrypt;
 import org.jdbi.v3.core.Handle;
 import org.jdbi.v3.core.HandleCallback;
 
 import java.time.LocalDate;
+import java.util.List;
 
 public class UserService extends BaseService<User>{
     public UserService(String tableName) {
@@ -82,4 +84,66 @@ public class UserService extends BaseService<User>{
         }
     }
 
+    public List<CartDTO> getCart(String idUser) {
+        return this.jdbi.withHandle(handle -> handle.createQuery(
+                "SELECT c.amount, c.idProduct as id, p.name, p.price, p.categoryId " +
+                        "FROM cart as c " +
+                        "RIGHT JOIN product as p ON p.id = c.idProduct " +
+                        "WHERE c.idUser = :idUser"
+        ).bind("idUser", idUser).mapToBean(CartDTO.class).list());
+    }
+
+    public void setCart(String idUser, String idProduct, int amount) {
+        int oldAmount = 0;
+        try{
+            oldAmount = this.jdbi.withHandle(handle -> handle.createQuery(
+                            "SELECT amount FROM cart WHERE idUser = :idUser AND idProduct = :idProduct"
+                    ).bind("idUser", idUser).bind("idProduct", idProduct)
+                    .mapTo(Integer.class).first());
+        }catch (IllegalArgumentException exception) {
+            oldAmount = 0;
+        }
+
+        if(oldAmount != 0) {
+            this.updateCart(idUser, idProduct, amount + oldAmount);
+        }else {
+            this.createCart(idUser, idProduct);
+        }
+    }
+    private void createCart(String idUser, String idProduct) {
+        this.jdbi.useHandle(handle -> {
+            handle.createUpdate(
+                    "INSERT INTO cart (idUser, idProduct, createdAt, amount) " +
+                            "VALUES (:idUser, :idProduct, :createdAt, :amount)")
+                    .bind("idUser", idUser)
+                    .bind("idProduct", idProduct)
+                    .bind("createdAt", LocalDate.now())
+                    .bind("amount", 1)
+                    .execute();
+        });
+    }
+    public void updateCart(String idUser, String idProduct, int amount) {
+        this.jdbi.useHandle(handle -> {
+            handle.createUpdate(
+                    "UPDATE cart " +
+                            "SET amount = :amount, " +
+                            "updatedAt = :updatedAt " +
+                            "WHERE idUser = :idUser AND " +
+                            "idProduct = :idProduct" )
+                    .bind("idUser", idUser)
+                    .bind("idProduct", idProduct)
+                    .bind("updatedAt", LocalDate.now())
+                    .bind("amount", amount)
+                    .execute();
+        });
+    }
+
+    public void deleteCart(String idUser, String idProduct) {
+        this.jdbi.useHandle(handle -> {
+            handle.createUpdate("DELETE FROM cart WHERE idUser = :idUser AND idProduct = :idProduct")
+                    .bind("idUser", idUser)
+                    .bind("idProduct", idProduct)
+                    .execute();
+        });
+    }
 }

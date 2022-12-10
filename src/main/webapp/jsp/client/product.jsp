@@ -15,7 +15,6 @@
 <body>
   <div id="container">
     <jsp:include page="common/menu.jsp">
-      <jsp:param name="logged" value="<%= false %>"/>
       <jsp:param name="classes" value="menu-white sticky-menu"/>
     </jsp:include>
     <jsp:include page="common/searchBarMenu.jsp"/>

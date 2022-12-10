@@ -17,7 +17,7 @@
                     <img class="img-product transt-04-linear" src="/assets/imgs/card-shop/chair-product.jpg" alt="">
                 </a>
                 <div class="btn-card-product translateY-bottom-btn">
-                    <a href="#"><button class="btn-icon bgr-white hover-bg-red br-50 shadow-01"><i
+                    <a href="${pageContext.request.contextPath}/addToCart?id=215891e8-76c6-11ed-971e-6018955a5f6c"><button class="btn-icon bgr-white hover-bg-red br-50 shadow-01"><i
                             class="bi bi-bag"></i></button></a>
                     <a href="#"><button class="btn-icon bgr-white hover-bg-red br-50 shadow-01"><i
                             class="fa-regular fa-heart fw-500"></i></button></a>
@@ -38,7 +38,7 @@
         </div>
     </div>
 </c:if>
-<c:if test="${param.type == 2}">
+<c:if test="${param.type == '1'}">
     <div class="card-product-1 col-6 col-md-4 col-lg-3">
         <div class="product-item-wrap">
             <div class="img-product-container">
