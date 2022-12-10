@@ -11,7 +11,7 @@ import org.jdbi.v3.core.HandleCallback;
 import java.time.LocalDate;
 import java.util.List;
 
-public class UserService extends BaseService<User>{
+public class UserService extends BaseService<User> {
     public UserService(String tableName) {
         super(tableName);
     }
@@ -20,14 +20,15 @@ public class UserService extends BaseService<User>{
         String hashPassword = BCrypt.withDefaults().hashToString(8, password.toCharArray());
 
         this.jdbi.useHandle(handle -> handle.createUpdate(
-                "UPDATE " + this.tableName +
-                        " SET password = :password," +
-                        " updatedAt = :updatedAt" +
-                        " WHERE id = :id "
+                        "UPDATE " + this.tableName +
+                                " SET password = :password," +
+                                " updatedAt = :updatedAt" +
+                                " WHERE id = :id "
                 ).bind("id", id)
                 .bind("updatedAt", LocalDate.now())
                 .bind("password", hashPassword).execute());
     }
+
     @Override
     public String create(User model) {
         return this.jdbi.withHandle(handle -> {
@@ -43,10 +44,10 @@ public class UserService extends BaseService<User>{
     }
 
     @Override
-    public boolean update(String id, BaseDTO model){
+    public boolean update(String id, BaseDTO model) {
         User user = this.findById(id, User.class);
 
-        if(user != null) {
+        if (user != null) {
             this.jdbi.useHandle(handle -> {
 
                 handle.createUpdate("UPDATE " + this.tableName +
@@ -68,13 +69,13 @@ public class UserService extends BaseService<User>{
     public User findByEmail(String email) {
         try {
             return this.jdbi.withHandle(new HandleCallback<User, Exception>() {
-                public User withHandle(Handle handle) throws Exception{
+                public User withHandle(Handle handle) throws Exception {
                     try {
                         return handle.createQuery(
                                         "SELECT * FROM " + tableName + " WHERE email = ?")
                                 .bind(0, email)
                                 .mapToBean(User.class).first();
-                    }catch (IllegalStateException exception) {
+                    } catch (IllegalStateException exception) {
                         return null;
                     }
 
@@ -96,7 +97,7 @@ public class UserService extends BaseService<User>{
 
     public void setCart(String idUser, Cart cart) {
         CartDTO exist = null;
-        try{
+        try {
             exist = this.jdbi.withHandle(handle -> handle.createQuery(
                             "SELECT id, amount FROM cart WHERE " +
                                     "idUser = :idUser AND " +
@@ -110,13 +111,13 @@ public class UserService extends BaseService<User>{
                     .bind("pattern", cart.getPattern())
                     .bind("size", cart.getSize())
                     .mapToBean(CartDTO.class).first());
-        }catch (IllegalStateException exception) {
+        } catch (IllegalStateException exception) {
             exist = null;
         }
 
-        if(exist != null) {
+        if (exist != null) {
             this.updateCart(exist.getId(), cart.getAmount() + exist.getAmount());
-        }else {
+        } else {
             this.createCart(idUser, cart);
         }
     }
@@ -136,18 +137,20 @@ public class UserService extends BaseService<User>{
                     .execute();
         });
     }
+
     public void updateCart(int id, int amount) {
         this.jdbi.useHandle(handle -> {
             handle.createUpdate("UPDATE cart " +
                             "SET amount = :amount, " +
                             "updatedAt = :updatedAt " +
-                            "WHERE id = :id" )
+                            "WHERE id = :id")
                     .bind("id", id)
                     .bind("updatedAt", LocalDate.now())
                     .bind("amount", amount)
                     .execute();
         });
     }
+
     public void deleteCart(int id) {
         this.jdbi.useHandle(handle -> {
             handle.createUpdate("DELETE FROM cart WHERE id = :id")
