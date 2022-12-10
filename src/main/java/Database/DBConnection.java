@@ -3,6 +3,7 @@ package Database;
 import com.mysql.cj.jdbc.MysqlDataSource;
 import org.jdbi.v3.core.Jdbi;
 
+import java.awt.*;
 import java.sql.SQLDataException;
 import java.sql.SQLException;
 
@@ -12,7 +13,6 @@ public class DBConnection {
     public DBConnection() {
         if(jdbi == null) {
             MysqlDataSource dataSource = new MysqlDataSource();
-
             dataSource.setURL(uri);
             dataSource.setUser(DBConfig.username);
             dataSource.setPassword(DBConfig.password);
@@ -23,7 +23,6 @@ public class DBConnection {
                 error.printStackTrace();
                 throw new RuntimeException(error);
             }
-
             jdbi = Jdbi.create(dataSource);
         }
     }
