@@ -15,7 +15,6 @@ public class Application implements ServletContextListener{
     public void contextInitialized(ServletContextEvent sce) {
         new DBConnection();
         System.out.println("MySQL is connected");
-
     }
 
     @Override
