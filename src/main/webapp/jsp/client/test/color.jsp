@@ -18,7 +18,7 @@
 </form>
 <h2>Update</h2>
 <form method="post" action="/test/color">
-    <input name="id" value="1" readonly>
+    <input name="id" value="1">
     <input name="name" type="text" placeholder="name">
     <input name="value" type="text" placeholder="value">
 
@@ -26,7 +26,7 @@
 </form>
 <h2>Delete</h2>
 <form method="post" action="/test/color">
-    <input name="id" value="1" readonly>
+    <input name="id" value="1">
     <button type="submit" name="action" value="DELETE">Submit</button>
 </form>
 </body>

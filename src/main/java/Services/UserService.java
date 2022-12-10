@@ -31,7 +31,6 @@ public class UserService extends BaseService<User>{
     public String create(User model) {
         return this.jdbi.withHandle(handle -> {
             String id = handle.createQuery("SELECT UUID()").mapTo(String.class).first();
-            System.out.println("Create");
             model.setId(id);
             handle.createUpdate(
                     "INSERT INTO " + this.tableName + " (id, email, password, status, type, createdAt) " +

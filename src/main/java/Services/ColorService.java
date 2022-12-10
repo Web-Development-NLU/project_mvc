@@ -13,8 +13,8 @@ public class ColorService extends BaseService<Color>{
     @Override
     public String create(Color model) {
         return this.jdbi.withHandle(handle -> {
-            handle.createUpdate("INSERT INTO " + this.tableName + "(name,value,createAt) "
-            + "VALUES ( :name, :value, :createAt)").bindBean(model).execute();
+            handle.createUpdate("INSERT INTO " + this.tableName + " (name, value, createdAt) "
+            + "VALUES ( :name, :value, :createdAt)").bindBean(model).execute();
             return model.getName();
         });
     }
