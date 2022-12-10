@@ -46,10 +46,10 @@
                         <input id="new-password" name="password" type="password">
                     </div>
                     <div class="btn-form-forgot-password">
-                        <button class="btn-text-lg bgr-black hover-bg-red monts" name="action" value="resend">GỬI LẠI MÃ</button>
+                        <button class="btn-text-lg bgr-black hover-bg-red monts" name="action" value="verify">ĐẶT LẠI MẬT KHẨU</button>
                     </div>
                     <div class="btn-form-forgot-password">
-                        <button class="btn-text-lg bgr-black hover-bg-red monts" name="action" value="verify">ĐẶT LẠI MẬT KHẨU</button>
+                        <button class="btn-text-lg bgr-black hover-bg-red monts" name="action" value="resend">GỬI LẠI MÃ</button>
                     </div>
                 </div>
             </div>

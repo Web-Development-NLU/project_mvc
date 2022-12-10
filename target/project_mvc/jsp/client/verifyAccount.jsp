@@ -42,10 +42,10 @@
                           <input id="user-login" name="code" type="text">
                       </div>
                       <div class="btn-form-forgot-password">
-                          <button class="btn-text-lg bgr-black hover-bg-red monts" name="action" value="resend">GỬI LẠI MÃ</button>
+                          <button class="btn-text-lg bgr-black hover-bg-red monts" name="action" value="verify">XÁC MINH</button>
                       </div>
                       <div class="btn-form-forgot-password">
-                          <button class="btn-text-lg bgr-black hover-bg-red monts" name="action" value="verify">XÁC MINH</button>
+                          <button class="btn-text-lg bgr-gray hover-bg-red monts" name="action" value="resend">GỬI LẠI MÃ</button>
                       </div>
                   </div>
               </div>
