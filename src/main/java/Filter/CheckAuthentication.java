@@ -34,7 +34,9 @@ public class CheckAuthentication implements Filter {
         HttpServletRequest httpRequest = (HttpServletRequest) request;
         HttpSession session = ((HttpServletRequest) request).getSession(true);
         AuthorizationData data = (AuthorizationData) session.getAttribute("authorization");
+        int cartNumber = (data == null) ? 0 : data.getCarts().size();
         User user = (data != null) ? userService.findById(data.getId() , User.class) : null;
+        request.setAttribute("cartNumber", cartNumber);
         request.setAttribute("logged", user != null);
         if(httpRequest.getMethod().equalsIgnoreCase("GET")){
 

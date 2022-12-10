@@ -41,11 +41,11 @@
 
 .about-info-card .about-info-card_thumbnail img{
   width: 100%;
+  transition: 1.5s;
 }
 
 .about-info-card .about-info-card_thumbnail:hover img {
   transform: scale(1.1);
-  transition: 1.5s;
 }
 
 .about-info-card.reverse {

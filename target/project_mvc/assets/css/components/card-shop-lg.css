@@ -5,14 +5,14 @@
 }
 
 .card-shop-lg:hover img {
-  transform: scale(1.1, 1.1);
+  transform: scale(1.05);
 }
 
 .card-shop-lg-list .card-shop-lg img {
   width: 100%;
   object-fit: cover;
   height: 626px;
-  transition: 1s;
+  transition: 0.5s linear 0s;
 }
 
 .card-shop-lg .card-shop-lg_content {
@@ -23,6 +23,9 @@
   bottom: 0;
   left: 100px;
   margin: auto;
+}
+.card-shop-lg .card-shop-lg_content > a:hover {
+  color: var(--cta-01);
 }
 
 .card-shop-lg .card-shop-lg_content .card-title {
