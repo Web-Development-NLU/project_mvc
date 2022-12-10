@@ -3,11 +3,13 @@ package Database;
 import com.mysql.cj.jdbc.MysqlDataSource;
 import org.jdbi.v3.core.Jdbi;
 
+import java.awt.*;
 import java.sql.SQLDataException;
 import java.sql.SQLException;
 
 public class DBConnection {
-    private String uri = "jdbc:mysql://" + DBConfig.host + ":" + DBConfig.port + "/" + DBConfig.dbname;
+//    private String uri = "jdbc:mysql://" + DBConfig.host + ":" + DBConfig.port + "/" + DBConfig.dbname;
+    private String uri = "jdbc:mysql://" + "localhost" + ":" + DBConfig.port + "/" + DBConfig.dbname;
     public static Jdbi jdbi;
     public DBConnection() {
         if(jdbi == null) {
@@ -25,7 +27,9 @@ public class DBConnection {
             }
 
             jdbi = Jdbi.create(dataSource);
+
         }
+
     }
 
 }
