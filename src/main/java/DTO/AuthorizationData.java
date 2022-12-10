@@ -34,7 +34,6 @@ public class AuthorizationData {
     public ArrayList<CartDTO> getCarts() {
         return carts;
     }
-
     public int addToCart(CartDTO newCart) {
         for (CartDTO cart : this.carts) {
             if (

@@ -46,7 +46,6 @@ public class CartDTO {
     public void setAmount(int amount) {
         this.amount = amount;
     }
-
     public int getCategoryId() {
         return categoryId;
     }

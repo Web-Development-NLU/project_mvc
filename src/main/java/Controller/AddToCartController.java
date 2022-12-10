@@ -4,7 +4,6 @@ import DTO.AuthorizationData;
 import DTO.CartDTO;
 import Model.Cart;
 import Model.Product;
-import Model.User;
 import Services.ProductService;
 import Services.UserService;
 

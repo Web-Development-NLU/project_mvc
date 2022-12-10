@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 <%@ page import="DTO.CartDTO" %><%--
+=======
+<%--
+>>>>>>> ec71f50125bc1009d06cf248ca673ff0008a9ca2
   Created by IntelliJ IDEA.
   User: Quang Tho
   Date: 03/12/2022
