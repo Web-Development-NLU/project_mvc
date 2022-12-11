@@ -1,16 +1,5 @@
-<%@page import="java.net.URLEncoder"%>
-<%@page import="java.nio.charset.StandardCharsets"%>
-
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
-
-<%@page import="java.util.Iterator"%>
-<%@page import="java.util.Collections"%>
-<%@page import="java.util.List"%>
-<%@page import="java.util.ArrayList"%>
-<%@page import="java.util.Enumeration"%>
-<%@page import="java.util.Map"%>
-<%@page import="java.util.HashMap"%>
-<%@ page import="Payment.Config" %>
+<%@ page import="Model.Order" %>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -23,25 +12,7 @@
     </head>
     <body>
         <%
-            //Begin process return from VNPAY
-            Map fields = new HashMap();
-            for (Enumeration params = request.getParameterNames(); params.hasMoreElements();) {
-                String fieldName = URLEncoder.encode((String) params.nextElement(), StandardCharsets.US_ASCII.toString());
-                String fieldValue = URLEncoder.encode(request.getParameter(fieldName), StandardCharsets.US_ASCII.toString());
-                if ((fieldValue != null) && (fieldValue.length() > 0)) {
-                    fields.put(fieldName, fieldValue);
-                }
-            }
-
-            String vnp_SecureHash = request.getParameter("vnp_SecureHash");
-            if (fields.containsKey("vnp_SecureHashType")) {
-                fields.remove("vnp_SecureHashType");
-            }
-            if (fields.containsKey("vnp_SecureHash")) {
-                fields.remove("vnp_SecureHash");
-            }
-            String signValue = Config.hashAllFields(fields);
-
+            Order order = (Order) request.getAttribute("order");
         %>
         <!--Begin display -->
         <div id="result-payment-container">
@@ -61,48 +32,36 @@
                 </div>
                 <div class="table-responsive">
                     <div class="form-group">
-                        <label >TransId:</label>
-                        <label><%=request.getParameter("vnp_TxnRef")%></label>
+                        <label >Mã đơn hàng:</label>
+                        <label><%=order.getId()%></label>
                     </div>
                     <div class="form-group">
-                        <label >Amount:</label>
-                        <label><%=request.getParameter("vnp_Amount")%></label>
+                        <label >Mã giao dịch VNPAY:</label>
+                        <label><%=order.getTransID()%></label>
                     </div>
                     <div class="form-group">
-                        <label >Order info:</label>
-                        <label><%=request.getParameter("vnp_OrderInfo")%></label>
+                        <label >Tên khách hàng:</label>
+                        <label><%=order.getUsername()%></label>
                     </div>
                     <div class="form-group">
-                        <label >Response Code (vnp_ResponseCode):</label>
-                        <label><%=request.getParameter("vnp_ResponseCode")%></label>
+                        <label>Quốc gia:</label>
+                        <label><%=order.getCountry()%></label>
                     </div>
                     <div class="form-group">
-                        <label >VNPAY TransId:</label>
-                        <label><%=request.getParameter("vnp_TransactionNo")%></label>
+                        <label >Thành phố:</label>
+                        <label><%=order.getCity()%></label>
                     </div>
                     <div class="form-group">
-                        <label >Bank Code:</label>
-                        <label><%=request.getParameter("vnp_BankCode")%></label>
+                        <label >Quận/Huyện:</label>
+                        <label><%=order.getDistrict()%></label>
                     </div>
                     <div class="form-group">
-                        <label >Pay Date:</label>
-                        <label><%=request.getParameter("vnp_PayDate")%></label>
+                        <label >Số điện thoại:</label>
+                        <label><%=order.getPhone()%></label>
                     </div>
                     <div class="form-group">
-                        <label >Payment Status:</label>
-                        <label>
-                            <%
-                                if (signValue.equals(vnp_SecureHash)) {
-                                    if ("00".equals(request.getParameter("vnp_TransactionStatus"))) {
-                                        System.out.print("Success");
-                                    } else {
-                                        System.out.print("Failed");
-                                    }
-
-                                } else {
-                                    System.out.print("invalid signature");
-                                }
-                            %></label>
+                        <label >Email:</label>
+                        <label><%=order.getEmail()%></label>
                     </div>
                 </div>
 

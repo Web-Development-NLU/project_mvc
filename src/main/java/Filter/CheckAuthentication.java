@@ -38,6 +38,7 @@ public class CheckAuthentication implements Filter {
         User user = (data != null) ? userService.findById(data.getId() , User.class) : null;
         request.setAttribute("cartNumber", cartNumber);
         request.setAttribute("logged", user != null);
+        request.setAttribute("user", user);
         if(httpRequest.getMethod().equalsIgnoreCase("GET")){
 
             if ((user != null) && (user.getStatus() == 0)) {

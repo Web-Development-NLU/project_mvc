@@ -1,8 +1,4 @@
-<<<<<<< HEAD
-<%@ page import="DTO.CartDTO" %><%--
-=======
-<%--
->>>>>>> ec71f50125bc1009d06cf248ca673ff0008a9ca2
+<%@ page import="java.text.DecimalFormat" %><%--
   Created by IntelliJ IDEA.
   User: Quang Tho
   Date: 03/12/2022
@@ -13,7 +9,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page isELIgnored="false" %>
 <%
-    double price = Double.parseDouble(request.getParameter("price"));
+    int price = (int) Double.parseDouble(request.getParameter("price"));
     String name = request.getParameter("name");
     int amount = Integer.parseInt(request.getParameter("amount"));
     String pattern = request.getParameter("pattern");
@@ -38,7 +34,7 @@
     </td>
     <td class="cart-price">
         <div class="card-price">
-            <span class="current-price"><%=price%> VNĐ</span>
+            <span class="current-price"><%=DecimalFormat.getIntegerInstance().format(price)%> VNĐ</span>
         </div>
     </td>
     <td>
@@ -51,14 +47,10 @@
         </div>
     </td>
     <td class="cart_sum-price">
-        <div class="card-price">
-            <span class="current-price"><span class="hidden-item">Total</span><%= amount * price %></span>
-        </div>
         <form action="${pageContext.request.contextPath}/cart" method="post">
             <input name="id" value="<%= request.getParameter("id")%>" class="d-none">
             <button class="btn-text color-red" name="action" value="DELETE"><i class="fa-sharp fa-solid fa-trash"></i>
             </button>
         </form>
-
     </td>
 </tr>

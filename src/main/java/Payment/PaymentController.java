@@ -1,5 +1,8 @@
 package Payment;
 
+import DTO.AuthorizationData;
+import DTO.CartDTO;
+import DTO.OrderDTO;
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
 
@@ -16,6 +19,35 @@ import java.util.*;
 public class PaymentController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        if((int) request.getAttribute("cartNumber") == 0) {
+            response.sendRedirect("/cart");
+            return;
+        }
+
+        HttpSession session = request.getSession(true);
+        AuthorizationData authorizationData = (AuthorizationData) session.getAttribute("authorization");
+        int sumPrice = 0;
+        StringBuilder name = new StringBuilder();
+        for (CartDTO cart : authorizationData.getCarts()) {
+            sumPrice += cart.getPrice() * cart.getAmount();
+            name.append(cart.getName())
+                    .append(" x ")
+                    .append(cart.getAmount())
+                    .append(", color: ")
+                    .append(cart.getColor())
+                    .append(", pattern: ")
+                    .append(cart.getPattern())
+                    .append(", size: ")
+                    .append(cart.getSize())
+                    .append(" \n");
+        }
+        OrderDTO order = (OrderDTO) session.getAttribute("order");
+        order.setName(String.valueOf(name));
+        order.setPrice(sumPrice);
+        session.setAttribute("order", order);
+        request.setAttribute("sumPrice", sumPrice);
+        request.setAttribute("name", name.toString());
+
         request.getRequestDispatcher("/jsp/client/payment/index.jsp").forward(request, response);
     }
 

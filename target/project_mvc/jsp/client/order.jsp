@@ -1,4 +1,6 @@
-<%--
+<%@ page import="java.util.ArrayList" %>
+<%@ page import="DTO.CartDTO" %>
+<%@ page import="Model.User" %><%--
   Created by IntelliJ IDEA.
   User: Quang Tho
   Date: 03/12/2022
@@ -6,6 +8,8 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ page isELIgnored="false" %>
 <html>
 <head>
     <jsp:include page="common/head.jsp">
@@ -13,7 +17,29 @@
     </jsp:include>
 </head>
 <body>
-
+<%
+    ArrayList<CartDTO> carts = (ArrayList<CartDTO>) request.getAttribute("carts");
+    User user = (User) request.getAttribute("user");
+    String error = (request.getAttribute("error") == null) ? "" : request.getAttribute("error").toString();
+    String firstName = "";
+    String lastName = "";
+    String country = "";
+    String city = "";
+    String district = "";
+    String address = "";
+    String phone = "";
+    String email = "";
+    if(user != null) {
+        firstName = (user.getFirstName() != null) ? user.getFirstName() : "";
+        lastName = (user.getLastName() != null) ? user.getLastName() : "";
+        country = (user.getCountry() != null) ? user.getCountry() : "";
+        city = (user.getCity() != null) ? user.getCity() : "";
+        district = (user.getDistrict() != null) ? user.getDistrict() : "";
+        address = (user.getAddress() != null) ? user.getAddress() : "";
+        phone = (user.getPhone() != null) ? user.getPhone() : "";
+        email = (user.getEmail() != null) ? user.getEmail() : "";
+    }
+%>
 <div id="order-container">
     <header>
         <jsp:include page="common/menu.jsp"/>
@@ -38,43 +64,48 @@
             </div>
         </div>
 
-        <form action="">
+        <form action="${pageContext.request.contextPath}/order" method="post">
             <div class="checkout-detail row">
                 <div class="checkout-billing col-12 col-lg-8">
                     <div class="checkout-billing_title">Chi tiết đơn hàng</div>
+                    <c:if test="<%= !error.isEmpty() %>">
+                        <div class="color-red mb-3 overflow-hidden">
+                            <%= error %>
+                        </div>
+                    </c:if>
                     <div class="billing-name row">
                         <div class="input-secondary col">
                             <label for="firstName">Frist Name *</label>
-                            <input type="text" id="firstName" name="firstName">
+                            <input type="text" id="firstName" name="firstName" value="<%= firstName %>">
                         </div>
                         <div class="input-secondary col">
                             <label for="lastName">Last Name *</label>
-                            <input type="text" id="lastName" name="lastName">
+                            <input type="text" id="lastName" name="lastName" value="<%= lastName %>">
                         </div>
                     </div>
                     <div class="input-secondary">
                         <label for="country">Country *</label>
-                        <input type="text" id="country">
+                        <input type="text" id="country" name="country" value="<%= country %>">
                     </div>
                     <div class="input-secondary">
                         <label for="city">City/Province *</label>
-                        <input type="text" id="city" name="city">
+                        <input type="text" id="city" name="city" value="<%= city %>">
                     </div>
                     <div class="input-secondary">
                         <label for="district">District *</label>
-                        <input type="text" id="district" name="district">
+                        <input type="text" id="district" name="district" value="<%= district %>">
                     </div>
                     <div class="input-secondary">
                         <label for="address">Address *</label>
-                        <input type="text" id="address" name="address">
+                        <input type="text" id="address" name="address" value="<%= address %>">
                     </div>
                     <div class="input-secondary">
                         <label for="phone">Phone *</label>
-                        <input type="text" id="phone" name="phone">
+                        <input type="text" id="phone" name="phone" value="<%= phone %>">
                     </div>
                     <div class="input-secondary">
                         <label for="email">Email *</label>
-                        <input type="text" id="email" name="email">
+                        <input type="text" id="email" name="email" VALUE="<%= email %>">
                     </div>
                     <div class="checkout-additional-info">
                         <div class="checkout-additional-info_title">Additional Infomation</div>
@@ -86,8 +117,16 @@
                     <div class="checkout-carts-list">
                         <div class="action-item-title monts mb-3">SẢN PHẨM</div>
                         <div class="action-carts">
-                            <jsp:include page="partials/order/action-cart.jsp"/>
-                            <jsp:include page="partials/order/action-cart.jsp"/>
+                            <c:forEach items="<%= carts %>" var="cart">
+                                <jsp:include page="partials/order/action-cart.jsp">
+                                    <jsp:param name="name" value="${cart.name}"/>
+                                    <jsp:param name="price" value="${cart.price}"/>
+                                    <jsp:param name="amount" value="${cart.amount}"/>
+                                    <jsp:param name="pattern" value="${cart.pattern}"/>
+                                    <jsp:param name="color" value="${cart.color}"/>
+                                    <jsp:param name="size" value="${cart.size}"/>
+                                </jsp:include>
+                            </c:forEach>
                         </div>
                     </div>
 
@@ -99,7 +138,7 @@
                             </div>
                         </div>
                     </div>
-                    <a href="#"><button class="btn-text-lg bgr-black hover-bg-red monts">TIẾN HÀNH THANH TOÁN</button></a>
+                    <button class="btn-text-lg bgr-black hover-bg-red monts">TIẾN HÀNH THANH TOÁN</button>
                 </div>
             </div>
         </form>

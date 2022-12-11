@@ -158,4 +158,8 @@ public class UserService extends BaseService<User> {
                     .execute();
         });
     }
+    public void removeAllCart(String idUser) {
+        this.jdbi.useHandle(handle ->
+            handle.createUpdate("DELETE FROM cart WHERE idUser = :idUser").bind("idUser", idUser).execute());
+    }
 }
