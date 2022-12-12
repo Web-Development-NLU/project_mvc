@@ -11,7 +11,7 @@ public class Order extends BaseModelUUID{
     private String address;
     private String phone;
     private String email;
-
+    private String userId;
     public Order() {
     }
 
@@ -107,5 +107,13 @@ public class Order extends BaseModelUUID{
 
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    public String getUserId() {
+        return userId;
+    }
+
+    public void setUserId(String userId) {
+        this.userId = userId;
     }
 }

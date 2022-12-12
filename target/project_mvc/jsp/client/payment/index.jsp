@@ -114,7 +114,11 @@
                                 </form>
                             </div>
                         </div>
-                        <div class="tab-pane fade" id="cod" role="tabpanel" aria-labelledby="cod-tab"></div>
+                        <div class="tab-pane fade" id="cod" role="tabpanel" aria-labelledby="cod-tab">
+                            <form action="${pageContext.request.contextPath}/codOrder">
+                                <button type="submit" class="btn btn-text bgr-black">Đặt hàng</button>
+                            </form>
+                        </div>
                     </div>
 
                 </section>

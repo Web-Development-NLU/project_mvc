@@ -1,10 +1,12 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@ page import="Model.Order" %>
+<%@ taglib prefix = "c" uri = "http://java.sun.com/jsp/jstl/core" %>
+<%@ page isELIgnored = "false" %>
 
 <!DOCTYPE html>
 <html lang="en">
     <head>
-        <jsp:include page="../common/head.jsp">
+        <jsp:include page="common/head.jsp">
             <jsp:param name="title" value="FURNITURE | KẾT QUẢ THANH TOÁN"/>
         </jsp:include>
         <!-- Custom styles for this template -->
@@ -17,11 +19,11 @@
         <!--Begin display -->
         <div id="result-payment-container">
             <header>
-                <jsp:include page="../common/menu.jsp">
+                <jsp:include page="common/menu.jsp">
                     <jsp:param name="logged" value="<%=false%>"/>
                 </jsp:include>
-                <jsp:include page="../common/searchBarMenu.jsp"/>
-                <jsp:include page="../common/head-bottom-page.jsp">
+                <jsp:include page="common/searchBarMenu.jsp"/>
+                <jsp:include page="common/head-bottom-page.jsp">
                     <jsp:param name="title" value="KẾT QUẢ THANH TOÁN"/>
                     <jsp:param name="page" value="payment_done"/>
                 </jsp:include>
@@ -35,10 +37,12 @@
                         <label >Mã đơn hàng:</label>
                         <label><%=order.getId()%></label>
                     </div>
-                    <div class="form-group">
-                        <label >Mã giao dịch VNPAY:</label>
-                        <label><%=order.getTransID()%></label>
-                    </div>
+                    <c:if test="<%= order.getTransID() != null %>">
+                        <div class="form-group">
+                            <label>Mã giao dịch VNPAY:</label>
+                            <label><%=order.getTransID()%></label>
+                        </div>
+                    </c:if>
                     <div class="form-group">
                         <label >Tên khách hàng:</label>
                         <label><%=order.getUsername()%></label>
@@ -66,10 +70,10 @@
                 </div>
 
             </div>
-            <jsp:include page="../common/footer.jsp"/>
+            <jsp:include page="common/footer.jsp"/>
         </div>
 
-        <jsp:include page="../common/tail.jsp"/>
+        <jsp:include page="common/tail.jsp"/>
         <script src="/assets/payment/jquery-1.11.3.min.js"></script>
     </body>
 </html>

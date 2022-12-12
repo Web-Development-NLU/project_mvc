@@ -32,14 +32,17 @@ public class PaymentController extends HttpServlet {
             sumPrice += cart.getPrice() * cart.getAmount();
             name.append(cart.getName())
                     .append(" x ")
-                    .append(cart.getAmount())
-                    .append(", color: ")
-                    .append(cart.getColor())
-                    .append(", pattern: ")
-                    .append(cart.getPattern())
-                    .append(", size: ")
-                    .append(cart.getSize())
-                    .append(" \n");
+                    .append(cart.getAmount());
+                    if(cart.getColor() != null) {
+                        name.append(", color: ").append(cart.getColor());
+                    }
+                    if(cart.getPattern() != null) {
+                        name.append(", pattern: ").append(cart.getPattern());
+                    }
+                    if(cart.getSize() != null) {
+                        name.append(", size: ").append(cart.getSize());
+                    }
+                    name.append(" \n");
         }
         OrderDTO order = (OrderDTO) session.getAttribute("order");
         order.setName(String.valueOf(name));
@@ -61,7 +64,10 @@ public class PaymentController extends HttpServlet {
         String vnp_IpAddr = Config.getIpAddress(request);
         String vnp_TmnCode = Config.vnp_TmnCode;
 
-        int amount = Integer.parseInt(request.getParameter("amount")) * 100;
+        HttpSession session = request.getSession(true);
+        OrderDTO order = (OrderDTO) session.getAttribute("order");
+
+        int amount = order.getPrice() * 100;
         Map vnp_Params = new HashMap<>();
         vnp_Params.put("vnp_Version", vnp_Version);
         vnp_Params.put("vnp_Command", vnp_Command);
