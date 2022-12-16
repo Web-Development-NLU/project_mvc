@@ -7,11 +7,13 @@ public class UpdateBrandDTO implements BaseDTO{
         private String name;
         protected LocalDate updatedAt;
 
-        public UpdateBrandDTO(String name) {
-            this.name = name;
 
-        }
-        public UpdateBrandDTO(Brand model) {
+    public UpdateBrandDTO(String name) {
+        this.name = name;
+        this.updatedAt = LocalDate.now();
+    }
+
+    public UpdateBrandDTO(Brand model) {
             this.name = model.getName();
             this.updatedAt = LocalDate.now();
         }
