@@ -11,8 +11,14 @@
     <title>Title</title>
 </head>
 <body>
+<h2>Create</h2>
 <form method="post" action="/test/code">
-<%--    <input name="value" type="text" placeholder="value">--%>
+    <input name="value" type="text" placeholder="value">
+    <input name="categoryId" type="text" placeholder="categoryId">
+    <input name="productId" type="text" placeholder="productId">
+    <button type="submit" name="action" value="CREATE">Submit</button>
+</form>
+<form method="post" action="/test/code">
     <input name="categoryId" type="text" placeholder="categoryId">
     <input name="productId" type="text" placeholder="productId">
     <button type="submit" name="action" value="CREATE">Submit</button>

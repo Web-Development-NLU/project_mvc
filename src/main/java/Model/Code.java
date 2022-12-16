@@ -1,13 +1,10 @@
 package Model;
 
-import org.jdbi.v3.core.Handle;
-import org.jdbi.v3.core.HandleCallback;
-
 import java.util.ArrayList;
 import java.util.Random;
 
 public class Code extends BaseModel{
-    private ArrayList<Integer> valueExclude;
+    private ArrayList<Integer> validValue;
     private String value;
     private int categoryId;
     private String productId;
@@ -16,26 +13,31 @@ public class Code extends BaseModel{
         this.value = value;
         this.categoryId = categoryId;
         this.productId = productId;
-        this.valueExclude = createValueExclude();
+        this.validValue = createValidValue();
     }
 
     public Code(int categoryId, String productId) {
-        this.value = createValue();
         this.categoryId = categoryId;
         this.productId = productId;
-        this.valueExclude = createValueExclude();
+        this.validValue = createValidValue();
     }
     public Code(){
-        this.valueExclude = createValueExclude();
+        this.validValue = createValidValue();
     }
 
-    public ArrayList<Integer> createValueExclude(){
-        ArrayList<Integer> result = new ArrayList<>();
-        for(int i =0; i< 6;i++){
-            result.add(58 + i);
-            result.add(91 + i);
+    public ArrayList<Integer> createValidValue(){
+        ArrayList<Integer> result = new ArrayList<>(createValueNumber());
+        for(int i =0; i< 26;i++){
+            result.add(65 + i);
+            result.add(97 + i);
         }
-        result.add(64);
+        return result;
+    }
+    public ArrayList<Integer> createValueNumber(){
+        ArrayList<Integer> result = new ArrayList<>();
+        for(int i =0; i< 10;i++){
+            result.add(48 + i);
+        }
         return result;
     }
 
@@ -44,12 +46,21 @@ public class Code extends BaseModel{
         Random random = new Random();
         char charCode;
         int intCode;
-        while(result.length() < 7){
-            intCode = 48 + random.nextInt(75);
-            if(!valueExclude.contains(intCode)){
+        while(result.length() < 6){
+            intCode = validValue.get(random.nextInt(validValue.size()));
+            if(validValue.contains(intCode)){
                 charCode =(char) intCode;
                 result += charCode;
             }
+        }
+        return result;
+    }
+
+    public boolean checkValidValue(String value){
+        boolean result = true;
+        for(int i=0; i < value.length(); i++){
+            int c = value.charAt(i);
+            if(!validValue.contains(c)) return false;
         }
         return result;
     }

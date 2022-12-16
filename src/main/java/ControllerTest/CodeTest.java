@@ -37,13 +37,20 @@ public class CodeTest extends HttpServlet {
         switch (action){
             case "CREATE":
                 Code model = new Code();
-                String tempValue = model.createValue();
-                while(this.codeService.findByCode(tempValue) != null){
-                    tempValue = model.createValue();
+                if(value != null) {
+                    if(value.length() < 1 || value.length() > 7) return;
+                    if(this.codeService.findByCode(value) != null) return;
+                    if(!model.checkValidValue(value)) return;
+                    model.setValue(value);
+                }else{
+                    String tempValue = model.createValue();
+                    while (this.codeService.findByCode(tempValue) != null) {
+                        tempValue = model.createValue();
+                    }
+                    model.setValue(tempValue);
                 }
                 model.setCategoryId(Integer.parseInt(categoryId));
                 model.setProductId(productId);
-                model.setValue(tempValue);
                 this.codeService.create(model);
                 break;
             case "UPDATE":
