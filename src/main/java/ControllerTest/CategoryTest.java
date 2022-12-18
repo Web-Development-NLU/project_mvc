@@ -2,7 +2,6 @@ package ControllerTest;
 
 import DTO.UpdateCategoryDTO;
 import Model.Category;
-import Model.User;
 import Services.CategoryServices;
 
 import javax.servlet.ServletException;
