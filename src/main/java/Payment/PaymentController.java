@@ -1,5 +1,8 @@
 package Payment;
 
+import DTO.AuthorizationData;
+import DTO.CartDTO;
+import DTO.OrderDTO;
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
 
@@ -16,6 +19,38 @@ import java.util.*;
 public class PaymentController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        if((int) request.getAttribute("cartNumber") == 0) {
+            response.sendRedirect("/cart");
+            return;
+        }
+
+        HttpSession session = request.getSession(true);
+        AuthorizationData authorizationData = (AuthorizationData) session.getAttribute("authorization");
+        int sumPrice = 0;
+        StringBuilder name = new StringBuilder();
+        for (CartDTO cart : authorizationData.getCarts()) {
+            sumPrice += cart.getPrice() * cart.getAmount();
+            name.append(cart.getName())
+                    .append(" x ")
+                    .append(cart.getAmount());
+                    if(cart.getColor() != null) {
+                        name.append(", color: ").append(cart.getColor());
+                    }
+                    if(cart.getPattern() != null) {
+                        name.append(", pattern: ").append(cart.getPattern());
+                    }
+                    if(cart.getSize() != null) {
+                        name.append(", size: ").append(cart.getSize());
+                    }
+                    name.append(" \n");
+        }
+        OrderDTO order = (OrderDTO) session.getAttribute("order");
+        order.setName(String.valueOf(name));
+        order.setPrice(sumPrice);
+        session.setAttribute("order", order);
+        request.setAttribute("sumPrice", sumPrice);
+        request.setAttribute("name", name.toString());
+
         request.getRequestDispatcher("/jsp/client/payment/index.jsp").forward(request, response);
     }
 
@@ -29,7 +64,10 @@ public class PaymentController extends HttpServlet {
         String vnp_IpAddr = Config.getIpAddress(request);
         String vnp_TmnCode = Config.vnp_TmnCode;
 
-        int amount = Integer.parseInt(request.getParameter("amount")) * 100;
+        HttpSession session = request.getSession(true);
+        OrderDTO order = (OrderDTO) session.getAttribute("order");
+
+        int amount = order.getPrice() * 100;
         Map vnp_Params = new HashMap<>();
         vnp_Params.put("vnp_Version", vnp_Version);
         vnp_Params.put("vnp_Command", vnp_Command);

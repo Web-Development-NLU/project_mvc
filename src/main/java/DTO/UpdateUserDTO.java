@@ -30,7 +30,7 @@ public class UpdateUserDTO implements BaseDTO{
         this.firstName = model.getFirstName();
         this.lastName = model.getLastName();
         this.phone = model.getPhone();
-        this.country = model.getPhone();
+        this.country = model.getCountry();
         this.city = model.getCity();
         this.district = model.getDistrict();
         this.address = model.getAddress();

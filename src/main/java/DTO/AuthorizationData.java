@@ -34,29 +34,34 @@ public class AuthorizationData {
     public ArrayList<CartDTO> getCarts() {
         return carts;
     }
-
-    public void addToCart(CartDTO newCart){
-        for(CartDTO cart : this.carts) {
-            if(Objects.equals(newCart.getId(), cart.getId())) {
+    public int addToCart(CartDTO newCart) {
+        for (CartDTO cart : this.carts) {
+            if (
+                    Objects.equals(newCart.getIdProduct(), cart.getIdProduct()) &&
+                            Objects.equals(newCart.getPattern(), cart.getPattern()) &&
+                            Objects.equals(newCart.getColor(), cart.getColor()) &&
+                            Objects.equals(newCart.getSize(), cart.getSize())
+            ) {
                 cart.setAmount(cart.getAmount() + newCart.getAmount());
-                return;
+                return cart.getId();
             }
         }
         this.carts.add(newCart);
+        return newCart.getId();
     }
 
-    public void removeCart(String id) {
-        for(CartDTO cart : this.carts) {
-            if(Objects.equals(id, cart.getId())) {
+    public void removeCart(int id) {
+        for (CartDTO cart : this.carts) {
+            if (id == cart.getId()) {
                 this.carts.remove(cart);
                 break;
             }
         }
     }
 
-    public void updateCart(String id, int amount) {
-        for(CartDTO cart : this.carts) {
-            if(Objects.equals(id, cart.getId())) {
+    public void updateCart(int id, int amount) {
+        for (CartDTO cart : this.carts) {
+            if (id == cart.getId()) {
                 cart.setAmount(amount);
                 break;
             }

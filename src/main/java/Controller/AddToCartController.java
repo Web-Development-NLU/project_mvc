@@ -2,8 +2,8 @@ package Controller;
 
 import DTO.AuthorizationData;
 import DTO.CartDTO;
+import Model.Cart;
 import Model.Product;
-import Model.User;
 import Services.ProductService;
 import Services.UserService;
 
@@ -28,27 +28,46 @@ public class AddToCartController extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        String id = request.getParameter("id");
 
-        Product product = this.productService.findById(id, Product.class);
-
-        HttpSession session = request.getSession(true);
-        AuthorizationData authorizationData = (session.getAttribute("authorization") == null)
-                ? new AuthorizationData() : (AuthorizationData) session.getAttribute("authorization");
-        if((boolean) request.getAttribute("logged")) {
-            CartDTO cart = new CartDTO(product.getName(), product.getId(), product.getPrice());
-            authorizationData.addToCart(cart);
-            this.userService.setCart(authorizationData.getId(), cart.getId(), cart.getAmount());
-        }else {
-            authorizationData.addToCart(new CartDTO(product.getName(), product.getId(), product.getPrice()));
-
-        }
-        session.setAttribute("authorization", authorizationData);
-        response.sendRedirect("/products");
     }
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        String idProduct = request.getParameter("id");
+        String pattern = request.getParameter("pattern");
+        String color = request.getParameter("color");
+        String size = request.getParameter("size");
+        int amount = Integer.parseInt(request.getParameter("amount"));
+        Product product = this.productService.findById(idProduct, Product.class);
 
+        HttpSession session = request.getSession(true);
+        AuthorizationData authorizationData = (session.getAttribute("authorization") == null)
+                ? new AuthorizationData() : (AuthorizationData) session.getAttribute("authorization");
+
+        if((boolean) request.getAttribute("logged")) {
+            Cart cart = new Cart(
+                    authorizationData.getId(),
+                    product.getId(),
+                    pattern,
+                    size,
+                    color,
+                    amount
+            );
+            this.userService.setCart(authorizationData.getId(), cart);
+            authorizationData.setCarts((ArrayList<CartDTO>) this.userService.getCart(authorizationData.getId()));
+        }else {
+            authorizationData.addToCart(new CartDTO(
+                    product.getName(),
+                    amount,
+                    product.getId(),
+                    product.getPrice(),
+                    product.getCategoryId(),
+                    color,
+                    pattern,
+                    size
+            ));
+        }
+        session.setAttribute("authorization", authorizationData);
+        response.sendRedirect("/product");
     }
 }
