@@ -1,4 +1,4 @@
-package Payment;
+package Controller;
 
 import DTO.AuthorizationData;
 import DTO.CartDTO;
@@ -11,57 +11,57 @@ import Services.OrderService;
 import Services.UserService;
 import com.mailjet.client.errors.MailjetException;
 import com.mailjet.client.errors.MailjetSocketTimeoutException;
+import org.apache.commons.lang3.RandomStringUtils;
 
 import javax.servlet.*;
 import javax.servlet.http.*;
 import javax.servlet.annotation.*;
 import java.io.IOException;
-import java.text.DecimalFormat;
 import java.util.ArrayList;
-import java.util.Objects;
 
-@WebServlet(name = "DonePayment", value = "/payment/done")
-public class DonePaymentController extends HttpServlet {
+@WebServlet(name = "CodOrderController", value = "/codOrder")
+public class CodOrderController extends HttpServlet {
     private UserService userService;
-    private OrderService orderService;
     private MailService mailService;
+    private OrderService orderService;
     @Override
     public void init() throws ServletException {
         super.init();
         this.userService = new UserService("users");
-        this.orderService = new OrderService("orders");
         this.mailService = new MailService();
+        this.orderService = new OrderService("orders");
     }
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        String responseCode = request.getParameter("vnp_ResponseCode");
-        String transId = request.getParameter("vnp_TxnRef");
-        String vnp_transId = request.getParameter("vnp_TransactionNo");
-        if (Objects.equals(responseCode, "00")) {
-            HttpSession session = request.getSession(true);
-            AuthorizationData authorizationData = (AuthorizationData) session.getAttribute("authorization");
-            OrderDTO order = (OrderDTO) session.getAttribute("order");
-            User user = ((boolean) request.getAttribute("logged")) ? (User) request.getAttribute("user") : (User) session.getAttribute("user");
-            Order orderSave = new Order(order.getName(), order.getPrice(), vnp_transId,
-                    user.getFirstName() + " " + user.getLastName(), user.getCountry(),
-                    user.getCity(), user.getDistrict(), user.getAddress(), user.getPhone(), order.getEmail());
-            if ((boolean) request.getAttribute("logged")) {
-                orderSave.setUserId(authorizationData.getId());
-                this.userService.removeAllCart(authorizationData.getId());
-            }
-            authorizationData.setCarts(new ArrayList<CartDTO>());
+        HttpSession session = request.getSession(true);
+        AuthorizationData authorizationData = (AuthorizationData) session.getAttribute("authorization");
+        OrderDTO order = (OrderDTO) session.getAttribute("order");
+        User user = ((boolean) request.getAttribute("logged")) ? (User) request.getAttribute("user") : (User) session.getAttribute("user");
+        Order orderSave = new Order();
+        String rand = RandomStringUtils.randomAlphabetic(10);
+        orderSave.setEmail(order.getEmail());
+        orderSave.setInfo(order.getName());
+        orderSave.setPrice(order.getPrice());
+        orderSave.setCountry(user.getCountry());
+        orderSave.setCity(user.getCity());
+        orderSave.setDistrict(user.getDistrict());
+        orderSave.setAddress(user.getAddress());
+        orderSave.setPhone(user.getPhone());
+        orderSave.setUsername(user.getFirstName() + " " + user.getLastName());
+        orderSave.setId(rand);
 
-            orderSave.setId(transId);
-            orderService.create(orderSave);
-            session.setAttribute("authorization", authorizationData);
-            session.removeAttribute("order");
-            this.sendEmail(orderSave);
-            response.sendRedirect("/orderDetail?id=" + orderSave.getId());
-
-        }else {
-            response.sendRedirect("/cart");
+        if ((boolean) request.getAttribute("logged")) {
+            orderSave.setUserId(authorizationData.getId());
+            this.userService.removeAllCart(authorizationData.getId());
         }
+        authorizationData.setCarts(new ArrayList<CartDTO>());
+
+        this.orderService.create(orderSave);
+        session.setAttribute("authorization", authorizationData);
+        session.removeAttribute("order");
+        this.sendEmail(orderSave);
+        response.sendRedirect("/orderDetail?id=" + orderSave.getId());
     }
 
     @Override
@@ -76,7 +76,6 @@ public class DonePaymentController extends HttpServlet {
                     "Mã đơn hàng: " + order.getId() + "\n" +
                             "Thông tin đơn hàng: " + order.getInfo() +"\n" +
                             "Gía tiền: " + order.getPrice() +"\n" +
-                            "Mã giao dịch VNPAY: " + order.getTransID() + "\n" +
                             "Tên khách hàng: " + order.getUsername() + "\n" +
                             "Quốc gia: " + order.getCountry() + "\n" +
                             "Thành phố: " + order.getCity() + "\n" +

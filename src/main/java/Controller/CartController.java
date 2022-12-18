@@ -43,19 +43,23 @@ public class CartController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String action = request.getParameter("action");
-        String id = request.getParameter("id");
+        int id = Integer.parseInt(request.getParameter("id"));
         HttpSession session = request.getSession(true);
         AuthorizationData authorizationData = (AuthorizationData) session.getAttribute("authorization");
         if(Objects.equals(action, "DELETE")) {
-            authorizationData.removeCart(id);
             if((boolean) request.getAttribute("logged")) {
-                this.userService.deleteCart(authorizationData.getId(), id);
+                this.userService.deleteCart(id);
+                authorizationData.setCarts((ArrayList<CartDTO>) this.userService.getCart(authorizationData.getId()));
+            }else {
+                authorizationData.removeCart(id);
             }
         }else {
             int amount = Integer.parseInt(request.getParameter("amount"));
-            authorizationData.updateCart(id, amount);
             if((boolean) request.getAttribute("logged")) {
-                this.userService.updateCart(authorizationData.getId(), id, amount);
+                this.userService.updateCart(id, amount);
+                authorizationData.setCarts((ArrayList<CartDTO>) this.userService.getCart(authorizationData.getId()));
+            }else {
+                authorizationData.updateCart(id, amount);
             }
         }
 

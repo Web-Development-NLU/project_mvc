@@ -1,9 +1,8 @@
-<%@ page import="DTO.AuthorizationData" %>
 <%@ page import="java.util.ArrayList" %>
 <%@ page import="DTO.CartDTO" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<%@ taglib prefix = "c" uri = "http://java.sun.com/jsp/jstl/core" %>
-<%@ page isELIgnored = "false" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ page isELIgnored="false" %>
 <html>
 <head>
     <jsp:include page="common/head.jsp">
@@ -51,7 +50,7 @@
                             <thead>
                             <tr>
                                 <th class="smart-cell">PRODUCT</th>
-                                <th></th>
+                                <th>Name</th>
                                 <th>PRICE</th>
                                 <th>QUANTITY</th>
                                 <th>SUBTOTAL</th>
@@ -64,6 +63,9 @@
                                     <jsp:param name="price" value="${cart.price}"/>
                                     <jsp:param name="id" value="${cart.id}"/>
                                     <jsp:param name="amount" value="${cart.amount}"/>
+                                    <jsp:param name="pattern" value="${cart.pattern}"/>
+                                    <jsp:param name="color" value="${cart.color}"/>
+                                    <jsp:param name="size" value="${cart.size}"/>
                                 </jsp:include>
                             </c:forEach>
                             </tbody>
@@ -78,44 +80,42 @@
                     </div>
 
                     <div class="cart-info-sum mt-5 col-12 col-md-4">
-                        <form action="">
-                            <table class="table table-bordered">
-                                <tbody>
-                                <tr class="table-secondary">
-                                    <th>CART TOTALS</th>
-                                    <th></th>
-                                </tr>
-                                <tr>
-                                    <th class="cart-info-title">
-                                        Subtotal
-                                    </th>
-                                    <td class="cart-info-des">
-                                        <div class="card-price">
-                                            <span class="current-price">650.00$</span>
-                                        </div>
-                                    </td>
-                                </tr>
-                                </tbody>
+                        <table class="table table-bordered">
+                            <tbody>
+                            <tr class="table-secondary">
+                                <th>CART TOTALS</th>
+                                <th></th>
+                            </tr>
+                            <tr>
+                                <th class="cart-info-title">
+                                    Subtotal
+                                </th>
+                                <td class="cart-info-des">
+                                    <div class="card-price">
+                                        <span class="current-price">650.00$</span>
+                                    </div>
+                                </td>
+                            </tr>
+                            </tbody>
 
-                                <tfoot>
-                                <tr>
-                                    <th class="cart-info-title">
-                                        TOTALS
-                                    </th>
-                                    <td class="cart-info-des">
-                                        <div class="card-price">
-                                            <span class="current-price">650.00$</span>
-                                        </div>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td colspan="100">
-                                        <button class="btn-text-lg bgr-red hover-bg-black">ORDER</button>
-                                    </td>
-                                </tr>
-                                </tfoot>
-                            </table>
-                        </form>
+                            <tfoot>
+                            <tr>
+                                <th class="cart-info-title">
+                                    TOTALS
+                                </th>
+                                <td class="cart-info-des">
+                                    <div class="card-price">
+                                        <span class="current-price">650.00$</span>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td colspan="100">
+                                    <a href="${pageContext.request.contextPath}/order"><button class="btn-text-lg bgr-red hover-bg-black">ORDER</button></a>
+                                </td>
+                            </tr>
+                            </tfoot>
+                        </table>
                     </div>
                 </div>
             </c:otherwise>
