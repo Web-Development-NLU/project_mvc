@@ -9,10 +9,8 @@ public class Code extends BaseModel{
     private int categoryId;
     private String productId;
 
-    public Code(String value, int categoryId, String productId) {
+    public Code(String value) {
         this.value = value;
-        this.categoryId = categoryId;
-        this.productId = productId;
     }
     public Code(){}
 

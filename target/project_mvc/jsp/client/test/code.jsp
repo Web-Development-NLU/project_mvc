@@ -18,11 +18,6 @@
     <input name="productId" type="text" placeholder="productId">
     <button type="submit" name="action" value="CREATE">Submit</button>
 </form>
-<form method="post" action="/test/code">
-    <input name="categoryId" type="text" placeholder="categoryId">
-    <input name="productId" type="text" placeholder="productId">
-    <button type="submit" name="action" value="CREATE">Submit</button>
-</form>
 <h2>Update</h2>
 <form method="post" action="/test/code">
     <input name="id" value="1">

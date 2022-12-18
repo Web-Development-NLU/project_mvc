@@ -42,10 +42,17 @@ public class CodeTest extends HttpServlet {
         String action = request.getParameter("action");
         switch (action){
             case "CREATE":
-                Code model = new Code(value,categoryId,productId);
+                Code model = new Code(value);
+                if(categoryId != 0 && productId != null) return;
+                if(categoryId != 0){
+                    model.setCategoryId(categoryId);
+                }else {
+                    model.setProductId(productId);
+                }
                 this.codeService.create(model);
                 break;
             case "UPDATE":
+                if(categoryId != 0 && productId != null) return;
                 UpdateCodeDTO dto = new UpdateCodeDTO(value,categoryId, productId);
                 this.codeService.update(id, dto);
                 break;

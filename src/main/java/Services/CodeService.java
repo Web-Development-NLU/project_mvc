@@ -13,16 +13,16 @@ public class CodeService extends BaseService<Code>{
 
     @Override
     public String create(Code model) {
-        if(model.getCategoryId() != 0){
+        if(model.getCategoryId() != 0) {
             return this.jdbi.withHandle(handle -> {
-                handle.createUpdate("INSERT INTO "+ this.tableName + " ( value, categoryId, productId, createdAt) "
+                handle.createUpdate("INSERT INTO " + this.tableName + " ( value, categoryId, productId, createdAt) "
                         + "VALUES ( :value, :categoryId , :productId, :createdAt)").bindBean(model).execute();
                 return model.getValue();
             });
         }else {
             return this.jdbi.withHandle(handle -> {
-                handle.createUpdate("INSERT INTO " + this.tableName + " ( value, categoryId, productId, createdAt) "
-                        + "VALUES ( :value, null , :productId, :createdAt)").bindBean(model).execute();
+                handle.createUpdate("INSERT INTO " + this.tableName + " ( value, productId, createdAt) "
+                        + "VALUES ( :value , :productId, :createdAt)").bindBean(model).execute();
                 return model.getValue();
             });
         }
@@ -38,7 +38,7 @@ public class CodeService extends BaseService<Code>{
                     handle.createUpdate("UPDATE " + this.tableName +
                             " SET value = :value," +
                             "categoryId = :categoryId," +
-                            "productId = :productId," +
+                            "productId = null," +
                             "updatedAt = :updatedAt " +
                             "WHERE id = :id").bind("id",id).bindBean(model).execute();
                 });
