@@ -15,7 +15,6 @@ public class Code extends BaseModel{
         this.productId = productId;
         this.validValue = createValidValue();
     }
-
     public Code(int categoryId, String productId) {
         this.categoryId = categoryId;
         this.productId = productId;
@@ -26,17 +25,10 @@ public class Code extends BaseModel{
     }
 
     public ArrayList<Integer> createValidValue(){
-        ArrayList<Integer> result = new ArrayList<>(createValueNumber());
+        ArrayList<Integer> result = new ArrayList<>();
         for(int i =0; i< 26;i++){
             result.add(65 + i);
             result.add(97 + i);
-        }
-        return result;
-    }
-    public ArrayList<Integer> createValueNumber(){
-        ArrayList<Integer> result = new ArrayList<>();
-        for(int i =0; i< 10;i++){
-            result.add(48 + i);
         }
         return result;
     }

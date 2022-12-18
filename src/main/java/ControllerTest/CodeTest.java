@@ -31,30 +31,22 @@ public class CodeTest extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String id = request.getParameter("id");
         String value = request.getParameter("value");
-        String categoryId = request.getParameter("categoryId");
-        String productId = request.getParameter("productId");
+        String sCategoryId = request.getParameter("categoryId");
+        int categoryId;
+        try {
+            categoryId = Integer.parseInt(sCategoryId);
+        }catch (Exception e){
+            categoryId = 0;
+        }
+        String productId = request.getParameter("productId").trim().equals("") ? null : request.getParameter("productId");
         String action = request.getParameter("action");
         switch (action){
             case "CREATE":
-                Code model = new Code();
-                if(value != null) {
-                    if(value.length() < 1 || value.length() > 7) return;
-                    if(this.codeService.findByCode(value) != null) return;
-                    if(!model.checkValidValue(value)) return;
-                    model.setValue(value);
-                }else{
-                    String tempValue = model.createValue();
-                    while (this.codeService.findByCode(tempValue) != null) {
-                        tempValue = model.createValue();
-                    }
-                    model.setValue(tempValue);
-                }
-                model.setCategoryId(Integer.parseInt(categoryId));
-                model.setProductId(productId);
+                Code model = new Code(value,categoryId,productId);
                 this.codeService.create(model);
                 break;
             case "UPDATE":
-                UpdateCodeDTO dto = new UpdateCodeDTO(value,Integer.parseInt(categoryId), productId);
+                UpdateCodeDTO dto = new UpdateCodeDTO(value,categoryId, productId);
                 this.codeService.update(id, dto);
                 break;
             case "DELETE":
