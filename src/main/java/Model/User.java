@@ -10,7 +10,6 @@ public class User extends BaseModelUUID{
     private String city;
     private String district;
     private String address;
-    private String avatar;
     private int status;
     private int type;
 
@@ -61,10 +60,6 @@ public class User extends BaseModelUUID{
         return address;
     }
 
-    public String getAvatar() {
-        return avatar;
-    }
-
     public int getStatus() {
         return status;
     }
@@ -109,10 +104,6 @@ public class User extends BaseModelUUID{
         this.address = address;
     }
 
-    public void setAvatar(String avatar) {
-        this.avatar = avatar;
-    }
-
     public void setStatus(int status) {
         this.status = status;
     }
@@ -133,7 +124,6 @@ public class User extends BaseModelUUID{
                 ", city='" + city + '\'' +
                 ", district='" + district + '\'' +
                 ", address='" + address + '\'' +
-                ", avatar='" + avatar + '\'' +
                 ", status=" + status +
                 ", type=" + type +
                 '}';

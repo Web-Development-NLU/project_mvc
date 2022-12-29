@@ -76,7 +76,7 @@
                                     <i class="bi bi-person"></i>
                                 </button>
                                 <div class="dropdown-menu">
-                                    <a class="dropdown-item" href="#">My Account</a>
+                                    <a class="dropdown-item" href="${pageContext.request.contextPath}/myAccount">My Account</a>
                                     <a class="dropdown-item" href="#">Orders List
                                         <span><i class="fa-solid fa-list"></i></span></a>
                                     <a class="dropdown-item" href="${pageContext.request.contextPath}/logout">Logout

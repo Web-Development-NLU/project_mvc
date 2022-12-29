@@ -39,24 +39,8 @@
         </div>
       </div>
 
-      <div class="product_pattern product_options-choice">
-        <div class="product_option_title">Pattern:</div>
-        <div class="input-radio rd-yellow">
-          <label>
-            <input type="radio" name="pattern" value="modern">
-            <div class="radio-bg"></div>
-          </label>
-        </div>
-        <div class="input-radio rd-red">
-          <label>
-            <input type="radio" name="pattern" value="classic">
-            <div class="radio-bg"></div>
-          </label>
-        </div>
-      </div>
-
       <div class="product_size product_options-choice">
-        <div class="product_option_title">Size:</div>
+        <div class="product_option_title">Pattern: </div>
         <div class="input-radio-text">
           <label>
             <input type="radio" name="size" value="Small">
