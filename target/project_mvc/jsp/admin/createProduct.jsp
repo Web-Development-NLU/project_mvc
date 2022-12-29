@@ -176,9 +176,11 @@
                                     </div>
                                     <div class="row mb-3">
                                         <label class="col-sm-2 col-form-label" for="product-thumbnails">Images</label>
-                                        <div class="col-sm-10">
-                                            <input type="text" class="form-control" id="product-thumbnails"
-                                                   name="thumbnail" placeholder="Link of image, separated by comma">
+                                        <div class="col-sm-10 upload-image">
+                                            <div class="input-group input-group-merge preview-image mb-3">
+                                            </div>
+                                            <input type="file" class="form-control" id="product-thumbnails"
+                                                   name="thumbnail" placeholder="Link of image, separated by comma" multiple>
                                         </div>
                                     </div>
                                     <div class="row mb-3">
@@ -257,6 +259,7 @@
 <script src="/assets/vendor/libs/perfect-scrollbar/perfect-scrollbar.js"></script>
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/chosen/1.8.7/chosen.jquery.min.js"></script>
 <script src="/assets/vendor/js/menu.js"></script>
+<script src="/assets/js/upload.js"></script>
 <!-- endbuild -->
 
 <!-- Vendors JS -->
