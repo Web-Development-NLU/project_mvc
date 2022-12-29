@@ -43,13 +43,13 @@
         <div class="product_option_title">Pattern: </div>
         <div class="input-radio-text">
           <label>
-            <input type="radio" name="size" value="Small">
+            <input type="radio" name="pattern" value="Small">
             <div class="radio-btn">Small</div>
           </label>
         </div>
         <div class="input-radio-text">
           <label>
-            <input type="radio" name="size" value="Large">
+            <input type="radio" name="pattern" value="Large">
             <div class="radio-btn">Large</div>
           </label>
         </div>
@@ -70,10 +70,6 @@
     <div class="wishlist-title">Add to wishlist</div>
   </div>
   <div class="product_info">
-    <div class="product_info-item">
-      <div class="product_info-type">SKU:</div>
-      <div class="product_info-name">BED1081</div>
-    </div>
     <div class="product_info-item">
       <div class="product_info-type">Category:</div>
       <div class="product_info-name">Storage</div>

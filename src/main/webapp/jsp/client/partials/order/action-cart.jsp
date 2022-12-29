@@ -14,7 +14,6 @@
   int amount = Integer.parseInt(request.getParameter("amount"));
   String pattern = request.getParameter("pattern");
   String color = request.getParameter("color");
-  String size = request.getParameter("size");
 %>
 <div class="action-cart">
   <div class="checkout-card-product">
@@ -35,10 +34,6 @@
           <c:if test="<%= !pattern.isEmpty() %>">
             <span class="material-pattern">pattern</span>
             <span class="value-pattern"><%= pattern %></span>
-          </c:if>
-          <c:if test="<%= !size.isEmpty() %>">
-            <span class="material-size">Size</span>
-            <span class="value-size">Large</span>
           </c:if>
         </div>
       </div>

@@ -36,7 +36,6 @@ public class AddToCartController extends HttpServlet {
         String idProduct = request.getParameter("id");
         String pattern = request.getParameter("pattern");
         String color = request.getParameter("color");
-        String size = request.getParameter("size");
         int amount = Integer.parseInt(request.getParameter("amount"));
         Product product = this.productService.findById(idProduct, Product.class);
 
@@ -49,7 +48,6 @@ public class AddToCartController extends HttpServlet {
                     authorizationData.getId(),
                     product.getId(),
                     pattern,
-                    size,
                     color,
                     amount
             );
@@ -63,8 +61,7 @@ public class AddToCartController extends HttpServlet {
                     product.getPrice(),
                     product.getCategoryId(),
                     color,
-                    pattern,
-                    size
+                    pattern
             ));
         }
         session.setAttribute("authorization", authorizationData);

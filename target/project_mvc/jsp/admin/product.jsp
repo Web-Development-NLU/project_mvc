@@ -6,6 +6,8 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ page isELIgnored="false" %>
 <!DOCTYPE html>
 
 <html
@@ -13,7 +15,7 @@
         class="light-style layout-menu-fixed"
         dir="ltr"
         data-theme="theme-default"
-        data-assets-path="../assets/"
+        data-assets-path="/assets/"
         data-template="vertical-menu-template-free"
 >
 <head>
@@ -28,7 +30,7 @@
     <meta name="description" content=""/>
 
     <!-- Favicon -->
-    <link rel="icon" type="image/x-icon" href="../../../assets/img_admin/favicon/favicon.ico"/>
+    <link rel="icon" type="image/x-icon" href="/assets/img_admin/favicon/favicon.ico"/>
 
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com"/>
@@ -39,18 +41,18 @@
     />
 
     <!-- Icons. Uncomment required icon fonts -->
-    <link rel="stylesheet" href="../assets/vendor/fonts/boxicons.css"/>
+    <link rel="stylesheet" href="/assets/vendor/fonts/boxicons.css"/>
 
     <!-- Core CSS -->
-    <link rel="stylesheet" href="../assets/vendor/css/style.css">
+    <link rel="stylesheet" href="/assets/vendor/css/style.css">
     <!-- Vendors CSS -->
-    <link rel="stylesheet" href="../assets/vendor/libs/perfect-scrollbar/perfect-scrollbar.css"/>
+    <link rel="stylesheet" href="/assets/vendor/libs/perfect-scrollbar/perfect-scrollbar.css"/>
 
     <!-- Page CSS -->
 
     <!-- Helpers -->
-    <script src="../assets/vendor/js/helpers.js"></script>
-    <script src="../assets/js_admin/config.js"></script>
+    <script src="/assets/vendor/js/helpers.js"></script>
+    <script src="/assets/js_admin/config.js"></script>
 </head>
 
 <body>
@@ -76,7 +78,7 @@
 
                 <div class="container-xxl flex-grow-1 container-p-y">
                     <h4 class="fw-bold py-3 mb-4"><span class="text-muted fw-light">Product /</span> Chair</h4>
-                    <a href="create_product.html">
+                    <a href="${pageContext.request.contextPath}/createProduct">
                         <button type="button" class="btn btn-outline-dark" style="float: right">Create Product</button>
                     </a>
 
@@ -112,7 +114,7 @@
                                                     data-bs-placement="top"
                                                     class="avatar avatar-xs pull-up"
                                                     title="Christina Parker">
-                                                <img src="../assets/img_admin/product/baniversary_Chair.png"
+                                                <img src="/assets/img_admin/product/baniversary_Chair.png"
                                                      alt="Avatar" class="rounded-circle1"/>
                                             </li>
                                         </ul>
@@ -152,12 +154,12 @@
                                                     class="avatar avatar-xs pull-up"
                                                     title="Christina Parker"
                                             >
-                                                <img src="../assets/img_admin/product/Beetle_Chair.png" alt="Avatar"
+                                                <img src="/assets/img_admin/product/Beetle_Chair.png" alt="Avatar"
                                                      class="rounded-circle1"/>
                                             </li>
                                         </ul>
                                     </td>
-                                    <td>Pellentesque habitant morbi tristique senectus et netus et ...</td>
+                                    <td>Pellentesque habitant morbi tristique senectus et netus et .</td>
                                     <td><span class="badge bg-label-success me-1">0</span></td>
                                     <td>
                                         <div class="dropdown">
@@ -194,12 +196,12 @@
                                                     class="avatar avatar-xs pull-up"
                                                     title="Christina Parker"
                                             >
-                                                <img src="../assets/img_admin/product/baniversary_Chair.png" alt=""
+                                                <img src="/assets/img_admin/product/baniversary_Chair.png" alt=""
                                                      class="rounded-circle1"/>
                                             </li>
                                         </ul>
                                     </td>
-                                    <td>Donec eu libero sit amet quam egestas semper. Aenean ultricies....</td>
+                                    <td>Donec eu libero sit amet quam egestas semper. Aenean ultricies</td>
                                     <td><span class="badge bg-label-primary me-1">Active</span></td>
                                     <td>
                                         <div class="dropdown">
@@ -260,18 +262,18 @@
 
 <!-- Core JS -->
 <!-- build:js assets/vendor/js/core.js -->
-<script src="../assets/vendor/libs/jquery/jquery.js"></script>
-<script src="../assets/vendor/libs/popper/popper.js"></script>
-<script src="../assets/vendor/js/bootstrap.js"></script>
-<script src="../assets/vendor/libs/perfect-scrollbar/perfect-scrollbar.js"></script>
+<script src="/assets/vendor/libs/jquery/jquery.js"></script>
+<script src="/assets/vendor/libs/popper/popper.js"></script>
+<script src="/assets/vendor/js/bootstrap.js"></script>
+<script src="/assets/vendor/libs/perfect-scrollbar/perfect-scrollbar.js"></script>
 
-<script src="../assets/vendor/js/menu.js"></script>
+<script src="/assets/vendor/js/menu.js"></script>
 <!-- endbuild -->
 
 <!-- Vendors JS -->
 
 <!-- Main JS -->
-<script src="../assets/js_admin/main.js"></script>
+<script src="/assets/js_admin/main.js"></script>
 
 <!-- Page JS -->
 

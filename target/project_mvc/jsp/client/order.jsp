@@ -124,7 +124,6 @@
                                     <jsp:param name="amount" value="${cart.amount}"/>
                                     <jsp:param name="pattern" value="${cart.pattern}"/>
                                     <jsp:param name="color" value="${cart.color}"/>
-                                    <jsp:param name="size" value="${cart.size}"/>
                                 </jsp:include>
                             </c:forEach>
                         </div>
