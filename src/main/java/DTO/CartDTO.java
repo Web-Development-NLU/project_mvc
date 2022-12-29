@@ -10,11 +10,10 @@ public class CartDTO {
     private int categoryId;
     private String color;
     private String pattern;
-    private String size;
 
     public CartDTO () {}
 
-    public CartDTO(String name, int amount, String idProduct, double price, int categoryId, String color, String pattern, String size) {
+    public CartDTO(String name, int amount, String idProduct, double price, int categoryId, String color, String pattern) {
         auto++;
         this.id = auto;
         this.name = name;
@@ -24,7 +23,6 @@ public class CartDTO {
         this.categoryId = categoryId;
         this.color = color;
         this.pattern = pattern;
-        this.size = size;
     }
 
     public String getName() {
@@ -66,20 +64,12 @@ public class CartDTO {
         return pattern;
     }
 
-    public String getSize() {
-        return size;
-    }
-
     public void setColor(String color) {
         this.color = color;
     }
 
     public void setPattern(String pattern) {
         this.pattern = pattern;
-    }
-
-    public void setSize(String size) {
-        this.size = size;
     }
 
     public int getId() {

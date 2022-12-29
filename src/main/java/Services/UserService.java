@@ -88,7 +88,7 @@ public class UserService extends BaseService<User> {
 
     public List<CartDTO> getCart(String idUser) {
         return this.jdbi.withHandle(handle -> handle.createQuery(
-                "SELECT c.id, c.amount, c.idProduct, p.name, p.price, p.categoryId, c.pattern, c.color, c.size " +
+                "SELECT c.id, c.amount, c.idProduct, p.name, p.price, p.categoryId, c.pattern, c.color " +
                         "FROM cart as c " +
                         "RIGHT JOIN product as p ON p.id = c.idProduct " +
                         "WHERE c.idUser = :idUser"
@@ -103,13 +103,11 @@ public class UserService extends BaseService<User> {
                                     "idUser = :idUser AND " +
                                     "idProduct = :idProduct AND " +
                                     "color = :color AND " +
-                                    "pattern = :pattern AND " +
-                                    "size = :size"
+                                    "pattern = :pattern"
                     ).bind("idUser", idUser)
                     .bind("idProduct", cart.getIdProduct())
                     .bind("color", cart.getColor())
                     .bind("pattern", cart.getPattern())
-                    .bind("size", cart.getSize())
                     .mapToBean(CartDTO.class).first());
         } catch (IllegalStateException exception) {
             exist = null;
@@ -125,15 +123,14 @@ public class UserService extends BaseService<User> {
     private void createCart(String idUser, Cart cart) {
         this.jdbi.useHandle(handle -> {
             handle.createUpdate(
-                            "INSERT INTO cart (idUser, idProduct, createdAt, amount, color, pattern, size) " +
-                                    "VALUES (:idUser, :idProduct, :createdAt, :amount, :color, :pattern, :size)")
+                            "INSERT INTO cart (idUser, idProduct, createdAt, amount, color, pattern) " +
+                                    "VALUES (:idUser, :idProduct, :createdAt, :amount, :color, :pattern)")
                     .bind("idUser", idUser)
                     .bind("idProduct", cart.getIdProduct())
                     .bind("createdAt", LocalDate.now())
                     .bind("amount", cart.getAmount())
                     .bind("color", cart.getColor())
                     .bind("pattern", cart.getPattern())
-                    .bind("size", cart.getSize())
                     .execute();
         });
     }

@@ -39,9 +39,6 @@ public class PaymentController extends HttpServlet {
                     if(cart.getPattern() != null) {
                         name.append(", pattern: ").append(cart.getPattern());
                     }
-                    if(cart.getSize() != null) {
-                        name.append(", size: ").append(cart.getSize());
-                    }
                     name.append(" \n");
         }
         OrderDTO order = (OrderDTO) session.getAttribute("order");

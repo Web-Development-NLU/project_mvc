@@ -4,17 +4,15 @@ public class Cart extends BaseModel{
     private String idUser;
     private String idProduct;
     private String pattern;
-    private String size;
     private String color;
     private int amount;
     public Cart() {
     }
 
-    public Cart(String idUser, String idProduct, String pattern, String size, String color, int amount) {
+    public Cart(String idUser, String idProduct, String pattern, String color, int amount) {
         this.idUser = idUser;
         this.idProduct = idProduct;
         this.pattern = pattern;
-        this.size = size;
         this.color = color;
         this.amount = amount;
     }
@@ -29,10 +27,6 @@ public class Cart extends BaseModel{
 
     public String getPattern() {
         return pattern;
-    }
-
-    public String getSize() {
-        return size;
     }
 
     public String getColor() {
@@ -53,10 +47,6 @@ public class Cart extends BaseModel{
 
     public void setPattern(String pattern) {
         this.pattern = pattern;
-    }
-
-    public void setSize(String size) {
-        this.size = size;
     }
 
     public void setColor(String color) {

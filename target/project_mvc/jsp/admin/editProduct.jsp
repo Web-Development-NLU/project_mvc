@@ -214,7 +214,7 @@
                   </div>
                   <div class="row justify-content-end">
                     <div class="col-sm-10">
-                      <button type="button" class="btn btn-primary">Create</button>
+                      <button type="button" class="btn btn-primary">Update</button>
                     </div>
                   </div>
                 </form>

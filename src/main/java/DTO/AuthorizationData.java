@@ -39,8 +39,7 @@ public class AuthorizationData {
             if (
                     Objects.equals(newCart.getIdProduct(), cart.getIdProduct()) &&
                             Objects.equals(newCart.getPattern(), cart.getPattern()) &&
-                            Objects.equals(newCart.getColor(), cart.getColor()) &&
-                            Objects.equals(newCart.getSize(), cart.getSize())
+                            Objects.equals(newCart.getColor(), cart.getColor())
             ) {
                 cart.setAmount(cart.getAmount() + newCart.getAmount());
                 return cart.getId();
