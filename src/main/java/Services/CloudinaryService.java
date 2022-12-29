@@ -26,7 +26,6 @@ public class CloudinaryService {
                 "use_filename", true,
                 "filename_override", file.getName()
         ));
-
         return result.get("url").toString();
     }
 }

@@ -20,21 +20,20 @@ public class UploadService {
         if(!folder.exists()) {
             folder.mkdirs();
         }
+        String result = null;
         String file = null;
         for (Part part : parts) {
             if(file == null) {
                 file = rootPath + File.separator +  Instant.now().toEpochMilli() + "_" + new Random().nextInt() + "." + getExtension(part);
             }
             part.write(file);
+            File fileUpload = new File(file);
+
+            result = (result == null) ? this.cloudService.upload(fileUpload, folderUpload) : String.join(",", result, this.cloudService.upload(fileUpload, folderUpload));
+            fileUpload.delete();
         }
 
-        File fileUpload = new File(file);
-
-        String result = this.cloudService.upload(fileUpload, folderUpload);
-
-        fileUpload.delete();
-
-        return  result;
+        return result;
 
     }
 
