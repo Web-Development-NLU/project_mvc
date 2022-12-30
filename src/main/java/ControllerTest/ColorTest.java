@@ -24,7 +24,7 @@ public class ColorTest extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        request.getRequestDispatcher("/jsp/client/test/color.jsp").forward(request,response);
+        request.getRequestDispatcher("/jsp/test/color.jsp").forward(request,response);
     }
 
     @Override

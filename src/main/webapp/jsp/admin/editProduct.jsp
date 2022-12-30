@@ -1,4 +1,12 @@
-<%--
+<%@ page import="Model.Color" %>
+<%@ page import="Model.Category" %>
+<%@ page import="java.util.ArrayList" %>
+<%@ page import="Model.Pattern" %>
+<%@ page import="Model.Product" %>
+<%@ page import="java.text.DecimalFormat" %>
+<%@ page import="java.math.BigDecimal" %>
+<%@ page import="java.util.Locale" %>
+<%@ page import="org.apache.commons.lang3.LocaleUtils" %><%--
   Created by IntelliJ IDEA.
   User: Quang Tho
   Date: 29/12/2022
@@ -56,6 +64,12 @@
 </head>
 
 <body>
+<%
+  ArrayList<Color> colors = (ArrayList<Color>) request.getAttribute("colors");
+  ArrayList<Category> categories = (ArrayList<Category>) request.getAttribute("categories");
+  ArrayList<Pattern> patterns = (ArrayList<Pattern>) request.getAttribute("patterns");
+  Product product = (Product) request.getAttribute("product");
+%>
 <!-- Layout wrapper -->
 <div class="layout-wrapper layout-content-navbar">
   <div class="layout-container">
@@ -87,11 +101,11 @@
               <div class="card-body">
                 <form action="${pageContext.request.contextPath}/createProduct" method="post">
                   <div class="row mb-3">
-                    <label class="col-sm-2 col-form-label" for="name">Name
+                    <label class="col-sm-2 col-form-label" for="name">Tên sản phẩm
                       Product</label>
                     <div class="col-sm-10">
                       <input type="text" class="form-control" id="name" name="name"
-                             placeholder="name"/>
+                             placeholder="name" required value="<%=product.getName()%>"/>
                     </div>
                   </div>
                   <div class="row mb-3">
@@ -103,17 +117,28 @@
                               id="price"
                               placeholder="VNĐ"
                               name="price"
+                              required
+                              value="<%=new DecimalFormat("#").format(product.getPrice())%>"
                       />
                     </div>
                   </div>
                   <div class="row mb-3">
                     <label class="col-sm-2 col-form-label"
-                           for="category">Category:</label>
+                           for="category">Danh mục:</label>
                     <div class="col-sm-10">
                       <select name="category" id="category"
                               class="chosen-select form-control form-control-chosen">
-                        <option>Choose...</option>
-                        <option>jQuery</option>
+                        <c:forEach items="<%=categories%>" var="category">
+                          <c:set var="id" value="<%=product.getCategoryId()%>"/>
+                          <c:choose>
+                            <c:when test="${category.id == id}">
+                                <option value="${category.id}" selected>${category.name}</option>
+                            </c:when>
+                            <c:otherwise>
+                                <option value="${category.id}">${category.name}</option>
+                            </c:otherwise>
+                          </c:choose>
+                        </c:forEach>
                       </select>
                     </div>
                   </div>
@@ -122,9 +147,11 @@
                            for="size">Size:</label>
                     <div class="col-sm-10">
                       <select name="size" id="size"
-                              class="chosen-select form-control form-control-chosen">
-                        <option>Choose...</option>
-                        <option>jQuery</option>
+                              class="chosen-select form-control form-control-chosen" required>
+                        <option value="<%=product.getSize()%>">Chọn kích cỡ</option>
+                        <option value="1">Lớn</option>
+                        <option value="2">Trung Bình</option>
+                        <option value="3">Nhỏ</option>
                       </select>
                     </div>
                   </div>
@@ -138,26 +165,29 @@
                               id="dimension"
                               placeholder="2140 × 140 × 70 cm"
                               name="dimension"
+                              value="<%= (product.getDimensions() == null) ? "" : product.getDimensions() %>"
                       />
                     </div>
                   </div>
                   <div class="row mb-3">
-                    <label class="col-sm-2 col-form-label" for="color">Color</label>
+                    <label class="col-sm-2 col-form-label" for="color">Chọn màu sắc</label>
                     <div class="col-sm-10">
                       <select name="color" id="color" multiple
                               class="chosen-select form-control form-control-chosen">
-                        <option>Choose...</option>
-                        <option>jQuery</option>
+                        <c:forEach items="<%=colors%>" var="color">
+                          <option value="${color.id}" style="color: ${color.value}">${color.name}</option>
+                        </c:forEach>
                       </select>
                     </div>
                   </div>
                   <div class="row mb-3">
-                    <label class="col-sm-2 col-form-label" for="pattern">Pattern</label>
+                    <label class="col-sm-2 col-form-label" for="pattern">Kiểu dáng</label>
                     <div class="col-sm-10">
                       <select name="pattern" id="pattern" multiple
                               class="chosen-select form-control form-control-chosen">
-                        <option>Choose...</option>
-                        <option>jQuery</option>
+                        <c:forEach items="<%=patterns%>" var="pattern">
+                          <option value="${pattern.id}">${pattern.name}</option>
+                        </c:forEach>
                       </select>
                     </div>
                   </div>
@@ -171,6 +201,7 @@
                               id="material"
                               placeholder="wooden"
                               name="material"
+                              value="<%=(product.getMaterial() == null) ? "" : product.getMaterial()%>"
                       />
                     </div>
                   </div>
@@ -194,7 +225,7 @@
                                     aria-label="Hi, Do you have a moment to talk Joe?"
                                     aria-describedby="basic-icon-default-message2"
                                     name="shortDescription"
-                            ></textarea>
+                            ><%=(product.getShortDescription() == null) ? "" : product.getShortDescription()%></textarea>
                     </div>
                   </div>
                   <div class="row mb-3">
@@ -207,7 +238,7 @@
                                       placeholder="description about product"
                                       aria-describedby="basic-icon-default-message2"
                                       name="description"
-                            ></textarea>
+                            ><%=(product.getDescription() == null) ? "" : product.getDescription()%></textarea>
                     </div>
                   </div>
                   <div class="row justify-content-end">

@@ -13,7 +13,7 @@
 <body>
 <form method="post" action="/test/color">
     <input name="name" type="text" placeholder="name">
-    <input name="value" type="text" placeholder="value">
+    <input name="value" type="color" placeholder="value">
     <button type="submit" name="action" value="CREATE">Submit</button>
 </form>
 <h2>Update</h2>
