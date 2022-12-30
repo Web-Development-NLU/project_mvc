@@ -2,7 +2,7 @@
   Created by IntelliJ IDEA.
   User: zxc
   Date: 30/Dec/22
-  Time: 3:09 PM
+  Time: 9:35 PM
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
@@ -18,7 +18,7 @@
             name="viewport"
             content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0"/>
 
-    <title>Category</title>
+    <title>Code</title>
 
     <meta name="description" content=""/>
 
@@ -75,7 +75,7 @@
                                 <thead>
                                 <tr>
                                     <th>ID</th>
-                                    <th>Tên</th>
+                                    <th>Giá trị</th>
                                     <th>Ngày tạo</th>
                                 </tr>
                                 </thead>
