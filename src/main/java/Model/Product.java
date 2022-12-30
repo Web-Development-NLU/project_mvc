@@ -1,5 +1,7 @@
 package Model;
 
+import java.time.LocalDate;
+
 public class Product extends BaseModelUUID {
 
     private String name;
@@ -8,7 +10,7 @@ public class Product extends BaseModelUUID {
     private int size;
     private int status;
     private String description;
-    private String demensions;
+    private String dimensions;
     private String material;
     private String thumbnail;
     private int categoryId;
@@ -16,7 +18,7 @@ public class Product extends BaseModelUUID {
     public Product() {
     }
 
-    public Product(String name, double price, String shortDescription, int size, int status, String description, String demensions, String material, String thumbnail, int categoryId) {
+    public Product(String name, double price, String shortDescription, int size, int status, String description, String dimensions, String material, String thumbnail, int categoryId) {
         super();
         this.name = name;
         this.price = price;
@@ -24,7 +26,7 @@ public class Product extends BaseModelUUID {
         this.size = size;
         this.status = status;
         this.description = description;
-        this.demensions = demensions;
+        this.dimensions = dimensions;
         this.material = material;
         this.thumbnail = thumbnail;
         this.categoryId = categoryId;
@@ -54,8 +56,8 @@ public class Product extends BaseModelUUID {
         return description;
     }
 
-    public String getDemensions() {
-        return demensions;
+    public String getDimensions() {
+        return dimensions;
     }
 
     public String getMaterial() {
@@ -94,8 +96,8 @@ public class Product extends BaseModelUUID {
         this.description = description;
     }
 
-    public void setDemensions(String demensions) {
-        this.demensions = demensions;
+    public void setDimensions(String demensions) {
+        this.dimensions = demensions;
     }
 
     public void setMaterial(String material) {

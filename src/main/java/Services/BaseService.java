@@ -7,6 +7,9 @@ import org.jdbi.v3.core.Handle;
 import org.jdbi.v3.core.HandleCallback;
 import org.jdbi.v3.core.Jdbi;
 
+import java.lang.reflect.Array;
+import java.util.ArrayList;
+
 public abstract class BaseService<M extends IModel> {
     protected Jdbi jdbi;
     protected String tableName;
@@ -14,6 +17,13 @@ public abstract class BaseService<M extends IModel> {
     public BaseService(String tableName) {
         this.jdbi = DBConnection.jdbi;
         this.tableName = tableName;
+    }
+
+    public ArrayList<M> findAll(Class<M> classes) {
+        return (ArrayList<M>) this.jdbi.withHandle(handle -> {
+            return handle.createQuery("SELECT * FROM " + this.tableName)
+                    .mapToBean(classes).list();
+        });
     }
 
     public M findById(String id, Class<M> classes) {

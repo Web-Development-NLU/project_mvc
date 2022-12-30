@@ -23,7 +23,7 @@ import java.io.IOException;
 
         @Override
         protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-            request.getRequestDispatcher("/jsp/client/test/pattern.jsp").forward(request, response);
+            request.getRequestDispatcher("/jsp/test/pattern.jsp").forward(request, response);
         }
 
         @Override
