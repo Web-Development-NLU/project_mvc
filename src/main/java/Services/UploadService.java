@@ -34,7 +34,6 @@ public class UploadService {
                 result = (result == null) ? this.cloudService.upload(fileUpload, folderUpload) : String.join(",", result, this.cloudService.upload(fileUpload, folderUpload));
                 fileUpload.delete();
             }
-
         }
 
         return result;
