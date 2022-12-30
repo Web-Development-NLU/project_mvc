@@ -1,4 +1,6 @@
-<%--
+<%@ page import="java.util.ArrayList" %>
+<%@ page import="java.util.Collection" %>
+<%@ page import="Model.*" %><%--
   Created by IntelliJ IDEA.
   User: Quang Tho
   Date: 29/12/2022
@@ -54,7 +56,11 @@
     <script src="/assets/js_admin/config.js"></script>
 
 </head>
-
+<%
+    ArrayList<Color> colors = (ArrayList<Color>) request.getAttribute("colors");
+    ArrayList<Category> categories = (ArrayList<Category>) request.getAttribute("categories");
+    ArrayList<Pattern> patterns = (ArrayList<Pattern>) request.getAttribute("patterns");
+%>
 <body>
 <!-- Layout wrapper -->
 <div class="layout-wrapper layout-content-navbar">
@@ -77,7 +83,7 @@
                 <!-- Content -->
 
                 <div class="container-xxl flex-grow-1 container-p-y">
-                    <h4 class="fw-bold py-3 mb-4"><span class="text-muted fw-light">Create/</span> Create Product</h4>
+                    <h4 class="fw-bold py-3 mb-4"><span class="text-muted fw-light">Tạo mới/</span>Tạo sản phẩm</h4>
                     <hr class="my-5"/>
                     <div class="col-xxl">
                         <div class="card mb-4">
@@ -85,17 +91,17 @@
                                 <h5 class="mb-0">Product Information</h5>
                             </div>
                             <div class="card-body">
-                                <form action="${pageContext.request.contextPath}/createProduct" method="post">
+                                <form action="${pageContext.request.contextPath}/admin/createProduct" method="post" enctype="multipart/form-data">
                                     <div class="row mb-3">
-                                        <label class="col-sm-2 col-form-label" for="name">Name
+                                        <label class="col-sm-2 col-form-label" for="name">Tên sản phẩm
                                             Product</label>
                                         <div class="col-sm-10">
                                             <input type="text" class="form-control" id="name" name="name"
-                                                   placeholder="name"/>
+                                                   placeholder="name" required/>
                                         </div>
                                     </div>
                                     <div class="row mb-3">
-                                        <label class="col-sm-2 col-form-label" for="price">Price</label>
+                                        <label class="col-sm-2 col-form-label" for="price">Gía</label>
                                         <div class="col-sm-10">
                                             <input
                                                     type="number"
@@ -108,12 +114,14 @@
                                     </div>
                                     <div class="row mb-3">
                                         <label class="col-sm-2 col-form-label"
-                                               for="category">Category:</label>
+                                               for="category">Danh mục:</label>
                                         <div class="col-sm-10">
                                             <select name="category" id="category"
                                                     class="chosen-select form-control form-control-chosen">
-                                                <option>Choose...</option>
-                                                <option>jQuery</option>
+                                                <option>Chọn danh mục</option>
+                                                <c:forEach items="<%=categories%>" var="category">
+                                                    <option value="${category.id}">${category.name}</option>
+                                                </c:forEach>
                                             </select>
                                         </div>
                                     </div>
@@ -122,9 +130,11 @@
                                                for="size">Size:</label>
                                         <div class="col-sm-10">
                                             <select name="size" id="size"
-                                                    class="chosen-select form-control form-control-chosen">
-                                                <option>Choose...</option>
-                                                <option>jQuery</option>
+                                                    class="chosen-select form-control form-control-chosen" required>
+                                                <option>Chọn kích cỡ</option>
+                                                <option value="1">Lớn</option>
+                                                <option value="2">Trung Bình</option>
+                                                <option value="3">Nhỏ</option>
                                             </select>
                                         </div>
                                     </div>
@@ -142,22 +152,24 @@
                                         </div>
                                     </div>
                                     <div class="row mb-3">
-                                        <label class="col-sm-2 col-form-label" for="color">Color</label>
+                                        <label class="col-sm-2 col-form-label" for="color">Màu sắc</label>
                                         <div class="col-sm-10">
                                             <select name="color" id="color" multiple
                                                     class="chosen-select form-control form-control-chosen">
-                                                <option>Choose...</option>
-                                                <option>jQuery</option>
+                                                <c:forEach items="<%=colors%>" var="color">
+                                                    <option value="${color.id}" style="color: ${color.value}">${color.name}</option>
+                                                </c:forEach>
                                             </select>
                                         </div>
                                     </div>
                                     <div class="row mb-3">
-                                        <label class="col-sm-2 col-form-label" for="pattern">Pattern</label>
+                                        <label class="col-sm-2 col-form-label" for="pattern">Kiểu dáng</label>
                                         <div class="col-sm-10">
                                             <select name="pattern" id="pattern" multiple
                                                     class="chosen-select form-control form-control-chosen">
-                                                <option>Choose...</option>
-                                                <option>jQuery</option>
+                                                <c:forEach items="<%=patterns%>" var="pattern">
+                                                    <option value="${pattern.id}">${pattern.name}</option>
+                                                </c:forEach>
                                             </select>
                                         </div>
                                     </div>
@@ -180,7 +192,7 @@
                                             <div class="input-group input-group-merge preview-image mb-3">
                                             </div>
                                             <input type="file" class="form-control" id="product-thumbnails"
-                                                   name="thumbnail" placeholder="Link of image, separated by comma" multiple>
+                                                   name="thumbnail" placeholder="Link of image, separated by comma" multiple required>
                                         </div>
                                     </div>
                                     <div class="row mb-3">
@@ -212,7 +224,7 @@
                                     </div>
                                     <div class="row justify-content-end">
                                         <div class="col-sm-10">
-                                            <button type="button" class="btn btn-primary">Create</button>
+                                            <button type="submit" class="btn btn-primary">Create</button>
                                         </div>
                                     </div>
                                 </form>
@@ -268,7 +280,6 @@
 <script src="/assets/js_admin/main.js"></script>
 <script>
     $(".chosen-select").chosen({
-        allow_single_deselect: true,
         width: '50%',
         no_results_text: "Không tìm thấy kết quả :"
     })
