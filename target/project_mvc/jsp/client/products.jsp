@@ -1,4 +1,5 @@
-<%--
+<%@ page import="java.util.ArrayList" %>
+<%@ page import="Model.Product" %><%--
   Created by IntelliJ IDEA.
   User: Quang Tho
   Date: 01/12/2022
@@ -15,6 +16,9 @@
     </jsp:include>
 </head>
 <body>
+<%
+    ArrayList<Product> products = (ArrayList<Product>) request.getAttribute("products");
+%>
     <div id="shop-container">
         <header>
             <jsp:include page="common/menu.jsp"/>
@@ -26,9 +30,13 @@
             <div class="products">
                 <div class="container-fluid">
                     <div class="product-list row mb-5 ">
-                        <c:forEach begin="1" end="12">
+                        <c:forEach items="<%=products%>" var="product">
                             <jsp:include page="common/card.jsp">
                                 <jsp:param name="type" value="2"/>
+                                <jsp:param name="name" value="${product.name}"/>
+                                <jsp:param name="thumbnails" value="${product.thumbnail}"/>
+                                <jsp:param name="price" value="${product.price}"/>
+                                <jsp:param name="id" value="${product.id}"/>
                             </jsp:include>
                         </c:forEach>
                     </div>

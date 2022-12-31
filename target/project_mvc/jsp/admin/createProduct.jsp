@@ -47,7 +47,7 @@
     <link rel="stylesheet" href="/assets/vendor/libs/perfect-scrollbar/perfect-scrollbar.css"/>
     <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/chosen/1.8.7/chosen.min.css">
     <link rel="stylesheet" href="/assets/vendor/css/component-chosen.min.css">
-
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.3/font/bootstrap-icons.css">
     <!-- Page CSS -->
 
     <!-- Helpers -->
@@ -91,7 +91,7 @@
                                 <h5 class="mb-0">Product Information</h5>
                             </div>
                             <div class="card-body">
-                                <form action="${pageContext.request.contextPath}/admin/createProduct" method="post" enctype="multipart/form-data">
+                                <form action="${pageContext.request.contextPath}/admin/createProduct" method="post">
                                     <div class="row mb-3">
                                         <label class="col-sm-2 col-form-label" for="name">Tên sản phẩm
                                             Product</label>
@@ -109,6 +109,7 @@
                                                     id="price"
                                                     placeholder="VNĐ"
                                                     name="price"
+                                                    required
                                             />
                                         </div>
                                     </div>
@@ -117,7 +118,7 @@
                                                for="category">Danh mục:</label>
                                         <div class="col-sm-10">
                                             <select name="category" id="category"
-                                                    class="chosen-select form-control form-control-chosen">
+                                                    class="chosen-select form-control form-control-chosen" required>
                                                 <option>Chọn danh mục</option>
                                                 <c:forEach items="<%=categories%>" var="category">
                                                     <option value="${category.id}">${category.name}</option>
@@ -188,11 +189,9 @@
                                     </div>
                                     <div class="row mb-3">
                                         <label class="col-sm-2 col-form-label" for="product-thumbnails">Images</label>
-                                        <div class="col-sm-10 upload-image">
-                                            <div class="input-group input-group-merge preview-image mb-3">
-                                            </div>
-                                            <input type="file" class="form-control" id="product-thumbnails"
-                                                   name="thumbnail" placeholder="Link of image, separated by comma" multiple required>
+                                        <div class="col-sm-10">
+                                            <textarea type="file" class="form-control" id="product-thumbnails"
+                                                      name="thumbnail" placeholder="Link of image, separated by comma" multiple required></textarea>
                                         </div>
                                     </div>
                                     <div class="row mb-3">
@@ -206,6 +205,7 @@
                                     aria-label="Hi, Do you have a moment to talk Joe?"
                                     aria-describedby="basic-icon-default-message2"
                                     name="shortDescription"
+                                    maxlength="255"
                             ></textarea>
                                         </div>
                                     </div>
@@ -271,7 +271,6 @@
 <script src="/assets/vendor/libs/perfect-scrollbar/perfect-scrollbar.js"></script>
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/chosen/1.8.7/chosen.jquery.min.js"></script>
 <script src="/assets/vendor/js/menu.js"></script>
-<script src="/assets/js/upload.js"></script>
 <!-- endbuild -->
 
 <!-- Vendors JS -->

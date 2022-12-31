@@ -1,4 +1,5 @@
-<%--
+<%@ page import="Model.Product" %>
+<%@ page import="java.text.DecimalFormat" %><%--
   Created by IntelliJ IDEA.
   User: Quang Tho
   Date: 01/12/2022
@@ -8,13 +9,18 @@
 <%@ taglib prefix = "c" uri = "http://java.sun.com/jsp/jstl/core" %>
 <%@ page isELIgnored = "false" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-
+<%
+    String name = request.getParameter("name");
+    String[] thumbnails = request.getParameter("thumbnails").split(",");
+    String price = DecimalFormat.getInstance().format(Double.parseDouble(request.getParameter("price")));
+    String id = request.getParameter("id");
+%>
 <c:if test="${param.type == '2'}">
     <div class="card-components-2 col-6 col-md-4 col-lg-3">
         <div class="product-item-wrap">
             <div class="img-product-container unset-border">
-                <a href="#">
-                    <img class="img-product transt-04-linear" src="/assets/imgs/card-shop/chair-product.jpg" alt="">
+                <a href="${pageContext.request.contextPath}/product?id=<%=id%>">
+                    <img class="img-product transt-04-linear" src="<%=thumbnails[0]%>" alt="">
                 </a>
                 <div class="btn-card-product translateY-bottom-btn">
                     <a href="#"><button class="btn-icon bgr-white hover-bg-red br-50 shadow-01"><i
@@ -26,10 +32,10 @@
             <div class="info-product">
                 <div class="star-rate" data-rate="4"></div>
                 <h2 class="product-name">
-                    <a href="#"><span>Pauline Barstool</span></a>
+                    <a href="${pageContext.request.contextPath}/product?id=<%=id%>"><span><%=name%></span></a>
                 </h2>
                 <div class="card-price">
-                    <span class="current-price">560.00$</span>
+                    <span class="current-price"><%=price%> VNĐ</span>
                     <span class="cost cl-text-price"></span>
                 </div>
             </div>

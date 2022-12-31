@@ -65,6 +65,6 @@ public class AddToCartController extends HttpServlet {
             ));
         }
         session.setAttribute("authorization", authorizationData);
-        response.sendRedirect("/product");
+        response.sendRedirect("/product?id=" + idProduct);
     }
 }

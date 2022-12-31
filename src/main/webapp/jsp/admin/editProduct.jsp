@@ -68,6 +68,8 @@
   ArrayList<Color> colors = (ArrayList<Color>) request.getAttribute("colors");
   ArrayList<Category> categories = (ArrayList<Category>) request.getAttribute("categories");
   ArrayList<Pattern> patterns = (ArrayList<Pattern>) request.getAttribute("patterns");
+  ArrayList<Pattern> patternOfProduct = (ArrayList<Pattern>) request.getAttribute("patternOfProduct");
+  ArrayList<Color> colorOfProduct = (ArrayList<Color>) request.getAttribute("colorOfProduct");
   Product product = (Product) request.getAttribute("product");
 %>
 <!-- Layout wrapper -->
@@ -99,7 +101,7 @@
                 <h5 class="mb-0">Product Information</h5>
               </div>
               <div class="card-body">
-                <form action="${pageContext.request.contextPath}/createProduct" method="post">
+                <form action="${pageContext.request.contextPath}/admin/editProduct?id=<%=product.getId()%>" method="post">
                   <div class="row mb-3">
                     <label class="col-sm-2 col-form-label" for="name">Tên sản phẩm
                       Product</label>
@@ -118,7 +120,7 @@
                               placeholder="VNĐ"
                               name="price"
                               required
-                              value="<%=new DecimalFormat("#").format(product.getPrice())%>"
+                              value="<%=(int) product.getPrice()%>"
                       />
                     </div>
                   </div>
@@ -174,6 +176,9 @@
                     <div class="col-sm-10">
                       <select name="color" id="color" multiple
                               class="chosen-select form-control form-control-chosen">
+                        <c:forEach items="<%=colorOfProduct%>" var="color">
+                          <option value="${color.id}" selected>${color.name}</option>
+                        </c:forEach>
                         <c:forEach items="<%=colors%>" var="color">
                           <option value="${color.id}" style="color: ${color.value}">${color.name}</option>
                         </c:forEach>
@@ -185,6 +190,9 @@
                     <div class="col-sm-10">
                       <select name="pattern" id="pattern" multiple
                               class="chosen-select form-control form-control-chosen">
+                        <c:forEach items="<%=patternOfProduct%>" var="pattern">
+                          <option value="${pattern.id}" selected>${pattern.name}</option>
+                        </c:forEach>
                         <c:forEach items="<%=patterns%>" var="pattern">
                           <option value="${pattern.id}">${pattern.name}</option>
                         </c:forEach>
@@ -208,10 +216,10 @@
                   <div class="row mb-3">
                     <label class="col-sm-2 col-form-label" for="product-thumbnails">Images</label>
                     <div class="col-sm-10 upload-image">
-                      <div class="input-group input-group-merge preview-image mb-3">
+                      <div class="input-group input-group-merge mb-3 upload-preview">
                       </div>
-                      <input type="file" class="form-control" id="product-thumbnails"
-                             name="thumbnail" placeholder="Link of image, separated by comma" multiple>
+                      <textarea type="file" class="form-control" id="product-thumbnails"
+                                name="thumbnail" placeholder="Link of image, separated by comma" multiple required><%=product.getThumbnail()%></textarea>
                     </div>
                   </div>
                   <div class="row mb-3">
@@ -225,6 +233,7 @@
                                     aria-label="Hi, Do you have a moment to talk Joe?"
                                     aria-describedby="basic-icon-default-message2"
                                     name="shortDescription"
+                                    maxlength="255"
                             ><%=(product.getShortDescription() == null) ? "" : product.getShortDescription()%></textarea>
                     </div>
                   </div>
@@ -243,7 +252,7 @@
                   </div>
                   <div class="row justify-content-end">
                     <div class="col-sm-10">
-                      <button type="button" class="btn btn-primary">Update</button>
+                      <button type="submit" class="btn btn-primary">Update</button>
                     </div>
                   </div>
                 </form>
@@ -296,7 +305,6 @@
 <!-- Vendors JS -->
 
 <!-- Main JS -->
-<script src="/assets/js_admin/main.js"></script>
 <script>
   $(".chosen-select").chosen({
     allow_single_deselect: true,
