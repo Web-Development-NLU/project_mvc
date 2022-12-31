@@ -1,3 +1,8 @@
+<%@ page import="java.util.ArrayList" %>
+<%@ page import="Model.Order" %>
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ page isELIgnored="false" %>
 <%--
   Created by IntelliJ IDEA.
   User: zxc
@@ -13,6 +18,9 @@
   </jsp:include>
 </head>
 <body>
+<%
+  ArrayList<Order> orders = (ArrayList<Order>) request.getAttribute("orders");
+%>
 <div id="cart-container">
   <header>
     <jsp:include page="common/menu.jsp"/>
@@ -24,10 +32,6 @@
   </header>
 
   <section id="cart-content" class="container-fluid">
-
-
-    <c:choose>
-      <c:otherwise>
         <div class="cart-place">
           <div class="cart-table mt-5">
             <table class="table table-bordered">
@@ -39,9 +43,11 @@
               </tr>
               </thead>
               <tbody>
-              <td></td>
-              <td></td>
-              <td></td>
+              <c:forEach items="<%= orders %>" var="order">
+                <td>${order.id}</td>
+                <td>${order.info}</td>
+                <td>${order.createdAt}</td>
+              </c:forEach>
               </tbody>
 <%--              <tfoot>--%>
 <%--              <tr>--%>
@@ -54,8 +60,8 @@
 <%--              </tfoot>--%>
             </table>
           </div>
-      </c:otherwise>
-    </c:choose>
+<%--      </c:otherwise>--%>
+<%--    </c:choose>--%>
   </section>
 
   <jsp:include page="common/footer.jsp"/>

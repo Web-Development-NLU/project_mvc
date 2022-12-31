@@ -1,5 +1,6 @@
 package Controller;
 
+import DTO.AuthorizationData;
 import DTO.OrderDTO;
 import Model.Order;
 import Services.OrderService;
@@ -22,11 +23,21 @@ public class OrderListController extends HttpServlet {
     }
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        HttpSession session = request.getSession(true);
+        AuthorizationData authorizationData = (AuthorizationData) session.getAttribute("authorization");
         boolean logged = (boolean) request.getAttribute("logged");
+        String userId = (String) authorizationData.getId();
+        System.out.print(userId);
         if(!logged) {
             response.sendRedirect("/");
         }else {
-            ArrayList<Order> orders = this.orderService.findAll(Order.class);
+            ArrayList<Order> listOrder = this.orderService.findAll(Order.class);
+            ArrayList<Order> orders = new ArrayList<>();
+            for(Order order : listOrder){
+                if(order.getUserId().equals(userId)){
+                    orders.add(order);
+                }
+            }
             request.setAttribute("orders", orders);
             request.getRequestDispatcher("/jsp/client/orderList.jsp").forward(request, response);
         }
