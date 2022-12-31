@@ -111,4 +111,9 @@ public class Product extends BaseModelUUID {
     public void setCategoryId(int categoryId) {
         this.categoryId = categoryId;
     }
+
+    @Override
+    public boolean equals(Object obj) {
+        return this.id.equals(((Product) obj).getId());
+    }
 }

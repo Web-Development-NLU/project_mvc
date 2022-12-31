@@ -1,4 +1,8 @@
-<%--
+<%@ page import="java.util.ArrayList" %>
+<%@ page import="Model.Category" %>
+<%@ page import="Model.Pattern" %>
+<%@ page import="Model.Color" %>
+<%@ page import="java.text.DecimalFormat" %><%--
   Created by IntelliJ IDEA.
   User: Quang Tho
   Date: 01/12/2022
@@ -6,12 +10,21 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib prefix = "c" uri = "http://java.sun.com/jsp/jstl/core" %>
+<%@ page isELIgnored = "false" %>
+<%
+  ArrayList<Category> categories = (ArrayList<Category>) request.getAttribute("categories");
+  ArrayList<Pattern> patterns = (ArrayList<Pattern>) request.getAttribute("patterns");
+  ArrayList<Color> colors = (ArrayList<Color>) request.getAttribute("colors");
+  Double priceMin = (Double) request.getAttribute("priceMin");
+  Double priceMax = (Double) request.getAttribute("priceMax");
+%>
 <div class="filter-product container-fluid mt-3">
   <div class="filter-btn" data-toggle="collapse" data-target="#collapseExample">
     <button class="btn-icon bgr-red br-50 color-white"><i class="bi bi-funnel"></i></button>
     <button class="filter-btn_text color-black">FILTER</button>
   </div>
-  <form action="">
+
     <div class="filter-boards bgr-white collapse" id="collapseExample">
       <div class="filter-boards_close hover-text-red" data-toggle="collapse" data-target="#collapseExample">
         <i class="fa-solid fa-xmark"></i>
@@ -20,53 +33,39 @@
 
       <div class="filter-boards_categories row">
         <div class="filter-boards_category col-12 col-lg">
-          <div class="filter-boards_category-tittle">CATEGORIES</div>
+          <div class="filter-boards_category-tittle">DANH MỤC</div>
           <div class="filter-boards_category-options btn-groups">
-            <div class="options-item"><button>Bedroom <span>(4)</span></button></div>
-            <div class="options-item"><button>Chair <span>(10)</span></button></div>
-            <div class="options-item"><button>Desk <span>(6)</span></button></div>
-            <div class="options-item"><button>Homewares <span>(15)</span></button></div>
-            <div class="options-item"><button>Lighting <span>(6)</span></button></div>
-            <div class="options-item"><button>Storage <span>(5)</span></button></div>
+            <form action="${pageContext.request.contextPath}/products">
+              <c:forEach items="<%=categories%>" var="category">
+                <div class="options-item"><button name="category" value="${category.id}">${category.name} <span>(4)</span></button></div>
+              </c:forEach>
+            </form>
           </div>
         </div>
         <div class="filter-boards_category col-12 col-lg">
-          <div class="filter-boards_category-tittle">COLOR</div>
+          <div class="filter-boards_category-tittle">MÀU SẮC</div>
           <div class="filter-boards_category-options">
             <div class="options-item">
-              <button class="button-color col" style="--color: red"></button>
-              <button class="button-color col" style="--color: red"></button>
-              <button class="button-color col" style="--color: red"></button>
-              <button class="button-color col" style="--color: red"></button>
-              <button class="button-color col" style="--color: red"></button>
-              <button class="button-color col" style="--color: red"></button>
-              <button class="button-color col" style="--color: red"></button>
-              <button class="button-color col" style="--color: red"></button>
+              <form action="${pageContext.request.contextPath}/products">
+                <c:forEach items="<%=colors%>" var="color">
+                  <button name="color" value="${color.id}" class="button-color col" style="--color: ${color.value}"></button>
+                </c:forEach>
+              </form>
             </div>
           </div>
         </div>
         <div class="filter-boards_category col-12 col-lg">
-          <div class="filter-boards_category-tittle">PATTERN</div>
+          <div class="filter-boards_category-tittle">KIỂU DÁNG</div>
           <div class="filter-boards_category-options btn-groups">
-            <div class="options-item"><button name="pattern">Plastic <span>(6)</span></button></div>
-            <div class="options-item"><button name="pattern">Plastic <span>(6)</span></button></div>
-            <div class="options-item"><button name="pattern">Plastic <span>(6)</span></button></div>
-            <div class="options-item"><button name="pattern">Plywood <span>(15)</span></button></div>
-            <div class="options-item"><button name="pattern">Wood <span>(6)</span></button></div>
+            <form action="${pageContext.request.contextPath}/products">
+              <c:forEach items="<%=patterns%>" var="pattern">
+                <div class="options-item"><button name="pattern" value="${pattern.id}"><c:out value="${pattern.name}"/></button></div>
+              </c:forEach>
+            </form>
           </div>
         </div>
         <div class="filter-boards_category col-12 col-lg">
-          <div class="filter-boards_category-tittle">TAGS</div>
-          <div class="filter-boards_category-options btn-groups">
-            <div class="options-item"><button>Fabic <span>(4)</span></button></div>
-            <div class="options-item"><button>Leather <span>(10)</span></button></div>
-            <div class="options-item"><button>Plastic <span>(6)</span></button></div>
-            <div class="options-item"><button>Plywood <span>(15)</span></button></div>
-            <div class="options-item"><button>Wood <span>(6)</span></button></div>
-          </div>
-        </div>
-        <div class="filter-boards_category col-12 col-lg">
-          <div class="filter-boards_category-tittle">FILTER BY PRICE</div>
+          <div class="filter-boards_category-tittle">GIÁ</div>
           <div class="filter-boards_category-options">
             <div class="options-item">
               <div class="filter-price-container">
@@ -75,19 +74,22 @@
                   <span class="state-filter-left" id="state-thumb-left"></span>
                   <span class="state-filter-right" id="state-thumb-right"></span>
                 </div>
-                <div class="price-slider-amount">
-                  <input id="range-min" type="range" min="140" max="969" value="140">
-                  <input id="range-max" type="range" min="140" max="969" value="969">
+                <form action="${pageContext.request.contextPath}/products">
                   <div class="price-slider-amount">
-                    <div class="price-label monts">
-                      Price:
-                      <span class="from-price monts" id="min-price">140.00$</span>
-                      -
-                      <span class="toPrice monts" id="max-price">969.00$</span>
+
+                    <input id="range-min" type="range" name="price-min" min="<%=priceMin%>" max="<%=priceMax%>" value="<%=priceMin%>">
+                    <input id="range-max" type="range" name="price-max" min="<%=priceMin%>" max="<%=priceMax%>" value="<%=priceMax%>">
+                    <div class="price-slider-amount">
+                      <div class="price-label monts">
+                        Price:
+                        <span class="from-price monts" id="min-price"><%=new DecimalFormat("#").format(priceMin)%> VNĐ</span>
+                        -
+                        <span class="toPrice monts" id="max-price"><%=new DecimalFormat("#").format(priceMax)%> VNĐ</span>
+                      </div>
+                      <button class="btn-text-lg bgr-black hover-bg-red">LỌC</button>
                     </div>
-                    <a href="#"><button class="btn-text-lg bgr-black hover-bg-red">FILTER</button></a>
                   </div>
-                </div>
+                </form>
               </div>
             </div>
           </div>
@@ -104,5 +106,4 @@
                 class="fa-solid fa-xmark"></i></button>
       </div>
     </div>
-  </form>
 </div>

@@ -1,5 +1,8 @@
 <%@ page import="java.util.ArrayList" %>
-<%@ page import="Model.Product" %><%--
+<%@ page import="Model.Product" %>
+<%@ page import="Model.Category" %>
+<%@ page import="Model.Color" %>
+<%@ page import="Model.Pattern" %><%--
   Created by IntelliJ IDEA.
   User: Quang Tho
   Date: 01/12/2022
