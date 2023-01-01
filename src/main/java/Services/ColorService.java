@@ -2,7 +2,6 @@ package Services;
 
 import DTO.BaseDTO;
 import Model.Color;
-import Model.User;
 
 public class ColorService extends BaseService<Color>{
 
