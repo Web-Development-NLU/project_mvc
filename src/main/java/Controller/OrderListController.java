@@ -31,13 +31,7 @@ public class OrderListController extends HttpServlet {
         if(!logged) {
             response.sendRedirect("/");
         }else {
-            ArrayList<Order> listOrder = this.orderService.findAll(Order.class);
-            ArrayList<Order> orders = new ArrayList<>();
-            for(Order order : listOrder){
-                if(order.getUserId().equals(userId)){
-                    orders.add(order);
-                }
-            }
+            ArrayList<Order> orders = this.orderService.findOrdersUser(userId);
             request.setAttribute("orders", orders);
             request.getRequestDispatcher("/jsp/client/orderList.jsp").forward(request, response);
         }
