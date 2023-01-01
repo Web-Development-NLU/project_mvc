@@ -27,7 +27,6 @@ public class OrderListController extends HttpServlet {
         AuthorizationData authorizationData = (AuthorizationData) session.getAttribute("authorization");
         boolean logged = (boolean) request.getAttribute("logged");
         String userId = (String) authorizationData.getId();
-        System.out.print(userId);
         if(!logged) {
             response.sendRedirect("/");
         }else {

@@ -44,9 +44,11 @@
                     </thead>
                     <tbody>
                     <c:forEach items="<%= orders %>" var="order">
-                        <td class="tb-border_right" style="border-right: 1px solid #DEE2E6">${order.id}</td>
-                        <td class="tb-border_right" style="border-right: 1px solid #DEE2E6">${order.info}</td>
-                        <td class ="tb-border_left" style="border-left: 1px solid #DEE2E6">${order.createdAt}</td>
+                        <tr style="border-bottom: 1px solid #DEE2E6">
+                            <td style="border-right: 1px solid #DEE2E6"><a href="${pageContext.request.contextPath}/orderDetail?id=${order.id}">${order.id}</a></td>
+                            <td style="border-right: 1px solid #DEE2E6">${order.info}</td>
+                            <td style="border-left: 1px solid #DEE2E6">${order.createdAt}</td>
+                        </tr>
                     </c:forEach>
                     </tbody>
                 </table>
