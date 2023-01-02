@@ -34,4 +34,9 @@ public class Color extends BaseModel{
                 ", value='" + value + '\'' +
                 '}';
     }
+
+    @Override
+    public boolean equals(Object obj) {
+        return this.id == ((Color) obj).getId();
+    }
 }

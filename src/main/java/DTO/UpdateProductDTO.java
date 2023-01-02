@@ -1,9 +1,10 @@
-package Model;
+package DTO;
+
+import Model.Product;
 
 import java.time.LocalDate;
 
-public class Product extends BaseModelUUID {
-
+public class UpdateProductDTO implements BaseDTO {
     private String name;
     private double price;
     private String shortDescription;
@@ -14,12 +15,9 @@ public class Product extends BaseModelUUID {
     private String material;
     private String thumbnail;
     private int categoryId;
+    private LocalDate updatedAt;
 
-    public Product() {
-    }
-
-    public Product(String name, double price, String shortDescription, int size, int status, String description, String dimensions, String material, String thumbnail, int categoryId) {
-        super();
+    public UpdateProductDTO(String name, double price, String shortDescription, int size, int status, String description, String dimensions, String material, String thumbnail, int categoryId) {
         this.name = name;
         this.price = price;
         this.shortDescription = shortDescription;
@@ -30,6 +28,21 @@ public class Product extends BaseModelUUID {
         this.material = material;
         this.thumbnail = thumbnail;
         this.categoryId = categoryId;
+        this.updatedAt = LocalDate.now();
+    }
+
+    public UpdateProductDTO(Product product) {
+        this.name = product.getName();
+        this.price = product.getPrice();
+        this.shortDescription = product.getShortDescription();
+        this.size = product.getSize();
+        this.status = product.getStatus();
+        this.description = product.getDescription();
+        this.dimensions = product.getDimensions();
+        this.material = product.getMaterial();
+        this.thumbnail = product.getThumbnail();
+        this.categoryId = product.getCategoryId();
+        this.updatedAt = LocalDate.now();
     }
 
     public String getName() {
@@ -72,6 +85,10 @@ public class Product extends BaseModelUUID {
         return categoryId;
     }
 
+    public LocalDate getUpdatedAt() {
+        return updatedAt;
+    }
+
     public void setName(String name) {
         this.name = name;
     }
@@ -96,8 +113,8 @@ public class Product extends BaseModelUUID {
         this.description = description;
     }
 
-    public void setDimensions(String demensions) {
-        this.dimensions = demensions;
+    public void setDimensions(String dimensions) {
+        this.dimensions = dimensions;
     }
 
     public void setMaterial(String material) {
@@ -112,8 +129,7 @@ public class Product extends BaseModelUUID {
         this.categoryId = categoryId;
     }
 
-    @Override
-    public boolean equals(Object obj) {
-        return this.id.equals(((Product) obj).getId());
+    public void setUpdatedAt(LocalDate updatedAt) {
+        this.updatedAt = updatedAt;
     }
 }
