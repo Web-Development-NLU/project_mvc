@@ -81,7 +81,7 @@
                     <div class="card">
                         <h5 class="card-header">THÔNG TIN VỀ QUẢN LÝ MÀU</h5>
                         <div class="table-responsive text-nowrap">
-                            <table class="table table-dark">
+                            <table class="table table-dark1">
                                 <thead>
                                 <tr>
                                     <th>MÃ MÀU</th>
