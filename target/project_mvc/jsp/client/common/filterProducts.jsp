@@ -18,11 +18,15 @@
   ArrayList<Color> colors = (ArrayList<Color>) request.getAttribute("colors");
   Double priceMin = (Double) request.getAttribute("priceMin");
   Double priceMax = (Double) request.getAttribute("priceMax");
+  Category filterCat = (request.getAttribute("filterCat") == null ) ? null : (Category) request.getAttribute("filterCat");
+  Color filterColor = (request.getAttribute("filterColor") == null) ? null : (Color) request.getAttribute("filterColor");
+  Pattern filterPattern = (request.getAttribute("filterPattern") == null) ? null : (Pattern) request.getAttribute("filterPattern");
+  String filterPrice = (request.getAttribute("filterPrice") == null) ? null : request.getAttribute("filterPrice").toString();
 %>
 <div class="filter-product container-fluid mt-3">
   <div class="filter-btn" data-toggle="collapse" data-target="#collapseExample">
     <button class="btn-icon bgr-red br-50 color-white"><i class="bi bi-funnel"></i></button>
-    <button class="filter-btn_text color-black">FILTER</button>
+    <button class="filter-btn_text color-black">BỘ LỌC</button>
   </div>
 
     <div class="filter-boards bgr-white collapse" id="collapseExample">
@@ -98,12 +102,25 @@
     </div>
 
     <div class="filter-results mt-3 ml-2">
-      <div id="clear-filter"><a href="#" class="color-black hover-text-red"><i class="fa-solid fa-xmark"></i>
-        clear</a></div>
+      <div id="clear-filter"><a href="${pageContext.request.contextPath}/products" class="color-black hover-text-red"><i class="fa-solid fa-xmark"></i>
+        Xóa lọc</a></div>
       <div class="filter-result-item">
-        <span class="result-item_type">Category:</span>
-        <button class="result-item_content btn-sm bgr-red hover-bg-black result-item_clear">Bedroom <i
-                class="fa-solid fa-xmark"></i></button>
+        <c:if test="<%=filterCat != null%>">
+          <span class="result-item_type">Danh mục:</span>
+          <button class="result-item_content btn-sm bgr-red hover-bg-black result-item_clear"><%=filterCat.getName()%></button>
+        </c:if>
+        <c:if test="<%=filterColor != null%>">
+          <span class="result-item_type">Màu sắc:</span>
+          <button class="result-item_content btn-sm bgr-red hover-bg-black result-item_clear"><%=filterColor.getName()%></button>
+        </c:if>
+        <c:if test="<%=filterPattern != null%>">
+          <span class="result-item_type">Kiểu dáng:</span>
+          <button class="result-item_content btn-sm bgr-red hover-bg-black result-item_clear"><%=filterPattern.getName()%></button>
+        </c:if>
+        <c:if test="<%=filterPrice != null%>">
+          <span class="result-item_type">Gía:</span>
+          <button class="result-item_content btn-sm bgr-red hover-bg-black result-item_clear"><%=filterPrice%> VNĐ</button>
+        </c:if>
       </div>
     </div>
 </div>

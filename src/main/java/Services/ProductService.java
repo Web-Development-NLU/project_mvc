@@ -1,10 +1,12 @@
 package Services;
 
 import DTO.BaseDTO;
+import DTO.FilterProduct;
 import Model.Color;
 import Model.Pattern;
 import Model.Product;
 
+import javax.management.Query;
 import java.time.LocalDate;
 import java.util.ArrayList;
 
@@ -12,6 +14,40 @@ public class ProductService extends BaseService<Product> {
 
     public ProductService(String tableName) {
         super(tableName);
+    }
+
+    public ArrayList<Product> queryByBuilder(FilterProduct filter) {
+        return (ArrayList<Product>) this.jdbi.withHandle(handle -> {
+           String sql = "SELECT pd.id, pd.thumbnail, pd.name, pd.price FROM " + this.tableName + " pd";
+           if(filter.pattern != null){
+               sql += " INNER JOIN patternForProduct p ON pd.id = p.idProduct AND p.idPattern = " + filter.pattern;
+           }
+
+           if(filter.color != null) {
+               sql += " INNER JOIN colorForProduct c ON pd.id = c.idProduct AND c.idColor = " + filter.color;
+           }
+           if(filter.category != null) {
+               sql += " WHERE pd.categoryId = " + filter.category;
+           }
+
+           if(filter.maxFilter != null) {
+               if(sql.contains("WHERE")){
+                   sql += " AND pd.price <= " + filter.maxFilter;
+               }else {
+                   sql += " WHERE pd.price <= " + filter.maxFilter;
+               }
+           }
+
+           if(filter.minFilter != null) {
+               if(sql.contains("WHERE")){
+                   sql += " AND pd.price >= " + filter.minFilter;
+               }else {
+                   sql += " WHERE pd.price >= " + filter.minFilter;
+               }
+           }
+
+           return handle.createQuery(sql).mapToBean(Product.class).list();
+        });
     }
 
     @Override
