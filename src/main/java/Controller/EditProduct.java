@@ -80,7 +80,7 @@ public class EditProduct extends HttpServlet {
         this.productService.update(id, model);
 
         this.productService.deleteColor(id);
-        
+
         if(colors != null) {
 
             for(String color : colors)  {
