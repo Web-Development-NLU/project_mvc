@@ -41,7 +41,7 @@
           <div class="filter-boards_category-options btn-groups">
             <form action="${pageContext.request.contextPath}/products">
               <c:forEach items="<%=categories%>" var="category">
-                <div class="options-item"><button name="category" value="${category.id}">${category.name} <span>(4)</span></button></div>
+                <div class="options-item"><button name="category" value="${category.id}">${category.name}</button></div>
               </c:forEach>
             </form>
           </div>
@@ -81,8 +81,8 @@
                 <form action="${pageContext.request.contextPath}/products">
                   <div class="price-slider-amount">
 
-                    <input id="range-min" type="range" name="price-min" min="<%=priceMin%>" max="<%=priceMax%>" value="<%=priceMin%>">
-                    <input id="range-max" type="range" name="price-max" min="<%=priceMin%>" max="<%=priceMax%>" value="<%=priceMax%>">
+                    <input id="range-min" type="range" name="price-min" min="<%=priceMin%>" max="<%=priceMax%>" value="<%=priceMin%>" step="100000">
+                    <input id="range-max" type="range" name="price-max" min="<%=priceMin%>" max="<%=priceMax%>" value="<%=priceMax%>" step="100000">
                     <div class="price-slider-amount">
                       <div class="price-label monts">
                         Price:
