@@ -13,6 +13,9 @@ public class CodeService extends BaseService<Code>{
 
     @Override
     public String create(Code model) {
+        Code code = this.findByCode(model.getValue());
+        Code codeExisted = this.findByCode(model.getValue());
+        if(code != null || codeExisted != null) return null;
         if(model.getCategoryId() != 0) {
             return this.jdbi.withHandle(handle -> {
                 handle.createUpdate("INSERT INTO " + this.tableName + " ( value, categoryId, productId, createdAt) "
@@ -32,6 +35,8 @@ public class CodeService extends BaseService<Code>{
     public boolean update(String id, BaseDTO model){
         Code code = this.findById(id, Code.class);
         UpdateCodeDTO updateModel = (UpdateCodeDTO) model;
+        Code codeExisted = this.findByCode(updateModel.getValue());
+        if(codeExisted != null) return false;
         if(code != null){
             if(updateModel.getCategoryId() != 0){
                 this.jdbi.useHandle(handle -> {

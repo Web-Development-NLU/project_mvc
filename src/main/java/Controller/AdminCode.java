@@ -11,8 +11,11 @@ import java.util.ArrayList;
 
 @WebServlet(name = "AdminCode", value = "/admin/code")
 public class AdminCode extends HttpServlet {
+    private CodeService codeService = new CodeService("code");
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        ArrayList<Code> codes = this.codeService.findAll(Code.class);
+        request.setAttribute("codes", codes);
         request.getRequestDispatcher("/jsp/admin/code.jsp").forward(request,response);
     }
 
