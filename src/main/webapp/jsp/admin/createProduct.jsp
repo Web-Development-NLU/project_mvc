@@ -92,6 +92,7 @@
                             </div>
                             <div class="card-body">
                                 <form action="${pageContext.request.contextPath}/admin/createProduct" method="post">
+
                                     <div class="row mb-3">
                                         <label class="col-sm-2 col-form-label" for="name">Tên sản phẩm
                                             Product</label>

@@ -2,6 +2,7 @@ package Controller;
 
 import DTO.UpdateProductDTO;
 import Model.*;
+
 import Services.*;
 
 import javax.servlet.*;
@@ -38,17 +39,17 @@ public class EditProduct extends HttpServlet {
 
         ArrayList<Pattern> patterns = this.patternService.findAll(Pattern.class);
         ArrayList<Pattern> patternOfProduct = this.productService.getPatterns(id);
-        for(int i = 0; i < patternOfProduct.size(); i++) {
-            if(patterns.contains(patternOfProduct.get(i))) {
-                patterns.remove(patternOfProduct.get(i));
+        for (Pattern pattern : patternOfProduct) {
+            if (patterns.contains(pattern)) {
+                patterns.remove(pattern);
             }
         }
 
         ArrayList<Color> colors = this.colorService.findAll(Color.class);
         ArrayList<Color> colorOfProduct = this.productService.getColors(id);
-        for(int i = 0; i < colorOfProduct.size(); i++) {
-            if(colors.contains(colorOfProduct.get(i))) {
-                colors.remove(colorOfProduct.get(i));
+        for (Color color : colorOfProduct) {
+            if (colors.contains(color)) {
+                colors.remove(color);
             }
         }
         request.setAttribute("product", this.productService.findById(id, Product.class));
@@ -78,15 +79,18 @@ public class EditProduct extends HttpServlet {
         UpdateProductDTO model = new UpdateProductDTO(name, price, shortDescription, size, StatusProduct.AVAILABLE.ordinal(),description, dimension, material, thumbnail, category);
         this.productService.update(id, model);
 
-
+        this.productService.deleteColor(id);
+        
         if(colors != null) {
-            this.productService.deleteColor(id);
+
             for(String color : colors)  {
                 this.productService.linkToColor(id, Integer.parseInt(color));
             }
         }
+
+        this.productService.deletePattern(id);
         if(patterns != null) {
-            this.productService.deletePattern(id);
+
             for(String pattern : patterns) {
                 this.productService.linkToPattern(id, Integer.parseInt(pattern));
             }

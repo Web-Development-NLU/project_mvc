@@ -2,7 +2,6 @@ package Controller;
 
 import Model.*;
 import Services.*;
-import com.sun.tools.jconsole.JConsoleContext;
 
 import javax.servlet.*;
 import javax.servlet.http.*;
@@ -12,6 +11,11 @@ import java.util.Collection;
 import java.util.List;
 
 @WebServlet(name = "CreateProduct", value = "/admin/createProduct")
+@MultipartConfig(
+        fileSizeThreshold=1024*1024,
+        maxFileSize=1024*1024*5,
+        maxRequestSize=1024*1024*5*5
+)
 public class CreateProduct extends HttpServlet {
 
     private ColorService colorService;
@@ -47,6 +51,7 @@ public class CreateProduct extends HttpServlet {
         int category = Integer.parseInt(request.getParameter("category"));
         int size = Integer.parseInt(request.getParameter("size"));
         String material = request.getParameter("material");
+
         String thumbnail = request.getParameter("thumbnail");
         String shortDescription = request.getParameter("shortDescription");
         String description = request.getParameter("description");
