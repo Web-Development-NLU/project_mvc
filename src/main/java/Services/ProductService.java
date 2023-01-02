@@ -5,6 +5,7 @@ import DTO.FilterProduct;
 import Model.Color;
 import Model.Pattern;
 import Model.Product;
+import Model.StatusProduct;
 
 import javax.management.Query;
 import java.time.LocalDate;
@@ -16,9 +17,19 @@ public class ProductService extends BaseService<Product> {
         super(tableName);
     }
 
+    public void setStatus(String id, int value) {
+        this.jdbi.useHandle(handle -> {
+
+            handle.createUpdate("UPDATE " + this.tableName +
+                    " SET status = :status " +
+                    "WHERE id = :id"
+            ).bind("id", id).bind("status", value).execute();
+        });
+    }
+
     public ArrayList<Product> queryByBuilder(FilterProduct filter) {
         return (ArrayList<Product>) this.jdbi.withHandle(handle -> {
-           String sql = "SELECT pd.id, pd.thumbnail, pd.name, pd.price FROM " + this.tableName + " pd";
+           String sql = "SELECT pd.id, pd.thumbnail, pd.name, pd.price, pd.createdAt, pd.status FROM " + this.tableName + " pd";
            if(filter.pattern != null){
                sql += " INNER JOIN patternForProduct p ON pd.id = p.idProduct AND p.idPattern = " + filter.pattern;
            }

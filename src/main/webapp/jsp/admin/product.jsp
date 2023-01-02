@@ -1,4 +1,9 @@
-<%--
+<%@ page import="java.util.ArrayList" %>
+<%@ page import="Model.Product" %>
+<%@ page import="Model.Category" %>
+<%@ page import="java.text.DecimalFormat" %>
+<%@ page import="Model.StatusProduct" %>
+<%@ page import="java.util.Objects" %><%--
   Created by IntelliJ IDEA.
   User: Quang Tho
   Date: 29/12/2022
@@ -30,7 +35,7 @@
     <meta name="description" content=""/>
 
     <!-- Favicon -->
-    <link rel="icon" type="image/x-icon" href="/assets/img_admin/favicon/favicon.ico"/>
+    <link rel="icon" type="image/x-icon" href="${pageContext.request.contextPath}/assets/img_admin/favicon/favicon.ico"/>
 
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com"/>
@@ -41,21 +46,26 @@
     />
 
     <!-- Icons. Uncomment required icon fonts -->
-    <link rel="stylesheet" href="/assets/vendor/fonts/boxicons.css"/>
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/vendor/fonts/boxicons.css"/>
 
     <!-- Core CSS -->
-    <link rel="stylesheet" href="/assets/vendor/css/style.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/vendor/css/style.css">
     <!-- Vendors CSS -->
-    <link rel="stylesheet" href="/assets/vendor/libs/perfect-scrollbar/perfect-scrollbar.css"/>
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/vendor/libs/perfect-scrollbar/perfect-scrollbar.css"/>
 
     <!-- Page CSS -->
 
     <!-- Helpers -->
-    <script src="/assets/vendor/js/helpers.js"></script>
-    <script src="/assets/js_admin/config.js"></script>
+    <script src="${pageContext.request.contextPath}/assets/vendor/js/helpers.js"></script>
+    <script src="${pageContext.request.contextPath}/assets/js_admin/config.js"></script>
 </head>
 
 <body>
+<%
+    ArrayList<Product> products = (ArrayList<Product>) request.getAttribute("products");
+    Category category = (Category) request.getAttribute("category");
+
+%>
 <!-- Layout wrapper -->
 <div class="layout-wrapper layout-content-navbar">
     <div class="layout-container">
@@ -77,152 +87,73 @@
                 <!-- Content -->
 
                 <div class="container-xxl flex-grow-1 container-p-y">
-                    <h4 class="fw-bold py-3 mb-4"><span class="text-muted fw-light">Product /</span> Chair</h4>
-                    <a href="${pageContext.request.contextPath}/createProduct">
-                        <button type="button" class="btn btn-outline-dark" style="float: right">Create Product</button>
+                    <h4 class="fw-bold py-3 mb-4"><span class="text-muted fw-light">Sản phẩm /</span> <%=category.getName()%></h4>
+                    <a href="${pageContext.request.contextPath}/admin/createProduct">
+                        <button type="button" class="btn btn-outline-dark" style="float: right">Thêm sản phẩm</button>
                     </a>
 
                     <hr class="my-5"/>
 
                     <!-- Basic Bootstrap Table -->
                     <div class="card">
-                        <h5 class="card-header">Chair Detail</h5>
+                        <h5 class="card-header">CHI TIẾT</h5>
                         <div class="table-responsive text-nowrap">
                             <table class="table">
                                 <thead>
                                 <tr>
-                                    <th>NAME PRODUCT</th>
-                                    <th>PRICE</th>
-                                    <th>IMAGE</th>
-                                    <th>DESCRIBE</th>
-                                    <th>Status</th>
-                                    <th>Actions</th>
+                                    <th>Tên</th>
+                                    <th>Giá</th>
+                                    <th>Ngày thêm</th>
+                                    <th>Trạng thái</th>
+                                    <th>Thao tác</th>
                                 </tr>
                                 </thead>
                                 <tbody class="table-border-bottom-0">
-                                <tr>
-                                    <td><a href="Detail_Product.html"> <i
-                                            class="fab fa-angular fa-lg text-danger me-3"></i> <strong>Knit-wit
-                                        Pendant</strong></a></td>
-                                    <td>478.00$</td>
-                                    <td>
-                                        <ul class="list-unstyled users-list m-0 avatar-group d-flex align-items-center">
-
-                                            <li
-                                                    data-bs-toggle="tooltip"
-                                                    data-popup="tooltip-custom"
-                                                    data-bs-placement="top"
-                                                    class="avatar avatar-xs pull-up"
-                                                    title="Christina Parker">
-                                                <img src="/assets/img_admin/product/baniversary_Chair.png"
-                                                     alt="Avatar" class="rounded-circle1"/>
-                                            </li>
-                                        </ul>
-                                    </td>
-                                    <td>Aenean ultricies mi vitae est. Mauris placerat eleifend leo.</td>
-                                    <td><span class="badge bg-label-primary me-1">Active</span></td>
-                                    <td>
-                                        <div class="dropdown">
-                                            <button type="button" class="btn p-0 dropdown-toggle hide-arrow"
-                                                    data-bs-toggle="dropdown">
-                                                <i class="bx bx-dots-vertical-rounded"></i>
-                                            </button>
-                                            <div class="dropdown-menu">
-                                                <a class="dropdown-item" href="javascript:void(0);"
-                                                ><i class="bx bx-edit-alt me-1"></i> Edit</a
-                                                >
-                                                <a class="dropdown-item" href="javascript:void(0);"
-                                                ><i class="bx bx-edit-alt me-1"></i> Set unavaiable</a
-                                                >
-                                                <a class="dropdown-item" href="javascript:void(0);"
-                                                ><i class="bx bx-trash me-1"></i> Delete</a
-                                                >
+                                <c:forEach items="<%=products%>" var="product">
+                                    <c:set var="status" value="${product.status}" scope="request"/>
+                                    <c:set var="price" value="${product.price}" scope="request"/>
+                                    <%
+                                        String price = DecimalFormat.getIntegerInstance().format(Double.parseDouble(request.getAttribute("price").toString()));
+                                        String status;
+                                        int oppositeStatus;
+                                        String nameOppositeStatus;
+                                        if (Integer.parseInt(request.getAttribute("status").toString()) == StatusProduct.AVAILABLE.ordinal()) {
+                                            status = "còn hàng";
+                                            oppositeStatus = StatusProduct.UNAVAILABLE.ordinal();
+                                            nameOppositeStatus = "hết hàng";
+                                        } else {
+                                            status = "hết hàng";
+                                            oppositeStatus = StatusProduct.AVAILABLE.ordinal();
+                                            nameOppositeStatus = "còn hàng";
+                                        }
+                                    %>
+                                    <tr>
+                                        <td><a href="Detail_Product.html"> <i
+                                                class="fab fa-angular fa-lg text-danger me-3"></i> <strong><c:out value="${product.name}"/></strong></a></td>
+                                        <td><%=price%> VNĐ</td>
+                                        <td><c:out value="${product.createdAt}"/></td>
+                                        <td><span class="badge bg-label-primary me-1"><%=status%></span></td>
+                                        <td>
+                                            <div class="dropdown">
+                                                <button type="button" class="btn p-0 dropdown-toggle hide-arrow"
+                                                        data-bs-toggle="dropdown">
+                                                    <i class="bx bx-dots-vertical-rounded"></i>
+                                                </button>
+                                                <div class="dropdown-menu">
+                                                    <a class="dropdown-item" href="${pageContext.request.contextPath}/admin/editProduct?id=${product.id}"
+                                                    ><i class="bx bx-edit-alt me-1"></i> Chỉnh sửa</a
+                                                    >
+                                                    <a class="dropdown-item" href="${pageContext.request.contextPath}/admin/setStatusProduct?id=${product.id}&category=<%=category.getId()%>&value=<%=oppositeStatus%>"
+                                                    ><i class="bx bx-edit-alt me-1"></i>Đánh dấu là <%=nameOppositeStatus%></a
+                                                    >
+                                                    <a class="dropdown-item" href="${pageContext.request.contextPath}/admin/deleteProduct?id=${product.id}&category=<%=category.getId()%>"
+                                                    ><i class="bx bx-trash me-1"></i>xóa</a
+                                                    >
+                                                </div>
                                             </div>
-                                        </div>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td><a href="Detail_Product.html"><i class="fab fa-react fa-lg text-info me-3"></i>
-                                        <strong>Beetle chair</strong></a></td>
-                                    <td>200.00$</td>
-                                    <td>
-                                        <ul class="list-unstyled users-list m-0 avatar-group d-flex align-items-center">
-                                            <li
-                                                    data-bs-toggle="tooltip"
-                                                    data-popup="tooltip-custom"
-                                                    data-bs-placement="top"
-                                                    class="avatar avatar-xs pull-up"
-                                                    title="Christina Parker"
-                                            >
-                                                <img src="/assets/img_admin/product/Beetle_Chair.png" alt="Avatar"
-                                                     class="rounded-circle1"/>
-                                            </li>
-                                        </ul>
-                                    </td>
-                                    <td>Pellentesque habitant morbi tristique senectus et netus et .</td>
-                                    <td><span class="badge bg-label-success me-1">0</span></td>
-                                    <td>
-                                        <div class="dropdown">
-                                            <button type="button" class="btn p-0 dropdown-toggle hide-arrow"
-                                                    data-bs-toggle="dropdown">
-                                                <i class="bx bx-dots-vertical-rounded"></i>
-                                            </button>
-                                            <div class="dropdown-menu">
-                                                <a class="dropdown-item" href="javascript:void(0);"
-                                                ><i class="bx bx-edit-alt me-1"></i> Edit</a
-                                                >
-                                                <a class="dropdown-item" href="javascript:void(0);"
-                                                ><i class="bx bx-edit-alt me-1"></i> Set unavaiable</a
-                                                >
-                                                <a class="dropdown-item" href="javascript:void(0);"
-                                                ><i class="bx bx-trash me-1"></i> Delete</a
-                                                >
-                                            </div>
-                                        </div>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td><a href="Detail_Product.html"><i
-                                            class="fab fa-angular fa-lg text-danger me-3"></i> <strong>Baniversary
-                                        Salutes Chair</strong></a></td>
-                                    <td>140.00$</td>
-                                    <td>
-                                        <ul class="list-unstyled users-list m-0 avatar-group d-flex align-items-center">
-
-                                            <li
-                                                    data-bs-toggle="tooltip"
-                                                    data-popup="tooltip-custom"
-                                                    data-bs-placement="top"
-                                                    class="avatar avatar-xs pull-up"
-                                                    title="Christina Parker"
-                                            >
-                                                <img src="/assets/img_admin/product/baniversary_Chair.png" alt=""
-                                                     class="rounded-circle1"/>
-                                            </li>
-                                        </ul>
-                                    </td>
-                                    <td>Donec eu libero sit amet quam egestas semper. Aenean ultricies</td>
-                                    <td><span class="badge bg-label-primary me-1">Active</span></td>
-                                    <td>
-                                        <div class="dropdown">
-                                            <button type="button" class="btn p-0 dropdown-toggle hide-arrow"
-                                                    data-bs-toggle="dropdown">
-                                                <i class="bx bx-dots-vertical-rounded"></i>
-                                            </button>
-                                            <div class="dropdown-menu">
-                                                <a class="dropdown-item" href="javascript:void(0);"
-                                                ><i class="bx bx-edit-alt me-1"></i> Edit</a
-                                                >
-                                                <a class="dropdown-item" href="javascript:void(0);"
-                                                ><i class="bx bx-edit-alt me-1"></i> Set unavaiable</a
-                                                >
-                                                <a class="dropdown-item" href="javascript:void(0);"
-                                                ><i class="bx bx-trash me-1"></i> Delete</a
-                                                >
-                                            </div>
-                                        </div>
-                                    </td>
-                                </tr>
+                                        </td>
+                                    </tr>
+                                </c:forEach>
                                 </tbody>
                             </table>
                         </div>
@@ -262,18 +193,18 @@
 
 <!-- Core JS -->
 <!-- build:js assets/vendor/js/core.js -->
-<script src="/assets/vendor/libs/jquery/jquery.js"></script>
-<script src="/assets/vendor/libs/popper/popper.js"></script>
-<script src="/assets/vendor/js/bootstrap.js"></script>
-<script src="/assets/vendor/libs/perfect-scrollbar/perfect-scrollbar.js"></script>
+<script src="${pageContext.request.contextPath}/assets/vendor/libs/jquery/jquery.js"></script>
+<script src="${pageContext.request.contextPath}/assets/vendor/libs/popper/popper.js"></script>
+<script src="${pageContext.request.contextPath}/assets/vendor/js/bootstrap.js"></script>
+<script src="${pageContext.request.contextPath}/assets/vendor/libs/perfect-scrollbar/perfect-scrollbar.js"></script>
 
-<script src="/assets/vendor/js/menu.js"></script>
+<script src="${pageContext.request.contextPath}/assets/vendor/js/menu.js"></script>
 <!-- endbuild -->
 
 <!-- Vendors JS -->
 
 <!-- Main JS -->
-<script src="/assets/js_admin/main.js"></script>
+<script src="${pageContext.request.contextPath}/assets/js_admin/main.js"></script>
 
 <!-- Page JS -->
 

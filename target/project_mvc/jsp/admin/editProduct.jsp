@@ -45,21 +45,21 @@
   />
 
   <!-- Icons. Uncomment required icon fonts -->
-  <link rel="stylesheet" href="/assets/vendor/fonts/boxicons.css"/>
+  <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/vendor/fonts/boxicons.css"/>
 
   <!-- Core CSS -->
-  <link rel="stylesheet" href="/assets/vendor/css/style.css">
+  <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/vendor/css/style.css">
   <!-- Vendors CSS -->
-  <link rel="stylesheet" href="/assets/vendor/libs/perfect-scrollbar/perfect-scrollbar.css"/>
+  <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/vendor/libs/perfect-scrollbar/perfect-scrollbar.css"/>
   <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/chosen/1.8.7/chosen.min.css">
-  <link rel="stylesheet" href="/assets/vendor/css/component-chosen.min.css">
+  <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/vendor/css/component-chosen.min.css">
 
   <!-- Page CSS -->
 
   <!-- Helpers -->
-  <script src="/assets/vendor/js/helpers.js"></script>
+  <script src="${pageContext.request.contextPath}/assets/vendor/js/helpers.js"></script>
 
-  <script src="/assets/js_admin/config.js"></script>
+  <script src="${pageContext.request.contextPath}/assets/js_admin/config.js"></script>
 
 </head>
 
@@ -93,12 +93,12 @@
         <!-- Content -->
 
         <div class="container-xxl flex-grow-1 container-p-y">
-          <h4 class="fw-bold py-3 mb-4"><span class="text-muted fw-light">Edit product/</span> Create Product</h4>
+          <h4 class="fw-bold py-3 mb-4"><span class="text-muted fw-light">Chỉnh sửa sản phẩm/</span> <%=product.getName()%></h4>
           <hr class="my-5"/>
           <div class="col-xxl">
             <div class="card mb-4">
               <div class="card-header d-flex align-items-center justify-content-between">
-                <h5 class="mb-0">Product Information</h5>
+                <h5 class="mb-0">Thông tin sản phẩm</h5>
               </div>
               <div class="card-body">
                 <form action="${pageContext.request.contextPath}/admin/editProduct?id=<%=product.getId()%>" method="post">
@@ -258,7 +258,7 @@
                   </div>
                   <div class="row justify-content-end">
                     <div class="col-sm-10">
-                      <button type="submit" class="btn btn-primary">Update</button>
+                      <button type="submit" class="btn btn-primary">Cập nhật</button>
                     </div>
                   </div>
                 </form>
@@ -299,13 +299,12 @@
 
 <!-- Core JS -->
 <!-- build:js assets/vendor/js/core.js -->
-<script src="/assets/vendor/libs/jquery/jquery.js"></script>
-<script src="/assets/vendor/libs/popper/popper.js"></script>
-<script src="/assets/vendor/js/bootstrap.js"></script>
-<script src="/assets/vendor/libs/perfect-scrollbar/perfect-scrollbar.js"></script>
+<script src="${pageContext.request.contextPath}/assets/vendor/libs/jquery/jquery.js"></script>
+<script src="${pageContext.request.contextPath}/assets/vendor/libs/popper/popper.js"></script>
+<script src="${pageContext.request.contextPath}/assets/vendor/js/bootstrap.js"></script>
+<script src="${pageContext.request.contextPath}/assets/vendor/libs/perfect-scrollbar/perfect-scrollbar.js"></script>
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/chosen/1.8.7/chosen.jquery.min.js"></script>
-<script src="/assets/vendor/js/menu.js"></script>
-<script src="/assets/js/upload.js"></script>
+<script src="${pageContext.request.contextPath}/assets/vendor/js/menu.js"></script>
 <!-- endbuild -->
 
 <!-- Vendors JS -->
@@ -318,6 +317,7 @@
     no_results_text: "Không tìm thấy kết quả :"
   })
 </script>
+<script src="${pageContext.request.contextPath}/assets/js_admin/main.js"></script>
 <!-- Page JS -->
 
 <!-- Place this tag in your head or just before your close body tag. -->
