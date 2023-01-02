@@ -85,7 +85,7 @@
                                     <div class="row mb-3">
                                         <label class="col-sm-2 col-form-label" for="name">Mã màu</label>
                                         <div class="col-sm-10">
-                                            <input type="text" class="form-control" id="name" name="name"
+                                            <input type="color" class="form-control" id="name" name="name"
                                                    placeholder="name" required/>
                                         </div>
                                     </div>
