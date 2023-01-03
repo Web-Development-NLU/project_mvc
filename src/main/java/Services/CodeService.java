@@ -2,6 +2,7 @@ package Services;
 
 import DTO.BaseDTO;
 import DTO.UpdateCodeDTO;
+import Model.Category;
 import Model.Code;
 import org.jdbi.v3.core.Handle;
 import org.jdbi.v3.core.HandleCallback;
@@ -13,20 +14,19 @@ public class CodeService extends BaseService<Code>{
 
     @Override
     public String create(Code model) {
-        Code code = this.findByCode(model.getValue());
-        Code codeExisted = this.findByCode(model.getValue());
-        if(code != null || codeExisted != null) return null;
         if(model.getCategoryId() != 0) {
             return this.jdbi.withHandle(handle -> {
                 handle.createUpdate("INSERT INTO " + this.tableName + " ( value, categoryId, productId, createdAt) "
                         + "VALUES ( :value, :categoryId , :productId, :createdAt)").bindBean(model).execute();
-                return model.getValue();
+                Code newCode = findByCode(model.getValue());
+                return newCode.getId()+"";
             });
         }else {
             return this.jdbi.withHandle(handle -> {
                 handle.createUpdate("INSERT INTO " + this.tableName + " ( value, productId, createdAt) "
                         + "VALUES ( :value , :productId, :createdAt)").bindBean(model).execute();
-                return model.getValue();
+                Code newCode = findByCode(model.getValue());
+                return newCode.getId()+"";
             });
         }
     }
@@ -35,8 +35,6 @@ public class CodeService extends BaseService<Code>{
     public boolean update(String id, BaseDTO model){
         Code code = this.findById(id, Code.class);
         UpdateCodeDTO updateModel = (UpdateCodeDTO) model;
-        Code codeExisted = this.findByCode(updateModel.getValue());
-        if(codeExisted != null) return false;
         if(code != null){
             if(updateModel.getCategoryId() != 0){
                 this.jdbi.useHandle(handle -> {
@@ -67,8 +65,27 @@ public class CodeService extends BaseService<Code>{
                 public Code withHandle(Handle handle) throws Exception{
                     try {
                         return handle.createQuery(
-                                        "SELECT * FROM " + tableName + " WHERE value = ?")
+                                        "SELECT * FROM " + tableName + " WHERE value = ?" + " order by id desc ")
                                 .bind(0, code)
+                                .mapToBean(Code.class).first();
+                    }catch (IllegalStateException exception) {
+                        return null;
+                    }
+
+                }
+            });
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+    }
+    public Code findByCode(String id,String code) {
+        try {
+            return this.jdbi.withHandle(new HandleCallback<Code, Exception>() {
+                public Code withHandle(Handle handle) throws Exception{
+                    try {
+                        return handle.createQuery(
+                                        "SELECT * FROM " + tableName + " WHERE value = ? and id != ?" + " order by id desc ")
+                                .bind(0, code).bind(1,id)
                                 .mapToBean(Code.class).first();
                     }catch (IllegalStateException exception) {
                         return null;

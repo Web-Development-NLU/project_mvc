@@ -26,5 +26,6 @@ public class EditCategory extends HttpServlet {
         String name = request.getParameter("name");
         UpdateCategoryDTO updateDTO = new UpdateCategoryDTO(name);
         this.categoryServices.update(id, updateDTO);
+        response.sendRedirect("/admin/category");
     }
 }
