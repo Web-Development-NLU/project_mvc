@@ -9,7 +9,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page isELIgnored="false" %>
 <%
-    int price = (int) Double.parseDouble(request.getParameter("price"));
+    double price = Double.parseDouble(request.getParameter("price"));
     String name = request.getParameter("name");
     int amount = Integer.parseInt(request.getParameter("amount"));
     String pattern = request.getParameter("pattern");

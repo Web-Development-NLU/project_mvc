@@ -27,4 +27,8 @@ public class Pattern extends BaseModel{
         this.name = name;
     }
 
+    @Override
+    public boolean equals(Object obj) {
+        return this.id == ((Pattern) obj).getId();
+    }
 }

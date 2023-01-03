@@ -1,9 +1,9 @@
-let min = 140;
-let max = 969;
-const calcLeftPosition = value => 100/ (969 -140)*(value -140);
 let ipRangeMin = document.getElementById("range-min");
 let ipRangeMax = document.getElementById("range-max");
 let getSlider = document.getElementById("slider-range");
+let min = ipRangeMin.getAttribute("min");
+let max = ipRangeMax.getAttribute("max");
+const calcLeftPosition = value => (100 / (max - min))*(value - min);
 if(ipRangeMin && ipRangeMax) {
     ipRangeMin.addEventListener("input",function (e){
         changeMin(e);
@@ -20,9 +20,9 @@ function  changeMin(e){
         e.target.value = max;
         newValue = max;
     }
-    min = newValue;
+
     filterMin.style.left = calcLeftPosition(newValue) + '%';
-    document.getElementById("min-price").innerHTML = newValue + '.00$';
+    document.getElementById("min-price").innerHTML = newValue + ' VNĐ';
     getSlider.style.left = calcLeftPosition(newValue) + '%';
     getSlider.style.right = (100 - calcLeftPosition(max)) + '%';
     setIndex(min, e.target.max, ipRangeMin);
@@ -35,9 +35,9 @@ function  changeMax(e) {
         e.target.value = min;
         newValue = min;
     }
-    max = newValue;
+
     filterMax.style.left = calcLeftPosition(newValue) + '%';
-    document.getElementById("max-price").innerHTML = newValue + '.00$';
+    document.getElementById("max-price").innerHTML = newValue + ' VNĐ';
     getSlider.style.left = calcLeftPosition(min) + '%';
     getSlider.style.right = (100 - calcLeftPosition(newValue))+ '%';
     setIndex(max, e.target.min, ipRangeMax);
