@@ -64,6 +64,8 @@
 <%
     ArrayList<Product> products = (ArrayList<Product>) request.getAttribute("products");
     Category category = (Category) request.getAttribute("category");
+    int pagination = (int) request.getAttribute("pagination");
+    String numPage = DecimalFormat.getIntegerInstance().format(Double.parseDouble(request.getAttribute("numPage").toString()));
 
 %>
 <!-- Layout wrapper -->
@@ -93,8 +95,37 @@
                     </a>
 
                     <hr class="my-5"/>
+                    <div class="row">
+                        <nav aria-label="breadcrumb" class="col-lg-6">
+                            <ol class="breadcrumb">
+                                <li class="breadcrumb-item">
+                                    <a href="javascript:void(0);">Trang <%=pagination%></a>
+                                </li>
+                                <li class="breadcrumb-item">
+                                    <a href="javascript:void(0);"><%=numPage%></a>
+                                </li>
+                            </ol>
+                        </nav>
+                        <!-- Basic Bootstrap Table -->
+                        <nav aria-label="Page navigation" class="col-lg-6">
+                            <ul class="pagination justify-content-end">
+                                <li class="page-item prev">
+                                    <a class="page-link" href="${pageContext.request.contextPath}/admin/products?id=<%=category.getId()%>&page=<%=pagination - 1%>"
+                                    ><i class="tf-icon bx bx-chevrons-left"></i
+                                    ></a>
+                                </li>
+                                <li class="page-item">
+                                    <a class="page-link" href="${pageContext.request.contextPath}/admin/products?id=<%=category.getId()%>&page=<%=pagination%>"><%=pagination%></a>
+                                </li>
+                                <li class="page-item next">
+                                    <a class="page-link" href="${pageContext.request.contextPath}/admin/products?id=<%=category.getId()%>&page=<%=pagination + 1%>"
+                                    ><i class="tf-icon bx bx-chevrons-right"></i
+                                    ></a>
+                                </li>
+                            </ul>
+                        </nav>
+                    </div>
 
-                    <!-- Basic Bootstrap Table -->
                     <div class="card">
                         <h5 class="card-header">CHI TIẾT</h5>
                         <div class="table-responsive text-nowrap">
