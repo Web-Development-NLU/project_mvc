@@ -1,4 +1,4 @@
-<%--
+<%@ page import="Model.Pattern" %><%--
   Created by IntelliJ IDEA.
   User: lyha8
   Date: 1/1/2023
@@ -6,6 +6,7 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ page isELIgnored="false" %>
 <html
         lang="en"
         class="light-style layout-menu-fixed"
@@ -51,6 +52,7 @@
 
 </head>
 <body>
+<%Pattern pattern=(Pattern) request.getAttribute("pattern");%>
 <!-- Layout wrapper -->
 <div class="layout-wrapper layout-content-navbar">
     <div class="layout-container">
@@ -80,23 +82,24 @@
                                 <h5 class="mb-0">Thông tin chi tiết của mẫu cần điều chỉnh</h5>
                             </div>
                             <div class="card-body">
-                                <form action="/admin/createProduct" method="post" enctype="multipart/form-data">
+                                <form action="${pageContext.request.contextPath}/admin/createProduct" method="post">
                                     <div class="row mb-3">
                                         <label class="col-sm-2 col-form-label" for="name">Mã mẫu</label>
                                         <div class="col-sm-10">
-                                            <input type="text" class="form-control" id="name" name="name"
-                                                   placeholder="name" required/>
+                                            <input type="text" class="form-control" id="value" name="value"
+                                                   placeholder="Mã mẫu" required value="<%=pattern.getId()%>"/>
                                         </div>
                                     </div>
                                     <div class="row mb-3">
-                                        <label class="col-sm-2 col-form-label" for="price">Tên mẫu</label>
+                                        <label class="col-sm-2 col-form-label" for="name">Tên mẫu</label>
                                         <div class="col-sm-10">
                                             <input
                                                     type="text"
                                                     class="form-control"
-                                                    id="price"
-                                                    placeholder="Chấm tròn"
-                                                    name="price"
+                                                    id="name"
+                                                    placeholder="Tên mẫu"
+                                                    name="name"
+                                                    value="<%=pattern.getName()%>"
                                             />
                                         </div>
                                     </div>

@@ -1,4 +1,5 @@
-<%--
+
+<%@ page import="Model.Color" %><%--
   Created by IntelliJ IDEA.
   User: lyha8
   Date: 1/1/2023
@@ -6,6 +7,7 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ page isELIgnored="false" %>
 <html
         lang="en"
         class="light-style layout-menu-fixed"
@@ -51,6 +53,7 @@
 
 </head>
 <body>
+<%Color color=(Color) request.getAttribute("color");%>
 <!-- Layout wrapper -->
 <div class="layout-wrapper layout-content-navbar">
     <div class="layout-container">
@@ -80,23 +83,24 @@
                                 <h5 class="mb-0">Thông tin chi tiết của màu cần điều chỉnh</h5>
                             </div>
                             <div class="card-body">
-                                <form action="/admin/createProduct" method="post" enctype="multipart/form-data">
+                                <form action="${pageContext.request.contextPath}/admin/createProduct?id=<%=color.getId()%>" method="post">
                                     <div class="row mb-3">
                                         <label class="col-sm-2 col-form-label" for="name">Mã màu</label>
                                         <div class="col-sm-10">
-                                            <input type="color" class="form-control" id="name" name="name"
-                                                   placeholder="name" required/>
+                                            <input type="text" class="form-control" id="value" name="value"
+                                                   placeholder="Mã màu" required value="<%=color.getId()%>"/>
                                         </div>
                                     </div>
                                     <div class="row mb-3">
-                                        <label class="col-sm-2 col-form-label" for="price">Tên màu</label>
+                                        <label class="col-sm-2 col-form-label" for="name">Tên màu</label>
                                         <div class="col-sm-10">
                                             <input
                                                     type="text"
                                                     class="form-control"
-                                                    id="price"
-                                                    placeholder="Màu đỏ"
-                                                    name="price"
+                                                    id="name"
+                                                    placeholder="Tên màu"
+                                                    name="name"
+                                                    value="<%=color.getName()%>"
                                             />
                                         </div>
                                     </div>

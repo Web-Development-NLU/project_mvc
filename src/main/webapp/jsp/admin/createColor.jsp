@@ -1,4 +1,5 @@
-<%--
+<%@ page import="java.util.ArrayList" %>
+<%@ page import="Model.Color" %><%--
   Created by IntelliJ IDEA.
   User: lyha8
   Date: 1/1/2023
@@ -6,7 +7,7 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-
+<%@ page isELIgnored="false" %>
 <html
         lang="en"
         class="light-style layout-menu-fixed"
@@ -51,7 +52,10 @@
     <script src="/assets/js_admin/config.js"></script>
 
 </head>
+
 <body>
+
+<% Color color= (Color) request.getAttribute("color");%>
 <!-- Layout wrapper -->
 <div class="layout-wrapper layout-content-navbar">
     <div class="layout-container">
@@ -81,23 +85,24 @@
                                 <h5 class="mb-0">Thông tin chi tiết của màu</h5>
                             </div>
                             <div class="card-body">
-                                <form action="/admin/createProduct" method="post" enctype="multipart/form-data">
+                                <form action="${pageContext.request.contextPath}/admin/createColor" method="post">
                                     <div class="row mb-3">
-                                        <label class="col-sm-2 col-form-label" for="name">Mã màu</label>
+                                        <label class="col-sm-2 col-form-label" >Mã màu</label>
                                         <div class="col-sm-10">
-                                            <input type="color" class="form-control" id="name" name="name"
-                                                   placeholder="name" required/>
+                                            <input type="color" class="form-control" id="value" name="value"
+                                                   placeholder="mã màu" required />
                                         </div>
                                     </div>
                                     <div class="row mb-3">
-                                        <label class="col-sm-2 col-form-label" for="price">Tên màu</label>
+                                        <label class="col-sm-2 col-form-label">Tên màu</label>
                                         <div class="col-sm-10">
                                             <input
                                                     type="text"
                                                     class="form-control"
-                                                    id="price"
-                                                    placeholder="Màu đỏ"
-                                                    name="price"
+                                                    id="name"
+                                                    placeholder="Tên màu"
+                                                    name="name"
+
                                             />
                                         </div>
                                     </div>

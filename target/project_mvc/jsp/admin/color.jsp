@@ -1,3 +1,6 @@
+<%@ page import="Model.Color" %>
+<%@ page import="java.util.ArrayList" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%--
   Created by IntelliJ IDEA.
   User: lyha8
@@ -6,6 +9,7 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ page isELIgnored="false" %>
 <!DOCTYPE html>
 
 <html
@@ -54,6 +58,7 @@
 </head>
 
 <body>
+<% ArrayList<Color> colors= (ArrayList<Color>) request.getAttribute("colors"); %>
 <!-- Layout wrapper -->
 <div class="layout-wrapper layout-content-navbar">
     <div class="layout-container">
@@ -91,20 +96,19 @@
                                 </tr>
                                 </thead>
                                 <tbody class="table-border-bottom-0">
-
+                        <c:forEach items="<%= colors %>" var="color">
                                 <tr>
-                                    <td><i class="fab fa-vuejs fa-lg text-success me-3"></i> <strong>1</strong></td>
-                                    <td>Màu Xanh</td>
-                                    <td>29/11/2022</td>
+                                    <td>${color.id}</td>
+                                    <td> ${color.name}</td>
+                                    <td>${color.createdAt}</td>
                                     <td>
                                         <div class="dropdown">
                                             <button type="button" class="btn p-0 dropdown-toggle hide-arrow" data-bs-toggle="dropdown">
                                                 <i class="bx bx-dots-vertical-rounded"></i>
                                             </button>
                                             <div class="dropdown-menu">
-                                                <a class="dropdown-item" href="javascript:void(0);"
-                                                ><i class="bx bx-edit-alt me-1"></i> Chỉnh sửa</a
-                                                >
+                                                <a class="dropdown-item" href="${pageContext.request.contextPath}/admin/editColor?id=${color.id}">
+                                                    <i class="bx bx-edit-alt me-1"></i> Chỉnh sửa</a>
                                                 <a class="dropdown-item" href="javascript:void(0);"
                                                 ><i class="bx bx-trash me-1"></i> Xóa</a
                                                 >
@@ -112,48 +116,7 @@
                                         </div>
                                     </td>
                                 </tr>
-                                <tr>
-                                    <td>
-                                        <i class="fab fa-bootstrap fa-lg text-primary me-3"></i> <strong>2</strong>
-                                    </td>
-                                    <td>Màu Vàng</td>
-                                    <td>27/09/2021</td>
-                                    <td>
-                                        <div class="dropdown">
-                                            <button type="button" class="btn p-0 dropdown-toggle hide-arrow" data-bs-toggle="dropdown">
-                                                <i class="bx bx-dots-vertical-rounded"></i>
-                                            </button>
-                                            <div class="dropdown-menu">
-                                                <a class="dropdown-item" href="javascript:void(0);"
-                                                ><i class="bx bx-edit-alt me-1"></i> Chỉnh sửa</a
-                                                >
-                                                <a class="dropdown-item" href="javascript:void(0);"
-                                                ><i class="bx bx-trash me-1"></i> Xóa</a
-                                                >
-                                            </div>
-                                        </div>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td><i class="fab fa-vuejs fa-lg text-success me-3"></i> <strong>3</strong></td>
-                                    <td>Màu Đỏ</td>
-                                    <td>27/06/2022</td>
-                                    <td>
-                                        <div class="dropdown">
-                                            <button type="button" class="btn p-0 dropdown-toggle hide-arrow" data-bs-toggle="dropdown">
-                                                <i class="bx bx-dots-vertical-rounded"></i>
-                                            </button>
-                                            <div class="dropdown-menu">
-                                                <a class="dropdown-item" href="javascript:void(0);"
-                                                ><i class="bx bx-edit-alt me-1"></i> Chỉnh sửa</a
-                                                >
-                                                <a class="dropdown-item" href="javascript:void(0);"
-                                                ><i class="bx bx-trash me-1"></i> Xóa</a
-                                                >
-                                            </div>
-                                        </div>
-                                    </td>
-                                </tr>
+                        </c:forEach>
                                 </tbody>
                             </table>
                         </div>
