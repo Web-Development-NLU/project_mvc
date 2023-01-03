@@ -29,7 +29,8 @@ public class ProductService extends BaseService<Product> {
 
     public ArrayList<Product> queryByBuilder(FilterProduct filter) {
         return (ArrayList<Product>) this.jdbi.withHandle(handle -> {
-           String sql = "SELECT pd.id, pd.thumbnail, pd.name, pd.price, pd.createdAt, pd.status FROM " + this.tableName + " pd";
+           String sql = "SELECT pd.id, pd.thumbnail, pd.name, pd.price, pd.createdAt, pd.status, AVG(r.point) avg FROM " + this.tableName + " pd";
+            sql += " LEFT JOIN review r ON r.productId = pd.id";
            if(filter.pattern != null){
                sql += " INNER JOIN patternForProduct p ON pd.id = p.idProduct AND p.idPattern = " + filter.pattern;
            }
@@ -37,6 +38,7 @@ public class ProductService extends BaseService<Product> {
            if(filter.color != null) {
                sql += " INNER JOIN colorForProduct c ON pd.id = c.idProduct AND c.idColor = " + filter.color;
            }
+
            if(filter.category != null) {
                sql += " WHERE pd.categoryId = " + filter.category;
            }
@@ -56,6 +58,7 @@ public class ProductService extends BaseService<Product> {
                    sql += " WHERE pd.price >= " + filter.minFilter;
                }
            }
+           sql += " GROUP BY pd.id ORDER BY pd.createdAt DESC";
 
            return handle.createQuery(sql).mapToBean(Product.class).list();
         });

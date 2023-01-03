@@ -2,7 +2,8 @@
 <%@ page import="java.util.ArrayList" %>
 <%@ page import="Model.Color" %>
 <%@ page import="Model.Product" %>
-<%@ page import="Model.Pattern" %><%--
+<%@ page import="Model.Pattern" %>
+<%@ page import="DTO.StatReview" %><%--
   Created by IntelliJ IDEA.
   User: Quang Tho
   Date: 02/12/2022
@@ -16,11 +17,12 @@
   Product product = (Product) request.getAttribute("product");
   ArrayList<Color> colors = (ArrayList<Color>) request.getAttribute("colors");
   ArrayList<Pattern> patterns = (ArrayList<Pattern>) request.getAttribute("patterns");
+  StatReview statReview = (StatReview) request.getAttribute("statReview");
 %>
 <div class="product-detail col col-lg-4">
   <div class="product_rate-point">
-    <div class="star-rate" data-rate="4"></div>
-    <div class="rate-number">(4 reviews)</div>
+    <div class="star-rate" data-rate="<%=statReview.getAvg()%>"></div>
+    <div class="rate-number">(<%=statReview.getSum()%> reviews)</div>
   </div>
   <div class="product_name monts">
     <h2><%=product.getName()%></h2>

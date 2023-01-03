@@ -14,6 +14,7 @@ public class Product extends BaseModelUUID {
     private String material;
     private String thumbnail;
     private int categoryId;
+    private double avg;
 
     public Product() {
     }
@@ -110,6 +111,14 @@ public class Product extends BaseModelUUID {
 
     public void setCategoryId(int categoryId) {
         this.categoryId = categoryId;
+    }
+
+    public double getAvg() {
+        return avg;
+    }
+
+    public void setAvg(double avg) {
+        this.avg = avg;
     }
 
     @Override
