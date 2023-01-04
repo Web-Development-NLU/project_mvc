@@ -4,11 +4,11 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page isELIgnored="false" %>
 <html>
-<head>
-    <jsp:include page="common/head.jsp">
-        <jsp:param name="title" value="FURNITURE | GIỎ HÀNG"/>
-    </jsp:include>
-</head>
+    <head>
+        <jsp:include page="common/head.jsp">
+            <jsp:param name="title" value="FURNITURE | GIỎ HÀNG"/>
+        </jsp:include>
+    </head>
 <body>
 <%
     ArrayList<CartDTO> carts = (ArrayList<CartDTO>) request.getAttribute("carts");

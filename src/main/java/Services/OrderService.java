@@ -3,6 +3,8 @@ package Services;
 import DTO.BaseDTO;
 import Model.Order;
 
+import java.util.ArrayList;
+
 public class OrderService extends BaseService<Order>{
 
     public OrderService(String tableName) {
@@ -22,5 +24,10 @@ public class OrderService extends BaseService<Order>{
     @Override
     protected boolean update(String id, BaseDTO model) throws Exception {
         return false;
+    }
+    public ArrayList<Order> findOrdersUser(String id){
+        return (ArrayList<Order>) this.jdbi.withHandle(handle -> {
+            return handle.createQuery("SELECT * FROM " + this.tableName + " WHERE userId = ?").bind(0,id).mapToBean(Order.class).list();
+        });
     }
 }
