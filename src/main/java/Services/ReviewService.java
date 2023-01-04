@@ -12,9 +12,17 @@ public class ReviewService extends BaseService<Review> {
     }
 
     public StatReview getStat(String productId) {
-        return this.jdbi.withHandle(handle -> handle.createQuery("SELECT AVG(point) as avg, COUNT(id) as sum  FROM " + this.tableName +
-                " WHERE productId = ? GROUP BY productId").bind(0, productId).mapToBean(StatReview.class).first()
-        );
+        try {
+            return this.jdbi.withHandle(handle -> handle.createQuery("SELECT AVG(point) as avg, COUNT(id) as sum  FROM " + this.tableName +
+                    " WHERE productId = ? GROUP BY productId").bind(0, productId).mapToBean(StatReview.class).first()
+            );
+        }catch(IllegalStateException e) {
+            StatReview stat = new StatReview();
+            stat.setAvg(0);
+            stat.setSum(0);
+            return stat;
+        }
+
     }
 
     public ArrayList<Review> findByProductId(String productId) {

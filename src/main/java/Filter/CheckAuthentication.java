@@ -1,6 +1,7 @@
 package Filter;
 
 import DTO.AuthorizationData;
+import Model.StatusAccount;
 import Model.User;
 import Services.AuthenticationService;
 import Services.UserService;
@@ -41,7 +42,7 @@ public class CheckAuthentication implements Filter {
         request.setAttribute("user", user);
         if(httpRequest.getMethod().equalsIgnoreCase("GET")){
 
-            if ((user != null) && (user.getStatus() == 0)) {
+            if ((user != null) && (user.getStatus() == StatusAccount.DISABLE.ordinal())) {
                 String rand = RandomStringUtils.randomAlphabetic(6);
                 this.authenticationService.sendVerify(rand, user.getEmail());
                 session.setAttribute("id", data.getId());
