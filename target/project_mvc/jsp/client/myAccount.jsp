@@ -6,6 +6,8 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ page isELIgnored="false" %>
 <html>
 <head>
   <jsp:include page="common/head.jsp">
@@ -22,6 +24,7 @@
   String address = (user.getAddress() != null) ? user.getAddress() : "";
   String phone = (user.getPhone() != null) ? user.getPhone() : "";
   String email = (user.getEmail() != null) ? user.getEmail() : "";
+  String success = (request.getAttribute("success") == null) ? null : request.getAttribute("success").toString();
 %>
 <body>
   <div id="myAccount_container">
@@ -35,51 +38,87 @@
     </header>
 
     <section id="checkout-content" class="container-fluid mb-5 mt-5">
-      <form action="">
+      <form action="${pageContext.request.contextPath}/myAccount" method="post">
         <div class="checkout-detail row mt-5">
           <div class="checkout-billing col">
-            <div class="checkout-billing_title">My Infomation</div>
+            <div class="checkout-billing_title">Thông tin của tôi\</div>
 
             <div class="billing-name row">
               <div class="input-secondary col">
-                <label for="fname">Frist Name *</label>
-                <input type="text" id="fname" value="<%= firstName %>">
+                <label for="firstName">Tên</label>
+                <input type="text" id="firstName" name="firstName" value="<%= firstName %>">
               </div>
               <div class="input-secondary col">
-                <label for="lname">Last Name *</label>
-                <input type="text" id="lname" value="<%= lastName %>">
+                <label for="lastName">Họ</label>
+                <input type="text" id="lastName" name="lastName" value="<%= lastName %>">
               </div>
             </div>
             <div class="input-secondary">
-              <label for="country">Country *</label>
-              <input type="text" id="country" value="<%= country %>">
+              <label for="country">Quốc gia</label>
+              <input type="text" id="country" name="country" value="<%= country %>">
             </div>
             <div class="input-secondary">
-              <label for="city">City/Province *</label>
-              <input type="text" id="city" value="<%= city %>">
+              <label for="city">Thành phố</label>
+              <input type="text" id="city" name="city" value="<%= city %>">
             </div>
             <div class="input-secondary">
-              <label for="district">District *</label>
-              <input type="text" id="district" value="<%= district %>">
+              <label for="district">Quận Huyện</label>
+              <input type="text" id="district" name="district" value="<%= district %>">
             </div>
             <div class="input-secondary">
-              <label for="address">Address *</label>
-              <input type="text" id="address" value="<%= address %>">
+              <label for="address">Địa chỉ</label>
+              <input type="text" id="address" name="address" value="<%= address %>">
             </div>
             <div class="input-secondary">
-              <label for="phone">Phone *</label>
-              <input type="text" id="phone" value="<%= phone %>">
+              <label for="phone">Số điện thoại</label>
+              <input type="text" id="phone" name="phone" value="<%= phone %>">
             </div>
             <div class="input-secondary">
-              <label for="email">Email *</label>
-              <input type="text" id="email" value="<%= email %>">
+              <label for="email">Email</label>
+              <input type="text" id="email" value="<%= email %>" disabled>
             </div>
           </div>
         </div>
         <button class="btn-text-lg bgr-black hover-bg-red">SAVE</button>
       </form>
-    </section>
+      <form action="${pageContext.request.contextPath}/changePasswordUser" method="post">
+        <div class="checkout-detail row mt-5">
+          <div class="checkout-billing col">
+            <div class="checkout-billing_title">Đổi mật khẩu</div>
 
+            <div class="input-secondary">
+              <label for="oldPassword">Mật khẩu cũ</label>
+              <input type="password" id="oldPassword" name="oldPassword" >
+            </div>
+            <div class="input-secondary">
+              <label for="newPassword">Mật khẩu mới</label>
+              <input type="password" id="newPassword" name="newPassword">
+            </div>
+
+          </div>
+        </div>
+        <button class="btn-text-lg bgr-black hover-bg-red">Đổi mật khẩu</button>
+      </form>
+    </section>
+    <%
+      String errorChangePass = (request.getAttribute("errorChangePass") == null) ? null :  request.getAttribute("errorChangePass").toString();
+    %>
+    <c:if test="<%=errorChangePass != null%>">
+      <div class="alert-danger alert alert-dismissible fade show fixed-top" role="alert">
+        <strong>Không thành công</strong> <%=errorChangePass%>
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+    </c:if>
+    <c:if test="<%=success != null%>">
+      <div class="alert-success alert alert-dismissible fade show fixed-top" role="alert">
+        <strong>Thành công</strong> <%=success%>
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+    </c:if>
     <jsp:include page="common/footer.jsp"/>
   </div>
 
