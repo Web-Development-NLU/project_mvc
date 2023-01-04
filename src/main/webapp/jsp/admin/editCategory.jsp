@@ -1,16 +1,12 @@
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ page import="Model.Pattern" %>
-<%@ page import="java.util.ArrayList" %><%--
+<%@ page import="Model.Category" %><%--
   Created by IntelliJ IDEA.
-  User: lyha8
-  Date: 12/30/2022
-  Time: 4:31 PM
+  User: zxc
+  Date: 01/Jan/23
+  Time: 11:17 PM
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ page isELIgnored="false" %>
-<!DOCTYPE html>
-
 <html
         lang="en"
         class="light-style layout-menu-fixed"
@@ -25,7 +21,7 @@
           name="viewport"
           content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0"/>
 
-  <title>Pattern </title>
+  <title>Edit category</title>
 
   <meta name="description" content=""/>
 
@@ -53,12 +49,10 @@
   <script src="/assets/vendor/js/helpers.js"></script>
 
   <script src="/assets/js_admin/config.js"></script>
-
 </head>
-
 <body>
 <%
-  ArrayList<Pattern> patterns= (ArrayList<Pattern>) request.getAttribute("patterns");
+    Category categories = (Category) request.getAttribute("categories");
 %>
 <!-- Layout wrapper -->
 <div class="layout-wrapper layout-content-navbar">
@@ -81,51 +75,33 @@
         <!-- Content -->
 
         <div class="container-xxl flex-grow-1 container-p-y">
-          <h4 class="fw-bold py-3 mb-4"><span class="text-muted fw-light">QUẢN LÝ /</span> MẪU</h4>
-          <a href="${pageContext.request.contextPath}/admin/createPattern">
-            <button type="button" class="btn btn-outline-dark" style="float: right">Tạo mới</button>
-          </a>
-          <hr class="my-5" />
-
-          <!-- Bootstrap Dark Table -->
-          <div class="card">
-            <h5 class="card-header">THÔNG TIN VỀ QUẢN LÝ MẪU</h5>
-            <div class="table-responsive text-nowrap">
-              <table class="table table-dark1">
-                <thead>
-                <tr>
-                  <th>MÃ MÀU</th>
-                  <th>TÊN MÀU</th>
-                  <th>NGÀY TẠO</th>
-                  <th>CHỈNH SỬA</th>
-                </tr>
-                </thead>
-                <tbody class="table-border-bottom-0">
-              <c:forEach items="<%= patterns %>" var="pattern">
-                <tr>
-                  <td>${pattern.id}</td>
-                  <td>${pattern.name}</td>
-                  <td>${pattern.createdAt}</td>
-                  <td>
-                    <div class="dropdown">
-                      <button type="button" class="btn p-0 dropdown-toggle hide-arrow" data-bs-toggle="dropdown">
-                        <i class="bx bx-dots-vertical-rounded"></i>
-                      </button>
-                      <div class="dropdown-menu">
-                        <a class="dropdown-item" href="${pageContext.request.contextPath}/admin/editPattern?id=${pattern.id}">
-                          <i class="bx bx-edit-alt me-1"></i> Chỉnh sửa</a>
-                        <a class="dropdown-item" href="javascript:void(0);"
-                        ><i class="bx bx-trash me-1"></i> Xóa</a>
-                      </div>
+          <h4 class="fw-bold py-3 mb-4"><span class="text-muted fw-light">Edit/</span> Edit Category</h4>
+          <hr class="my-5"/>
+          <div class="col-xxl">
+            <div class="card mb-4">
+              <div class="card-header d-flex align-items-center justify-content-between">
+                <h5 class="mb-0">Category Information</h5>
+              </div>
+              <div class="card-body">
+                <form action="${pageContext.request.contextPath}/admin/editCategory" method="post">
+                  <div class="row mb-3">
+                    <label class="col-sm-2 col-form-label" for="name">Tên danh mục</label>
+                    <div class="col-sm-10">
+                      <input type="text" class="form-control" id="name" name="name"
+                             placeholder="name" required value="<%=categories.getName()%>"/>
                     </div>
-                  </td>
-                </tr>
-              </c:forEach>
-                </tbody>
-              </table>
+                  </div>
+                  <div class="row justify-content-end">
+                    <div class="col-sm-10">
+                      <button type="submit" class="btn btn-primary">Update</button>
+                    </div>
+                  </div>
+                </form>
+              </div>
             </div>
           </div>
-          <!--/ Bootstrap Dark Table -->
+          <!-- Basic with Icons -->
+
         </div>
         <!-- / Content -->
 
@@ -137,7 +113,9 @@
               <script>
                 document.write(new Date().getFullYear());
               </script>
+              <a href="https://themeselection.com" target="_blank" class="footer-link fw-bolder"></a>
             </div>
+
           </div>
         </footer>
         <!-- / Footer -->

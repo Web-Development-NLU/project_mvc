@@ -82,7 +82,11 @@
 
         <div class="container-xxl flex-grow-1 container-p-y">
           <h4 class="fw-bold py-3 mb-4"><span class="text-muted fw-light">QUẢN LÝ /</span> MẪU</h4>
+          <a href="${pageContext.request.contextPath}/admin/createPattern">
+            <button type="button" class="btn btn-outline-dark" style="float: right">Tạo mới</button>
+          </a>
           <hr class="my-5" />
+
           <!-- Bootstrap Dark Table -->
           <div class="card">
             <h5 class="card-header">THÔNG TIN VỀ QUẢN LÝ MẪU</h5>

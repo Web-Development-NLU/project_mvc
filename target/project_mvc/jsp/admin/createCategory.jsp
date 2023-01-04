@@ -1,8 +1,8 @@
-<%@ page import="Model.Pattern" %><%--
+<%--
   Created by IntelliJ IDEA.
-  User: lyha8
-  Date: 1/1/2023
-  Time: 9:44 PM
+  User: zxc
+  Date: 02/Jan/23
+  Time: 2:24 PM
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
@@ -21,7 +21,7 @@
             name="viewport"
             content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0"/>
 
-    <title>Edit Pattern </title>
+    <title>Create category</title>
 
     <meta name="description" content=""/>
 
@@ -49,10 +49,8 @@
     <script src="/assets/vendor/js/helpers.js"></script>
 
     <script src="/assets/js_admin/config.js"></script>
-
 </head>
 <body>
-<%Pattern pattern=(Pattern) request.getAttribute("pattern");%>
 <!-- Layout wrapper -->
 <div class="layout-wrapper layout-content-navbar">
     <div class="layout-container">
@@ -74,39 +72,25 @@
                 <!-- Content -->
 
                 <div class="container-xxl flex-grow-1 container-p-y">
-                    <h4 class="fw-bold py-3 mb-4"><span class="text-muted fw-light">Chỉnh sửa/</span>Mẫu</h4>
+                    <h4 class="fw-bold py-3 mb-4"><span class="text-muted fw-light">Create/</span> Create Category</h4>
                     <hr class="my-5"/>
                     <div class="col-xxl">
                         <div class="card mb-4">
                             <div class="card-header d-flex align-items-center justify-content-between">
-                                <h5 class="mb-0">Thông tin chi tiết của mẫu cần điều chỉnh</h5>
+                                <h5 class="mb-0">Category Information</h5>
                             </div>
                             <div class="card-body">
-                                <form action="${pageContext.request.contextPath}/admin/editPattern?id=<%=pattern.getId()%>" method="post">
+                                <form action="${pageContext.request.contextPath}/admin/createCategory" method="post">
                                     <div class="row mb-3">
-                                        <label class="col-sm-2 col-form-label" for="name">Mã mẫu</label>
+                                        <label class="col-sm-2 col-form-label" for="name">Tên danh mục</label>
                                         <div class="col-sm-10">
-                                            <input type="text" class="form-control" id="value" name="value"
-                                                   placeholder="Mã mẫu" required value="<%=pattern.getId()%>"/>
+                                            <input type="text" class="form-control" id="name" name="name"
+                                                   placeholder="name" required value=""/>
                                         </div>
                                     </div>
-                                    <div class="row mb-3">
-                                        <label class="col-sm-2 col-form-label" for="name">Tên mẫu</label>
-                                        <div class="col-sm-10">
-                                            <input
-                                                    type="text"
-                                                    class="form-control"
-                                                    id="name"
-                                                    placeholder="Tên mẫu"
-                                                    name="name"
-                                                    value="<%=pattern.getName()%>"
-                                            />
-                                        </div>
-                                    </div>
-
                                     <div class="row justify-content-end">
                                         <div class="col-sm-10">
-                                            <button type="submit" class="btn btn-primary">Lưu</button>
+                                            <button type="submit" class="btn btn-primary">Update</button>
                                         </div>
                                     </div>
                                 </form>
@@ -162,6 +146,7 @@
 <script src="/assets/js_admin/main.js"></script>
 <script>
     $(".chosen-select").chosen({
+        allow_single_deselect: true,
         width: '50%',
         no_results_text: "Không tìm thấy kết quả :"
     })

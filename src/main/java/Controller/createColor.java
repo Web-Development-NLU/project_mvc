@@ -29,6 +29,6 @@ public class createColor extends HttpServlet {
         Color color=new Color(name,value);
         String colorId=this.colorService.create(color);
 
-        response.sendRedirect("/admin/color?id"+colorId);
+        response.sendRedirect("/admin/color");
     }
 }

@@ -83,7 +83,7 @@
                                 <h5 class="mb-0">Thông tin chi tiết của màu cần điều chỉnh</h5>
                             </div>
                             <div class="card-body">
-                                <form action="${pageContext.request.contextPath}/admin/createProduct?id=<%=color.getId()%>" method="post">
+                                <form action="${pageContext.request.contextPath}/admin/editColor?id=<%=color.getId()%>" method="post">
                                     <div class="row mb-3">
                                         <label class="col-sm-2 col-form-label" for="name">Mã màu</label>
                                         <div class="col-sm-10">

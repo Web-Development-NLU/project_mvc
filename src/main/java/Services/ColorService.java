@@ -3,6 +3,8 @@ package Services;
 import DTO.BaseDTO;
 import Model.Color;
 
+import java.util.ArrayList;
+
 public class ColorService extends BaseService<Color>{
 
     public ColorService(String tableName) {
@@ -34,4 +36,17 @@ public class ColorService extends BaseService<Color>{
         }
         return color != null;
     }
+    public void deleteColor(String idColor) {
+        this.jdbi.useHandle(handle -> handle.createUpdate("DELETE FROM color c WHERE c.id = :idColor").bind("idColor", idColor).execute());
+    }
+    public ArrayList<Color> getColorByName(String nameColor){
+        return (ArrayList<Color>) this.jdbi.withHandle(handle -> {
+            return handle.createQuery("SELECT * from color c"
+            +"WHERE c.nameColor=: nameColor")
+                    .bind("idColor",nameColor)
+                    .mapToBean(Color.class)
+                    .list();
+        });
+    }
+
 }

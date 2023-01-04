@@ -25,8 +25,13 @@ public class EditColor extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         id=request.getParameter("id");
         String value=request.getParameter("value");
-        Color color=this.colorService.findById(id,Color.class);
-
+        Color color;
+        if(id!=null){
+             color=this.colorService.findById(id,Color.class);
+        }else{
+            color=new Color();
+            color.setId(Integer.parseInt(value));
+        }
         request.setAttribute("color",color);
         request.getRequestDispatcher("/jsp/admin/editColor.jsp").forward(request, response);
     }
@@ -37,7 +42,8 @@ public class EditColor extends HttpServlet {
         String name=request.getParameter("name");
         String value=request.getParameter("value");
         UpdateColorDTO updateColorDTO=new UpdateColorDTO(name,value);
-
         this.colorService.update(id,updateColorDTO);
+        response.sendRedirect("/admin/color");
+
     }
 }

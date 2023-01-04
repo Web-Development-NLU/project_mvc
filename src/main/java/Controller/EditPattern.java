@@ -32,7 +32,13 @@ public class EditPattern  extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
          id=request.getParameter("id");
         String name=request.getParameter("name");
-        Pattern pattern=this.patternService.findById(id,Pattern.class);
+        Pattern pattern;
+        if(id!=null) {
+            pattern = this.patternService.findById(id, Pattern.class);
+        }else{
+            pattern=new Pattern();
+            pattern.setId(Integer.parseInt(name));
+        }
         request.setAttribute("pattern",pattern);
         request.getRequestDispatcher("/jsp/admin/editPattern.jsp").forward(request, response);
     }
@@ -43,6 +49,7 @@ public class EditPattern  extends HttpServlet {
         String name=request.getParameter("name");
         UpdatePatternDTO updatePatternDTO=new UpdatePatternDTO(name);
         this.patternService.update(id,updatePatternDTO);
+        response.sendRedirect("/admin/pattern");
     }
 }
 

@@ -82,7 +82,7 @@
                                 <h5 class="mb-0">Thông tin chi tiết của mẫu cần điều chỉnh</h5>
                             </div>
                             <div class="card-body">
-                                <form action="${pageContext.request.contextPath}/admin/createProduct" method="post">
+                                <form action="${pageContext.request.contextPath}/admin/editPattern?id=<%=pattern.getId()%>" method="post">
                                     <div class="row mb-3">
                                         <label class="col-sm-2 col-form-label" for="name">Mã mẫu</label>
                                         <div class="col-sm-10">

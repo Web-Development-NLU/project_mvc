@@ -1,27 +1,28 @@
-<%@ page import="Model.Pattern" %><%--
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ page import="java.util.ArrayList" %>
+<%@ page import="Model.Category" %>
+<%@ page isELIgnored="false" %>
+<%@ page contentType="text/html;charset=UTF-8" language="java" %><%--
   Created by IntelliJ IDEA.
-  User: lyha8
-  Date: 1/1/2023
-  Time: 9:44 PM
+  User: zxc
+  Date: 30/Dec/22
+  Time: 3:09 PM
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<%@ page isELIgnored="false" %>
-<html
-        lang="en"
-        class="light-style layout-menu-fixed"
-        dir="ltr"
-        data-theme="theme-default"
-        data-assets-path="/assets/"
-        data-template="vertical-menu-template-free"
->
+<html lang="en"
+      class="light-style layout-menu-fixed"
+      dir="ltr"
+      data-theme="theme-default"
+      data-assets-path="/assets/"
+      data-template="vertical-menu-template-free">
 <head>
     <meta charset="utf-8"/>
     <meta
             name="viewport"
             content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0"/>
 
-    <title>Edit Pattern </title>
+    <title>Category</title>
 
     <meta name="description" content=""/>
 
@@ -49,10 +50,11 @@
     <script src="/assets/vendor/js/helpers.js"></script>
 
     <script src="/assets/js_admin/config.js"></script>
-
 </head>
 <body>
-<%Pattern pattern=(Pattern) request.getAttribute("pattern");%>
+<%
+    ArrayList<Category> categories = (ArrayList<Category>) request.getAttribute("categories");
+%>
 <!-- Layout wrapper -->
 <div class="layout-wrapper layout-content-navbar">
     <div class="layout-container">
@@ -72,52 +74,45 @@
             <!-- Content wrapper -->
             <div class="content-wrapper">
                 <!-- Content -->
-
                 <div class="container-xxl flex-grow-1 container-p-y">
-                    <h4 class="fw-bold py-3 mb-4"><span class="text-muted fw-light">Chỉnh sửa/</span>Mẫu</h4>
-                    <hr class="my-5"/>
-                    <div class="col-xxl">
-                        <div class="card mb-4">
-                            <div class="card-header d-flex align-items-center justify-content-between">
-                                <h5 class="mb-0">Thông tin chi tiết của mẫu cần điều chỉnh</h5>
-                            </div>
-                            <div class="card-body">
-                                <form action="${pageContext.request.contextPath}/admin/editPattern?id=<%=pattern.getId()%>" method="post">
-                                    <div class="row mb-3">
-                                        <label class="col-sm-2 col-form-label" for="name">Mã mẫu</label>
-                                        <div class="col-sm-10">
-                                            <input type="text" class="form-control" id="value" name="value"
-                                                   placeholder="Mã mẫu" required value="<%=pattern.getId()%>"/>
-                                        </div>
-                                    </div>
-                                    <div class="row mb-3">
-                                        <label class="col-sm-2 col-form-label" for="name">Tên mẫu</label>
-                                        <div class="col-sm-10">
-                                            <input
-                                                    type="text"
-                                                    class="form-control"
-                                                    id="name"
-                                                    placeholder="Tên mẫu"
-                                                    name="name"
-                                                    value="<%=pattern.getName()%>"
-                                            />
-                                        </div>
-                                    </div>
-
-                                    <div class="row justify-content-end">
-                                        <div class="col-sm-10">
-                                            <button type="submit" class="btn btn-primary">Lưu</button>
-                                        </div>
-                                    </div>
-                                </form>
-                            </div>
+                    <div class="card">
+                        <h5 class="card-header">Category</h5>
+                        <div class="table-responsive text-nowrap">
+                            <table class="table">
+                                <thead>
+                                <tr>
+                                    <th>ID</th>
+                                    <th>Tên</th>
+                                    <th>Ngày tạo</th>
+                                </tr>
+                                </thead>
+                                <tbody class="table-border-bottom-0">
+                                <c:forEach items="<%= categories %>" var="category">
+                                    <tr>
+                                        <td><a href="${pageContext.request.contextPath}/admin/editCategory?id=${category.id}">${category.id}</a></td>
+                                        <td>${category.name}</td>
+                                        <td>${category.createdAt}</td>
+                                        <td>
+                                            <div class="dropdown">
+                                                <button type="button" class="btn p-0 dropdown-toggle hide-arrow"
+                                                        data-bs-toggle="dropdown">
+                                                    <i class="bx bx-dots-vertical-rounded"></i>
+                                                </button>
+                                                <div class="dropdown-menu">
+                                                    <a class="dropdown-item" href="${pageContext.request.contextPath}/admin/editCategory?id=${category.id}"><i
+                                                            class="bx bx-edit-alt me-2"></i> Edit</a>
+                                                    <a class="dropdown-item" href="javascript:void(0);"><i
+                                                            class="bx bx-trash me-2"></i> Delete</a>
+                                                </div>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                </c:forEach>
+                                </tbody>
+                            </table>
                         </div>
                     </div>
-                    <!-- Basic with Icons -->
-
                 </div>
-                <!-- / Content -->
-
                 <!-- Footer -->
                 <footer class="content-footer footer bg-footer-theme">
                     <div class="container-xxl d-flex flex-wrap justify-content-between py-2 flex-md-row flex-column">
@@ -162,6 +157,7 @@
 <script src="/assets/js_admin/main.js"></script>
 <script>
     $(".chosen-select").chosen({
+        allow_single_deselect: true,
         width: '50%',
         no_results_text: "Không tìm thấy kết quả :"
     })
