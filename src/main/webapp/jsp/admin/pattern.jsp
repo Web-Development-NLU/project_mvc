@@ -94,8 +94,8 @@
               <table class="table table-dark1">
                 <thead>
                 <tr>
-                  <th>MÃ MÀU</th>
-                  <th>TÊN MÀU</th>
+                  <th>MÃ MẪU</th>
+                  <th>TÊN MẪU</th>
                   <th>NGÀY TẠO</th>
                   <th>CHỈNH SỬA</th>
                 </tr>

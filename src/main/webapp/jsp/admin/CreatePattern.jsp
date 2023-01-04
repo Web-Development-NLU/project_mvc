@@ -83,13 +83,7 @@
                             </div>
                             <div class="card-body">
                                 <form action="${pageContext.request.contextPath}/admin/createPattern" method="post">
-                                    <div class="row mb-3">
-                                        <label class="col-sm-2 col-form-label">Mã mẫu</label>
-                                        <div class="col-sm-10">
-                                            <input type="text" class="form-control" id="value" name="value"
-                                                   placeholder="mã mẫu" required/>
-                                        </div>
-                                    </div>
+
                                     <div class="row mb-3">
                                         <label class="col-sm-2 col-form-label" >Tên mẫu</label>
                                         <div class="col-sm-10">

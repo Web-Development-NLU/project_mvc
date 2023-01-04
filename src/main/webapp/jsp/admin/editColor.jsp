@@ -87,8 +87,8 @@
                                     <div class="row mb-3">
                                         <label class="col-sm-2 col-form-label" for="name">Mã màu</label>
                                         <div class="col-sm-10">
-                                            <input type="text" class="form-control" id="value" name="value"
-                                                   placeholder="Mã màu" required value="<%=color.getId()%>"/>
+                                            <input type="color" class="form-control" id="value" name="value"
+                                                   placeholder="Mã màu" required value="<%=color.getValue()%>"/>
                                         </div>
                                     </div>
                                     <div class="row mb-3">
