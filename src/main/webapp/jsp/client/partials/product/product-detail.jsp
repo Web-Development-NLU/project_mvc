@@ -2,8 +2,12 @@
 <%@ page import="java.util.ArrayList" %>
 <%@ page import="Model.Color" %>
 <%@ page import="Model.Product" %>
+<<<<<<< HEAD
 <%@ page import="Model.Pattern" %>
 <%@ page import="DTO.StatReview" %><%--
+=======
+<%@ page import="Model.Pattern" %><%--
+>>>>>>> a54fe1ac2474d64b9373d2e8acf7d69699fc7c06
   Created by IntelliJ IDEA.
   User: Quang Tho
   Date: 02/12/2022

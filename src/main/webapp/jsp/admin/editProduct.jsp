@@ -176,12 +176,9 @@
                     <div class="col-sm-10">
                       <select name="color" id="color" multiple
                               class="chosen-select form-control form-control-chosen">
-<<<<<<< HEAD
                         <c:forEach items="<%=colorOfProduct%>" var="color">
                           <option value="${color.id}" selected>${color.name}</option>
                         </c:forEach>
-=======
->>>>>>> dd3a0fbe692837a605eb4a4fbf4adeef8a21a2b5
                         <c:forEach items="<%=colors%>" var="color">
                           <option value="${color.id}" style="color: ${color.value}">${color.name}</option>
                         </c:forEach>
@@ -193,12 +190,9 @@
                     <div class="col-sm-10">
                       <select name="pattern" id="pattern" multiple
                               class="chosen-select form-control form-control-chosen">
-<<<<<<< HEAD
                         <c:forEach items="<%=patternOfProduct%>" var="pattern">
                           <option value="${pattern.id}" selected>${pattern.name}</option>
                         </c:forEach>
-=======
->>>>>>> dd3a0fbe692837a605eb4a4fbf4adeef8a21a2b5
                         <c:forEach items="<%=patterns%>" var="pattern">
                           <option value="${pattern.id}">${pattern.name}</option>
                         </c:forEach>

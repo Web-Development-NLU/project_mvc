@@ -1,6 +1,5 @@
 package Controller;
 
-import DTO.AuthorizationData;
 import DTO.FilterProduct;
 import Model.Product;
 import Services.ProductService;

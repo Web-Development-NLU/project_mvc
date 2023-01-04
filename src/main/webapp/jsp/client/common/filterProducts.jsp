@@ -80,7 +80,6 @@
                 </div>
                 <form action="${pageContext.request.contextPath}/products">
                   <div class="price-slider-amount">
-
                     <input id="range-min" type="range" name="price-min" min="<%=priceMin%>" max="<%=priceMax%>" value="<%=priceMin%>" step="100000">
                     <input id="range-max" type="range" name="price-max" min="<%=priceMin%>" max="<%=priceMax%>" value="<%=priceMax%>" step="100000">
                     <div class="price-slider-amount">

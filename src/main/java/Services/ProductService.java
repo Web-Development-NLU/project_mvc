@@ -16,7 +16,6 @@ public class ProductService extends BaseService<Product> {
     public ProductService(String tableName) {
         super(tableName);
     }
-
     public void setStatus(String id, int value) {
         this.jdbi.useHandle(handle -> {
 
@@ -38,7 +37,6 @@ public class ProductService extends BaseService<Product> {
            if(filter.color != null) {
                sql += " INNER JOIN colorForProduct c ON pd.id = c.idProduct AND c.idColor = " + filter.color;
            }
-
            if(filter.category != null) {
                sql += " WHERE pd.categoryId = " + filter.category;
            }

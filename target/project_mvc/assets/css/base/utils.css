@@ -1,0 +1,9 @@
+.center {
+    text-align: center !important;
+}
+td.tb-border_right{
+    border-right: 1px solid #DEE2E6 !important;
+}
+td.tb-border_left{
+    border-left: 1px solid #DEE2E6 !important;
+}
