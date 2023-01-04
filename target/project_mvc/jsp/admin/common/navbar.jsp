@@ -68,15 +68,9 @@
                         <div class="dropdown-divider"></div>
                     </li>
                     <li>
-                        <a class="dropdown-item" href="myprofile.html">
-                            <i class="bx bx-user me-2"></i>
-                            <span class="align-middle">My Profile</span>
-                        </a>
-                    </li>
-                    <li>
-                        <a class="dropdown-item" href="pages-account-settings-account.html">
+                        <a class="dropdown-item" href="${pageContext.request.contextPath}/admin/setting">
                             <i class="bx bx-cog me-2"></i>
-                            <span class="align-middle">Account Settings</span>
+                            <span class="align-middle">Cài đặt</span>
                         </a>
                     </li>
 

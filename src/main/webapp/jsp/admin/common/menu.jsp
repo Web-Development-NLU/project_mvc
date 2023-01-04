@@ -1,7 +1,9 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page isELIgnored="false"%>
 <%@ page import="java.util.ArrayList" %>
-<%@ page import="Model.Category" %><%--
+<%@ page import="Model.Category" %>
+<%@ page import="DTO.AuthorizationData" %>
+<%@ page import="Model.TypeAccount" %><%--
   Created by IntelliJ IDEA.
   User: Quang Tho
   Date: 29/12/2022
@@ -11,6 +13,7 @@
 
 <%
     ArrayList<Category> categories = (ArrayList<Category>) request.getAttribute("categoriesMenu");
+    AuthorizationData data = (AuthorizationData) session.getAttribute("adminLogin");
 %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <aside id="layout-menu" class="layout-menu menu-vertical menu bg-menu-theme">
@@ -32,7 +35,7 @@
         <li class="menu-item active">
             <a href="${pageContext.request.contextPath}/admin" class="menu-link">
                 <i class="menu-icon tf-icons bx bx-home-circle"></i>
-                <div data-i18n="Analytics">Home</div>
+                <div data-i18n="Analytics">Trang chủ</div>
             </a>
         </li>
 
@@ -68,17 +71,19 @@
         <li class="menu-item">
             <a href="javascript:void(0);" class="menu-link menu-toggle">
                 <i class="menu-icon tf-icons bx bx-table"></i>
-                <div data-i18n="Authentications">Account</div>
+                <div data-i18n="Authentications">Tài khoản người dùng</div>
             </a>
             <ul class="menu-sub">
+                <c:if test="<%=data.getType() == TypeAccount.ROOT_ADMIN.ordinal()%>">
+                    <li class="menu-item">
+                        <a href="${pageContext.request.contextPath}/admin/account?type=admin" class="menu-link">
+                            <div data-i18n="Basic">Tài khoản Admin</div>
+                        </a>
+                    </li>
+                </c:if>
                 <li class="menu-item">
-                    <a href="/dashboard/accountAdmin" class="menu-link" target="_blank">
-                        <div data-i18n="Basic">Account Admin</div>
-                    </a>
-                </li>
-                <li class="menu-item">
-                    <a href="/dashboard/accountClient" class="menu-link" target="_blank">
-                        <div data-i18n="Basic">Account Customer</div>
+                    <a href="${pageContext.request.contextPath}/admin/account?type=user" class="menu-link">
+                        <div data-i18n="Basic">Tài khoản người dùng</div>
                     </a>
                 </li>
             </ul>

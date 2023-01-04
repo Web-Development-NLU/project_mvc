@@ -86,7 +86,7 @@
                         <div class="mb-3">
                             <label for="email" class="form-label">Địa chỉ Email</label>
                             <input
-                                    type="text"
+                                    type="email"
                                     class="form-control"
                                     id="email"
                                     name="email"
