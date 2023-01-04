@@ -56,6 +56,6 @@ public class AminProduct extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
+        response.sendRedirect("/admin/products?id=" + request.getParameter("id") + "&page=" + request.getParameter("page"));
     }
 }

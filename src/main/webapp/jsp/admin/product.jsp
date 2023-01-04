@@ -117,6 +117,17 @@
                                 <li class="page-item">
                                     <a class="page-link" href="${pageContext.request.contextPath}/admin/products?id=<%=category.getId()%>&page=<%=pagination%>"><%=pagination%></a>
                                 </li>
+                                <li class="page-item">
+                                    <form action="/admin/products?id=<%=category.getId()%>" method="post">
+                                        <input
+                                                type="number"
+                                                class="form-control"
+                                                name="page"
+                                                autofocus
+                                                min="1"
+                                        />
+                                    </form>
+                                </li>
                                 <li class="page-item next">
                                     <a class="page-link" href="${pageContext.request.contextPath}/admin/products?id=<%=category.getId()%>&page=<%=pagination + 1%>"
                                     ><i class="tf-icon bx bx-chevrons-right"></i
