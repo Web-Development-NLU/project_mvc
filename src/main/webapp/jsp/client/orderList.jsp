@@ -27,6 +27,7 @@
 <body>
 <%
     ArrayList<Order> orders = (ArrayList<Order>) request.getAttribute("orders");
+    String infoSearch = (String) request.getAttribute("infoSearch");
 %>
 <div id="cart-container">
     <header>
@@ -39,27 +40,47 @@
     </header>
 
     <section id="cart-content" class="container-fluid">
-        <div class="cart-place">
-            <div class="cart-table mt-5">
-                <table class="table table-bordered">
-                    <thead>
-                    <tr>
-                        <th>ID</th>
-                        <th>Thông tin chi tiết</th>
-                        <th>Ngày tạo</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    <c:forEach items="<%= orders %>" var="order">
-                        <tr style="border-bottom: 1px solid #DEE2E6">
-                            <td style="border-right: 1px solid #DEE2E6"><a href="${pageContext.request.contextPath}/orderDetail?id=${order.id}">${order.id}</a></td>
-                            <td style="border-right: 1px solid #DEE2E6">${order.info}</td>
-                            <td style="border-left: 1px solid #DEE2E6">${order.createdAt}</td>
-                        </tr>
-                    </c:forEach>
-                    </tbody>
-                </table>
-            </div>
+        <div class="cart-place" style="margin-top: 2rem">
+            <c:choose>
+                <c:when test="${!orders.isEmpty()}">
+                    <form class="form-search" action="/orderList" method="post">
+                        <input class="ip_search" type="search" placeholder="Nhập mã đơn hàng..." name="search_order">
+                        <button class="btn-search">
+                            <i class="fa-solid fa-magnifying-glass"></i>
+                        </button>
+                    </form>
+                    <div class="cart-table mt-5" style="margin-top: 10px !important;">
+                        <table class="table table-bordered">
+                            <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>Thông tin chi tiết</th>
+                                <th>Ngày tạo</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <c:forEach items="<%= orders %>" var="order">
+                                <tr style="border-bottom: 1px solid #DEE2E6">
+                                    <td style="border-right: 1px solid #DEE2E6"><a href="${pageContext.request.contextPath}/orderDetail?id=${order.id}">${order.id}</a></td>
+                                    <td style="border-right: 1px solid #DEE2E6">${order.info}</td>
+                                    <td style="border-left: 1px solid #DEE2E6">${order.createdAt}</td>
+                                </tr>
+                            </c:forEach>
+                            </tbody>
+                        </table>
+                    </div>
+                </c:when>
+                <c:otherwise>
+                    <form class="form-search" action="/orderList" method="post">
+                        <input class="ip_search" type="search" placeholder="Nhập mã đơn hàng..." name="search_order">
+                        <button class="btn-search">
+                            <i class="fa-solid fa-magnifying-glass"></i>
+                        </button>
+                    </form>
+                    <div style="text-align: center;margin: 3.5rem 0">${infoSearch != null ? "Không tìm thấy đơn đặt hàng" : "Không có đơn đặt hàng nào"}</div>
+                </c:otherwise>
+            </c:choose>
+
         </div>
     </section>
 

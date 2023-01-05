@@ -26,18 +26,30 @@ public class OrderListController extends HttpServlet {
         HttpSession session = request.getSession(true);
         AuthorizationData authorizationData = (AuthorizationData) session.getAttribute("authorization");
         boolean logged = (boolean) request.getAttribute("logged");
-        String userId = (String) authorizationData.getId();
+        String infoSearch = request.getParameter("infoSearch");
         if(!logged) {
             response.sendRedirect("/");
-        }else {
-            ArrayList<Order> orders = this.orderService.findOrdersUser(userId);
-            request.setAttribute("orders", orders);
-            request.getRequestDispatcher("/jsp/client/orderList.jsp").forward(request, response);
+            return;
         }
+        String userId = (String) authorizationData.getId();
+        ArrayList<Order> orders = new ArrayList<>();
+        if(infoSearch != null){
+            Order order = this.orderService.findOrderUserById(userId, infoSearch);
+            if(order != null){
+                orders.add(order);
+            }else{
+                orders = this.orderService.findOrdersUserByDetail(userId, infoSearch);
+            }
+        }else{
+            orders = this.orderService.findOrdersUser(userId);
+        }
+        request.setAttribute("orders", orders);
+        request.setAttribute("infoSearch",infoSearch);
+        request.getRequestDispatcher("/jsp/client/orderList.jsp").forward(request, response);
     }
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
+        response.sendRedirect("/orderList?infoSearch="+request.getParameter("search_order").trim());
     }
 }

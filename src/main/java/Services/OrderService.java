@@ -2,6 +2,8 @@ package Services;
 
 import DTO.BaseDTO;
 import Model.Order;
+import org.jdbi.v3.core.Handle;
+import org.jdbi.v3.core.HandleCallback;
 
 import java.util.ArrayList;
 
@@ -29,5 +31,36 @@ public class OrderService extends BaseService<Order>{
         return (ArrayList<Order>) this.jdbi.withHandle(handle -> {
             return handle.createQuery("SELECT * FROM " + this.tableName + " WHERE userId = ?").bind(0,id).mapToBean(Order.class).list();
         });
+    }
+    public ArrayList<Order> findOrdersUserByDetail(String id, String detail){
+        String detailSearch = "%"+detail+"%";
+        return (ArrayList<Order>) this.jdbi.withHandle(handle -> {
+            return handle.createQuery("SELECT * FROM " + this.tableName + " WHERE userId = ? and info like ?").bind(0,id).bind(1,detailSearch).mapToBean(Order.class).list();
+        });
+    }
+    public Order findOrderUserById(String userId, String orderId){
+        if(orderId.isEmpty()) {
+            return null;
+        }
+        try {
+            Order data;
+            data = this.jdbi.withHandle(new HandleCallback<Order, Exception>() {
+                public Order withHandle(Handle handle) throws Exception{
+                    try {
+                        return handle.createQuery(
+                                        "SELECT * FROM " + tableName + " WHERE id = ? and userId = ?")
+                                .bind(0, userId).bind(1,orderId)
+                                .mapToBean(Order.class).first();
+                    }catch (IllegalStateException exception) {
+                        return null;
+                    }
+
+                }
+            });
+
+            return data;
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
     }
 }
