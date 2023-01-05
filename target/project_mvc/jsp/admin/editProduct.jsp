@@ -130,6 +130,7 @@
                     <div class="col-sm-10">
                       <select name="category" id="category"
                               class="chosen-select form-control form-control-chosen">
+                        <option value="0">Chọn danh mục</option>
                         <c:forEach items="<%=categories%>" var="category">
                           <c:set var="id" value="<%=product.getCategoryId()%>"/>
                           <c:choose>

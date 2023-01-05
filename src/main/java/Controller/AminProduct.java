@@ -31,16 +31,14 @@ public class AminProduct extends HttpServlet {
         if(page == null || Integer.parseInt(page) < 1) {
             page = "1";
         }
-        if(id == null) {
-            response.sendRedirect("/admin");
-            return;
-        }
+
         FilterProduct filter = new FilterProduct();
+        filter.category = id;
         ArrayList<Product> allProduct = productService.queryByBuilder(filter);
         ArrayList<Product> productsResult = new ArrayList<>();
 
         int index = (Integer.parseInt(page) - 1) * 10;
-        for(int i = index; i < (index * 10 + 10); i++ ){
+        for(int i = index; i < (index + 10); i++ ){
             if(i >= allProduct.size()){
                 break;
             }

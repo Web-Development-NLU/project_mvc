@@ -2,9 +2,9 @@
 <%@ page import="java.util.ArrayList" %>
 <%@ page import="Model.Color" %>
 <%@ page import="Model.Product" %>
-<<<<<<< HEAD
 <%@ page import="Model.Pattern" %>
-<%@ page import="DTO.StatReview" %><%--
+<%@ page import="DTO.StatReview" %>
+<%@ page import="Model.StatusProduct" %><%--
 =======
 <%@ page import="Model.Pattern" %><%--
 >>>>>>> a54fe1ac2474d64b9373d2e8acf7d69699fc7c06
@@ -22,6 +22,7 @@
   ArrayList<Color> colors = (ArrayList<Color>) request.getAttribute("colors");
   ArrayList<Pattern> patterns = (ArrayList<Pattern>) request.getAttribute("patterns");
   StatReview statReview = (StatReview) request.getAttribute("statReview");
+  boolean isUnavailable = product.getStatus() == StatusProduct.UNAVAILABLE.ordinal();
 %>
 <div class="product-detail col col-lg-4">
   <div class="product_rate-point">
@@ -70,7 +71,15 @@
         <input type="number" class="input-number" name="amount" value="1">
       </div>
       <div class="col-9 col-lg">
-        <button class="btn-text-lg bgr-black hover-bg-red" type="submit">ADD TO CART</button>
+        <c:choose>
+          <c:when test="<%=isUnavailable%>">
+            <button class="btn-text-lg bgr-black hover-bg-red" type="button" disabled>Hết hàng</button>
+          </c:when>
+          <c:otherwise>
+            <button class="btn-text-lg bgr-black hover-bg-red" type="submit">Thêm vào giỏ hàng</button>
+          </c:otherwise>
+        </c:choose>
+
       </div>
     </div>
   </form>

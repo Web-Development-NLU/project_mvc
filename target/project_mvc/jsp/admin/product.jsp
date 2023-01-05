@@ -89,7 +89,7 @@
                 <!-- Content -->
 
                 <div class="container-xxl flex-grow-1 container-p-y">
-                    <h4 class="fw-bold py-3 mb-4"><span class="text-muted fw-light">Sản phẩm /</span> <%=category.getName()%></h4>
+                    <h4 class="fw-bold py-3 mb-4"><span class="text-muted fw-light">Sản phẩm /</span> <%=(category == null) ? "Tất cả sản phẩm" : category.getName()%></h4>
                     <a href="${pageContext.request.contextPath}/admin/createProduct">
                         <button type="button" class="btn btn-outline-dark" style="float: right">Thêm sản phẩm</button>
                     </a>
@@ -110,15 +110,15 @@
                         <nav aria-label="Page navigation" class="col-lg-6">
                             <ul class="pagination justify-content-end">
                                 <li class="page-item prev">
-                                    <a class="page-link" href="${pageContext.request.contextPath}/admin/products?id=<%=category.getId()%>&page=<%=pagination - 1%>"
+                                    <a class="page-link" href="${pageContext.request.contextPath}/admin/products?<%=(category == null) ? "" : "id="+category.getId()+"&"%>page=<%=pagination - 1%>"
                                     ><i class="tf-icon bx bx-chevrons-left"></i
                                     ></a>
                                 </li>
                                 <li class="page-item">
-                                    <a class="page-link" href="${pageContext.request.contextPath}/admin/products?id=<%=category.getId()%>&page=<%=pagination%>"><%=pagination%></a>
+                                    <a class="page-link" href="${pageContext.request.contextPath}/admin/products?<%=(category == null) ? "" : "id="+category.getId()+"&"%>page=<%=pagination%>"><%=pagination%></a>
                                 </li>
                                 <li class="page-item">
-                                    <form action="/admin/products?id=<%=category.getId()%>" method="post">
+                                    <form action="/admin/products?<%=(category == null) ? "" : "id="+category.getId()%>" method="post">
                                         <input
                                                 type="number"
                                                 class="form-control"
@@ -129,7 +129,7 @@
                                     </form>
                                 </li>
                                 <li class="page-item next">
-                                    <a class="page-link" href="${pageContext.request.contextPath}/admin/products?id=<%=category.getId()%>&page=<%=pagination + 1%>"
+                                    <a class="page-link" href="${pageContext.request.contextPath}/admin/products?<%=(category == null) ? "" : "id="+category.getId()+"&"%>&page=<%=pagination + 1%>"
                                     ><i class="tf-icon bx bx-chevrons-right"></i
                                     ></a>
                                 </li>
@@ -170,7 +170,7 @@
                                         }
                                     %>
                                     <tr>
-                                        <td><a href="Detail_Product.html"> <i
+                                        <td><a href="${pageContext.request.contextPath}/admin/editProduct?id=${product.id}"> <i
                                                 class="fab fa-angular fa-lg text-danger me-3"></i> <strong><c:out value="${product.name}"/></strong></a></td>
                                         <td><%=price%> VNĐ</td>
                                         <td><c:out value="${product.createdAt}"/></td>
@@ -185,10 +185,10 @@
                                                     <a class="dropdown-item" href="${pageContext.request.contextPath}/admin/editProduct?id=${product.id}"
                                                     ><i class="bx bx-edit-alt me-1"></i> Chỉnh sửa</a
                                                     >
-                                                    <a class="dropdown-item" href="${pageContext.request.contextPath}/admin/setStatusProduct?id=${product.id}&category=<%=category.getId()%>&value=<%=oppositeStatus%>"
+                                                    <a class="dropdown-item" href="${pageContext.request.contextPath}/admin/setStatusProduct?id=${product.id}&<%=(category == null) ? "" : "category="+category.getId()+"&"%>value=<%=oppositeStatus%>"
                                                     ><i class="bx bx-edit-alt me-1"></i>Đánh dấu là <%=nameOppositeStatus%></a
                                                     >
-                                                    <a class="dropdown-item" href="${pageContext.request.contextPath}/admin/deleteProduct?id=${product.id}&category=<%=category.getId()%>"
+                                                    <a class="dropdown-item" href="${pageContext.request.contextPath}/admin/deleteProduct?id=${product.id}<%=(category == null) ? "" : "&id="+category.getId()%>"
                                                     ><i class="bx bx-trash me-1"></i>xóa</a
                                                     >
                                                 </div>
