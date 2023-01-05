@@ -41,7 +41,7 @@
       <form action="${pageContext.request.contextPath}/myAccount" method="post">
         <div class="checkout-detail row mt-5">
           <div class="checkout-billing col">
-            <div class="checkout-billing_title">Thông tin của tôi\</div>
+            <div class="checkout-billing_title">Thông tin của tôi</div>
 
             <div class="billing-name row">
               <div class="input-secondary col">
