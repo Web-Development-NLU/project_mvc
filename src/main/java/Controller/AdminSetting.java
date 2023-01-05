@@ -1,6 +1,8 @@
 package Controller;
 
 import DTO.AuthorizationData;
+import DTO.UpdateUserDTO;
+import Model.StatusAccount;
 import Model.User;
 import Services.UserService;
 
@@ -28,6 +30,14 @@ public class AdminSetting extends HttpServlet {
         if(errorChangePass != null) {
             request.setAttribute("errorChangePass", "Mật khẩu cũ không chính xác");
         }
+
+        String success = (request.getParameter("success") == null) ? "" : request.getParameter("success");
+        if(success.equals("changePass")) {
+            request.setAttribute("success", "Thay đổi mật khẩu thành công");
+        }else if(success.equals("changeInfo")){
+            request.setAttribute("success", "Cập nhật thông tin thành công");
+        }
+
         User user = this.userService.findById(data.getId(), User.class);
         request.setAttribute("user", user);
 
@@ -37,6 +47,21 @@ public class AdminSetting extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        HttpSession session = request.getSession(true);
+        AuthorizationData data = (AuthorizationData) session.getAttribute("adminLogin");
+        UpdateUserDTO dto = new UpdateUserDTO(
+                request.getParameter("firstName"),
+                request.getParameter("lastName"),
+                request.getParameter("phone"),
+                request.getParameter("country"),
+                request.getParameter("city"),
+                request.getParameter("district"),
+                request.getParameter("address")
+        );
+        dto.setStatus(StatusAccount.ACTIVE.ordinal());
 
+        this.userService.update(data.getId(), dto);
+
+        response.sendRedirect("/admin/setting?success=changeInfo");
     }
 }

@@ -34,7 +34,7 @@ public class ChangePasswordAdmin extends HttpServlet {
             return;
         }
 
-        response.sendRedirect("/admin/setting");
+        response.sendRedirect("/admin/setting?success=changePass");
 
     }
 }

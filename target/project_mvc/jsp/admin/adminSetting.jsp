@@ -6,6 +6,8 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ page isELIgnored="false" %>
+
 <!DOCTYPE html>
 
 <html
@@ -36,21 +38,21 @@
   />
 
   <!-- Icons. Uncomment required icon fonts -->
-  <link rel="stylesheet" href="../assets/vendor/fonts/boxicons.css" />
+  <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/vendor/fonts/boxicons.css" />
 
   <!-- Core CSS -->
-  <link rel="stylesheet" href="../assets/vendor/css/style.css">
+  <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/vendor/css/style.css">
   <!-- Vendors CSS -->
-  <link rel="stylesheet" href="../assets/vendor/libs/perfect-scrollbar/perfect-scrollbar.css" />
+  <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/vendor/libs/perfect-scrollbar/perfect-scrollbar.css" />
 
   <!-- Page CSS -->
 
   <!-- Helpers -->
-  <script src="../assets/vendor/js/helpers.js"></script>
+  <script src="${pageContext.request.contextPath}/assets/vendor/js/helpers.js"></script>
 
   <!--! Template customizer & Theme config files MUST be included after core stylesheets and helpers.js in the <head> section -->
   <!--? Config:  Mandatory theme config file contain global vars & default theme options, Set your preferred theme option in this file.  -->
-  <script src="../assets/js_admin/config.js"></script>
+  <script src="${pageContext.request.contextPath}/assets/js_admin/config.js"></script>
 </head>
 
 <body>
@@ -60,6 +62,7 @@
 <%
   User user = (User) request.getAttribute("user");
   String errorChangePass = (request.getAttribute("errorChangePass") == null) ? null : request.getAttribute("errorChangePass").toString();
+  String success = (request.getAttribute("success") == null) ? null : request.getAttribute("success").toString();
 %>
 <!-- Layout wrapper -->
 <div class="layout-wrapper layout-content-navbar">
@@ -83,7 +86,18 @@
 
         <div class="container-xxl flex-grow-1 container-p-y">
           <h4 class="fw-bold py-3 mb-4"><span class="text-muted fw-light">Cài đặt /</span>Tài khoản</h4>
-
+          <c:if test="<%=errorChangePass != null%>">
+            <div class="alert-danger alert alert-dismissible" role="alert">
+              <strong>Không thành công</strong> <%=errorChangePass%>
+              <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+          </c:if>
+          <c:if test="<%=success != null%>">
+            <div class="alert-success alert alert-dismissible" role="alert">
+              <strong>Thành công</strong> <%=success%>
+              <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+          </c:if>
           <div class="row">
             <div class="col-md-12">
 
@@ -92,7 +106,7 @@
                 <!-- Account -->
                 <hr class="my-0" />
                 <div class="card-body">
-                  <form id="formAccountSettings" method="POST" onsubmit="return false">
+                  <form id="formAccountSettings" action="${pageContext.request.contextPath}/admin/setting" method="POST">
                     <div class="row">
                       <div class="mb-3 col-md-6">
                         <label for="firstName" class="form-label">Tên</label>
@@ -106,11 +120,11 @@
                         />
                       </div>
                       <div class="mb-3 col-md-6">
-                        <label for="lastName" class="form-label">Last Name</label>
+                        <label for="lastName" class="form-label">Họ</label>
                         <input class="form-control" type="text" name="lastName" id="lastName" value="<%=(user.getLastName() == null) ? "" : user.getLastName()%>" />
                       </div>
                       <div class="mb-3 col-md-6">
-                        <label for="email" class="form-label">E-mail</label>
+                        <label for="email" class="form-label">Email</label>
                         <input
                                 class="form-control"
                                 type="text"
@@ -122,12 +136,12 @@
                         />
                       </div>
                       <div class="mb-3 col-md-6">
-                        <label class="form-label" for="phoneNumber">Phone Number</label>
+                        <label class="form-label" for="phoneNumber">Số điện thoại</label>
                         <div class="input-group input-group-merge">
                           <input
                                   type="text"
                                   id="phoneNumber"
-                                  name="phoneNumber"
+                                  name="phone"
                                   class="form-control"
                                   placeholder="202 555 0111"
                                   value="<%=(user.getPhone() == null) ? "" : user.getPhone()%>"
@@ -136,25 +150,24 @@
                       </div>
                       <div class="mb-3 col-md-6">
                         <label for="country" class="form-label">Quốc gia</label>
-                        <input class="form-control" type="text" id="country" name="country" placeholder="California" />
+                        <input class="form-control" type="text" id="country" name="country" placeholder="California" value="<%=(user.getCountry() == null) ? "" : user.getCountry()%>" />
                       </div>
                       <div class="mb-3 col-md-6">
                         <label for="city" class="form-label">Thành phố</label>
-                        <input class="form-control" type="text" id="city" name="city" placeholder="California" />
+                        <input class="form-control" type="text" id="city" name="city" placeholder="California" value="<%=(user.getCity() == null) ? "" : user.getCity()%>" />
                       </div>
                       <div class="mb-3 col-md-6">
                         <label for="district" class="form-label">Quận/Huyện</label>
-                        <input class="form-control" type="text" id="district" name="district" placeholder="California" />
+                        <input class="form-control" type="text" id="district" name="district" placeholder="California" value="<%=(user.getDistrict() == null) ? "" : user.getDistrict()%>" />
                       </div>
 
                       <div class="mb-3 col-md-6">
                         <label for="address" class="form-label">Address</label>
-                        <input type="text" class="form-control" id="address" name="address" placeholder="Address" />
+                        <input type="text" class="form-control" id="address" name="address" placeholder="Address" <%=(user.getAddress() == null) ? "" : user.getAddress()%> />
                       </div>
                     </div>
                     <div class="mt-2">
-                      <button type="submit" class="btn btn-primary me-2">Save changes</button>
-                      <button type="reset" class="btn btn-outline-secondary">Cancel</button>
+                      <button type="submit" class="btn btn-primary me-2">Lưu thay đổi</button>
                     </div>
                   </form>
                 </div>
@@ -162,9 +175,6 @@
               </div>
               <div class="card">
                 <h5 class="card-header">Đổi mật khẩu</h5>
-                <c:if test="<%=errorChangePass != null%>">
-                  <div class="alert alert-danger" role="alert"><%=errorChangePass%></div>
-                </c:if>
                 <div class="card-body">
                   <form id="formAccountDeactivation" action="${pageContext.request.contextPath}/admin/changePassword" method="post">
                     <div class="mb-3">
@@ -183,6 +193,7 @@
               </div>
             </div>
           </div>
+
         </div>
         <!-- / Content -->
 
@@ -214,21 +225,21 @@
 
 <!-- Core JS -->
 <!-- build:js assets/vendor/js/core.js -->
-<script src="../assets/vendor/libs/jquery/jquery.js"></script>
-<script src="../assets/vendor/libs/popper/popper.js"></script>
-<script src="../assets/vendor/js/bootstrap.js"></script>
-<script src="../assets/vendor/libs/perfect-scrollbar/perfect-scrollbar.js"></script>
+<script src="${pageContext.request.contextPath}/assets/vendor/libs/jquery/jquery.js"></script>
+<script src="${pageContext.request.contextPath}/assets/vendor/libs/popper/popper.js"></script>
+<script src="${pageContext.request.contextPath}/assets/vendor/js/bootstrap.js"></script>
+<script src="${pageContext.request.contextPath}/assets/vendor/libs/perfect-scrollbar/perfect-scrollbar.js"></script>
 
-<script src="../assets/vendor/js/menu.js"></script>
+<script src="${pageContext.request.contextPath}/assets/vendor/js/menu.js"></script>
 <!-- endbuild -->
 
 <!-- Vendors JS -->
 
 <!-- Main JS -->
-<script src="../assets/js_admin/main.js"></script>
+<script src="${pageContext.request.contextPath}/assets/js_admin/main.js"></script>
 
 <!-- Page JS -->
-<script src="../assets/js_admin/pages-account-settings-account.js"></script>
+<script src="${pageContext.request.contextPath}/assets/js_admin/pages-account-settings-account.js"></script>
 
 <!-- Place this tag in your head or just before your close body tag. -->
 <script async defer src="https://buttons.github.io/buttons.js"></script>
