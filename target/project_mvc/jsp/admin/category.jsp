@@ -1,6 +1,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page import="java.util.ArrayList" %>
 <%@ page import="Model.Category" %>
+<%@ page import="java.text.DecimalFormat" %>
 <%@ page isELIgnored="false" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %><%--
   Created by IntelliJ IDEA.
@@ -54,6 +55,9 @@
 <body>
 <%
     ArrayList<Category> categories = (ArrayList<Category>) request.getAttribute("categories");
+    int pagination = (int) request.getAttribute("pagination");
+    String numPage = DecimalFormat.getIntegerInstance().format(Double.parseDouble(request.getAttribute("numPage").toString()));
+    int totalPage = Integer.parseInt(numPage);
 %>
 <!-- Layout wrapper -->
 <div class="layout-wrapper layout-content-navbar">
@@ -75,6 +79,52 @@
             <div class="content-wrapper">
                 <!-- Content -->
                 <div class="container-xxl flex-grow-1 container-p-y">
+                    <h4 class="fw-bold py-3 mb-4"><span class="text-muted fw-light"></span>Danh mục</h4>
+                    <a href="${pageContext.request.contextPath}/admin/createCategory">
+                        <button type="button" class="btn btn-outline-dark" style="float: right">Thêm danh mục</button>
+                    </a>
+                    <hr class="my-5"/>
+                    <div class="row">
+                        <nav aria-label="breadcrumb" class="col-lg-6">
+                            <ol class="breadcrumb">
+                                <li class="breadcrumb-item">
+                                    <a href="javascript:void(0);"> Trang <%=pagination%></a>
+                                </li>
+                                <li class="breadcrumb-item">
+                                    <a href="javascript:void(0);"><%=numPage%></a>
+                                </li>
+                            </ol>
+                        </nav>
+                        <!-- Basic Bootstrap Table -->
+                        <nav aria-label="Page navigation" class="col-lg-6">
+                            <ul class="pagination justify-content-end">
+                                <li class="page-item prev" style="display:<%=(pagination == 1) ? "none" : "block"%> ">
+                                    <a class="page-link" href="${pageContext.request.contextPath}/admin/category?page=<%= pagination - 1%>"
+                                    ><i class="tf-icon bx bx-chevrons-left"></i
+                                    ></a>
+                                </li>
+                                <li class="page-item">
+                                    <a class="page-link" href="${pageContext.request.contextPath}/admin/category?page=<%=pagination%>"><%=pagination%></a>
+                                </li>
+                                <li class="page-item">
+                                    <form action="${pageContext.request.contextPath}/admin/category" method="post">
+                                        <input
+                                                type="number"
+                                                class="form-control"
+                                                name="page"
+                                                autofocus
+                                                min="1"
+                                        />
+                                    </form>
+                                </li>
+                                <li class="page-item next" style="display:<%=(pagination == totalPage) ? "none" : "block"%> ">
+                                    <a class="page-link" href="${pageContext.request.contextPath}/admin/category?page=<%= pagination + 1%>"
+                                    ><i class="tf-icon bx bx-chevrons-right"></i
+                                    ></a>
+                                </li>
+                            </ul>
+                        </nav>
+                    </div>
                     <div class="card">
                         <h5 class="card-header">Category</h5>
                         <div class="table-responsive text-nowrap">
@@ -101,7 +151,7 @@
                                                 <div class="dropdown-menu">
                                                     <a class="dropdown-item" href="${pageContext.request.contextPath}/admin/editCategory?id=${category.id}"><i
                                                             class="bx bx-edit-alt me-2"></i> Edit</a>
-                                                    <a class="dropdown-item" href="javascript:void(0);"><i
+                                                    <a class="dropdown-item" href="${pageContext.request.contextPath}/admin/editCategory?id=${category.id}&delete=true"><i
                                                             class="bx bx-trash me-2"></i> Delete</a>
                                                 </div>
                                             </div>

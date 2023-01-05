@@ -57,12 +57,6 @@
     int pagination = (int) request.getAttribute("pagination");
     String numPage = DecimalFormat.getIntegerInstance().format(Double.parseDouble(request.getAttribute("numPage").toString()));
     int totalPage = Integer.parseInt(numPage);
-    boolean noPre = pagination == 1;
-    boolean noNext = pagination == totalPage;
-    System.out.println("Page"+pagination);
-    System.out.println(totalPage);
-    System.out.println(noPre+"no pre");
-    System.out.println(noNext+"no next");
 %>
 <!-- Layout wrapper -->
 <div class="layout-wrapper layout-content-navbar">

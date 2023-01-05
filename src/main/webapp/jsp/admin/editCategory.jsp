@@ -53,6 +53,8 @@
 <body>
 <%
     Category categories = (Category) request.getAttribute("categories");
+    boolean nameExists = Boolean.parseBoolean(request.getParameter("nameExists"));
+    String name = request.getParameter("name");
 %>
 <!-- Layout wrapper -->
 <div class="layout-wrapper layout-content-navbar">
@@ -84,12 +86,13 @@
               </div>
               <div class="card-body">
                 <form action="${pageContext.request.contextPath}/admin/editCategory" method="post">
-                  <div class="row mb-3">
+                  <div class="row mb-3" style="margin-bottom: 0 !important;">
                     <label class="col-sm-2 col-form-label" for="name">Tên danh mục</label>
                     <div class="col-sm-10">
                       <input type="text" class="form-control" id="name" name="name"
-                             placeholder="name" required value="<%=categories.getName()%>"/>
+                             placeholder="name" required value="${categories != null ? categories.getName() : name}"/>
                     </div>
+                    <div class="" id="error_code" style="color: red; padding: 8px 0;margin-left: 17.8%; min-height: 16px">${nameExists == true ? "Tên danh mục đã tồn tại":""}</div>
                   </div>
                   <div class="row justify-content-end">
                     <div class="col-sm-10">
