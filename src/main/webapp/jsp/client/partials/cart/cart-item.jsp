@@ -14,10 +14,11 @@
     int amount = Integer.parseInt(request.getParameter("amount"));
     String pattern = request.getParameter("pattern");
     String color = request.getParameter("color");
+    String image = request.getParameter("image");
 %>
 <tr class="cart-item">
     <td class="cart-item_img"><img
-            src="https://caston.familab.net/wp-content/uploads/2021/09/product_pilke-18-natural-birch-with-light-hr_2-420x420.jpg">
+            src="<%=image%>">
     </td>
     <td>
         <div><a href="#"><h4><%=name%></h4></a></div>

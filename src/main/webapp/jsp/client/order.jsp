@@ -1,6 +1,7 @@
 <%@ page import="java.util.ArrayList" %>
 <%@ page import="DTO.CartDTO" %>
-<%@ page import="Model.User" %><%--
+<%@ page import="Model.User" %>
+<%@ page import="java.text.DecimalFormat" %><%--
   Created by IntelliJ IDEA.
   User: Quang Tho
   Date: 03/12/2022
@@ -38,6 +39,12 @@
         address = (user.getAddress() != null) ? user.getAddress() : "";
         phone = (user.getPhone() != null) ? user.getPhone() : "";
         email = (user.getEmail() != null) ? user.getEmail() : "";
+    }
+
+    double sumPrice = 0;
+
+    for(CartDTO cart: carts) {
+        sumPrice += cart.getPrice() * cart.getAmount();
     }
 %>
 <div id="order-container">
@@ -119,6 +126,7 @@
                         <div class="action-carts">
                             <c:forEach items="<%= carts %>" var="cart">
                                 <jsp:include page="partials/order/action-cart.jsp">
+                                    <jsp:param name="image" value="${cart.image}"/>
                                     <jsp:param name="name" value="${cart.name}"/>
                                     <jsp:param name="price" value="${cart.price}"/>
                                     <jsp:param name="amount" value="${cart.amount}"/>
@@ -133,7 +141,7 @@
                         <div class="action-item-title monts">TỔNG GIÁ</div>
                         <div class="action-item-des">
                             <div class="card-price">
-                                <span class="current-price">650.00$</span>
+                                <span class="current-price"><%=DecimalFormat.getIntegerInstance().format(sumPrice)%> VNĐ</span>
                             </div>
                         </div>
                     </div>
