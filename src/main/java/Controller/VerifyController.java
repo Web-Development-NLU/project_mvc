@@ -3,6 +3,7 @@ package Controller;
 import DTO.AuthorizationData;
 import DTO.UpdateUserDTO;
 import Model.MailContent;
+import Model.StatusAccount;
 import Model.User;
 import Services.AuthenticationService;
 import Services.MailService;
@@ -58,7 +59,7 @@ public class VerifyController extends HttpServlet {
                     request.setAttribute("error", "Mã xác minh sai hãy nhập lại!!");
                     request.getRequestDispatcher("/jsp/client/verifyAccount.jsp").forward(request, response);
                 }else {
-                    user.setStatus(1);
+                    user.setStatus(StatusAccount.ACTIVE.ordinal());
                     UpdateUserDTO dto = new UpdateUserDTO(user);
                     this.userService.update(id, dto);
                     session.removeAttribute("id");

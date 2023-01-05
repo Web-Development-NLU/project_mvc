@@ -14,12 +14,13 @@
   int amount = Integer.parseInt(request.getParameter("amount"));
   String pattern = request.getParameter("pattern");
   String color = request.getParameter("color");
+  String image = request.getParameter("image");
 %>
 <div class="action-cart">
   <div class="checkout-card-product">
     <div class="product-info-container">
       <div class="img-product">
-        <img src="../assets/imgs/card-shop/product_chair_wood.jpg" alt="">
+        <img src="<%=image%>" alt="">
       </div>
       <div class="product-info">
         <div class="product-item-name-swap">
@@ -43,7 +44,7 @@
     </div>
   </div>
   <div class="checkout-action-item">
-    <div class="action-item-title monts">SUBTOTAL</div>
+    <div class="action-item-title monts">Tổng giá</div>
     <div class="action-item-des">
       <div class="card-price">
         <span class="current-price">đ<%=DecimalFormat.getIntegerInstance().format(amount * price)%></span>

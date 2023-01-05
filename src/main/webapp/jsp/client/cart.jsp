@@ -1,5 +1,6 @@
 <%@ page import="java.util.ArrayList" %>
 <%@ page import="DTO.CartDTO" %>
+<%@ page import="java.text.DecimalFormat" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page isELIgnored="false" %>
@@ -12,6 +13,12 @@
 <body>
 <%
     ArrayList<CartDTO> carts = (ArrayList<CartDTO>) request.getAttribute("carts");
+    double sumPrice = 0;
+
+    for(CartDTO cart: carts) {
+        sumPrice += cart.getPrice() * cart.getAmount();
+    }
+
 %>
 <div id="cart-container">
     <header>
@@ -59,6 +66,7 @@
                             <tbody class="cart-list">
                             <c:forEach items="<%= carts %>" var="cart">
                                 <jsp:include page="partials/cart/cart-item.jsp">
+                                    <jsp:param name="image" value="${cart.image}"/>
                                     <jsp:param name="name" value="${cart.name}"/>
                                     <jsp:param name="price" value="${cart.price}"/>
                                     <jsp:param name="id" value="${cart.id}"/>
@@ -82,35 +90,25 @@
                         <table class="table table-bordered">
                             <tbody>
                             <tr class="table-secondary">
-                                <th>CART TOTALS</th>
+                                <th>Tổng</th>
                                 <th></th>
-                            </tr>
-                            <tr>
-                                <th class="cart-info-title">
-                                    Subtotal
-                                </th>
-                                <td class="cart-info-des">
-                                    <div class="card-price">
-                                        <span class="current-price">650.00$</span>
-                                    </div>
-                                </td>
                             </tr>
                             </tbody>
 
                             <tfoot>
                             <tr>
                                 <th class="cart-info-title">
-                                    TOTALS
+                                    Tổng giá
                                 </th>
                                 <td class="cart-info-des">
                                     <div class="card-price">
-                                        <span class="current-price">650.00$</span>
+                                        <span class="current-price"><%=DecimalFormat.getIntegerInstance().format(sumPrice)%> VNĐ</span>
                                     </div>
                                 </td>
                             </tr>
                             <tr>
                                 <td colspan="100">
-                                    <a href="${pageContext.request.contextPath}/order"><button class="btn-text-lg bgr-red hover-bg-black">ORDER</button></a>
+                                    <a href="${pageContext.request.contextPath}/order"><button class="btn-text-lg bgr-red hover-bg-black">Đặt hàng</button></a>
                                 </td>
                             </tr>
                             </tfoot>

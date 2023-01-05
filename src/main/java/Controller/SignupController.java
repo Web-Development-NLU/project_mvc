@@ -1,6 +1,8 @@
 package Controller;
 
 import Model.MailContent;
+import Model.StatusAccount;
+import Model.TypeAccount;
 import Model.User;
 import Services.AuthenticationService;
 import Services.MailService;
@@ -48,7 +50,7 @@ public class SignupController extends HttpServlet {
                 request.getRequestDispatcher("/jsp/client/authentication.jsp").forward(request, response);
             }else {
                 String passwordHash = BCrypt.withDefaults().hashToString(8, password.toCharArray());
-                User model = new User(email, passwordHash, 0, 0);
+                User model = new User(email, passwordHash, StatusAccount.DISABLE.ordinal(), TypeAccount.USER.ordinal());
 
                 String id = this.userService.create(model);
                 String rand = RandomStringUtils.randomAlphabetic(6);

@@ -42,15 +42,17 @@ public class AddToCartController extends HttpServlet {
         HttpSession session = request.getSession(true);
         AuthorizationData authorizationData = (session.getAttribute("authorization") == null)
                 ? new AuthorizationData() : (AuthorizationData) session.getAttribute("authorization");
-
+        String image = product.getThumbnail().split(",")[0];
         if((boolean) request.getAttribute("logged")) {
             Cart cart = new Cart(
                     authorizationData.getId(),
                     product.getId(),
                     pattern,
                     color,
-                    amount
+                    amount,
+                    image
             );
+
             this.userService.setCart(authorizationData.getId(), cart);
             authorizationData.setCarts((ArrayList<CartDTO>) this.userService.getCart(authorizationData.getId()));
         }else {
@@ -61,7 +63,8 @@ public class AddToCartController extends HttpServlet {
                     product.getPrice(),
                     product.getCategoryId(),
                     color,
-                    pattern
+                    pattern,
+                    image
             ));
         }
         session.setAttribute("authorization", authorizationData);
