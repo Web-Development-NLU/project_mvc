@@ -73,4 +73,8 @@ public class UpdateUserDTO implements BaseDTO{
     public int getStatus() {
         return status;
     }
+
+    public void setStatus(int status) {
+        this.status = status;
+    }
 }

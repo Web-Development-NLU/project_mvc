@@ -1,5 +1,6 @@
 <%@ page import="java.util.ArrayList" %>
 <%@ page import="Model.Code" %>
+<%@ page import="java.text.DecimalFormat" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page isELIgnored="false" %><%--
   Created by IntelliJ IDEA.
@@ -53,6 +54,15 @@
 <body>
 <%
     ArrayList<Code> codes = (ArrayList<Code>) request.getAttribute("codes");
+    int pagination = (int) request.getAttribute("pagination");
+    String numPage = DecimalFormat.getIntegerInstance().format(Double.parseDouble(request.getAttribute("numPage").toString()));
+    int totalPage = Integer.parseInt(numPage);
+    boolean noPre = pagination == 1;
+    boolean noNext = pagination == totalPage;
+    System.out.println("Page"+pagination);
+    System.out.println(totalPage);
+    System.out.println(noPre+"no pre");
+    System.out.println(noNext+"no next");
 %>
 <!-- Layout wrapper -->
 <div class="layout-wrapper layout-content-navbar">
@@ -74,6 +84,52 @@
             <div class="content-wrapper">
                 <!-- Content -->
                 <div class="container-xxl flex-grow-1 container-p-y">
+                    <h4 class="fw-bold py-3 mb-4"><span class="text-muted fw-light"></span>Mã giảm giá</h4>
+                    <a href="${pageContext.request.contextPath}/admin/createCode">
+                        <button type="button" class="btn btn-outline-dark" style="float: right">Thêm mã giảm giá</button>
+                    </a>
+                    <hr class="my-5"/>
+                    <div class="row">
+                        <nav aria-label="breadcrumb" class="col-lg-6">
+                            <ol class="breadcrumb">
+                                <li class="breadcrumb-item">
+                                    <a href="javascript:void(0);"> Trang <%=pagination%></a>
+                                </li>
+                                <li class="breadcrumb-item">
+                                    <a href="javascript:void(0);"><%=numPage%></a>
+                                </li>
+                            </ol>
+                        </nav>
+                        <!-- Basic Bootstrap Table -->
+                        <nav aria-label="Page navigation" class="col-lg-6">
+                            <ul class="pagination justify-content-end">
+                                <li class="page-item prev" style="display:<%=(pagination == 1) ? "none" : "block"%> ">
+                                    <a class="page-link" href="${pageContext.request.contextPath}/admin/code?page=<%= pagination - 1%>"
+                                    ><i class="tf-icon bx bx-chevrons-left"></i
+                                    ></a>
+                                </li>
+                                <li class="page-item">
+                                    <a class="page-link" href="${pageContext.request.contextPath}/admin/code?page=<%=pagination%>"><%=pagination%></a>
+                                </li>
+                                <li class="page-item">
+                                    <form action="${pageContext.request.contextPath}/admin/code" method="post">
+                                        <input
+                                                type="number"
+                                                class="form-control"
+                                                name="page"
+                                                autofocus
+                                                min="1"
+                                        />
+                                    </form>
+                                </li>
+                                <li class="page-item next" style="display:<%=(pagination == totalPage) ? "none" : "block"%> ">
+                                    <a class="page-link" href="${pageContext.request.contextPath}/admin/code?page=<%= pagination + 1%>"
+                                    ><i class="tf-icon bx bx-chevrons-right"></i
+                                    ></a>
+                                </li>
+                            </ul>
+                        </nav>
+                    </div>
                     <div class="card">
                         <h5 class="card-header">Table Basic</h5>
                         <div class="table-responsive text-nowrap">
@@ -100,7 +156,7 @@
                                                 <div class="dropdown-menu">
                                                     <a class="dropdown-item" href="${pageContext.request.contextPath}/admin/editCode?id=${code.id}"><i
                                                             class="bx bx-edit-alt me-1"></i> Edit</a>
-                                                    <a class="dropdown-item" href="javascript:void(0);"><i
+                                                    <a class="dropdown-item" href="${pageContext.request.contextPath}/admin/editCode?id=${code.id}&delete=true"><i
                                                             class="bx bx-trash me-1"></i> Delete</a>
                                                 </div>
                                             </div>

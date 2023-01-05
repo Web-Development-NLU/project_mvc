@@ -30,6 +30,12 @@ public class EditCode extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String id = request.getParameter("id");
+        boolean delete = Boolean.parseBoolean(request.getParameter("delete"));
+        if(delete) {
+            this.codeService.delete(id, Code.class);
+            response.sendRedirect("/admin/code");
+            return;
+        }
         String value = request.getParameter("value");
         String productId = request.getParameter("productId");
         Code code;
@@ -60,8 +66,13 @@ public class EditCode extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        Boolean errorValueCode = false,errorInput= false,errorCategoryId = false, errorProductId = false;
         String id = request.getParameter("id");
+        boolean delete = Boolean.parseBoolean(request.getParameter("delete"));
+        if(delete){
+            response.sendRedirect("/admin/editCode?id="+id+"&delete=true");
+            return;
+        }
+        Boolean errorValueCode = false,errorInput= false,errorCategoryId = false, errorProductId = false;
         String value = request.getParameter("value");
         String productId = request.getParameter("productId");
         int categoryId = 0;
@@ -77,7 +88,7 @@ public class EditCode extends HttpServlet {
             errorInput = true;
         }
         if(errorInput || errorCategoryId || errorProductId || errorValueCode) {
-            response.sendRedirect("/admin/editCode?value="+value+"&productId="+productId+"&categoryId="+categoryId+"&errorProductId="+errorProductId+"&errorInput="+errorInput+"&errorCategoryId="+errorCategoryId+"&errorValueCode="+errorValueCode);
+            response.sendRedirect("/admin/editCode?id="+id+"&value="+value+"&productId="+productId+"&categoryId="+categoryId+"&errorProductId="+errorProductId+"&errorInput="+errorInput+"&errorCategoryId="+errorCategoryId+"&errorValueCode="+errorValueCode);
             return;
         }
         UpdateCodeDTO dto = new UpdateCodeDTO(value,categoryId, productId);

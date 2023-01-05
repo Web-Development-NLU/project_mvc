@@ -25,6 +25,7 @@
             <jsp:param name="thumbnails" value="${product.thumbnail}"/>
             <jsp:param name="price" value="${product.price}"/>
             <jsp:param name="id" value="${product.id}"/>
+            <jsp:param name="avg" value="${product.avg}"/>
           </jsp:include>
         </c:forEach>
       </div>

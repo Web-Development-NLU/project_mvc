@@ -6,15 +6,17 @@ public class Cart extends BaseModel{
     private String pattern;
     private String color;
     private int amount;
+    private String image;
     public Cart() {
     }
 
-    public Cart(String idUser, String idProduct, String pattern, String color, int amount) {
+    public Cart(String idUser, String idProduct, String pattern, String color, int amount, String image) {
         this.idUser = idUser;
         this.idProduct = idProduct;
         this.pattern = pattern;
         this.color = color;
         this.amount = amount;
+        this.image = image;
     }
 
     public String getIdUser() {
@@ -55,5 +57,13 @@ public class Cart extends BaseModel{
 
     public void setAmount(int amount) {
         this.amount = amount;
+    }
+
+    public String getImage() {
+        return image;
+    }
+
+    public void setImage(String image) {
+        this.image = image;
     }
 }

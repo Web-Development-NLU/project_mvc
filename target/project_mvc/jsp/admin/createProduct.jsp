@@ -120,7 +120,7 @@
                                         <div class="col-sm-10">
                                             <select name="category" id="category"
                                                     class="chosen-select form-control form-control-chosen" required>
-                                                <option>Chọn danh mục</option>
+                                                <option value="0">Chọn danh mục</option>
                                                 <c:forEach items="<%=categories%>" var="category">
                                                     <option value="${category.id}">${category.name}</option>
                                                 </c:forEach>
@@ -133,7 +133,7 @@
                                         <div class="col-sm-10">
                                             <select name="size" id="size"
                                                     class="chosen-select form-control form-control-chosen" required>
-                                                <option>Chọn kích cỡ</option>
+                                                <option value="0">Chọn kích cỡ</option>
                                                 <option value="1">Lớn</option>
                                                 <option value="2">Trung Bình</option>
                                                 <option value="3">Nhỏ</option>

@@ -27,7 +27,7 @@
         <th>Màu sắc</th>
         <td>
           <c:forEach items="<%=colors%>" var="color">
-            <c:out value="${color}"/>
+            <c:out value="${color.name}, "/>
           </c:forEach>
         </td>
       </tr>

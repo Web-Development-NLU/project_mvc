@@ -2,6 +2,7 @@ package DTO;
 
 public class CartDTO {
     private static int auto = 0;
+    private String image;
     private int id;
     private String name;
     private int amount = 1;
@@ -13,7 +14,7 @@ public class CartDTO {
 
     public CartDTO () {}
 
-    public CartDTO(String name, int amount, String idProduct, double price, int categoryId, String color, String pattern) {
+    public CartDTO(String name, int amount, String idProduct, double price, int categoryId, String color, String pattern, String image) {
         auto++;
         this.id = auto;
         this.name = name;
@@ -23,6 +24,7 @@ public class CartDTO {
         this.categoryId = categoryId;
         this.color = color;
         this.pattern = pattern;
+        this.image = image;
     }
 
     public String getName() {
@@ -86,5 +88,13 @@ public class CartDTO {
 
     public void setIdProduct(String idProduct) {
         this.idProduct = idProduct;
+    }
+
+    public String getImage() {
+        return image;
+    }
+
+    public void setImage(String image) {
+        this.image = image;
     }
 }
