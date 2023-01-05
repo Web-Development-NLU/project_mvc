@@ -2,6 +2,7 @@ package Controller;
 
 import Model.Product;
 import Services.ProductService;
+import Services.ReviewService;
 
 import javax.servlet.*;
 import javax.servlet.http.*;
@@ -12,11 +13,13 @@ import java.io.IOException;
 public class ProductController extends HttpServlet {
 
     private ProductService productService;
+    private ReviewService reviewService;
 
     @Override
     public void init() throws ServletException {
         super.init();
         this.productService = new ProductService("product");
+        this.reviewService = new ReviewService("review");
     }
 
     @Override
@@ -35,6 +38,8 @@ public class ProductController extends HttpServlet {
             response.sendRedirect("/products");
             return;
         }
+        request.setAttribute("reviews", this.reviewService.findByProductId(id));
+        request.setAttribute("statReview", this.reviewService.getStat(id));
         request.setAttribute("product", product);
         request.setAttribute("patterns", this.productService.getPatterns(id));
         request.setAttribute("colors", this.productService.getColors(id));

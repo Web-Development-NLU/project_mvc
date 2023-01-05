@@ -27,7 +27,7 @@ public abstract class BaseService<M extends IModel> {
     }
 
     public M findById(String id, Class<M> classes) {
-        if(id.isEmpty()) {
+        if(id == null || id.isEmpty()) {
             return null;
         }
 

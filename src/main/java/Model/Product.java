@@ -14,6 +14,7 @@ public class Product extends BaseModelUUID {
     private String material;
     private String thumbnail;
     private int categoryId;
+    private double avg;
 
     public Product() {
     }
@@ -112,6 +113,13 @@ public class Product extends BaseModelUUID {
         this.categoryId = categoryId;
     }
 
+    public double getAvg() {
+        return avg;
+    }
+
+    public void setAvg(double avg) {
+        this.avg = avg;
+    }
     @Override
     public boolean equals(Object obj) {
         return this.id.equals(((Product) obj).getId());

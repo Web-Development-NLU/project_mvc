@@ -2,9 +2,11 @@ package Services;
 
 import DTO.BaseDTO;
 import DTO.FilterProduct;
+import DTO.UpdateProductDTO;
 import Model.Color;
 import Model.Pattern;
 import Model.Product;
+import Model.StatusProduct;
 
 import javax.management.Query;
 import java.time.LocalDate;
@@ -15,10 +17,20 @@ public class ProductService extends BaseService<Product> {
     public ProductService(String tableName) {
         super(tableName);
     }
+    public void setStatus(String id, int value) {
+        this.jdbi.useHandle(handle -> {
+
+            handle.createUpdate("UPDATE " + this.tableName +
+                    " SET status = :status " +
+                    "WHERE id = :id"
+            ).bind("id", id).bind("status", value).execute();
+        });
+    }
 
     public ArrayList<Product> queryByBuilder(FilterProduct filter) {
         return (ArrayList<Product>) this.jdbi.withHandle(handle -> {
-           String sql = "SELECT pd.id, pd.thumbnail, pd.name, pd.price FROM " + this.tableName + " pd";
+           String sql = "SELECT pd.id, pd.thumbnail, pd.name, pd.price, pd.createdAt, pd.status, AVG(r.point) avg FROM " + this.tableName + " pd";
+            sql += " LEFT JOIN review r ON r.productId = pd.id";
            if(filter.pattern != null){
                sql += " INNER JOIN patternForProduct p ON pd.id = p.idProduct AND p.idPattern = " + filter.pattern;
            }
@@ -45,6 +57,7 @@ public class ProductService extends BaseService<Product> {
                    sql += " WHERE pd.price >= " + filter.minFilter;
                }
            }
+           sql += " GROUP BY pd.id ORDER BY pd.createdAt DESC";
 
            return handle.createQuery(sql).mapToBean(Product.class).list();
         });
@@ -56,8 +69,16 @@ public class ProductService extends BaseService<Product> {
             String id = handle.createQuery("SELECT UUID()").mapTo(String.class).first();
             model.setId(id);
             handle.createUpdate(
-                    "INSERT INTO " + this.tableName + " (id, name, price, shortDescription, size, status, description, dimensions, material, thumbnail, categoryId, createdAt) " +
-                            "VALUES (:id, :name, :price, :shortDescription, :size, :status, :description, :dimensions, :material, :thumbnail, :categoryId, :createdAt)"
+                    "INSERT INTO " + this.tableName + " (id, name, price, shortDescription," +
+                            ((model.getSize() == 0) ? "" : "size,") +
+                            " status, description, dimensions, material, thumbnail, "+
+                            ((model.getCategoryId() == 0) ? "" : "categoryId, ")
+                            +"createdAt) " +
+                            "VALUES (:id, :name, :price, :shortDescription, " +
+                            ((model.getSize() == 0) ? "" : ":size, ") + "" +
+                            ":status, :description, :dimensions, :material, :thumbnail, " +
+                            ((model.getCategoryId() == 0) ? "" : ":categoryId, ")
+                            +":createdAt)"
             ).bindBean(model).execute();
 
             return id;
@@ -67,6 +88,7 @@ public class ProductService extends BaseService<Product> {
     @Override
     public boolean update(String id, BaseDTO model) {
         Product product = this.findById(id, Product.class);
+        UpdateProductDTO productDTO = (UpdateProductDTO) model;
 
         if (product != null) {
             this.jdbi.useHandle(handle -> {
@@ -76,13 +98,13 @@ public class ProductService extends BaseService<Product> {
                         "name = :name, " +
                         "price = :price, " +
                         "shortDescription = :shortDescription, " +
-                        "size = :size, " +
+                        ((productDTO.getSize() == 0) ? "size = null, " : "size = :size, ") +
                         "status = :status," +
                         "description = :description, " +
                         "dimensions = :dimensions, " +
                         "material = :material, " +
                         "thumbnail = :thumbnail, " +
-                        "categoryId = :categoryId, " +
+                        ((productDTO.getCategoryId() == 0) ? "categoryId = null, " : "categoryId = :categoryId, ") +
                         "updatedAt = :updatedAt " +
                         "WHERE id = :id"
                 ).bind("id", id).bindBean(model).execute();

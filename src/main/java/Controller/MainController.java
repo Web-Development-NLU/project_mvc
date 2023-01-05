@@ -1,6 +1,6 @@
 package Controller;
 
-import DTO.AuthorizationData;
+import DTO.FilterProduct;
 import Model.Product;
 import Services.ProductService;
 
@@ -21,7 +21,7 @@ public class MainController extends HttpServlet {
     }
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        ArrayList<Product> products = this.productService.findAll(Product.class);
+        ArrayList<Product> products = this.productService.queryByBuilder(new FilterProduct());
         ArrayList<Product> productsResult = new ArrayList<>();
         int end = (products.size() < 8) ? products.size() : 8;
         for(int i = 0; i < end; i++) {

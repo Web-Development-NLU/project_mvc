@@ -14,6 +14,7 @@
     String[] thumbnails = request.getParameter("thumbnails").split(",");
     String price = DecimalFormat.getInstance().format(Double.parseDouble(request.getParameter("price")));
     String id = request.getParameter("id");
+    double point = Double.parseDouble(request.getParameter("avg"));
 %>
 <c:if test="${param.type == '2'}">
     <div class="card-components-2 col-6 col-md-4 col-lg-3">
@@ -30,7 +31,7 @@
                 </div>
             </div>
             <div class="info-product">
-                <div class="star-rate" data-rate="4"></div>
+                <div class="star-rate" data-rate="<%=point%>"></div>
                 <h2 class="product-name">
                     <a href="${pageContext.request.contextPath}/product?id=<%=id%>"><span><%=name%></span></a>
                 </h2>
