@@ -11,7 +11,14 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<html>
+<html
+        lang="en"
+        class="light-style layout-menu-fixed"
+        dir="ltr"
+        data-theme="theme-default"
+        data-assets-path="/assets/"
+        data-template="vertical-menu-template-free"
+>
 <head>
     <jsp:include page="common/head.jsp">
         <jsp:param name="title" value="FURNITURE | GIỎ HÀNG"/>
