@@ -57,6 +57,12 @@
             </a>
         </li>
         <li class="menu-item">
+            <a href="${pageContext.request.contextPath}/admin/contact" class="menu-link">
+                <i class="menu-icon tf-icons bx bx-home-circle"></i>
+                <div data-i18n="Analytics">Thông tin liên hệ</div>
+            </a>
+        </li>
+        <li class="menu-item">
             <a href="${pageContext.request.contextPath}/admin/slide" class="menu-link">
                 <i class="menu-icon tf-icons bx bx-home-circle"></i>
                 <div data-i18n="Analytics">Slide</div>
