@@ -57,7 +57,6 @@
   boolean errorCategoryId = (boolean) request.getAttribute("errorCategoryId");
   boolean errorProductId = (boolean) request.getAttribute("errorProductId");
   boolean errorValueCode = (boolean) request.getAttribute("errorValueCode");
-//  System.out.print(code.getCategoryId());
 %>
 <!-- Layout wrapper -->
 <div class="layout-wrapper layout-content-navbar">

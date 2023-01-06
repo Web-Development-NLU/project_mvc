@@ -63,4 +63,14 @@ public class OrderService extends BaseService<Order>{
             throw new RuntimeException(e);
         }
     }
+    public ArrayList<Order> findOrdersPrepayment(){
+        return (ArrayList<Order>) this.jdbi.withHandle(handle -> {
+            return handle.createQuery("SELECT * FROM " + this.tableName + " WHERE transID is not null").mapToBean(Order.class).list();
+        });
+    }
+    public ArrayList<Order> findOrdersPostPaid(){
+        return (ArrayList<Order>) this.jdbi.withHandle(handle -> {
+            return handle.createQuery("SELECT * FROM " + this.tableName + " WHERE transID is null").mapToBean(Order.class).list();
+        });
+    }
 }

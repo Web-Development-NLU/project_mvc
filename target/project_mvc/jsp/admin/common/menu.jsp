@@ -3,7 +3,8 @@
 <%@ page import="java.util.ArrayList" %>
 <%@ page import="Model.Category" %>
 <%@ page import="DTO.AuthorizationData" %>
-<%@ page import="Model.TypeAccount" %><%--
+<%@ page import="Model.TypeAccount" %>
+<%@ page import="Model.Order" %><%--
   Created by IntelliJ IDEA.
   User: Quang Tho
   Date: 29/12/2022
@@ -13,6 +14,7 @@
 
 <%
     ArrayList<Category> categories = (ArrayList<Category>) request.getAttribute("categoriesMenu");
+    ArrayList<Order> orders = (ArrayList<Order>) request.getAttribute("ordersMenu");
     AuthorizationData data = (AuthorizationData) session.getAttribute("adminLogin");
 %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
@@ -66,9 +68,32 @@
         <li class="menu-item">
             <a href="/dashboard/order" class="menu-link ">
                 <i class="menu-icon tf-icons bx bx-dock-top"></i>
-                <div data-i18n="Account Settings">Order Management</div>
+                <div data-i18n="Account Settings">Quản lý đơn hàng</div>
             </a>
-
+            <ul class="menu-sub">
+                <li class="menu-item">
+                    <a href="${pageContext.request.contextPath}/admin/order" class="menu-link">
+                        <div data-i18n="Without menu">Tất cả</div>
+                    </a>
+                </li>
+                <li class="menu-item">
+                    <a href="${pageContext.request.contextPath}/amin/orderPrePayment" class="menu-link">
+                        <div data-i18n="Without menu">Thanh toán trước</div>
+                    </a>
+                </li>
+                <li class="menu-item">
+                    <a href="${pageContext.request.contextPath}/admin/order" class="menu-link">
+                        <div data-i18n="Without menu">Thanh toán khi nhận hàng</div>
+                    </a>
+                </li>
+<%--                <c:forEach items="<%=orders%>" var="order">--%>
+<%--                    <li class="menu-item">--%>
+<%--                        <a href="${pageContext.request.contextPath}/admin/products?id=${category.id}" class="menu-link">--%>
+<%--                            <div data-i18n="Without menu">${category.name}</div>--%>
+<%--                        </a>--%>
+<%--                    </li>--%>
+<%--                </c:forEach>--%>
+            </ul>
         </li>
 
 
