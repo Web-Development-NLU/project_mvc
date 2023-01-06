@@ -29,7 +29,7 @@ public class OrderService extends BaseService<Order>{
     }
     public ArrayList<Order> findOrdersUser(String id){
         return (ArrayList<Order>) this.jdbi.withHandle(handle -> {
-            return handle.createQuery("SELECT * FROM " + this.tableName + " WHERE userId = ?").bind(0,id).mapToBean(Order.class).list();
+            return handle.createQuery("SELECT * FROM " + this.tableName + " WHERE userId = ? order by createdAt desc ").bind(0,id).mapToBean(Order.class).list();
         });
     }
     public ArrayList<Order> findOrdersUserByDetail(String id, String detail){
