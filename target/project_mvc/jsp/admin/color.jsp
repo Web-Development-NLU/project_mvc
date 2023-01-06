@@ -60,12 +60,13 @@
 
 <body>
 <%
-    ArrayList<Color> colors= (ArrayList<Color>) request.getAttribute("colors");
-    Color color = (Color) request.getAttribute("color");
-    int pagination = (int) request.getAttribute("pagination");
-//    String numPage = DecimalFormat.getIntegerInstance().format(Double.parseDouble(request.getAttribute("numPage").toString()));
+        ArrayList<Color> colors = (ArrayList<Color>) request.getAttribute("colors");
+        int pagination = (int) request.getAttribute("pagination");
+        String numPage = DecimalFormat.getIntegerInstance().format(Double.parseDouble(request.getAttribute("numPage").toString()));
+        int totalPage = Integer.parseInt(numPage);
 
-    %>
+%>
+
 <!-- Layout wrapper -->
 <div class="layout-wrapper layout-content-navbar">
     <div class="layout-container">
@@ -77,9 +78,12 @@
         <!-- Layout container -->
         <div class="layout-page">
             <!-- Navbar -->
-
-            <jsp:include page="common/navbar.jsp"/>
-
+            <div style="margin:3em 5em 1em 5em">
+            <form action="${pageContext.request.contextPath}/admin/color" methods="post">
+                <input type="text" class="form-control" name="color"
+                       placeholder="Tên màu" required style="height:12%"/>
+            </form>
+            </div>
             <!-- / Navbar -->
 
             <!-- Content wrapper -->
@@ -88,37 +92,34 @@
 
                 <div class="container-xxl flex-grow-1 container-p-y">
                     <h4 class="fw-bold py-3 mb-4"><span class="text-muted fw-light">QUẢN LÝ /</span> MÀU</h4>
-                    <form action="${pageContext.request.contextPath}/admin/SearchColor" methods="post">
-                    <input type="text" class="form-control" name="color"
-                           placeholder="Tên màu" required style="width:50%"/>
-                    </form>
 
+                    <a href="${pageContext.request.contextPath}/admin/createColor">
+                        <button type="button" class="btn btn-outline-dark" style="float: right">Tạo mới</button>
+                    </a>
                     <hr class="my-5" />
-                    <div>
+                    <div class="row">
                     <nav aria-label="breadcrumb" class="col-lg-6">
                         <ol class="breadcrumb">
                             <li class="breadcrumb-item">
-                                <a href="javascript:void(0);">Trang <%=pagination%></a>
+                                <a href="javascript:void(0);"> Trang <%=pagination%></a>
                             </li>
                             <li class="breadcrumb-item">
-                                <a href="javascript:void(0);"></a>
+                                <a href="javascript:void(0);"><%= numPage%></a>
                             </li>
                         </ol>
                     </nav>
-                        <a href="${pageContext.request.contextPath}/admin/createColor">
-                            <button type="button" class="btn btn-outline-dark" style="float: right">Tạo mới</button>
-                        </a>
+                        <nav aria-label="Page navigation" class="col-lg-6">
                     <ul class="pagination justify-content-end">
-                        <li class="page-item prev">
-                            <a class="page-link" href="${pageContext.request.contextPath}/admin/color?<%=(color == null) ? "" : "id="+color.getId()+"&"%>page=<%=pagination - 1%>"
+                        <li class="page-item prev" style=" display: <%=( pagination ==1) ? "none" : "block"%>">
+                            <a class="page-link" href="${pageContext.request.contextPath}/admin/color?page=<%=pagination - 1%>"
                             ><i class="tf-icon bx bx-chevrons-left"></i
                             ></a>
                         </li>
                         <li class="page-item">
-                            <a class="page-link" href="${pageContext.request.contextPath}/admin/products?<%=(color == null) ? "" : "id="+color.getId()+"&"%>page=<%=pagination%>"><%=pagination%></a>
+                            <a class="page-link" href="${pageContext.request.contextPath}/admin/color?page=<%=pagination%>"><%=pagination%></a>
                         </li>
                         <li class="page-item">
-                            <form action="/admin/color?<%=(color == null) ? "" : "id="+color.getId()%>" method="post">
+                            <form action="${pageContext.request.contextPath}/admin/color" method="post">
                                 <input
                                         type="number"
                                         class="form-control"
@@ -128,12 +129,13 @@
                                 />
                             </form>
                         </li>
-                        <li class="page-item next">
-                            <a class="page-link" href="${pageContext.request.contextPath}/admin/color?<%=(color == null) ? "" : "id="+color.getId()+"&"%>&page=<%=pagination + 1%>"
+                        <li class="page-item next" style="display:<%=(pagination == totalPage) ? "none" : "block"%>">
+                            <a class="page-link" href="${pageContext.request.contextPath}/admin/color?page=<%=pagination + 1%>"
                             ><i class="tf-icon bx bx-chevrons-right"></i
                             ></a>
                         </li>
                     </ul>
+                        </nav>
                     </div>
 
                     <!-- Bootstrap Dark Table -->

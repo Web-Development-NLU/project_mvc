@@ -21,21 +21,39 @@ public class AdminColor extends HttpServlet {
     }
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        String id = request.getParameter("id");
-        String page = request.getParameter("page");
-        if(page == null || Integer.parseInt("page") < 1){
-            page ="1";
+        String color=request.getParameter("color");
+        ArrayList<Color> colors = this.colorService.findAll(Color.class);
+        if(color !=null){
+            colors=this.colorService.findColorByName(color);
         }
+        ArrayList<Color> colorResult = new ArrayList<>();
+        String page = request.getParameter("page");
 
-        ArrayList<Color> colors=this.colorService.findAll(Color.class);
+        Double numPage = Math.ceil(Double.parseDouble(String.valueOf(colors.size())) / 10);
+        if(page == null || Integer.parseInt(page) < 1) {
+            page = "1";
+        }
+        if(Integer.parseInt(page) > numPage.intValue()) page = ""+ numPage.intValue();
+        int index = (Integer.parseInt(page) - 1) * 10;
+        for(int i = index; i < (index + 10); i++ ){
+            if(i >= colors.size()){
+                break;
+            }
+            colorResult.add(colors.get(i));
+        }
         request.setAttribute("pagination", Integer.parseInt(page));
-//        request.setAttribute("numPage", Math.ceil(Double.parseDouble(String.valueOf())));
-        request.setAttribute("colors",colors);
+        request.setAttribute("numPage", numPage);
+        request.setAttribute("colors", colorResult);
         request.getRequestDispatcher("/jsp/admin/color.jsp").forward(request, response);
     }
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        response.sendRedirect("/admin/color?id=" + request.getParameter("id") + "&page="+request.getParameter("page"));
+        String color=request.getParameter("color");
+        String paramColor="";
+        if(color !=null){
+            paramColor="&color="+color;
+        }
+        response.sendRedirect("/admin/color?page="+request.getParameter("page")+paramColor);
     }
 }
