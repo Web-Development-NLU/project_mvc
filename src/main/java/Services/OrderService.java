@@ -49,7 +49,7 @@ public class OrderService extends BaseService<Order>{
                     try {
                         return handle.createQuery(
                                         "SELECT * FROM " + tableName + " WHERE id = ? and userId = ?")
-                                .bind(0, userId).bind(1,orderId)
+                                .bind(0, orderId).bind(1,userId)
                                 .mapToBean(Order.class).first();
                     }catch (IllegalStateException exception) {
                         return null;

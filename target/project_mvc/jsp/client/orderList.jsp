@@ -1,5 +1,7 @@
 <%@ page import="java.util.ArrayList" %>
 <%@ page import="Model.Order" %>
+<%@ page import="java.text.DecimalFormat" %>
+<%@ page import="java.net.URLEncoder" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page isELIgnored="false" %>
@@ -27,7 +29,9 @@
 <body>
 <%
     ArrayList<Order> orders = (ArrayList<Order>) request.getAttribute("orders");
-    String infoSearch = (String) request.getAttribute("infoSearch");
+    int pagination = (int) request.getAttribute("pagination");
+    String numPage = DecimalFormat.getIntegerInstance().format(Double.parseDouble(request.getAttribute("numPage").toString()));
+    int totalPage = Integer.parseInt(numPage);
 %>
 <div id="cart-container">
     <header>
@@ -43,7 +47,7 @@
         <div class="cart-place" style="margin-top: 2rem">
             <c:choose>
                 <c:when test="${!orders.isEmpty()}">
-                    <form class="form-search" action="/orderList" method="post">
+                    <form class="form-search" action="/orderList" accept-charset="utf-8" method="post">
                         <input class="ip_search" type="search" placeholder="Nhập mã đơn hàng..." name="search_order">
                         <button class="btn-search">
                             <i class="fa-solid fa-magnifying-glass"></i>
@@ -63,7 +67,7 @@
                                 <tr style="border-bottom: 1px solid #DEE2E6">
                                     <td style="border-right: 1px solid #DEE2E6"><a href="${pageContext.request.contextPath}/orderDetail?id=${order.id}">${order.id}</a></td>
                                     <td style="border-right: 1px solid #DEE2E6">${order.info}</td>
-                                    <td style="border-left: 1px solid #DEE2E6">${order.createdAt}</td>
+                                    <td style="border-left: 1px solid #DEE2E6;">${order.createdAt}</td>
                                 </tr>
                             </c:forEach>
                             </tbody>
@@ -80,8 +84,16 @@
                     <div style="text-align: center;margin: 3.5rem 0">${infoSearch != null ? "Không tìm thấy đơn đặt hàng" : "Không có đơn đặt hàng nào"}</div>
                 </c:otherwise>
             </c:choose>
-
         </div>
+        <nav aria-label="Page navigation">
+            <ul class="pagination" style="justify-content: center">
+                <li class="page-item pagination-item" style="display: <%= totalPage < 2 ? "none" : "block" %>"><a class="page-link color-black" href="${pageContext.request.contextPath}/orderList?page=<%= pagination -1 %>"><i class="fa-solid fa-angle-left"></i></a></li>
+                <c:forEach begin="1" end="<%= totalPage %>" var="item">
+                    <li class="page-item pagination-item" style="display: <%= totalPage < 2 ? "none" : "block" %>"><a class="page-link color-black ${item == pagination ? "pg-action":""}" href="${pageContext.request.contextPath}/orderList?page=${item}">${item}</a></li>
+                </c:forEach>
+                <li class="page-item pagination-item" style="display: <%= totalPage < 2 ? "none" : "block" %>"><a class="page-link color-black" href="${pageContext.request.contextPath}/orderList?page=<%= pagination + 1 %>"><i class="fa-solid fa-angle-right"></i></a></li>
+            </ul>
+        </nav>
     </section>
 
     <jsp:include page="common/footer.jsp"/>

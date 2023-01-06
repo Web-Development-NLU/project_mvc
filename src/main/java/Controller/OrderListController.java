@@ -10,6 +10,7 @@ import javax.servlet.*;
 import javax.servlet.http.*;
 import javax.servlet.annotation.*;
 import java.io.IOException;
+import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 
 @WebServlet(name = "oderList", value = "/orderList")
@@ -34,6 +35,8 @@ public class OrderListController extends HttpServlet {
         String userId = (String) authorizationData.getId();
         ArrayList<Order> orders = new ArrayList<>();
         if(infoSearch != null){
+            byte[] bytes = infoSearch.getBytes(StandardCharsets.ISO_8859_1);
+            infoSearch = new String(bytes, StandardCharsets.UTF_8);
             Order order = this.orderService.findOrderUserById(userId, infoSearch);
             if(order != null){
                 orders.add(order);
@@ -43,13 +46,39 @@ public class OrderListController extends HttpServlet {
         }else{
             orders = this.orderService.findOrdersUser(userId);
         }
-        request.setAttribute("orders", orders);
+        ArrayList<Order> orderResult = new ArrayList<>();
+        String page = request.getParameter("page");
+        int intPage;
+        try {
+            intPage = Integer.parseInt(page);
+        }catch (Exception e){
+            intPage = 0;
+        }
+        Double numPage = Math.ceil(Double.parseDouble(String.valueOf(orders.size())) / 10);
+        if(page == null || intPage < 1) {
+            page = "1";
+        }
+        if(Integer.parseInt(page) > numPage.intValue()) page = ""+ numPage.intValue();
+        int index =1;
+        if(orders.size() > 0) {
+            index = (Integer.parseInt(page) - 1) * 10;
+        }
+        for(int i = index; i < (index + 10); i++ ){
+            if(i >= orders.size()){
+                break;
+            }
+            orderResult.add(orders.get(i));
+        }
+//        request.setAttribute("orders", orders);
+        request.setAttribute("orders", orderResult);
+        request.setAttribute("pagination", Integer.parseInt(page));
+        request.setAttribute("numPage", numPage);
         request.setAttribute("infoSearch",infoSearch);
         request.getRequestDispatcher("/jsp/client/orderList.jsp").forward(request, response);
     }
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        response.sendRedirect("/orderList?infoSearch="+request.getParameter("search_order").trim());
+        response.sendRedirect("/orderList?infoSearch="+request.getParameter("search_order").trim()+"&page="+ request.getParameter("page"));
     }
 }
