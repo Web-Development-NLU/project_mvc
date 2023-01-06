@@ -105,7 +105,7 @@
                       <input type="text" class="form-control" id="categoryId" name="categoryId"
                             style="${errorCategoryId == true ? "border: 1px solid red" : "border: 1px solid #d9dee3"}" placeholder="Mã danh mục" value="${code.categoryId > 0 ? code.categoryId : ""}"/>
                     </div>
-                    <div class="" id="error_categoryId" style="color: red; padding: 8px 0;margin-left: 17.8%; min-height: 16px">${errorCategoryId == true ? "Mã sản phẩm không tồn tại" : ""}</div>
+                    <div class="" id="error_categoryId" style="color: red; padding: 8px 0;margin-left: 17.8%; min-height: 16px">${errorCategoryId == true ? "Mã danh mục không tồn tại" : ""}</div>
                   </div>
                   <div class="row mb-3" style="margin-bottom: 0 !important;">
                     <label class="col-sm-2 col-form-label" for="productId">Mã sản phẩm</label>

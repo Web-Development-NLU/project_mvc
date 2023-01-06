@@ -38,9 +38,13 @@ public class EditCode extends HttpServlet {
         }
         String value = request.getParameter("value");
         String productId = request.getParameter("productId");
+        boolean errorInput = Boolean.parseBoolean(request.getParameter("errorInput"));
+        boolean errorCategoryId = Boolean.valueOf(request.getParameter("errorCategoryId"));
+        boolean errorProductId = Boolean.valueOf(request.getParameter("errorProductId"));
+        boolean errorValueCode = Boolean.parseBoolean(request.getParameter("errorValueCode"));
         Code code;
         int categoryId = 0;
-        if(id != null){
+        if(!errorCategoryId && !errorInput && !errorProductId && !errorValueCode){
             code = this.codeService.findById(id, Code.class);
         }else{
             code = new Code(value);
@@ -52,10 +56,7 @@ public class EditCode extends HttpServlet {
             }
             code.setCategoryId(categoryId);
         }
-        boolean errorInput = Boolean.parseBoolean(request.getParameter("errorInput"));
-        boolean errorCategoryId = Boolean.valueOf(request.getParameter("errorCategoryId"));
-        boolean errorProductId = Boolean.valueOf(request.getParameter("errorProductId"));
-        boolean errorValueCode = Boolean.parseBoolean(request.getParameter("errorValueCode"));
+        code.setId(Integer.parseInt(id));
         request.setAttribute("code",code);
         request.setAttribute("errorInput",errorInput);
         request.setAttribute("errorCategoryId",errorCategoryId);

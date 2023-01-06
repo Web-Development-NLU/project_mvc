@@ -57,6 +57,7 @@
   boolean errorCategoryId = (boolean) request.getAttribute("errorCategoryId");
   boolean errorProductId = (boolean) request.getAttribute("errorProductId");
   boolean errorValueCode = (boolean) request.getAttribute("errorValueCode");
+//  System.out.print(code.getCategoryId());
 %>
 <!-- Layout wrapper -->
 <div class="layout-wrapper layout-content-navbar">
@@ -92,7 +93,7 @@
                     <label class="col-sm-2 col-form-label" for="value">Giá trị</label>
                     <div class="col-sm-10" style="width: 72.7%">
                       <input type="text" class="form-control" id="value" name="value"
-                             placeholder="Giá trị" required value="${code.value}" />
+                             placeholder="Giá trị" required value="${code.value}"/>
                     </div>
                     <div class="col-sm-10" style="display: inline-block;width: 10.6%; padding-right: 0">
                       <button type="button" class="btn btn-primary" id="btnGetCode">Lấy mã</button>
@@ -105,7 +106,7 @@
                       <input type="text" class="form-control" id="categoryId" name="categoryId"
                              style="${errorCategoryId == true ? "border: 1px solid red" : "border: 1px solid #d9dee3"}" placeholder="Mã danh mục" value="${code.categoryId > 0 ? code.categoryId : ""}"/>
                     </div>
-                    <div class="" id="error_categoryId" style="color: red; padding: 8px 0;margin-left: 17.8%; min-height: 16px">${errorCategoryId == true ? "Mã sản phẩm không tồn tại" : ""}</div>
+                    <div class="" id="error_categoryId" style="color: red; padding: 8px 0;margin-left: 17.8%; min-height: 16px">${errorCategoryId == true ? "Mã danh mục không tồn tại" : ""}</div>
                   </div>
                   <div class="row mb-3" style="margin-bottom: 0 !important;">
                     <label class="col-sm-2 col-form-label" for="productId">Mã sản phẩm</label>
