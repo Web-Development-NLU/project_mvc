@@ -20,9 +20,7 @@ public class SearchPattern extends HttpServlet {
     }
      public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String txtSearch=request.getParameter("pattern");
-        System.out.println(txtSearch);
          ArrayList<Pattern> list=patternService.findPatternByName(txtSearch);
-         System.out.println(list);
          request.setAttribute("patterns",list);
          request.getRequestDispatcher("/jsp/admin/pattern.jsp").forward(request,response);
 

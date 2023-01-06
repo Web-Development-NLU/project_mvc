@@ -1,7 +1,5 @@
 package Controller;
 
-import DTO.UpdateColorDTO;
-import Model.Color;
 import Services.ColorService;
 
 import javax.servlet.ServletException;
@@ -19,18 +17,15 @@ public class DeleteColor extends HttpServlet {
         super.init();
         colorService=new ColorService("color");
     }
-    @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         String id=req.getParameter("id");
-        Color color=this.colorService.findById(id,Color.class);
-        req.setAttribute("color",color);
-        req.getRequestDispatcher("/jsp/admin/delete.jsp").forward(req,resp);
+       boolean colors= this.colorService.deleteColor(id);
+       req.setAttribute("colors",colors);
+        req.getRequestDispatcher("/admin/color").forward(req,resp);
     }
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        String id=request.getParameter("id");
-        this.colorService.delete(id);
-        response.sendRedirect("/admin/color");
+        response.sendRedirect("/admin/delete?id="+request.getParameter("id"));
     }
 }

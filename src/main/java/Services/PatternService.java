@@ -46,5 +46,15 @@ public ArrayList<Pattern> findPatternByName(String name){
                     .list();
         });
 }
-
+    public boolean deletePattern(String id) {
+        Pattern pattern=this.findById(id,Pattern.class);
+        if(pattern !=null){
+            this.jdbi.useHandle(handle -> {
+                handle.createUpdate("DELETE FROM " +this.tableName +
+                        " WHERE id = ? ")
+                        .bind(0,id).execute();
+            });
+        }
+        return pattern !=null;
+    }
 }

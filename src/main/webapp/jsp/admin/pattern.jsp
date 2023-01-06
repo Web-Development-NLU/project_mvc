@@ -118,7 +118,7 @@
                       <div class="dropdown-menu">
                         <a class="dropdown-item" href="${pageContext.request.contextPath}/admin/editPattern?id=${pattern.id}">
                           <i class="bx bx-edit-alt me-1"></i> Chỉnh sửa</a>
-                        <a class="dropdown-item" href="${pageContext.request.contextPath}/admin/delete?id=${pattern.id}"
+                        <a class="dropdown-item" href="${pageContext.request.contextPath}/admin/deletePattern?id=${pattern.id}" methods="post"
                         ><i class="bx bx-trash me-1"></i> Xóa</a>
                       </div>
                     </div>

@@ -21,12 +21,21 @@ public class AdminColor extends HttpServlet {
     }
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        String id = request.getParameter("id");
+        String page = request.getParameter("page");
+        if(page == null || Integer.parseInt("page") < 1){
+            page ="1";
+        }
+
         ArrayList<Color> colors=this.colorService.findAll(Color.class);
+        request.setAttribute("pagination", Integer.parseInt(page));
+//        request.setAttribute("numPage", Math.ceil(Double.parseDouble(String.valueOf())));
         request.setAttribute("colors",colors);
         request.getRequestDispatcher("/jsp/admin/color.jsp").forward(request, response);
     }
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        response.sendRedirect("/admin/color?id=" + request.getParameter("id") + "&page="+request.getParameter("page"));
     }
 }

@@ -1,5 +1,6 @@
 <%@ page import="Model.Color" %>
 <%@ page import="java.util.ArrayList" %>
+<%@ page import="java.text.DecimalFormat" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%--
   Created by IntelliJ IDEA.
@@ -60,7 +61,11 @@
 <body>
 <%
     ArrayList<Color> colors= (ArrayList<Color>) request.getAttribute("colors");
-%>
+    Color color = (Color) request.getAttribute("color");
+    int pagination = (int) request.getAttribute("pagination");
+//    String numPage = DecimalFormat.getIntegerInstance().format(Double.parseDouble(request.getAttribute("numPage").toString()));
+
+    %>
 <!-- Layout wrapper -->
 <div class="layout-wrapper layout-content-navbar">
     <div class="layout-container">
@@ -87,10 +92,50 @@
                     <input type="text" class="form-control" name="color"
                            placeholder="Tên màu" required style="width:50%"/>
                     </form>
-                    <a href="${pageContext.request.contextPath}/admin/createColor">
-                        <button type="button" class="btn btn-outline-dark" style="float: right">Tạo mới</button>
-                    </a>
+
                     <hr class="my-5" />
+                    <div>
+                    <nav aria-label="breadcrumb" class="col-lg-6">
+                        <ol class="breadcrumb">
+                            <li class="breadcrumb-item">
+                                <a href="javascript:void(0);">Trang <%=pagination%></a>
+                            </li>
+                            <li class="breadcrumb-item">
+                                <a href="javascript:void(0);"></a>
+                            </li>
+                        </ol>
+                    </nav>
+                        <a href="${pageContext.request.contextPath}/admin/createColor">
+                            <button type="button" class="btn btn-outline-dark" style="float: right">Tạo mới</button>
+                        </a>
+                    <ul class="pagination justify-content-end">
+                        <li class="page-item prev">
+                            <a class="page-link" href="${pageContext.request.contextPath}/admin/color?<%=(color == null) ? "" : "id="+color.getId()+"&"%>page=<%=pagination - 1%>"
+                            ><i class="tf-icon bx bx-chevrons-left"></i
+                            ></a>
+                        </li>
+                        <li class="page-item">
+                            <a class="page-link" href="${pageContext.request.contextPath}/admin/products?<%=(color == null) ? "" : "id="+color.getId()+"&"%>page=<%=pagination%>"><%=pagination%></a>
+                        </li>
+                        <li class="page-item">
+                            <form action="/admin/color?<%=(color == null) ? "" : "id="+color.getId()%>" method="post">
+                                <input
+                                        type="number"
+                                        class="form-control"
+                                        name="page"
+                                        autofocus
+                                        min="1"
+                                />
+                            </form>
+                        </li>
+                        <li class="page-item next">
+                            <a class="page-link" href="${pageContext.request.contextPath}/admin/color?<%=(color == null) ? "" : "id="+color.getId()+"&"%>&page=<%=pagination + 1%>"
+                            ><i class="tf-icon bx bx-chevrons-right"></i
+                            ></a>
+                        </li>
+                    </ul>
+                    </div>
+
                     <!-- Bootstrap Dark Table -->
                     <div class="card">
                         <h5 class="card-header">THÔNG TIN VỀ QUẢN LÝ MÀU</h5>

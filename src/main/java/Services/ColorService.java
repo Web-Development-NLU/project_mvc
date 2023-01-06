@@ -36,23 +36,17 @@ public class ColorService extends BaseService<Color>{
         }
         return color != null;
     }
-    public boolean delete(String id){
-        Color color=this.findById(id,Color.class);
+    public boolean deleteColor(String id){
+         Color color=this.findById(id,Color.class);
         if(color != null ){
             this.jdbi.useHandle(handle -> {
                 handle.createUpdate("DELETE FROM " +this.tableName +
-                        " WHERE id=: id")
-                        .bind("id",id).execute();
+                        " WHERE id = ? ")
+                        .bind(0,id).execute();
             });
         }
         return color !=null;
     }
-    public void deleteColor(String id) {
-        this.jdbi.useHandle(handle -> handle.createUpdate("DELETE FROM "+  this.tableName +
-                " WHERE id=: id ")
-                .bind("id", id).execute());
-    }
-
 
     public ArrayList<Color> findColorByName(String name){
         String nameSearch = "%"+name+"%";
