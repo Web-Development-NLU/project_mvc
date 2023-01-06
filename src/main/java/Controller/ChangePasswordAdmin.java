@@ -33,7 +33,6 @@ public class ChangePasswordAdmin extends HttpServlet {
             response.sendRedirect("/admin/setting?errorChangePass=error");
             return;
         }
-
         response.sendRedirect("/admin/setting?success=changePass");
 
     }
