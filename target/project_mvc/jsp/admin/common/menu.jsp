@@ -66,7 +66,7 @@
 
 
         <li class="menu-item">
-            <a href="/dashboard/order" class="menu-link ">
+            <a href="/admin/order" class="menu-link menu-toggle">
                 <i class="menu-icon tf-icons bx bx-dock-top"></i>
                 <div data-i18n="Account Settings">Quản lý đơn hàng</div>
             </a>
@@ -82,7 +82,7 @@
                     </a>
                 </li>
                 <li class="menu-item">
-                    <a href="${pageContext.request.contextPath}/admin/order" class="menu-link">
+                    <a href="${pageContext.request.contextPath}/admin/orderPostpaid" class="menu-link">
                         <div data-i18n="Without menu">Thanh toán khi nhận hàng</div>
                     </a>
                 </li>

@@ -153,7 +153,7 @@
                                 <tbody class="table-border-bottom-0">
                                 <c:forEach items="<%= orders %>" var="order">
                                     <tr>
-                                        <td><i class="fab fa-angular fa-lg text-danger me-3"></i> <strong>${order.id}</strong></td>
+                                        <td><i class="fab fa-angular fa-lg text-danger me-3"></i> <a href="${pageContext.request.contextPath}/admin/adminOrderDetail?id=${order.id}"><strong>${order.id}</strong></a></td>
                                         <td>${order.info}</td>
                                         <td>${order.createdAt}</td>
                                         <td>
