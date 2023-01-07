@@ -4,7 +4,8 @@
 <%@ page import="Model.Category" %>
 <%@ page import="java.text.DecimalFormat" %>
 <%@ page import="Model.StatusProduct" %>
-<%@ page import="java.util.Objects" %><%--
+<%@ page import="java.util.Objects" %>
+<%@ page import="Controller.MyAccount" %><%--
   Created by IntelliJ IDEA.
   User: Quang Tho
   Date: 29/12/2022
@@ -66,10 +67,11 @@
     ArrayList<Product> products = (ArrayList<Product>) request.getAttribute("products");
     Category category = (Category) request.getAttribute("category");
     int pagination = (int) request.getAttribute("pagination");
-    String numPage = DecimalFormat.getIntegerInstance().format(Double.parseDouble(request.getAttribute("numPage").toString()));
+    int numPage = (int) request.getAttribute("numPage");
     String idParam = (category == null) ? "" : "id="+category.getId()+"&";
     String search = (request.getParameter("search") == null) ? "" : "search=" + request.getParameter("search") + "&";
-
+    int start = ((pagination % 10) == 0) ? ((pagination / 10) - 1) * 10 + 1 : (pagination / 10) * 10 + 1;
+    int end = Math.min(start + 9, numPage);
 %>
 <!-- Layout wrapper -->
 <div class="layout-wrapper layout-content-navbar">
@@ -126,20 +128,27 @@
                                     ><i class="tf-icon bx bx-chevrons-left"></i
                                     ></a>
                                 </li>
-                                <li class="page-item">
-                                    <a class="page-link" href="${pageContext.request.contextPath}/admin/products?<%=idParam + search%>page=<%=pagination%>"><%=pagination%></a>
-                                </li>
-                                <li class="page-item">
-                                    <form action="/admin/products?<%=idParam + search%>">
-                                        <input
-                                                type="number"
-                                                class="form-control"
-                                                name="page"
-                                                autofocus
-                                                min="1"
-                                        />
-                                    </form>
-                                </li>
+
+                                <c:forEach begin="<%=start%>" end="<%=end%>" var="index">
+                                    <c:set var="i" scope="request" value="${index}"/>
+                                    <% int index = (int) request.getAttribute("i"); %>
+                                    <c:choose>
+                                        <c:when test="<%=index == pagination%>">
+                                            <li class="page-item active">
+                                                <a class="page-link" href="${pageContext.request.contextPath}/admin/products?<%=idParam + search%>page=<%=Integer.parseInt(request.getAttribute("i").toString())%>">
+                                                    <%=Integer.parseInt(request.getAttribute("i").toString())%>
+                                                </a>
+                                            </li>
+                                        </c:when>
+                                        <c:otherwise>
+                                            <li class="page-item">
+                                                <a class="page-link" href="${pageContext.request.contextPath}/admin/products?<%=idParam + search%>page=<%=Integer.parseInt(request.getAttribute("i").toString())%>">
+                                                    <%=Integer.parseInt(request.getAttribute("i").toString())%>
+                                                </a>
+                                            </li>
+                                        </c:otherwise>
+                                    </c:choose>
+                                </c:forEach>
                                 <li class="page-item next">
                                     <a class="page-link" href="${pageContext.request.contextPath}/admin/products?<%=idParam + search%>page=<%=pagination + 1%>"
                                     ><i class="tf-icon bx bx-chevrons-right"></i
