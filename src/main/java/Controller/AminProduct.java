@@ -47,6 +47,7 @@ public class AminProduct extends HttpServlet {
             allProduct = productService.queryByBuilder(filter);
         }
         int numpage = (int) Math.ceil(Double.parseDouble(String.valueOf(allProduct.size())) / 10);
+        if(numpage < 1) numpage = 1;
         if(Integer.parseInt(page) > numpage) {
             page = numpage + "";
         }
@@ -68,9 +69,5 @@ public class AminProduct extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        String idParam = (request.getParameter("id") == null) ? "" : "id=" + request.getParameter("id") + "&";
-        String searchParam = (request.getParameter("search") == null) ? "" : "search=" + request.getParameter("search") + "&";
-        String pageParam = (request.getParameter("page") == null) ? "" : "page=" + request.getParameter("page");
-        response.sendRedirect("/admin/products?" + idParam + searchParam + pageParam);
     }
 }

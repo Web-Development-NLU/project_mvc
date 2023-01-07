@@ -99,7 +99,7 @@
 
                     <hr class="my-5"/>
                     <div class="row mb-4">
-                        <form method="post" action="${pageContext.request.contextPath}/admin/products?<%=idParam%>" content="">
+                        <form action="${pageContext.request.contextPath}/admin/products?<%=idParam%>">
                             <div class="input-group">
                                 <input type="text" class="form-control" name="search" placeholder="tên sản phẩm">
                                 <button class="btn btn-outline-primary" type="submit" id="button-addon2">Tìm kiếm</button>
@@ -130,7 +130,7 @@
                                     <a class="page-link" href="${pageContext.request.contextPath}/admin/products?<%=idParam + search%>page=<%=pagination%>"><%=pagination%></a>
                                 </li>
                                 <li class="page-item">
-                                    <form action="/admin/products?<%=idParam + search%>" method="post">
+                                    <form action="/admin/products?<%=idParam + search%>">
                                         <input
                                                 type="number"
                                                 class="form-control"
