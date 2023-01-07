@@ -1,4 +1,6 @@
-<%--
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ page import="java.util.ArrayList" %>
+<%@ page import="Model.Product" %><%--
   Created by IntelliJ IDEA.
   User: Quang Tho
   Date: 29/12/2022
@@ -6,6 +8,7 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ page isELIgnored="false" %>
 <!DOCTYPE html>
 
 <html
@@ -56,6 +59,7 @@
 </head>
 
 <body>
+<% ArrayList<Product> products= (ArrayList<Product>) request.getAttribute("products"); %>
 <!-- Layout wrapper -->
 <div class="layout-wrapper layout-content-navbar">
     <div class="layout-container">
@@ -81,13 +85,15 @@
                         <div class="row">
                             <!-- Bootstrap carousel -->
                             <div class="col-md">
-                                <h5 class="my-4">Product information</h5>
+                                <h5 class="my-4">Thông tin sản phẩm</h5>
 
                                 <div class="row">
                                     <div class="col-md mb-4 mb-md-0">
                                         <small class="text-light fw-semibold">Product Detail </small>
                                         <div class="accordion mt-3" id="accordionExample">
+                                    <c:forEach items="<%=products%>" var="product">
                                             <div class="card accordion-item active">
+
                                                 <h2 class="accordion-header" id="headingOne">
                                                     <button
                                                             type="button"
@@ -97,7 +103,7 @@
                                                             aria-expanded="true"
                                                             aria-controls="accordionOne"
                                                     >
-                                                        Cost storages
+                                                        ${product.name}
                                                     </button>
                                                 </h2>
 
@@ -107,118 +113,20 @@
                                                         data-bs-parent="#accordionExample"
                                                 >
                                                     <div class="accordion-body">
-                                                        Lemon drops chocolate cake gummies carrot cake chupa chups
-                                                        muffin topping. Sesame snaps icing
-                                                        marzipan gummi bears macaroon dragée danish caramels powder.
-                                                        Bear claw dragée pastry topping
-                                                        soufflé. Wafer gummi bears marshmallow pastry pie.
+                                                        ${product.description}
                                                         <br><br>
-                                                        Dimensions:&nbsp;30 × 69.9 × 24 cm
+                                                        Kích thước: ${product.dimensions}
                                                         <br>
-                                                        Color :&nbsp; Beige, Burgundy, Green, White
+                                                        Giá:&nbsp; ${product.price}
                                                         <br>
-                                                        Hanging Rail:&nbsp; Stainless steel
-                                                        <br>
-                                                        Product Type:&nbsp;Wall shelf with clothes rack
-                                                        <br>
-                                                        Pattern:&nbsp; Fabic, Leather, Plastic, Plywood, Wood
-                                                        <br>
-                                                        Size:&nbsp;Medium, Small
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="card accordion-item">
-                                                <h2 class="accordion-header" id="headingTwo">
-                                                    <button
-                                                            type="button"
-                                                            class="accordion-button collapsed"
-                                                            data-bs-toggle="collapse"
-                                                            data-bs-target="#accordionTwo"
-                                                            aria-expanded="false"
-                                                            aria-controls="accordionTwo"
-                                                    >
-                                                        Baniversary Chair
-                                                    </button>
-                                                </h2>
-                                                <div
-                                                        id="accordionTwo"
-                                                        class="accordion-collapse collapse"
-                                                        aria-labelledby="headingTwo"
-                                                        data-bs-parent="#accordionExample"
-                                                >
-                                                    <div class="accordion-body">
-                                                        Pellentesque habitant morbi tristique senectus et netus et
-                                                        malesuada fames ac turpis egestas. Vestibulum tortor quam,
-                                                        feugiat vitae, ultricies eget, tempor sit amet, ante. Donec eu
-                                                        libero sit amet quam egestas semper. Aenean ultricies mi vitae
-                                                        est. Mauris placerat eleifend leo.
-
-                                                        Lorem ipsum was conceived as filler text, formatted in a certain
-                                                        way to enable the presentation of graphic elements in documents,
-                                                        without the need for formal copy. Using Lorem Ipsum allows
-                                                        designers to put together layouts and the form of the content
-                                                        before the content has been created, giving the design and
-                                                        production process more freedom.
-                                                        <br><br>
-                                                        Dimensions:&nbsp;50 × 83 cm
-                                                        <br>
-                                                        Color:&nbsp;Beige
-                                                        <br>
-                                                        Material:&nbsp;Wood
-                                                        <br>
-                                                        Pattern:&nbsp; Fabic
+                                                        Vật liệu:&nbsp; ${product.material}
 
 
                                                     </div>
                                                 </div>
-                                            </div>
-                                            <div class="card accordion-item">
-                                                <h2 class="accordion-header" id="headingThree">
-                                                    <button
-                                                            type="button"
-                                                            class="accordion-button collapsed"
-                                                            data-bs-toggle="collapse"
-                                                            data-bs-target="#accordionThree"
-                                                            aria-expanded="false"
-                                                            aria-controls="accordionThree"
-                                                    >
-                                                        Le klnit
-                                                    </button>
-                                                </h2>
-                                                <div
-                                                        id="accordionThree"
-                                                        class="accordion-collapse collapse"
-                                                        aria-labelledby="headingThree"
-                                                        data-bs-parent="#accordionExample"
-                                                >
-                                                    <div class="accordion-body">
-                                                        Pellentesque habitant morbi tristique senectus et netus et
-                                                        malesuada fames ac turpis egestas. Vestibulum tortor quam,
-                                                        feugiat vitae, ultricies eget, tempor sit amet, ante. Donec eu
-                                                        libero sit amet quam egestas semper. Aenean ultricies mi vitae
-                                                        est. Mauris placerat eleifend leo.
+                                            </div
+                                    </c:forEach>
 
-                                                        Lorem ipsum was conceived as filler text, formatted in a certain
-                                                        way to enable the presentation of graphic elements in documents,
-                                                        without the need for formal copy. Using Lorem Ipsum allows
-                                                        designers to put together layouts and the form of the content
-                                                        before the content has been created, giving the design and
-                                                        production process more freedom.
-                                                        <br><br>
-                                                        Weight 2.5 kg
-                                                        <br>
-                                                        Dimensions:&nbsp;55 × 25 cm
-                                                        <br>
-                                                        Color:&nbsp; Black
-                                                        <br>
-                                                        Lamp Type:&nbsp; No
-                                                        <br>
-                                                        Lamping:&nbsp; No
-                                                        <br>
-                                                        Material:&nbsp; birch veneer
-                                                    </div>
-                                                </div>
-                                            </div>
                                         </div>
                                     </div>
 
@@ -226,7 +134,7 @@
                             </div>
                             <!-- Bootstrap crossfade carousel -->
                             <div class="col-md">
-                                <h5 class="my-4">Hot Products</h5>
+                                <h5 class="my-4">Sản phẩm nổi bật</h5>
 
                                 <div
                                         id="carouselExample-cf"
@@ -239,35 +147,20 @@
                                         <li data-bs-target="#carouselExample-cf" data-bs-slide-to="1"></li>
                                         <li data-bs-target="#carouselExample-cf" data-bs-slide-to="2"></li>
                                     </ol>
+
                                     <div class="carousel-inner">
+                                        <c:forEach items="<%=products%>" var="product">
                                         <div class="carousel-item active">
-                                            <img class="d-block w-100" src="/assets/img_admin/product/Cost_storages.png"
+                                            <img class="d-block w-100" src="${product.thumbnail.split(",")[0]}"
                                                  alt="First slide"/>
                                             <div class="carousel-caption d-none d-md-block">
-                                                <h3>Cost storages</h3>
-                                                <p>Eos mutat malis maluisset et, agam ancillae quo te, in vim congue
-                                                    pertinacia.</p>
+                                                <h3>${product.name}</h3>
+                                                <p>${product.shortDescription}</p>
                                             </div>
                                         </div>
-                                        <div class="carousel-item">
-                                            <img class="d-block w-100"
-                                                 src="/assets/img_admin/product/baniversary_Chair.png"
-                                                 alt="Second slide"/>
-                                            <div class="carousel-caption d-none d-md-block">
-                                                <h3>Baniversary Chair</h3>
-                                                <p>In numquam omittam sea.</p>
-                                            </div>
-                                        </div>
-                                        <div class="carousel-item">
-                                            <img class="d-block w-100" src="/assets/img_admin/product/le_klnit.png"
-                                                 alt="Third slide"/>
-                                            <div class="carousel-caption d-none d-md-block">
-                                                <h3>Le klnit</h3>
-                                                <p>Lorem ipsum dolor sit amet, virtute consequat ea qui, minim graeco
-                                                    mel no.</p>
-                                            </div>
-                                        </div>
+                                        </c:forEach>
                                     </div>
+
                                     <a class="carousel-control-prev" href="#carouselExample-cf" role="button"
                                        data-bs-slide="prev">
                                         <span class="carousel-control-prev-icon" aria-hidden="true"></span>
@@ -284,66 +177,9 @@
                     </div>
 
                     <!-- Total Revenue -->
-                    <div class="col-12 col-lg-8 order-2 order-md-3 order-lg-2 mb-4">
-                        <div class="card">
-                            <div class="row row-bordered g-0">
-                                <div class="col-md-8">
-                                    <h5 class="card-header m-0 me-2 pb-3">Total Revenue</h5>
-                                    <div id="totalRevenueChart" class="px-2"></div>
-                                </div>
-                                <div class="col-md-4">
-                                    <div class="card-body">
-                                        <div class="text-center">
-                                            <div class="dropdown">
-                                                <button
-                                                        class="btn btn-sm btn-outline-primary dropdown-toggle"
-                                                        type="button"
-                                                        id="growthReportId"
-                                                        data-bs-toggle="dropdown"
-                                                        aria-haspopup="true"
-                                                        aria-expanded="false"
-                                                >
-                                                    2022
-                                                </button>
-                                                <div class="dropdown-menu dropdown-menu-end"
-                                                     aria-labelledby="growthReportId">
-                                                    <a class="dropdown-item" href="javascript:void(0);">2021</a>
-                                                    <a class="dropdown-item" href="javascript:void(0);">2020</a>
-                                                    <a class="dropdown-item" href="javascript:void(0);">2019</a>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div id="growthChart"></div>
-                                    <div class="text-center fw-semibold pt-3 mb-2">62% Company Growth</div>
 
-                                    <div class="d-flex px-xxl-4 px-lg-2 p-4 gap-xxl-3 gap-lg-1 gap-3 justify-content-between">
-                                        <div class="d-flex">
-                                            <div class="me-2">
-                                                <span class="badge bg-label-primary p-2"><i
-                                                        class="bx bx-dollar text-primary"></i></span>
-                                            </div>
-                                            <div class="d-flex flex-column">
-                                                <small>2022</small>
-                                                <h6 class="mb-0">$32.5k</h6>
-                                            </div>
-                                        </div>
-                                        <div class="d-flex">
-                                            <div class="me-2">
-                                                <span class="badge bg-label-info p-2"><i
-                                                        class="bx bx-wallet text-info"></i></span>
-                                            </div>
-                                            <div class="d-flex flex-column">
-                                                <small>2021</small>
-                                                <h6 class="mb-0">$41.2k</h6>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    / Total Revenue
+
+
                     <style>
                         .mb-4 {
                             width: 98%;
@@ -364,7 +200,6 @@
                         <script>
                             document.write(new Date().getFullYear());
                         </script>
-                        <a href="https://themeselection.com" target="_blank" class="footer-link fw-bolder">Furniture</a>
                     </div>
 
                 </div>

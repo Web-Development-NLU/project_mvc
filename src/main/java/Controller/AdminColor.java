@@ -30,6 +30,7 @@ public class AdminColor extends HttpServlet {
         String page = request.getParameter("page");
 
         Double numPage = Math.ceil(Double.parseDouble(String.valueOf(colors.size())) / 10);
+        if(numPage<1) numPage= 1.0;
         if(page == null || Integer.parseInt(page) < 1) {
             page = "1";
         }

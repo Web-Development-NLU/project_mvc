@@ -19,9 +19,9 @@
             <div id="menu_btn-responsive" class="menu_btn-responsive col"><i class="fa-solid fa-bars"></i></div>
             <ul class="menu_list col">
                 <li class="menu_list_item menu_list-search hidden_item">
-                    <form action="">
+                    <form action="/searchProduct">
                         <div class="input-line">
-                            <input type="email" placeholder="Search your keywords">
+                            <input type="email" placeholder="Tìm kiếm...">
                             <button type="submit">
                                 <i class="fa-solid fa-magnifying-glass"></i>
                             </button>

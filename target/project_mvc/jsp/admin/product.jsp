@@ -148,8 +148,6 @@
                                             </li>
                                         </c:otherwise>
                                     </c:choose>
-
-
                                 </c:forEach>
                                 <li class="page-item next">
                                     <a class="page-link" href="${pageContext.request.contextPath}/admin/products?<%=idParam + search%>page=<%=pagination + 1%>"

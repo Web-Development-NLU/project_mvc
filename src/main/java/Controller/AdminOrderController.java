@@ -1,21 +1,17 @@
 package Controller;
 
-import DTO.AuthorizationData;
-import DTO.OrderDTO;
 import Model.Order;
 import Services.OrderService;
-import Services.UserService;
 
 import javax.servlet.*;
 import javax.servlet.http.*;
 import javax.servlet.annotation.*;
 import java.io.IOException;
-import java.nio.charset.StandardCharsets;
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 
-@WebServlet(name = "oderList", value = "/orderList")
-public class OrderListController extends HttpServlet {
-
+@WebServlet(name = "AdminOrderController", value = "/admin/order")
+public class AdminOrderController extends HttpServlet {
     private OrderService orderService;
     @Override
     public void init() throws ServletException {
@@ -24,25 +20,13 @@ public class OrderListController extends HttpServlet {
     }
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        HttpSession session = request.getSession(true);
-        AuthorizationData authorizationData = (AuthorizationData) session.getAttribute("authorization");
-        boolean logged = (boolean) request.getAttribute("logged");
         String infoSearch = request.getParameter("infoSearch");
-        if(!logged) {
-            response.sendRedirect("/");
-            return;
-        }
-        String userId = (String) authorizationData.getId();
-        ArrayList<Order> orders = new ArrayList<>();
-        if(infoSearch != null){
-            Order order = this.orderService.findOrderUserById(userId, infoSearch);
-            if(order != null){
-                orders.add(order);
-            }else{
-                orders = this.orderService.findOrdersUserByDetail(userId, infoSearch);
-            }
+        ArrayList<Order> orders;
+        if(infoSearch != null && !infoSearch.equals("null")){
+            request.setAttribute("search", infoSearch);
+            orders = this.orderService.findOrders(infoSearch);
         }else{
-            orders = this.orderService.findOrdersUser(userId);
+            orders = this.orderService.findAll(Order.class);
         }
         ArrayList<Order> orderResult = new ArrayList<>();
         String page = request.getParameter("page");
@@ -68,15 +52,16 @@ public class OrderListController extends HttpServlet {
             }
             orderResult.add(orders.get(i));
         }
-        request.setAttribute("orders", orderResult);
         request.setAttribute("pagination", Integer.parseInt(page));
+        request.setAttribute("orders", orderResult);
         request.setAttribute("numPage", numPage);
-        request.setAttribute("infoSearch",infoSearch);
-        request.getRequestDispatcher("/jsp/client/orderList.jsp").forward(request, response);
+        request.setAttribute("pagePrepayment", false);
+        request.setAttribute("pagePostpaid", false);
+        request.getRequestDispatcher("/jsp/admin/order.jsp").forward(request,response);
     }
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        response.sendRedirect("/orderList?infoSearch="+request.getParameter("search_order").trim()+"&page="+ request.getParameter("page"));
+        response.sendRedirect("/admin/order?page=" + request.getParameter("page")+"&infoSearch="+ request.getParameter("infoSearch"));
     }
 }

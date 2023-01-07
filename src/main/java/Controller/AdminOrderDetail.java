@@ -1,29 +1,29 @@
 package Controller;
 
-import Model.Product;
-import Services.ProductService;
+import Model.Order;
+import Services.OrderService;
 
 import javax.servlet.*;
 import javax.servlet.http.*;
 import javax.servlet.annotation.*;
 import java.io.IOException;
-import java.util.ArrayList;
 
-@WebServlet(name = "Admin", value = "/admin")
-public class Admin extends HttpServlet {
-    private ProductService productService;
+@WebServlet(name = "AdminOrderDetail", value = "/admin/adminOrderDetail")
+public class AdminOrderDetail extends HttpServlet {
+    private OrderService orderService;
 
     @Override
     public void init() throws ServletException {
         super.init();
-        this.productService=new ProductService("product");
+        orderService = new OrderService("orders");
     }
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        ArrayList<Product> products=productService.getProductTop3();
-        request.setAttribute("products",products);
-        request.getRequestDispatcher("/jsp/admin/home.jsp").forward(request, response);
+        String id = request.getParameter("id");
+        Order order = this.orderService.findById(id, Order.class);
+        request.setAttribute("order",order);
+        request.getRequestDispatcher("/jsp/admin/orderDetail.jsp").forward(request,response);
     }
 
     @Override

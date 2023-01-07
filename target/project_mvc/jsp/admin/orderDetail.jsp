@@ -1,18 +1,19 @@
-<%--
+<%@ page import="Model.Order" %><%--
   Created by IntelliJ IDEA.
   User: zxc
-  Date: 02/Jan/23
-  Time: 2:24 PM
+  Date: 06/Jan/23
+  Time: 7:25 PM
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<%@ page isELIgnored="false" %>
+<%@ taglib prefix = "c" uri = "http://java.sun.com/jsp/jstl/core" %>
+<%@ page isELIgnored = "false" %>
 <html
         lang="en"
         class="light-style layout-menu-fixed"
         dir="ltr"
         data-theme="theme-default"
-        data-assets-path="/assets/"
+        data-assets-path="../assets/"
         data-template="vertical-menu-template-free"
 >
 <head>
@@ -21,7 +22,7 @@
             name="viewport"
             content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0"/>
 
-    <title>Create category</title>
+    <title>Chi tiết đơn hàng</title>
 
     <meta name="description" content=""/>
 
@@ -34,26 +35,23 @@
     />
 
     <!-- Icons. Uncomment required icon fonts -->
-    <link rel="stylesheet" href="/assets/vendor/fonts/boxicons.css"/>
+    <link rel="stylesheet" href="../assets/vendor/fonts/boxicons.css"/>
 
     <!-- Core CSS -->
-    <link rel="stylesheet" href="/assets/vendor/css/style.css">
+    <link rel="stylesheet" href="../assets/vendor/css/style.css">
     <!-- Vendors CSS -->
-    <link rel="stylesheet" href="/assets/vendor/libs/perfect-scrollbar/perfect-scrollbar.css"/>
-    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/chosen/1.8.7/chosen.min.css">
-    <link rel="stylesheet" href="/assets/vendor/css/component-chosen.min.css">
+    <link rel="stylesheet" href="../assets/vendor/libs/perfect-scrollbar/perfect-scrollbar.css"/>
 
     <!-- Page CSS -->
 
     <!-- Helpers -->
-    <script src="/assets/vendor/js/helpers.js"></script>
+    <script src="../assets/vendor/js/helpers.js"></script>
 
-    <script src="/assets/js_admin/config.js"></script>
+    <script src="../assets/js_admin/config.js"></script>
 </head>
 <body>
 <%
-    boolean nameExists = Boolean.parseBoolean(request.getParameter("nameExists"));
-    String name = request.getParameter("name");
+    Order order = (Order) request.getAttribute("order");
 %>
 <!-- Layout wrapper -->
 <div class="layout-wrapper layout-content-navbar">
@@ -74,39 +72,52 @@
             <!-- Content wrapper -->
             <div class="content-wrapper">
                 <!-- Content -->
-
                 <div class="container-xxl flex-grow-1 container-p-y">
-                    <h4 class="fw-bold py-3 mb-4"><span class="text-muted fw-light">Create/</span> Create Category</h4>
-                    <hr class="my-5"/>
-                    <div class="col-xxl">
-                        <div class="card mb-4">
-                            <div class="card-header d-flex align-items-center justify-content-between">
-                                <h5 class="mb-0">Category Information</h5>
-                            </div>
-                            <div class="card-body">
-                                <form action="${pageContext.request.contextPath}/admin/createCategory" method="post">
-                                    <div class="row mb-3" style="margin-bottom: 0 !important;">
-                                        <label class="col-sm-2 col-form-label" for="name">Tên danh mục</label>
-                                        <div class="col-sm-10">
-                                            <input type="text" class="form-control" id="name" name="name"
-                                                   placeholder="name" required value="${nameExists == true ? name :""}"/>
-                                        </div>
-                                        <div class="" id="error_code" style="color: red; padding: 8px 0;margin-left: 17.8%; min-height: 16px">${nameExists == true ? "Tên danh mục đã tồn tại":""}</div>
+                    <h4 class="fw-bold py-3 mb-4"><span class="text-muted fw-light">Đơn hàng /</span> Chi tiết đơn hàng</h4>
+<%--                    <hr class="my-5"/>--%>
+                    <div class="card">
+                        <h5 class="card-header" style="padding: 1rem 0 1rem 1.5rem">Chi tiết đơn hàng</h5>
+                        <div class="container mt-5 mb-5" style="margin-top: 0.5rem !important;">
+                            <div class="table-responsive">
+                                <div class="form-group">
+                                    <label >Mã đơn hàng:</label>
+                                    <label><%=order.getId()%></label>
+                                </div>
+                                <c:if test="<%= order.getTransID() != null %>">
+                                    <div class="form-group">
+                                        <label>Mã giao dịch VNPAY:</label>
+                                        <label><%=order.getTransID()%></label>
                                     </div>
-                                    <div class="row justify-content-end">
-                                        <div class="col-sm-10">
-                                            <button type="submit" class="btn btn-primary">Tạo</button>
-                                        </div>
-                                    </div>
-                                </form>
+                                </c:if>
+                                <div class="form-group">
+                                    <label >Tên khách hàng:</label>
+                                    <label><%=order.getUsername()%></label>
+                                </div>
+                                <div class="form-group">
+                                    <label>Quốc gia:</label>
+                                    <label><%=order.getCountry()%></label>
+                                </div>
+                                <div class="form-group">
+                                    <label >Thành phố:</label>
+                                    <label><%=order.getCity()%></label>
+                                </div>
+                                <div class="form-group">
+                                    <label >Quận/Huyện:</label>
+                                    <label><%=order.getDistrict()%></label>
+                                </div>
+                                <div class="form-group">
+                                    <label >Số điện thoại:</label>
+                                    <label><%=order.getPhone()%></label>
+                                </div>
+                                <div class="form-group">
+                                    <label >Email:</label>
+                                    <label><%=order.getEmail()%></label>
+                                </div>
                             </div>
+
                         </div>
                     </div>
-                    <!-- Basic with Icons -->
-
                 </div>
-                <!-- / Content -->
-
                 <!-- Footer -->
                 <footer class="content-footer footer bg-footer-theme">
                     <div class="container-xxl d-flex flex-wrap justify-content-between py-2 flex-md-row flex-column">

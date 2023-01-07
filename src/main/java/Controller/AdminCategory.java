@@ -21,13 +21,42 @@ public class AdminCategory extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        ArrayList<Category> categories = this.categoryServices.findAll(Category.class);
-        request.setAttribute("categories", categories);
+        String infoSearch = request.getParameter("infoSearch");
+        ArrayList<Category> categories;
+        if(infoSearch != null && !infoSearch.equals("null")){
+            categories = this.categoryServices.findCategoriesByName(infoSearch);
+        }else{
+            categories = this.categoryServices.findAll(Category.class);
+        }
+        ArrayList<Category> categoryResult = new ArrayList<>();
+        String page = request.getParameter("page");
+        int intPage;
+        try {
+            intPage = Integer.parseInt(page);
+        }catch (Exception e){
+            intPage = 0;
+        }
+        Double numPage = Math.ceil(Double.parseDouble(String.valueOf(categories.size())) / 10);
+        if(numPage < 1) numPage = 1.0;
+        if(page == null || intPage < 1) {
+            page = "1";
+        }
+        if(Integer.parseInt(page) > numPage.intValue()) page = ""+ numPage.intValue();
+        int index = (Integer.parseInt(page) - 1) * 10;
+        for(int i = index; i < (index + 10); i++ ){
+            if(i >= categories.size()){
+                break;
+            }
+            categoryResult.add(categories.get(i));
+        }
+        request.setAttribute("pagination", Integer.parseInt(page));
+        request.setAttribute("numPage", numPage);
+        request.setAttribute("categories", categoryResult);
         request.getRequestDispatcher("/jsp/admin/category.jsp").forward(request, response);
     }
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
+        response.sendRedirect("/admin/category?page=" + request.getParameter("page")+"&infoSearch="+request.getParameter("infoSearch"));
     }
 }
