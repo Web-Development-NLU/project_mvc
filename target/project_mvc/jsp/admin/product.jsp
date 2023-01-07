@@ -1,3 +1,4 @@
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ page import="java.util.ArrayList" %>
 <%@ page import="Model.Product" %>
 <%@ page import="Model.Category" %>
@@ -10,7 +11,7 @@
   Time: 10:57
   To change this template use File | Settings | File Templates.
 --%>
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page isELIgnored="false" %>
 <!DOCTYPE html>
@@ -66,6 +67,8 @@
     Category category = (Category) request.getAttribute("category");
     int pagination = (int) request.getAttribute("pagination");
     String numPage = DecimalFormat.getIntegerInstance().format(Double.parseDouble(request.getAttribute("numPage").toString()));
+    String idParam = (category == null) ? "" : "id="+category.getId()+"&";
+    String search = (request.getParameter("search") == null) ? "" : "search=" + request.getParameter("search") + "&";
 
 %>
 <!-- Layout wrapper -->
@@ -95,6 +98,15 @@
                     </a>
 
                     <hr class="my-5"/>
+                    <div class="row mb-4">
+                        <form method="post" action="${pageContext.request.contextPath}/admin/products?<%=idParam%>" content="">
+                            <div class="input-group">
+                                <input type="text" class="form-control" name="search" placeholder="tên sản phẩm">
+                                <button class="btn btn-outline-primary" type="submit" id="button-addon2">Tìm kiếm</button>
+                            </div>
+                        </form>
+                    </div>
+
                     <div class="row">
                         <nav aria-label="breadcrumb" class="col-lg-6">
                             <ol class="breadcrumb">
@@ -110,15 +122,15 @@
                         <nav aria-label="Page navigation" class="col-lg-6">
                             <ul class="pagination justify-content-end">
                                 <li class="page-item prev">
-                                    <a class="page-link" href="${pageContext.request.contextPath}/admin/products?<%=(category == null) ? "" : "id="+category.getId()+"&"%>page=<%=pagination - 1%>"
+                                    <a class="page-link" href="${pageContext.request.contextPath}/admin/products?<%=idParam + search%>page=<%=pagination - 1%>"
                                     ><i class="tf-icon bx bx-chevrons-left"></i
                                     ></a>
                                 </li>
                                 <li class="page-item">
-                                    <a class="page-link" href="${pageContext.request.contextPath}/admin/products?<%=(category == null) ? "" : "id="+category.getId()+"&"%>page=<%=pagination%>"><%=pagination%></a>
+                                    <a class="page-link" href="${pageContext.request.contextPath}/admin/products?<%=idParam + search%>page=<%=pagination%>"><%=pagination%></a>
                                 </li>
                                 <li class="page-item">
-                                    <form action="/admin/products?<%=(category == null) ? "" : "id="+category.getId()%>" method="post">
+                                    <form action="/admin/products?<%=idParam + search%>" method="post">
                                         <input
                                                 type="number"
                                                 class="form-control"
@@ -129,7 +141,7 @@
                                     </form>
                                 </li>
                                 <li class="page-item next">
-                                    <a class="page-link" href="${pageContext.request.contextPath}/admin/products?<%=(category == null) ? "" : "id="+category.getId()+"&"%>&page=<%=pagination + 1%>"
+                                    <a class="page-link" href="${pageContext.request.contextPath}/admin/products?<%=idParam + search%>page=<%=pagination + 1%>"
                                     ><i class="tf-icon bx bx-chevrons-right"></i
                                     ></a>
                                 </li>
