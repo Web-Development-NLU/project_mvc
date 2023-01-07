@@ -18,7 +18,7 @@
       <div class="about-info-card_content right-content">
         <div class="info_title monts"><%=request.getParameter("title")%>></div>
         <div class="info_break-line"></div>
-        <div class="info_description monts"><%=request.getParameter("value")%>></div>
+        <div class="info_description monts"><%=request.getParameter("value")%></div>
         <div class="info_action">
           <a href="${pageContext.request.contextPath}/products"><button class="btn-text bgr-white hover-bg-red outline-black">XEM CÁC SẢN PHẨM</button></a>
         </div>
@@ -33,7 +33,7 @@
       <div class="about-info-card_content left-content">
         <div class="info_title monts"><%=request.getParameter("title")%></div>
         <div class="info_break-line"></div>
-        <div class="info_description monts"><%=request.getParameter("value")%>></div>
+        <div class="info_description monts"><%=request.getParameter("value")%></div>
         <div class="info_action">
           <a href="${pageContext.request.contextPath}/products"><button class="btn-text bgr-white hover-bg-red outline-black">XEM CÁC SẢN PHẨM</button></a>
         </div>
