@@ -1,7 +1,10 @@
 package Controller;
 
+import DTO.UpdateAboutDTO;
 import DTO.UpdateContactDTO;
+import Model.About;
 import Model.Contact;
+import Services.AboutService;
 import Services.ContactService;
 import org.jdbi.v3.core.statement.Update;
 
@@ -24,31 +27,32 @@ public class AdminContact extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         request.setAttribute("contact", this.contactService.findAll(Contact.class).get(0));
+            request.getRequestDispatcher("/jsp/admin/contact.jsp").forward(request, response);
 
-        request.getRequestDispatcher("/jsp/admin/contact.jsp").forward(request, response);
     }
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String id = request.getParameter("id");
-
-        if(id == null) {
+        String idAbout=request.getParameter("idAbout");
+        if(id ==null & idAbout ==null){
             response.sendRedirect("/admin");
             return;
         }
+            UpdateContactDTO dto = new UpdateContactDTO(
+                    request.getParameter("email"),
+                    request.getParameter("phone"),
+                    request.getParameter("address")
+            );
 
-        UpdateContactDTO dto = new UpdateContactDTO(
-                request.getParameter("email"),
-                request.getParameter("phone"),
-                request.getParameter("address")
-        );
+            try {
+                this.contactService.update(id, dto);
+            } catch (Exception e) {
+                throw new RuntimeException(e);
+            }
 
-        try {
-            this.contactService.update(id, dto);
-        } catch (Exception e) {
-            throw new RuntimeException(e);
-        }
 
         response.sendRedirect("/admin/contact");
     }
+
 }

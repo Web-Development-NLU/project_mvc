@@ -3,6 +3,8 @@ package Services;
 import DTO.BaseDTO;
 import Model.Pattern;
 
+import java.util.ArrayList;
+
 
 public class PatternService extends BaseService<Pattern> {
     public PatternService(String tableName){
@@ -34,5 +36,25 @@ public class PatternService extends BaseService<Pattern> {
 
         return pattern != null;
     }
-
+public ArrayList<Pattern> findPatternByName(String name){
+        String nameSearch="%"+name+"%";
+        return (ArrayList<Pattern>) this.jdbi.withHandle(handle -> {
+            return handle.createQuery("SELECT * FROM " + this.tableName +
+                    " WHERE name like ? ")
+                    .bind(0,nameSearch)
+                    .mapToBean(Pattern.class)
+                    .list();
+        });
+}
+    public boolean deletePattern(String id) {
+        Pattern pattern=this.findById(id,Pattern.class);
+        if(pattern !=null){
+            this.jdbi.useHandle(handle -> {
+                handle.createUpdate("DELETE FROM " +this.tableName +
+                        " WHERE id = ? ")
+                        .bind(0,id).execute();
+            });
+        }
+        return pattern !=null;
+    }
 }
