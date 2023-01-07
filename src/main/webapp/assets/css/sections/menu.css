@@ -52,7 +52,7 @@ menu .menu_list .menu_list_item{
   margin-right: 2rem;
   font-weight: bold;
   font-family: var(--f-monts);
-  letter-spacing: 2px;
+  letter-spacing: 1px;
 }
 
 menu .menu_action .menu_action_item {

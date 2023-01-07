@@ -28,24 +28,24 @@
                         </div>
                     </form>
                 </li>
-                <li class="menu_list_item"><a href="${pageContext.request.contextPath}/">Home</a></li>
-                <li class="menu_list_item"><a href="${pageContext.request.contextPath}/products">Products</a></li>
-                <li class="menu_list_item"><a href="${pageContext.request.contextPath}/about">About Us</a></li>
-                <li class="menu_list_item"><a href="${pageContext.request.contextPath}/contact">Contact</a></li>
+                <li class="menu_list_item"><a href="${pageContext.request.contextPath}/">Trang chủ</a></li>
+                <li class="menu_list_item"><a href="${pageContext.request.contextPath}/products">Sản phẩm</a></li>
+                <li class="menu_list_item"><a href="${pageContext.request.contextPath}/about">Về chúng tôi</a></li>
+                <li class="menu_list_item"><a href="${pageContext.request.contextPath}/contact">Liên hệ</a></li>
                 <c:choose>
                     <c:when test="<%= logged%>">
                         <li class="menu_list_item hidden_item"><a href="#">
                             <i class="fa-regular fa-user action-icon color-red"></i>
-                            <span class="btn-content monts">My Account</span>
+                            <span class="btn-content monts">Tài khoản của tôi</span>
                         </a>
                         <li class="menu_list_item hidden_item"><a href="#">
                             <i class="fa-solid fa-list action-icon color-red"></i>
-                            <span class="btn-content monts">Orders List</span>
+                            <span class="btn-content monts">Đơn hàng của tôi</span>
                         </a>
                         </li>
                         <li class="menu_list_item hidden_item"><a href="#">
                             <i class="fa-solid fa-right-from-bracket action-icon color-red"></i>
-                            <span class="btn-content monts">Logout</span>
+                            <span class="btn-content monts">Đăng xuất</span>
                         </a>
                         </li>
                     </c:when>
@@ -76,10 +76,10 @@
                                     <i class="bi bi-person"></i>
                                 </button>
                                 <div class="dropdown-menu">
-                                    <a class="dropdown-item" href="${pageContext.request.contextPath}/myAccount">My Account</a>
-                                    <a class="dropdown-item" href="#">Orders List
+                                    <a class="dropdown-item" href="${pageContext.request.contextPath}/myAccount">Tài khoản của tôi</a>
+                                    <a class="dropdown-item" href="#">Đơn hàng của tôi
                                         <span><i class="fa-solid fa-list"></i></span></a>
-                                    <a class="dropdown-item" href="${pageContext.request.contextPath}/logout">Logout
+                                    <a class="dropdown-item" href="${pageContext.request.contextPath}/logout">Đăng xuất
                                         <span><i class="fa-solid fa-right-from-bracket"></i></span></a>
                                 </div>
                             </div>
@@ -88,7 +88,7 @@
                             <button class="btn-icon-cb-text bd-white-02 rounded-pill">
                                 <a href="${pageContext.request.contextPath}/login" class="color-white">
                                     <i class="fa-regular fa-user action-icon"></i>
-                                    <span class="btn-content monts">Login</span>
+                                    <span class="btn-content monts">Đăng nhập</span>
                                 </a>
                             </button>
                         </c:otherwise>
