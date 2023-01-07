@@ -153,7 +153,14 @@ public class ProductService extends BaseService<Product> {
                     .list();
         });
     }
-
+    public ArrayList<Product> getProductTop3() {
+        return (ArrayList<Product>) this.jdbi.withHandle(handle -> {
+            return handle.createQuery("SELECT * FROM " + this.tableName +
+                            " ORDER BY createdAT desc limit 3")
+                    .mapToBean(Product.class)
+                    .list();
+        });
+    };
     public void deletePattern(String idProduct) {
         this.jdbi.useHandle(handle -> handle.createUpdate("DELETE FROM patternForProduct WHERE idProduct = :idProduct").bind("idProduct", idProduct).execute());
     }

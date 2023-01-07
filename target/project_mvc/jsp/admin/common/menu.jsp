@@ -42,25 +42,25 @@
 
         <li class="menu-item">
             <a href="${pageContext.request.contextPath}/admin/category" class="menu-link">
-                <i class="menu-icon tf-icons bx bx-home-circle"></i>
+                <i class="menu-icon tf-icons bx bx-detail"></i>
                 <div data-i18n="Analytics">Danh mục</div>
             </a>
         </li>
         <li class="menu-item">
             <a href="${pageContext.request.contextPath}/admin/pattern" class="menu-link">
-                <i class="menu-icon tf-icons bx bx-home-circle"></i>
+                <i class="menu-icon tf-icons bx bx-crown"></i>
                 <div data-i18n="Analytics">Kiểu dáng</div>
             </a>
         </li>
         <li class="menu-item">
             <a href="${pageContext.request.contextPath}/admin/color" class="menu-link">
-                <i class="menu-icon tf-icons bx bx-home-circle"></i>
+                <i class="menu-icon tf-icons bx bx-support"></i>
                 <div data-i18n="Analytics">Màu sắc</div>
             </a>
         </li>
         <li class="menu-item">
             <a href="${pageContext.request.contextPath}/admin/contact" class="menu-link">
-                <i class="menu-icon tf-icons bx bx-home-circle"></i>
+                <i class="menu-icon tf-icons bx bx-detail"></i>
                 <div data-i18n="Analytics">Thông tin liên hệ</div>
             </a>
         </li>
@@ -92,7 +92,29 @@
             </ul>
         </li>
 
-
+        <li class="menu-item">
+            <a href="javascript:void(0);" class="menu-link menu-toggle">
+                <i class="menu-icon tf-icons bx bx-collection"></i>
+                <div data-i18n="Account Settings">Các nút tạo khác</div>
+            </a>
+            <ul class="menu-sub">
+                <li class="menu-item">
+                    <a href="${pageContext.request.contextPath}/admin/createProduct" class="menu-link">
+                        <div data-i18n="Account">Tạo sản phẩm</div>
+                    </a>
+                </li>
+                <li class="menu-item">
+                    <a href="${pageContext.request.contextPath}/admin/createColor" class="menu-link">
+                        <div data-i18n="Notifications">Tạo màu</div>
+                    </a>
+                </li>
+                <li class="menu-item">
+                    <a href="${pageContext.request.contextPath}/admin/createPattern" class="menu-link">
+                        <div data-i18n="Connections">Tạo kiểu dáng</div>
+                    </a>
+                </li>
+            </ul>
+        </li>
         <li class="menu-item">
             <a href="/admin/order" class="menu-link menu-toggle">
                 <i class="menu-icon tf-icons bx bx-dock-top"></i>

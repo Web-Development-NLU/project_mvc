@@ -47,7 +47,10 @@
   <link rel="stylesheet" href="/assets/vendor/libs/perfect-scrollbar/perfect-scrollbar.css"/>
   <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/chosen/1.8.7/chosen.min.css">
   <link rel="stylesheet" href="/assets/vendor/css/component-chosen.min.css">
-
+  <link rel="stylesheet" href="/assets/css/components/search.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css"
+        integrity="sha512-xh6O/CkQoPOWDdYTDqeRdPCVd1SpvCA9XXcUnZS2FmJNp1coAFzvtCN9BmamE+4aHK8yyUHUSCcJHgXloTyT2A=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"/>
   <!-- Page CSS -->
 
   <!-- Helpers -->
@@ -85,18 +88,10 @@
           <h4 class="fw-bold py-3 mb-4"><span class="text-muted fw-light">QUẢN LÝ /</span> MẪU</h4>
 
           <a href="${pageContext.request.contextPath}/admin/createPattern">
-            <button type="button" class="btn btn-outline-dark" style="float: right">Tạo mới</button>
+            <button type="button" class="btn btn-outline-dark" style="float: right">Thêm mẫu mới</button>
           </a>
           <hr class="my-5" />
-          <div class="row mb-4">
-            <form action="${pageContext.request.contextPath}/admin/pattern" methods="post">
-              <div class="input-group">
-              <input type="text" class="form-control" name="pattern"
-                     placeholder="Tên mẫu" />
-                <button class="btn btn-outline-primary" type="submit" id="button-addon2">Tìm kiếm</button>
-              </div>
-            </form>
-          </div>
+
           <div class="row">
             <nav aria-label="breadcrumb" class="col-lg-6">
               <ol class="breadcrumb">
@@ -137,6 +132,14 @@
               </ul>
             </nav>
           </div>
+          <ol style="padding-left: 0">
+            <form action="${pageContext.request.contextPath}/admin/pattern" class="form-search">
+              <input class="ip_search" type="search" name="pattern" placeholder="Tìm kiếm..." style="background: white; border-radius: 10px; width: 50%" >
+              <button class="btn-search" style="background: #696CFF; border-radius: 50%; border: 1px solid transparent; outline: none; width: 44px;height: 44px; transform: translate(10px,4px)">
+                <i class="fa-solid fa-magnifying-glass" style="color: #FFF3FF;transform: translate(1px,2px);"></i>
+              </button>
+            </form>
+          </ol>
           <!-- Bootstrap Dark Table -->
           <div class="card">
             <h5 class="card-header">THÔNG TIN VỀ QUẢN LÝ MẪU</h5>
