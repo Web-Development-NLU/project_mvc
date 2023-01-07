@@ -3,7 +3,8 @@
 <%@ page import="java.util.ArrayList" %>
 <%@ page import="Model.Category" %>
 <%@ page import="DTO.AuthorizationData" %>
-<%@ page import="Model.TypeAccount" %><%--
+<%@ page import="Model.TypeAccount" %>
+<%@ page import="Model.TypeShop" %><%--
   Created by IntelliJ IDEA.
   User: Quang Tho
   Date: 29/12/2022
@@ -90,6 +91,26 @@
             </ul>
         </li>
 
+        <li class="menu-item">
+            <a href="javascript:void(0);" class="menu-link menu-toggle">
+                <i class="menu-icon tf-icons bx bx-table"></i>
+                <div data-i18n="Authentications">Banner Cửa hàng</div>
+            </a>
+            <ul class="menu-sub">
+                <c:if test="<%=data.getType() == TypeAccount.ROOT_ADMIN.ordinal()%>">
+                    <li class="menu-item">
+                        <a href="${pageContext.request.contextPath}/admin/shop?type=<%=TypeShop.SMALL.ordinal()%>" class="menu-link">
+                            <div data-i18n="Basic">Banner nhỏ</div>
+                        </a>
+                    </li>
+                </c:if>
+                <li class="menu-item">
+                    <a href="${pageContext.request.contextPath}/admin/shop?type=<%=TypeShop.LARGE.ordinal()%>" class="menu-link">
+                        <div data-i18n="Basic">Banner lớn</div>
+                    </a>
+                </li>
+            </ul>
+        </li>
 
         <li class="menu-item">
             <a href="/dashboard/order" class="menu-link ">
@@ -120,6 +141,7 @@
                     </a>
                 </li>
             </ul>
+        </li>
 
 
     </ul>

@@ -6,7 +6,7 @@
 }
 
 .card-shop{
-  width: fit-content;
+  max-width: 450px;
   text-align: center;
   overflow: hidden;
   position: relative;

@@ -1,6 +1,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page import="java.util.ArrayList" %>
 <%@ page import="Model.Slide" %>
+<%@ page import="Model.Shop" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ page isELIgnored="false" %>
 <html>
@@ -9,7 +10,9 @@
         <jsp:param name="title" value="FURNITURE | TRANG CHỦ"/>
     </jsp:include>
 </head>
-<% ArrayList<Slide> slides = (ArrayList<Slide>) request.getAttribute("slides"); %>
+<%
+    ArrayList<Slide> slides = (ArrayList<Slide>) request.getAttribute("slides");
+%>
 <body>
     <div id="home-container">
         <header>
