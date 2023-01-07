@@ -88,11 +88,11 @@
                 <div class="container-xxl flex-grow-1 container-p-y">
                     <h4 class="fw-bold py-3 mb-4"><span class="text-muted fw-light">QUẢN LÝ /</span> MÀU</h4>
                     <a href="${pageContext.request.contextPath}/admin/createColor">
-                        <button type="button" class="btn btn-outline-dark" style="float: right">Tạo mới</button>
+                        <button type="button" class="btn btn-outline-dark" style="float: right">Thêm màu mới</button>
                     </a>
                     <hr class="my-5" />
                     <div class="row mb-4">
-                        <form action="${pageContext.request.contextPath}/admin/color" methods="post">
+                        <form action="${pageContext.request.contextPath}/admin/color">
                             <div class="input-group">
                             <input type="text" class="form-control" name="color"
                                    placeholder="Tên màu" />
