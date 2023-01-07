@@ -3,10 +3,7 @@ package Services;
 import DTO.BaseDTO;
 import DTO.FilterProduct;
 import DTO.UpdateProductDTO;
-import Model.Color;
-import Model.Pattern;
-import Model.Product;
-import Model.StatusProduct;
+import Model.*;
 
 import javax.management.Query;
 import java.time.LocalDate;
@@ -163,5 +160,11 @@ public class ProductService extends BaseService<Product> {
 
     public void deleteColor(String idProduct) {
         this.jdbi.useHandle(handle -> handle.createUpdate("DELETE FROM colorForProduct WHERE idProduct = :idProduct").bind("idProduct", idProduct).execute());
+    }
+    public ArrayList<Product> findByName(String name){
+        String nameSearch = "%"+name+"";
+        return (ArrayList<Product>) this.jdbi.withHandle(handle -> {
+            return handle.createQuery("SELECT * FROM " + this.tableName + " WHERE name like ?").bind(0,nameSearch).mapToBean(Product.class).list();
+        });
     }
 }

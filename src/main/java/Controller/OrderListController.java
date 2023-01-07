@@ -69,7 +69,6 @@ public class OrderListController extends HttpServlet {
             }
             orderResult.add(orders.get(i));
         }
-//        request.setAttribute("orders", orders);
         request.setAttribute("orders", orderResult);
         request.setAttribute("pagination", Integer.parseInt(page));
         request.setAttribute("numPage", numPage);

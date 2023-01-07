@@ -3,6 +3,7 @@
 <%@ page import="Model.Category" %>
 <%@ page import="Model.Color" %>
 <%@ page import="Model.Pattern" %>
+<%@ page import="java.text.DecimalFormat" %>
 <%--
   Created by IntelliJ IDEA.
   User: zxc
@@ -29,6 +30,9 @@
 <body>
 <%
     ArrayList<Product> products = (ArrayList<Product>) request.getAttribute("products");
+    int pagination = (int) request.getAttribute("pagination");
+    String numPage = DecimalFormat.getIntegerInstance().format(Double.parseDouble(request.getAttribute("numPage").toString()));
+    int totalPage = Integer.parseInt(numPage);
 %>
 <div id="shop-container">
     <header>
@@ -36,7 +40,7 @@
         <jsp:include page="common/searchBarMenu.jsp"/>
         <jsp:include page="partials/products/headSearch.jsp"/>
     </header>
-    <jsp:include page="common/filterProducts.jsp"/>
+<%--    <jsp:include page="common/filterProducts.jsp"/>--%>
     <div class="products-container">
         <div class="products">
             <div class="container-fluid">
@@ -54,9 +58,9 @@
                 </div>
             </div>
             <jsp:include page="common/pagination.jsp">
-                <jsp:param name="path" value="#"/>
-                <jsp:param name="number" value="${10}"/>
-                <jsp:param name="active" value="0"/>
+                <jsp:param name="path" value="searchProduct"/>
+                <jsp:param name="number" value="<%= totalPage %>"/>
+                <jsp:param name="active" value="${pagination}"/>
             </jsp:include>
         </div>
     </div>
@@ -64,5 +68,6 @@
 </div>
 
 <jsp:include page="common/tail.jsp"/>
+</div>
 </body>
 </html>

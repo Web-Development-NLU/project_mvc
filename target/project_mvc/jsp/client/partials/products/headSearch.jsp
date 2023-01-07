@@ -11,50 +11,11 @@
         <div class="head_bottom-title color-white">
             <h1 class="monts">The Shop</h1>
         </div>
-
-        <div class="container-slide">
-            <div class="control-slide color-white">
-                <div class="control-slide-action prev"><i class="fa-solid fa-angle-left"></i></div>
-                <div class="control-slide-action next"><i class="fa-solid fa-angle-right"></i></div>
-            </div>
-            <div class="category-slide">
-                <div class="card-category">
-                    <div class="img-category">
-                        <a href="#"><img src="../assets/imgs/card-shop/chair-category.jpg" alt="Not found"></a>
-                    </div>
-                    <h5><a href="#">CHAIR</a></h5>
-                </div>
-                <div class="card-category">
-                    <div class="img-category">
-                        <a href="#"><img src="../assets/imgs/card-shop/chair-category.jpg" alt="Not found"></a>
-                    </div>
-                    <h5><a href="#">CHAIR</a></h5>
-                </div>
-                <div class="card-category">
-                    <div class="img-category">
-                        <a href="#"><img src="../assets/imgs/card-shop/chair-category.jpg" alt="Not found"></a>
-                    </div>
-                    <h5><a href="#">CHAIR</a></h5>
-                </div>
-                <div class="card-category">
-                    <div class="img-category">
-                        <a href="#"><img src="../assets/imgs/card-shop/chair-category.jpg" alt="Not found"></a>
-                    </div>
-                    <h5><a href="#">CHAIR</a></h5>
-                </div>
-                <div class="card-category">
-                    <div class="img-category">
-                        <a href="#"><img src="../assets/imgs/card-shop/chair-category.jpg" alt="Not found"></a>
-                    </div>
-                    <h5><a href="#">CHAIR</a></h5>
-                </div>
-                <div class="card-category">
-                    <div class="img-category">
-                        <a href="#"><img src="../assets/imgs/card-shop/chair-category.jpg" alt="Not found"></a>
-                    </div>
-                    <h5><a href="#">CHAIR</a></h5>
-                </div>
-            </div>
-        </div>
+        <form action="/searchProduct" class="form-search" style="justify-content: center">
+            <input class="ip_search" type="text" name="infoSearch" placeholder="Tìm kiếm..." style="width: 60%">
+            <button class="btn-search">
+                <i class="fa-solid fa-magnifying-glass"></i>
+            </button>
+        </form>
     </div>
 </div>
