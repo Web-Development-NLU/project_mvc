@@ -97,7 +97,7 @@
                                                             aria-expanded="true"
                                                             aria-controls="accordionOne"
                                                     >
-                                                        Cost storages
+                                                        GHẾ BÀNH BỌC NỆM FEMI
                                                     </button>
                                                 </h2>
 
@@ -107,23 +107,22 @@
                                                         data-bs-parent="#accordionExample"
                                                 >
                                                     <div class="accordion-body">
-                                                        Lemon drops chocolate cake gummies carrot cake chupa chups
-                                                        muffin topping. Sesame snaps icing
-                                                        marzipan gummi bears macaroon dragée danish caramels powder.
-                                                        Bear claw dragée pastry topping
-                                                        soufflé. Wafer gummi bears marshmallow pastry pie.
+                                                        Với nhiều tùy chọn màu bọc theo xu hướng, chiếc ghế bành này là sự bổ sung lý tưởng cho các phòng có hình dạng,
+                                                        kiểu dáng và bảng màu khác nhau. Được chế tác từ một khung làm bằng gỗ dán chắc chắn và gỗ kỹ thuật,
+                                                        nó cung cấp bốn chân gỗ đen thon, hơi loe,
+                                                        tương phản tuyệt đẹp với loại vải có màu sắc rắn chắc ở phía trên.
                                                         <br><br>
-                                                        Dimensions:&nbsp;30 × 69.9 × 24 cm
+                                                        Kích thước:&nbsp;W865 x D(905-1260) x H(1280-1335) mm
                                                         <br>
-                                                        Color :&nbsp; Beige, Burgundy, Green, White
+                                                        Màu sắc:&nbsp; Màu xám
                                                         <br>
-                                                        Hanging Rail:&nbsp; Stainless steel
+                                                        Vật liệu:&nbsp; Gỗ cao su, bọc nệm
                                                         <br>
-                                                        Product Type:&nbsp;Wall shelf with clothes rack
+                                                        Loại sản phẩm:&nbsp;Ghế
                                                         <br>
-                                                        Pattern:&nbsp; Fabic, Leather, Plastic, Plywood, Wood
+                                                        Kiểu dáng:&nbsp;Hiện đại
                                                         <br>
-                                                        Size:&nbsp;Medium, Small
+                                                        Kích thước: Lớn
                                                     </div>
                                                 </div>
                                             </div>
@@ -137,7 +136,7 @@
                                                             aria-expanded="false"
                                                             aria-controls="accordionTwo"
                                                     >
-                                                        Baniversary Chair
+                                                        ĐÈN BỌC LƯỚI THÉP
                                                     </button>
                                                 </h2>
                                                 <div
@@ -147,26 +146,19 @@
                                                         data-bs-parent="#accordionExample"
                                                 >
                                                     <div class="accordion-body">
-                                                        Pellentesque habitant morbi tristique senectus et netus et
-                                                        malesuada fames ac turpis egestas. Vestibulum tortor quam,
-                                                        feugiat vitae, ultricies eget, tempor sit amet, ante. Donec eu
-                                                        libero sit amet quam egestas semper. Aenean ultricies mi vitae
-                                                        est. Mauris placerat eleifend leo.
-
-                                                        Lorem ipsum was conceived as filler text, formatted in a certain
-                                                        way to enable the presentation of graphic elements in documents,
-                                                        without the need for formal copy. Using Lorem Ipsum allows
-                                                        designers to put together layouts and the form of the content
-                                                        before the content has been created, giving the design and
-                                                        production process more freedom.
+                                                        Đèn này có một cái nhìn táo bạo ngay lập tức thu hút mắt, vì vậy nó rất lý tưởng cho bất kỳ người trang trí
+                                                        sành điệu nào đang tìm cách đưa ra tuyên bố. Khung được làm từ kim loại và có hình bóng giống như lồng với lớp kim loại bóng mượt.
+                                                        Nó được hỗ trợ bởi một tấm đệm tròn và một cánh tay mỏng với chi tiết giống như chuỗi. Bên trong bóng râm mờ bên trong,
+                                                        bộ đồ cứng này có đèn LED tích hợp. Điều đó có nghĩa là bạn có thể thêm nó vào không gian của mình ngay khi nó đến,
+                                                        mà không phải lo lắng về việc tìm một bóng đèn.
                                                         <br><br>
-                                                        Dimensions:&nbsp;50 × 83 cm
+                                                        Kích thước:&nbsp;6.25'' H X 7'' W X 8'' D
                                                         <br>
-                                                        Color:&nbsp;Beige
+                                                        Màu sắc:&nbsp;Trắng
                                                         <br>
-                                                        Material:&nbsp;Wood
+                                                        Vật liệu:&nbsp;Hỗn hợp vải lanh, kim loại, thủy tinh
                                                         <br>
-                                                        Pattern:&nbsp; Fabic
+                                                        Kiểu dáng:&nbsp;Phương tây
 
 
                                                     </div>
@@ -182,7 +174,7 @@
                                                             aria-expanded="false"
                                                             aria-controls="accordionThree"
                                                     >
-                                                        Le klnit
+                                                        GIƯỜNG KITKA
                                                     </button>
                                                 </h2>
                                                 <div
@@ -192,30 +184,17 @@
                                                         data-bs-parent="#accordionExample"
                                                 >
                                                     <div class="accordion-body">
-                                                        Pellentesque habitant morbi tristique senectus et netus et
-                                                        malesuada fames ac turpis egestas. Vestibulum tortor quam,
-                                                        feugiat vitae, ultricies eget, tempor sit amet, ante. Donec eu
-                                                        libero sit amet quam egestas semper. Aenean ultricies mi vitae
-                                                        est. Mauris placerat eleifend leo.
-
-                                                        Lorem ipsum was conceived as filler text, formatted in a certain
-                                                        way to enable the presentation of graphic elements in documents,
-                                                        without the need for formal copy. Using Lorem Ipsum allows
-                                                        designers to put together layouts and the form of the content
-                                                        before the content has been created, giving the design and
-                                                        production process more freedom.
-                                                        <br><br>
-                                                        Weight 2.5 kg
+                                                        Giường ngủ KITKA có thiết kế vững chãi,
+                                                        chất liệu gỗ cao su và màu sắc ấm áp,
+                                                        đem đến vẻ đẹp sang trọng cho căn phòng.
                                                         <br>
-                                                        Dimensions:&nbsp;55 × 25 cm
+                                                        Kích thước:&nbsp;180 x 200cm
                                                         <br>
-                                                        Color:&nbsp; Black
+                                                        Màu sắc:&nbsp;Màu gỗ
                                                         <br>
-                                                        Lamp Type:&nbsp; No
+                                                        Kiểu dáng:&nbsp; Hiện đại
                                                         <br>
-                                                        Lamping:&nbsp; No
-                                                        <br>
-                                                        Material:&nbsp; birch veneer
+                                                        Vật liệu:&nbsp; Gỗ cao su, ván ép
                                                     </div>
                                                 </div>
                                             </div>
@@ -226,7 +205,7 @@
                             </div>
                             <!-- Bootstrap crossfade carousel -->
                             <div class="col-md">
-                                <h5 class="my-4">Hot Products</h5>
+                                <h5 class="my-4">Sản phẩm nổi bật</h5>
 
                                 <div
                                         id="carouselExample-cf"
@@ -241,30 +220,30 @@
                                     </ol>
                                     <div class="carousel-inner">
                                         <div class="carousel-item active">
-                                            <img class="d-block w-100" src="/assets/img_admin/product/Cost_storages.png"
+                                            <img class="d-block w-100" src="https://secure.img1-cg.wfcdn.com/im/7798995/resize-h500-w500%5Ecompr-r85/1882/188295243/Femi+Upholstered+Armchair.jpg"
                                                  alt="First slide"/>
                                             <div class="carousel-caption d-none d-md-block">
-                                                <h3>Cost storages</h3>
-                                                <p>Eos mutat malis maluisset et, agam ancillae quo te, in vim congue
-                                                    pertinacia.</p>
+                                                <h3>GHẾ BÀNH BỌC NỆM FEMI</h3>
+                                                <p>Được chế tác từ một khung làm bằng gỗ dán chắc chắn và gỗ kỹ thuật, nó cung cấp bốn chân gỗ đen thon,
+                                                    hơi loe, tương phản tuyệt đẹp với loại vải có màu sắc rắn chắc ở phía trên.</p>
                                             </div>
                                         </div>
                                         <div class="carousel-item">
                                             <img class="d-block w-100"
-                                                 src="/assets/img_admin/product/baniversary_Chair.png"
+                                                 src="https://secure.img1-cg.wfcdn.com/im/81498417/resize-h800-w800%5Ecompr-r85/2091/209146275/Northampt+2+-+Light+Bath+Bar.jpg"
                                                  alt="Second slide"/>
                                             <div class="carousel-caption d-none d-md-block">
-                                                <h3>Baniversary Chair</h3>
-                                                <p>In numquam omittam sea.</p>
+                                                <h3>ĐÈN BỌC LƯỚI THÉP</h3>
+                                                <p>Khung được làm từ kim loại và có hình bóng giống như lồng với lớp kim loại bóng mượt.
+                                                    </p>
                                             </div>
                                         </div>
                                         <div class="carousel-item">
-                                            <img class="d-block w-100" src="/assets/img_admin/product/le_klnit.png"
+                                            <img class="d-block w-100" src="https://baya.vn/media/catalog/product/cache/26ca5c7013acde829a5e76d2852b1d14/k/i/kitka_bed_baya_5043_inspiration.jpg"
                                                  alt="Third slide"/>
                                             <div class="carousel-caption d-none d-md-block">
-                                                <h3>Le klnit</h3>
-                                                <p>Lorem ipsum dolor sit amet, virtute consequat ea qui, minim graeco
-                                                    mel no.</p>
+                                                <h3>GIƯỜNG KITKA</h3>
+                                                <p>Giường ngủ KITKA có thiết kế vững chãi, chất liệu gỗ cao su và màu sắc ấm áp, đem đến vẻ đẹp sang trọng cho căn phòng.</p>
                                             </div>
                                         </div>
                                     </div>

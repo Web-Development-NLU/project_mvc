@@ -90,7 +90,29 @@
             </ul>
         </li>
 
-
+        <li class="menu-item">
+            <a href="javascript:void(0);" class="menu-link menu-toggle">
+                <i class="menu-icon tf-icons bx bx-dock-top"></i>
+                <div data-i18n="Account Settings">Các nút tạo khác</div>
+            </a>
+            <ul class="menu-sub">
+                <li class="menu-item">
+                    <a href="${pageContext.request.contextPath}/admin/createProduct" class="menu-link">
+                        <div data-i18n="Account">Tạo sản phẩm</div>
+                    </a>
+                </li>
+                <li class="menu-item">
+                    <a href="${pageContext.request.contextPath}/admin/createColor" class="menu-link">
+                        <div data-i18n="Notifications">Tạo màu</div>
+                    </a>
+                </li>
+                <li class="menu-item">
+                    <a href="${pageContext.request.contextPath}/admin/createPattern" class="menu-link">
+                        <div data-i18n="Connections">Tạo kiểu dáng</div>
+                    </a>
+                </li>
+            </ul>
+        </li>
         <li class="menu-item">
             <a href="/dashboard/order" class="menu-link ">
                 <i class="menu-icon tf-icons bx bx-dock-top"></i>
