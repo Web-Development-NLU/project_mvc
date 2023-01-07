@@ -1,4 +1,6 @@
-<%--
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ page import="java.util.ArrayList" %>
+<%@ page import="Model.Product" %><%--
   Created by IntelliJ IDEA.
   User: Quang Tho
   Date: 29/12/2022
@@ -6,6 +8,7 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ page isELIgnored="false" %>
 <!DOCTYPE html>
 
 <html
@@ -56,6 +59,7 @@
 </head>
 
 <body>
+<% ArrayList<Product> products= (ArrayList<Product>) request.getAttribute("products"); %>
 <!-- Layout wrapper -->
 <div class="layout-wrapper layout-content-navbar">
     <div class="layout-container">
@@ -87,7 +91,9 @@
                                     <div class="col-md mb-4 mb-md-0">
                                         <small class="text-light fw-semibold">Product Detail </small>
                                         <div class="accordion mt-3" id="accordionExample">
+                                    <c:forEach items="<%=products%>" var="product">
                                             <div class="card accordion-item active">
+
                                                 <h2 class="accordion-header" id="headingOne">
                                                     <button
                                                             type="button"
@@ -97,7 +103,7 @@
                                                             aria-expanded="true"
                                                             aria-controls="accordionOne"
                                                     >
-                                                        GHẾ BÀNH BỌC NỆM FEMI
+                                                        ${product.name}
                                                     </button>
                                                 </h2>
 
@@ -107,97 +113,20 @@
                                                         data-bs-parent="#accordionExample"
                                                 >
                                                     <div class="accordion-body">
-                                                        Với nhiều tùy chọn màu bọc theo xu hướng, chiếc ghế bành này là sự bổ sung lý tưởng cho các phòng có hình dạng,
-                                                        kiểu dáng và bảng màu khác nhau. Được chế tác từ một khung làm bằng gỗ dán chắc chắn và gỗ kỹ thuật,
-                                                        nó cung cấp bốn chân gỗ đen thon, hơi loe,
-                                                        tương phản tuyệt đẹp với loại vải có màu sắc rắn chắc ở phía trên.
+                                                        ${product.description}
                                                         <br><br>
-                                                        Kích thước:&nbsp;W865 x D(905-1260) x H(1280-1335) mm
+                                                        Kích thước: ${product.dimensions}
                                                         <br>
-                                                        Màu sắc:&nbsp; Màu xám
+                                                        Giá:&nbsp; ${product.price}
                                                         <br>
-                                                        Vật liệu:&nbsp; Gỗ cao su, bọc nệm
-                                                        <br>
-                                                        Loại sản phẩm:&nbsp;Ghế
-                                                        <br>
-                                                        Kiểu dáng:&nbsp;Hiện đại
-                                                        <br>
-                                                        Kích thước: Lớn
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="card accordion-item">
-                                                <h2 class="accordion-header" id="headingTwo">
-                                                    <button
-                                                            type="button"
-                                                            class="accordion-button collapsed"
-                                                            data-bs-toggle="collapse"
-                                                            data-bs-target="#accordionTwo"
-                                                            aria-expanded="false"
-                                                            aria-controls="accordionTwo"
-                                                    >
-                                                        ĐÈN BỌC LƯỚI THÉP
-                                                    </button>
-                                                </h2>
-                                                <div
-                                                        id="accordionTwo"
-                                                        class="accordion-collapse collapse"
-                                                        aria-labelledby="headingTwo"
-                                                        data-bs-parent="#accordionExample"
-                                                >
-                                                    <div class="accordion-body">
-                                                        Đèn này có một cái nhìn táo bạo ngay lập tức thu hút mắt, vì vậy nó rất lý tưởng cho bất kỳ người trang trí
-                                                        sành điệu nào đang tìm cách đưa ra tuyên bố. Khung được làm từ kim loại và có hình bóng giống như lồng với lớp kim loại bóng mượt.
-                                                        Nó được hỗ trợ bởi một tấm đệm tròn và một cánh tay mỏng với chi tiết giống như chuỗi. Bên trong bóng râm mờ bên trong,
-                                                        bộ đồ cứng này có đèn LED tích hợp. Điều đó có nghĩa là bạn có thể thêm nó vào không gian của mình ngay khi nó đến,
-                                                        mà không phải lo lắng về việc tìm một bóng đèn.
-                                                        <br><br>
-                                                        Kích thước:&nbsp;6.25'' H X 7'' W X 8'' D
-                                                        <br>
-                                                        Màu sắc:&nbsp;Trắng
-                                                        <br>
-                                                        Vật liệu:&nbsp;Hỗn hợp vải lanh, kim loại, thủy tinh
-                                                        <br>
-                                                        Kiểu dáng:&nbsp;Phương tây
+                                                        Vật liệu:&nbsp; ${product.material}
 
 
                                                     </div>
                                                 </div>
-                                            </div>
-                                            <div class="card accordion-item">
-                                                <h2 class="accordion-header" id="headingThree">
-                                                    <button
-                                                            type="button"
-                                                            class="accordion-button collapsed"
-                                                            data-bs-toggle="collapse"
-                                                            data-bs-target="#accordionThree"
-                                                            aria-expanded="false"
-                                                            aria-controls="accordionThree"
-                                                    >
-                                                        GIƯỜNG KITKA
-                                                    </button>
-                                                </h2>
-                                                <div
-                                                        id="accordionThree"
-                                                        class="accordion-collapse collapse"
-                                                        aria-labelledby="headingThree"
-                                                        data-bs-parent="#accordionExample"
-                                                >
-                                                    <div class="accordion-body">
-                                                        Giường ngủ KITKA có thiết kế vững chãi,
-                                                        chất liệu gỗ cao su và màu sắc ấm áp,
-                                                        đem đến vẻ đẹp sang trọng cho căn phòng.
-                                                        <br>
-                                                        Kích thước:&nbsp;180 x 200cm
-                                                        <br>
-                                                        Màu sắc:&nbsp;Màu gỗ
-                                                        <br>
-                                                        Kiểu dáng:&nbsp; Hiện đại
-                                                        <br>
-                                                        Vật liệu:&nbsp; Gỗ cao su, ván ép
-                                                    </div>
-                                                </div>
-                                            </div>
+                                            </div
+                                    </c:forEach>
+
                                         </div>
                                     </div>
 
@@ -218,35 +147,20 @@
                                         <li data-bs-target="#carouselExample-cf" data-bs-slide-to="1"></li>
                                         <li data-bs-target="#carouselExample-cf" data-bs-slide-to="2"></li>
                                     </ol>
+
                                     <div class="carousel-inner">
+                                        <c:forEach items="<%=products%>" var="product">
                                         <div class="carousel-item active">
-                                            <img class="d-block w-100" src="https://secure.img1-cg.wfcdn.com/im/7798995/resize-h500-w500%5Ecompr-r85/1882/188295243/Femi+Upholstered+Armchair.jpg"
+                                            <img class="d-block w-100" src="${product.thumbnail.split(",")[0]}"
                                                  alt="First slide"/>
                                             <div class="carousel-caption d-none d-md-block">
-                                                <h3>GHẾ BÀNH BỌC NỆM FEMI</h3>
-                                                <p>Được chế tác từ một khung làm bằng gỗ dán chắc chắn và gỗ kỹ thuật, nó cung cấp bốn chân gỗ đen thon,
-                                                    hơi loe, tương phản tuyệt đẹp với loại vải có màu sắc rắn chắc ở phía trên.</p>
+                                                <h3>${product.name}</h3>
+                                                <p>${product.shortDescription}</p>
                                             </div>
                                         </div>
-                                        <div class="carousel-item">
-                                            <img class="d-block w-100"
-                                                 src="https://secure.img1-cg.wfcdn.com/im/81498417/resize-h800-w800%5Ecompr-r85/2091/209146275/Northampt+2+-+Light+Bath+Bar.jpg"
-                                                 alt="Second slide"/>
-                                            <div class="carousel-caption d-none d-md-block">
-                                                <h3>ĐÈN BỌC LƯỚI THÉP</h3>
-                                                <p>Khung được làm từ kim loại và có hình bóng giống như lồng với lớp kim loại bóng mượt.
-                                                    </p>
-                                            </div>
-                                        </div>
-                                        <div class="carousel-item">
-                                            <img class="d-block w-100" src="https://baya.vn/media/catalog/product/cache/26ca5c7013acde829a5e76d2852b1d14/k/i/kitka_bed_baya_5043_inspiration.jpg"
-                                                 alt="Third slide"/>
-                                            <div class="carousel-caption d-none d-md-block">
-                                                <h3>GIƯỜNG KITKA</h3>
-                                                <p>Giường ngủ KITKA có thiết kế vững chãi, chất liệu gỗ cao su và màu sắc ấm áp, đem đến vẻ đẹp sang trọng cho căn phòng.</p>
-                                            </div>
-                                        </div>
+                                        </c:forEach>
                                     </div>
+
                                     <a class="carousel-control-prev" href="#carouselExample-cf" role="button"
                                        data-bs-slide="prev">
                                         <span class="carousel-control-prev-icon" aria-hidden="true"></span>
@@ -263,6 +177,7 @@
                     </div>
 
                     <!-- Total Revenue -->
+
 
 
                     <style>
