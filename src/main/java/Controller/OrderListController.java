@@ -35,8 +35,6 @@ public class OrderListController extends HttpServlet {
         String userId = (String) authorizationData.getId();
         ArrayList<Order> orders = new ArrayList<>();
         if(infoSearch != null){
-            byte[] bytes = infoSearch.getBytes(StandardCharsets.ISO_8859_1);
-            infoSearch = new String(bytes, StandardCharsets.UTF_8);
             Order order = this.orderService.findOrderUserById(userId, infoSearch);
             if(order != null){
                 orders.add(order);

@@ -77,7 +77,7 @@
                     </a>
                 </li>
                 <li class="menu-item">
-                    <a href="${pageContext.request.contextPath}/amin/orderPrePayment" class="menu-link">
+                    <a href="${pageContext.request.contextPath}/admin/orderPrePayment" class="menu-link">
                         <div data-i18n="Without menu">Thanh toán trước</div>
                     </a>
                 </li>

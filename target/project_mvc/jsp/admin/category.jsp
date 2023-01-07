@@ -44,7 +44,10 @@
     <link rel="stylesheet" href="/assets/vendor/libs/perfect-scrollbar/perfect-scrollbar.css"/>
     <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/chosen/1.8.7/chosen.min.css">
     <link rel="stylesheet" href="/assets/vendor/css/component-chosen.min.css">
-
+    <link rel="stylesheet" href="/assets/css/components/search.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css"
+          integrity="sha512-xh6O/CkQoPOWDdYTDqeRdPCVd1SpvCA9XXcUnZS2FmJNp1coAFzvtCN9BmamE+4aHK8yyUHUSCcJHgXloTyT2A=="
+          crossorigin="anonymous" referrerpolicy="no-referrer"/>
     <!-- Page CSS -->
 
     <!-- Helpers -->
@@ -93,6 +96,14 @@
                                 <li class="breadcrumb-item">
                                     <a href="javascript:void(0);"><%=numPage%></a>
                                 </li>
+                            </ol>
+                            <ol style="padding-left: 0">
+                                <form action="/admin/category" class="form-search" method="post">
+                                    <input class="ip_search" type="search" name="infoSearch" placeholder="Tìm kiếm..." style="background: white; border-radius: 10px; width: 50%" >
+                                    <button class="btn-search" style="background: #696CFF; border-radius: 50%; border: 1px solid transparent; outline: none; width: 44px;height: 44px; transform: translate(10px,4px)">
+                                        <i class="fa-solid fa-magnifying-glass" style="color: #FFF3FF"></i>
+                                    </button>
+                                </form>
                             </ol>
                         </nav>
                         <!-- Basic Bootstrap Table -->

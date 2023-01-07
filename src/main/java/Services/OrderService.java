@@ -73,4 +73,22 @@ public class OrderService extends BaseService<Order>{
             return handle.createQuery("SELECT * FROM " + this.tableName + " WHERE transID is null").mapToBean(Order.class).list();
         });
     }
+    public ArrayList<Order> findOrders(String infoSearch){
+        String infoSearchDetail = "%"+infoSearch+"%";
+        return (ArrayList<Order>) this.jdbi.withHandle(handle -> {
+            return handle.createQuery("SELECT * FROM " + this.tableName + " WHERE id = ? or info like ?").bind(0, infoSearch).bind(1, infoSearchDetail).mapToBean(Order.class).list();
+        });
+    }
+    public ArrayList<Order> findOrders(String infoSearch, boolean isPrepayment){
+        String infoSearchDetail = "%"+infoSearch+"%";
+        String condition;
+        if(isPrepayment){
+            condition = "is not null";
+        }else{
+            condition = "is null";
+        }
+        return (ArrayList<Order>) this.jdbi.withHandle(handle -> {
+            return handle.createQuery("SELECT * FROM " + this.tableName + " WHERE ( id = ? or info like ? ) and transID " + condition).bind(0, infoSearch).bind(1, infoSearchDetail).mapToBean(Order.class).list();
+        });
+    }
 }

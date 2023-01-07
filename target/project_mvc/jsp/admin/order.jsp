@@ -45,7 +45,10 @@
     <link rel="stylesheet" href="../assets/vendor/css/style.css">
     <!-- Vendors CSS -->
     <link rel="stylesheet" href="../assets/vendor/libs/perfect-scrollbar/perfect-scrollbar.css"/>
-
+    <link rel="stylesheet" href="/assets/css/components/search.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css"
+          integrity="sha512-xh6O/CkQoPOWDdYTDqeRdPCVd1SpvCA9XXcUnZS2FmJNp1coAFzvtCN9BmamE+4aHK8yyUHUSCcJHgXloTyT2A=="
+          crossorigin="anonymous" referrerpolicy="no-referrer"/>
     <!-- Page CSS -->
 
     <!-- Helpers -->
@@ -108,35 +111,113 @@
                                     <a href="javascript:void(0);"><%=numPage%></a>
                                 </li>
                             </ol>
+
+                            <ol style="padding-left: 0">
+                                <c:choose>
+                                    <c:when test="${pagePrepayment}">
+                                        <form action="/admin/orderPrePayment" class="form-search" method="post">
+                                    </c:when>
+                                    <c:when test="${pagePostpaid}">
+                                        <form action="/admin/orderPostpaid" class="form-search" method="post"></c:when>
+                                    <c:otherwise>
+                                        <form action="/admin/order" class="form-search" method="post">
+                                    </c:otherwise>
+                                </c:choose>
+                                    <input class="ip_search" type="search" name="infoSearch" placeholder="Tìm kiếm..." style="background: white; border-radius: 10px; width: 50%" >
+                                    <button class="btn-search" style="background: #696CFF; border-radius: 50%; border: 1px solid transparent; outline: none; width: 44px;height: 44px; transform: translate(10px,4px)">
+                                        <i class="fa-solid fa-magnifying-glass" style="color: #FFF3FF"></i>
+                                    </button>
+                                </form>
+                            </ol>
                         </nav>
                         <!-- Basic Bootstrap Table -->
                         <nav aria-label="Page navigation" class="col-lg-6">
-                            <ul class="pagination justify-content-end">
-                                <li class="page-item prev" style="display:<%=(pagination == 1) ? "none" : "block"%> ">
-                                    <a class="page-link" href="${pageContext.request.contextPath}/admin/order?page=<%= pagination - 1%>"
-                                    ><i class="tf-icon bx bx-chevrons-left"></i
-                                    ></a>
-                                </li>
-                                <li class="page-item">
-                                    <a class="page-link" href="${pageContext.request.contextPath}/admin/order?page=<%=pagination%>"><%=pagination%></a>
-                                </li>
-                                <li class="page-item">
-                                    <form action="${pageContext.request.contextPath}/admin/order" method="post">
-                                        <input
-                                                type="number"
-                                                class="form-control"
-                                                name="page"
-                                                autofocus
-                                                min="1"
-                                        />
-                                    </form>
-                                </li>
-                                <li class="page-item next" style="display:<%=(pagination == totalPage) ? "none" : "block"%> ">
-                                    <a class="page-link" href="${pageContext.request.contextPath}/admin/order?page=<%= pagination + 1%>"
-                                    ><i class="tf-icon bx bx-chevrons-right"></i
-                                    ></a>
-                                </li>
-                            </ul>
+                            <c:choose>
+                                <c:when test="${pagePrepayment}">
+                                    <ul class="pagination justify-content-end">
+                                        <li class="page-item prev" style="display:<%=(pagination == 1) ? "none" : "block"%> ">
+                                            <a class="page-link" href="${pageContext.request.contextPath}/admin/orderPrePayment?page=<%= pagination - 1%>"
+                                            ><i class="tf-icon bx bx-chevrons-left"></i
+                                            ></a>
+                                        </li>
+                                        <li class="page-item">
+                                            <a class="page-link" href="${pageContext.request.contextPath}/admin/orderPrePayment?page=<%=pagination%>"><%=pagination%></a>
+                                        </li>
+                                        <li class="page-item">
+                                            <form action="${pageContext.request.contextPath}/admin/orderPrePayment" method="post">
+                                                <input
+                                                        type="number"
+                                                        class="form-control"
+                                                        name="page"
+                                                        autofocus
+                                                        min="1"
+                                                />
+                                            </form>
+                                        </li>
+                                        <li class="page-item next" style="display:<%=(pagination == totalPage) ? "none" : "block"%> ">
+                                            <a class="page-link" href="${pageContext.request.contextPath}/admin/orderPrePayment?page=<%= pagination + 1%>"
+                                            ><i class="tf-icon bx bx-chevrons-right"></i
+                                            ></a>
+                                        </li>
+                                    </ul>
+                                </c:when>
+                                <c:when test="${pagePostpaid}">
+                                    <ul class="pagination justify-content-end">
+                                        <li class="page-item prev" style="display:<%=(pagination == 1) ? "none" : "block"%> ">
+                                            <a class="page-link" href="${pageContext.request.contextPath}/admin/orderPostpaid?page=<%= pagination - 1%>"
+                                            ><i class="tf-icon bx bx-chevrons-left"></i
+                                            ></a>
+                                        </li>
+                                        <li class="page-item">
+                                            <a class="page-link" href="${pageContext.request.contextPath}/admin/orderPostpaid?page=<%=pagination%>"><%=pagination%></a>
+                                        </li>
+                                        <li class="page-item">
+                                            <form action="${pageContext.request.contextPath}/admin/orderPostpaid" method="post">
+                                                <input
+                                                        type="number"
+                                                        class="form-control"
+                                                        name="page"
+                                                        autofocus
+                                                        min="1"
+                                                />
+                                            </form>
+                                        </li>
+                                        <li class="page-item next" style="display:<%=(pagination == totalPage) ? "none" : "block"%> ">
+                                            <a class="page-link" href="${pageContext.request.contextPath}/admin/orderPostpaid?page=<%= pagination + 1%>"
+                                            ><i class="tf-icon bx bx-chevrons-right"></i
+                                            ></a>
+                                        </li>
+                                    </ul>
+                                </c:when>
+                                <c:otherwise>
+                                    <ul class="pagination justify-content-end">
+                                        <li class="page-item prev" style="display:<%=(pagination == 1) ? "none" : "block"%> ">
+                                            <a class="page-link" href="${pageContext.request.contextPath}/admin/order?page=<%= pagination - 1%>"
+                                            ><i class="tf-icon bx bx-chevrons-left"></i
+                                            ></a>
+                                        </li>
+                                        <li class="page-item">
+                                            <a class="page-link" href="${pageContext.request.contextPath}/admin/order?page=<%=pagination%>"><%=pagination%></a>
+                                        </li>
+                                        <li class="page-item">
+                                            <form action="${pageContext.request.contextPath}/admin/order" method="post">
+                                                <input
+                                                        type="number"
+                                                        class="form-control"
+                                                        name="page"
+                                                        autofocus
+                                                        min="1"
+                                                />
+                                            </form>
+                                        </li>
+                                        <li class="page-item next" style="display:<%=(pagination == totalPage) ? "none" : "block"%> ">
+                                            <a class="page-link" href="${pageContext.request.contextPath}/admin/order?page=<%= pagination + 1%>"
+                                            ><i class="tf-icon bx bx-chevrons-right"></i
+                                            ></a>
+                                        </li>
+                                    </ul>
+                                </c:otherwise>
+                            </c:choose>
                         </nav>
                     </div>
                     <div class="card">

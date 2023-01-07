@@ -17,8 +17,14 @@ public class AdminCode extends HttpServlet {
         ArrayList<Code> codes = this.codeService.findAll(Code.class);
         ArrayList<Code> codeResult = new ArrayList<>();
         String page = request.getParameter("page");
+        int intPage;
+        try {
+            intPage = Integer.parseInt(page);
+        }catch (Exception e){
+            intPage = 0;
+        }
         Double numPage = Math.ceil(Double.parseDouble(String.valueOf(codes.size())) / 10);
-        if(page == null || Integer.parseInt(page) < 1) {
+        if(page == null || intPage < 1) {
             page = "1";
         }
         if(Integer.parseInt(page) > numPage.intValue()) page = ""+ numPage.intValue();

@@ -21,11 +21,23 @@ public class AdminCategory extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        ArrayList<Category> categories = this.categoryServices.findAll(Category.class);
+        String infoSearch = request.getParameter("infoSearch");
+        ArrayList<Category> categories;
+        if(infoSearch != null){
+            categories = this.categoryServices.findCategoriesByName(infoSearch);
+        }else{
+            categories = this.categoryServices.findAll(Category.class);
+        }
         ArrayList<Category> categoryResult = new ArrayList<>();
         String page = request.getParameter("page");
+        int intPage;
+        try {
+            intPage = Integer.parseInt(page);
+        }catch (Exception e){
+            intPage = 0;
+        }
         Double numPage = Math.ceil(Double.parseDouble(String.valueOf(categories.size())) / 10);
-        if(page == null || Integer.parseInt(page) < 1) {
+        if(page == null || intPage < 1) {
             page = "1";
         }
         if(Integer.parseInt(page) > numPage.intValue()) page = ""+ numPage.intValue();
@@ -44,6 +56,6 @@ public class AdminCategory extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        response.sendRedirect("/admin/category?page=" + request.getParameter("page"));
+        response.sendRedirect("/admin/category?page=" + request.getParameter("page")+"&infoSearch="+request.getParameter("infoSearch"));
     }
 }

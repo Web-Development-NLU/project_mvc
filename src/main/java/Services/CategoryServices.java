@@ -3,8 +3,11 @@ package Services;
 import DTO.BaseDTO;
 import Model.Category;
 import Model.Code;
+import Model.Order;
 import org.jdbi.v3.core.Handle;
 import org.jdbi.v3.core.HandleCallback;
+
+import java.util.ArrayList;
 
 public class CategoryServices extends BaseService<Category> {
     public CategoryServices(String tableName){
@@ -54,6 +57,12 @@ public class CategoryServices extends BaseService<Category> {
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
+    }
+    public ArrayList<Category> findCategoriesByName(String name){
+        String detailSearch = "%"+name+"%";
+        return (ArrayList<Category>) this.jdbi.withHandle(handle -> {
+            return handle.createQuery("SELECT * FROM " + this.tableName + " WHERE name like ?").bind(0,detailSearch).mapToBean(Category.class).list();
+        });
     }
 
 }

@@ -9,7 +9,7 @@ import javax.servlet.annotation.*;
 import java.io.IOException;
 import java.util.ArrayList;
 
-@WebServlet(name = "OrderPrePayment", value = "/amin/orderPrePayment")
+@WebServlet(name = "OrderPrePayment", value = "/admin/orderPrePayment")
 public class OrderPrePayment extends HttpServlet {
     private OrderService orderService;
     @Override
@@ -19,11 +19,24 @@ public class OrderPrePayment extends HttpServlet {
     }
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        ArrayList<Order> orders = this.orderService.findOrdersPrepayment();
+        String infoSearch = request.getParameter("infoSearch");
+        ArrayList<Order> orders;
+        if(infoSearch != null){
+            orders = this.orderService.findOrders(infoSearch, true);
+        }else{
+            orders = this.orderService.findOrdersPrepayment();
+        }
+//        ArrayList<Order> orders = this.orderService.findOrdersPrepayment();
         ArrayList<Order> orderResult = new ArrayList<>();
         String page = request.getParameter("page");
+        int intPage;
+        try {
+            intPage = Integer.parseInt(page);
+        }catch (Exception e){
+            intPage = 0;
+        }
         Double numPage = Math.ceil(Double.parseDouble(String.valueOf(orders.size())) / 10);
-        if(page == null || Integer.parseInt(page) < 1) {
+        if(page == null || intPage < 1) {
             page = "1";
         }
         if(Integer.parseInt(page) > numPage.intValue()) page = ""+ numPage.intValue();
@@ -47,6 +60,6 @@ public class OrderPrePayment extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
+        response.sendRedirect("/admin/orderPrePayment?page=" + request.getParameter("page")+"&infoSearch="+ request.getParameter("infoSearch"));
     }
 }
