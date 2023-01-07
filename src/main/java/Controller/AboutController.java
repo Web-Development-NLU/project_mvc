@@ -20,7 +20,7 @@ public class AboutController extends HttpServlet {
     }
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        request.setAttribute("contact", this.aboutService.findAll(About.class).get(0));
+        request.setAttribute("about", this.aboutService.findAll(About.class).get(0));
         request.getRequestDispatcher("/jsp/client/about.jsp").forward(request, response);
     }
 
