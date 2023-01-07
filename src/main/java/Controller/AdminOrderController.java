@@ -23,6 +23,7 @@ public class AdminOrderController extends HttpServlet {
         String infoSearch = request.getParameter("infoSearch");
         ArrayList<Order> orders;
         if(infoSearch != null && !infoSearch.equals("null")){
+            request.setAttribute("search", infoSearch);
             orders = this.orderService.findOrders(infoSearch);
         }else{
             orders = this.orderService.findAll(Order.class);

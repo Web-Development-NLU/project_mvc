@@ -65,6 +65,8 @@
     int totalPage = Integer.parseInt(numPage);
     boolean pagePostpaid = (boolean) request.getAttribute("pagePostpaid");
     boolean pagePrepayment = (boolean) request.getAttribute("pagePrepayment");
+    String search = (String) request.getAttribute("search") == null ? "" : "&infoSearch="+ request.getAttribute("search");
+    String search2 = (String) request.getAttribute("search") == null ? "" : "infoSearch="+ request.getAttribute("search");
 %>
 <!-- Layout wrapper -->
 <div class="layout-wrapper layout-content-navbar">
@@ -97,9 +99,6 @@
                             <h4 class="fw-bold py-3 mb-4"><span class="text-muted fw-light"></span>Đơn hàng</h4>
                         </c:otherwise>
                     </c:choose>
-<%--                    <a href="${pageContext.request.contextPath}/admin/createCode">--%>
-<%--                        <button type="button" class="btn btn-outline-dark" style="float: right">Thêm mã giảm giá</button>--%>
-<%--                    </a>--%>
                     <hr class="my-5"/>
                     <div class="row">
                         <nav aria-label="breadcrumb" class="col-lg-6">
@@ -115,17 +114,17 @@
                             <ol style="padding-left: 0">
                                 <c:choose>
                                     <c:when test="${pagePrepayment}">
-                                        <form action="/admin/orderPrePayment" class="form-search" method="post">
+                                        <form action="/admin/orderPrePayment" class="form-search" method="get">
                                     </c:when>
                                     <c:when test="${pagePostpaid}">
-                                        <form action="/admin/orderPostpaid" class="form-search" method="post"></c:when>
+                                        <form action="/admin/orderPostpaid" class="form-search"></c:when>
                                     <c:otherwise>
-                                        <form action="/admin/order" class="form-search" method="post">
+                                        <form action="/admin/order" class="form-search">
                                     </c:otherwise>
                                 </c:choose>
                                     <input class="ip_search" type="search" name="infoSearch" placeholder="Tìm kiếm..." style="background: white; border-radius: 10px; width: 50%" >
                                     <button class="btn-search" style="background: #696CFF; border-radius: 50%; border: 1px solid transparent; outline: none; width: 44px;height: 44px; transform: translate(10px,4px)">
-                                        <i class="fa-solid fa-magnifying-glass" style="color: #FFF3FF"></i>
+                                        <i class="fa-solid fa-magnifying-glass" style="color: #FFF3FF;transform: translate(1px,2px);"></i>
                                     </button>
                                 </form>
                             </ol>
@@ -136,15 +135,15 @@
                                 <c:when test="${pagePrepayment}">
                                     <ul class="pagination justify-content-end">
                                         <li class="page-item prev" style="display:<%=(pagination == 1) ? "none" : "block"%> ">
-                                            <a class="page-link" href="${pageContext.request.contextPath}/admin/orderPrePayment?page=<%= pagination - 1%>"
+                                            <a class="page-link" href="${pageContext.request.contextPath}/admin/orderPrePayment?page=<%= (pagination - 1) + search%>"
                                             ><i class="tf-icon bx bx-chevrons-left"></i
                                             ></a>
                                         </li>
                                         <li class="page-item">
-                                            <a class="page-link" href="${pageContext.request.contextPath}/admin/orderPrePayment?page=<%=pagination%>"><%=pagination%></a>
+                                            <a class="page-link" href="${pageContext.request.contextPath}/admin/orderPrePayment?page=<%=pagination+search%>"><%=pagination%></a>
                                         </li>
                                         <li class="page-item">
-                                            <form action="${pageContext.request.contextPath}/admin/orderPrePayment" method="post">
+                                            <form action="${pageContext.request.contextPath}/admin/orderPrePayment?<%=search%>">
                                                 <input
                                                         type="number"
                                                         class="form-control"
@@ -155,7 +154,7 @@
                                             </form>
                                         </li>
                                         <li class="page-item next" style="display:<%=(pagination == totalPage) ? "none" : "block"%> ">
-                                            <a class="page-link" href="${pageContext.request.contextPath}/admin/orderPrePayment?page=<%= pagination + 1%>"
+                                            <a class="page-link" href="${pageContext.request.contextPath}/admin/orderPrePayment?page=<%= (pagination + 1)+search%>"
                                             ><i class="tf-icon bx bx-chevrons-right"></i
                                             ></a>
                                         </li>
@@ -164,15 +163,15 @@
                                 <c:when test="${pagePostpaid}">
                                     <ul class="pagination justify-content-end">
                                         <li class="page-item prev" style="display:<%=(pagination == 1) ? "none" : "block"%> ">
-                                            <a class="page-link" href="${pageContext.request.contextPath}/admin/orderPostpaid?page=<%= pagination - 1%>"
+                                            <a class="page-link" href="${pageContext.request.contextPath}/admin/orderPostpaid?page=<%= (pagination - 1)+search%>"
                                             ><i class="tf-icon bx bx-chevrons-left"></i
                                             ></a>
                                         </li>
                                         <li class="page-item">
-                                            <a class="page-link" href="${pageContext.request.contextPath}/admin/orderPostpaid?page=<%=pagination%>"><%=pagination%></a>
+                                            <a class="page-link" href="${pageContext.request.contextPath}/admin/orderPostpaid?page=<%=pagination+search%>"><%=pagination%></a>
                                         </li>
                                         <li class="page-item">
-                                            <form action="${pageContext.request.contextPath}/admin/orderPostpaid" method="post">
+                                            <form action="${pageContext.request.contextPath}/admin/orderPostpaid?<%=search%>">
                                                 <input
                                                         type="number"
                                                         class="form-control"
@@ -183,7 +182,7 @@
                                             </form>
                                         </li>
                                         <li class="page-item next" style="display:<%=(pagination == totalPage) ? "none" : "block"%> ">
-                                            <a class="page-link" href="${pageContext.request.contextPath}/admin/orderPostpaid?page=<%= pagination + 1%>"
+                                            <a class="page-link" href="${pageContext.request.contextPath}/admin/orderPostpaid?page=<%=(pagination + 1)+search%>"
                                             ><i class="tf-icon bx bx-chevrons-right"></i
                                             ></a>
                                         </li>
@@ -192,15 +191,15 @@
                                 <c:otherwise>
                                     <ul class="pagination justify-content-end">
                                         <li class="page-item prev" style="display:<%=(pagination == 1) ? "none" : "block"%> ">
-                                            <a class="page-link" href="${pageContext.request.contextPath}/admin/order?page=<%= pagination - 1%>"
+                                            <a class="page-link" href="${pageContext.request.contextPath}/admin/order?page=<%=(pagination - 1)+search%>"
                                             ><i class="tf-icon bx bx-chevrons-left"></i
                                             ></a>
                                         </li>
                                         <li class="page-item">
-                                            <a class="page-link" href="${pageContext.request.contextPath}/admin/order?page=<%=pagination%>"><%=pagination%></a>
+                                            <a class="page-link" href="${pageContext.request.contextPath}/admin/order?page=<%=pagination +search%>"><%=pagination%></a>
                                         </li>
                                         <li class="page-item">
-                                            <form action="${pageContext.request.contextPath}/admin/order" method="post">
+                                            <form action="${pageContext.request.contextPath}/admin/order?<%=search2%>">
                                                 <input
                                                         type="number"
                                                         class="form-control"
@@ -211,7 +210,7 @@
                                             </form>
                                         </li>
                                         <li class="page-item next" style="display:<%=(pagination == totalPage) ? "none" : "block"%> ">
-                                            <a class="page-link" href="${pageContext.request.contextPath}/admin/order?page=<%= pagination + 1%>"
+                                            <a class="page-link" href="${pageContext.request.contextPath}/admin/order?page=<%=(pagination + 1)+search%>"
                                             ><i class="tf-icon bx bx-chevrons-right"></i
                                             ></a>
                                         </li>
