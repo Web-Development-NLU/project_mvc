@@ -136,43 +136,52 @@
                             </ul>
                         </nav>
                     </div>
-                    <div class="card">
-                        <h5 class="card-header">Category</h5>
-                        <div class="table-responsive text-nowrap">
-                            <table class="table">
-                                <thead>
-                                <tr>
-                                    <th>ID</th>
-                                    <th>Tên</th>
-                                    <th>Ngày tạo</th>
-                                </tr>
-                                </thead>
-                                <tbody class="table-border-bottom-0">
-                                <c:forEach items="<%= categories %>" var="category">
-                                    <tr>
-                                        <td><a href="${pageContext.request.contextPath}/admin/editCategory?id=${category.id}">${category.id}</a></td>
-                                        <td>${category.name}</td>
-                                        <td>${category.createdAt}</td>
-                                        <td>
-                                            <div class="dropdown">
-                                                <button type="button" class="btn p-0 dropdown-toggle hide-arrow"
-                                                        data-bs-toggle="dropdown">
-                                                    <i class="bx bx-dots-vertical-rounded"></i>
-                                                </button>
-                                                <div class="dropdown-menu">
-                                                    <a class="dropdown-item" href="${pageContext.request.contextPath}/admin/editCategory?id=${category.id}"><i
-                                                            class="bx bx-edit-alt me-2"></i> Edit</a>
-                                                    <a class="dropdown-item" href="${pageContext.request.contextPath}/admin/editCategory?id=${category.id}&delete=true"><i
-                                                            class="bx bx-trash me-2"></i> Delete</a>
-                                                </div>
-                                            </div>
-                                        </td>
-                                    </tr>
-                                </c:forEach>
-                                </tbody>
-                            </table>
-                        </div>
-                    </div>
+                    <c:choose>
+                        <c:when test="<%= categories.size() == 0 %>">
+                            <div class="card">
+                                <h5 class="card-header" style="text-align: center">Không có danh mục nào</h5>
+                            </div>
+                        </c:when>
+                        <c:otherwise>
+                            <div class="card">
+                                <h5 class="card-header">Category</h5>
+                                <div class="table-responsive text-nowrap">
+                                    <table class="table">
+                                        <thead>
+                                        <tr>
+                                            <th>ID</th>
+                                            <th>Tên</th>
+                                            <th>Ngày tạo</th>
+                                        </tr>
+                                        </thead>
+                                        <tbody class="table-border-bottom-0">
+                                        <c:forEach items="<%= categories %>" var="category">
+                                            <tr>
+                                                <td><a href="${pageContext.request.contextPath}/admin/editCategory?id=${category.id}">${category.id}</a></td>
+                                                <td>${category.name}</td>
+                                                <td>${category.createdAt}</td>
+                                                <td>
+                                                    <div class="dropdown">
+                                                        <button type="button" class="btn p-0 dropdown-toggle hide-arrow"
+                                                                data-bs-toggle="dropdown">
+                                                            <i class="bx bx-dots-vertical-rounded"></i>
+                                                        </button>
+                                                        <div class="dropdown-menu">
+                                                            <a class="dropdown-item" href="${pageContext.request.contextPath}/admin/editCategory?id=${category.id}"><i
+                                                                    class="bx bx-edit-alt me-2"></i> Edit</a>
+                                                            <a class="dropdown-item" href="${pageContext.request.contextPath}/admin/editCategory?id=${category.id}&delete=true"><i
+                                                                    class="bx bx-trash me-2"></i> Delete</a>
+                                                        </div>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                        </c:forEach>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </c:otherwise>
+                    </c:choose>
                 </div>
                 <!-- Footer -->
                 <footer class="content-footer footer bg-footer-theme">

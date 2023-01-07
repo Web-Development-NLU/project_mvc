@@ -51,7 +51,7 @@
 
 .slider_item-head {
   font-size: 7rem;
-  font-weight: 100;
+  font-weight: 300;
   line-height: 1.2em;
   margin-bottom: 30px;
 }
@@ -60,6 +60,11 @@
   width: 20%;
   margin: auto;
   margin-top: 20px;
+}
+
+.slider_item img {
+  height: 941px;
+  width: 100%;
 }
 
 @media screen and (max-width: 1024px) {

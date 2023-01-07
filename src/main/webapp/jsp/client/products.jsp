@@ -30,7 +30,7 @@
         <header>
             <jsp:include page="common/menu.jsp"/>
             <jsp:include page="common/searchBarMenu.jsp"/>
-            <jsp:include page="partials/products/headBottom.jsp"/>
+            <jsp:include page="partials/products/headSearch.jsp"/>
         </header>
         <jsp:include page="common/filterProducts.jsp"/>
         <div class="products-container">

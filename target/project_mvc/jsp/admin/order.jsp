@@ -220,41 +220,50 @@
                             </c:choose>
                         </nav>
                     </div>
-                    <div class="card">
-                        <h5 class="card-header">Table Basic</h5>
-                        <div class="table-responsive text-nowrap">
-                            <table class="table">
-                                <thead>
-                                <tr>
-                                    <th>ID</th>
-                                    <th>Thông tin chi tiết</th>
-                                    <th>Ngày tạo</th>
-                                </tr>
-                                </thead>
-                                <tbody class="table-border-bottom-0">
-                                <c:forEach items="<%= orders %>" var="order">
-                                    <tr>
-                                        <td><i class="fab fa-angular fa-lg text-danger me-3"></i> <a href="${pageContext.request.contextPath}/admin/adminOrderDetail?id=${order.id}"><strong>${order.id}</strong></a></td>
-                                        <td>${order.info}</td>
-                                        <td>${order.createdAt}</td>
-                                        <td>
-                                            <div class="dropdown">
-                                                <button type="button" class="btn p-0 dropdown-toggle hide-arrow"
-                                                        data-bs-toggle="dropdown">
-                                                    <i class="bx bx-dots-vertical-rounded"></i>
-                                                </button>
-                                                <div class="dropdown-menu">
-                                                    <a class="dropdown-item" href="${pageContext.request.contextPath}/admin/deleteOrder?id=${order.id}"><i
-                                                            class="bx bx-trash me-1"></i> Delete</a>
-                                                </div>
-                                            </div>
-                                        </td>
-                                    </tr>
-                                </c:forEach>
-                                </tbody>
-                            </table>
-                        </div>
-                    </div>
+                    <c:choose>
+                        <c:when test="<%= orders.size() == 0%>">
+                            <div class="card">
+                                <h5 class="card-header" style="text-align: center">Không có danh mục nào</h5>
+                            </div>
+                        </c:when>
+                        <c:otherwise>
+                            <div class="card">
+                                <h5 class="card-header">Table Basic</h5>
+                                <div class="table-responsive text-nowrap">
+                                    <table class="table">
+                                        <thead>
+                                        <tr>
+                                            <th>ID</th>
+                                            <th>Thông tin chi tiết</th>
+                                            <th>Ngày tạo</th>
+                                        </tr>
+                                        </thead>
+                                        <tbody class="table-border-bottom-0">
+                                        <c:forEach items="<%= orders %>" var="order">
+                                            <tr>
+                                                <td><i class="fab fa-angular fa-lg text-danger me-3"></i> <a href="${pageContext.request.contextPath}/admin/adminOrderDetail?id=${order.id}"><strong>${order.id}</strong></a></td>
+                                                <td>${order.info}</td>
+                                                <td>${order.createdAt}</td>
+                                                <td>
+                                                    <div class="dropdown">
+                                                        <button type="button" class="btn p-0 dropdown-toggle hide-arrow"
+                                                                data-bs-toggle="dropdown">
+                                                            <i class="bx bx-dots-vertical-rounded"></i>
+                                                        </button>
+                                                        <div class="dropdown-menu">
+                                                            <a class="dropdown-item" href="${pageContext.request.contextPath}/admin/deleteOrder?id=${order.id}"><i
+                                                                    class="bx bx-trash me-1"></i> Delete</a>
+                                                        </div>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                        </c:forEach>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </c:otherwise>
+                    </c:choose>
                 </div>
                 <!-- Footer -->
                 <footer class="content-footer footer bg-footer-theme">

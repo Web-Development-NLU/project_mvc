@@ -24,6 +24,7 @@ public class AdminCode extends HttpServlet {
             intPage = 0;
         }
         Double numPage = Math.ceil(Double.parseDouble(String.valueOf(codes.size())) / 10);
+        if(numPage < 1) numPage = 1.0;
         if(page == null || intPage < 1) {
             page = "1";
         }

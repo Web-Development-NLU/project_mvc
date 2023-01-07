@@ -22,7 +22,7 @@ public class AdminOrderController extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String infoSearch = request.getParameter("infoSearch");
         ArrayList<Order> orders;
-        if(infoSearch != null){
+        if(infoSearch != null && !infoSearch.equals("null")){
             orders = this.orderService.findOrders(infoSearch);
         }else{
             orders = this.orderService.findAll(Order.class);
@@ -36,6 +36,7 @@ public class AdminOrderController extends HttpServlet {
             intPage = 0;
         }
         Double numPage = Math.ceil(Double.parseDouble(String.valueOf(orders.size())) / 10);
+        if(numPage < 1) numPage = 1.0;
         if(page == null || intPage < 1) {
             page = "1";
         }

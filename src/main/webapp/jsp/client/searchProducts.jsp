@@ -45,16 +45,23 @@
         <div class="products">
             <div class="container-fluid">
                 <div class="product-list row mb-5 ">
-                    <c:forEach items="<%=products%>" var="product">
-                        <jsp:include page="common/card.jsp">
-                            <jsp:param name="type" value="2"/>
-                            <jsp:param name="name" value="${product.name}"/>
-                            <jsp:param name="thumbnails" value="${product.thumbnail}"/>
-                            <jsp:param name="price" value="${product.price}"/>
-                            <jsp:param name="id" value="${product.id}"/>
-                            <jsp:param name="avg" value="${product.avg}"/>
-                        </jsp:include>
-                    </c:forEach>
+                    <c:choose>
+                        <c:when test="<%=products.size() == 0%>">
+                            <h5 style="text-align: center; color: #6E8192;display: block;width: 100%">Không tìm được sản phẩm phù hợp</h5>
+                        </c:when>
+                        <c:otherwise>
+                            <c:forEach items="<%=products%>" var="product">
+                                <jsp:include page="common/card.jsp">
+                                    <jsp:param name="type" value="2"/>
+                                    <jsp:param name="name" value="${product.name}"/>
+                                    <jsp:param name="thumbnails" value="${product.thumbnail}"/>
+                                    <jsp:param name="price" value="${product.price}"/>
+                                    <jsp:param name="id" value="${product.id}"/>
+                                    <jsp:param name="avg" value="${product.avg}"/>
+                                </jsp:include>
+                            </c:forEach>
+                        </c:otherwise>
+                    </c:choose>
                 </div>
             </div>
             <jsp:include page="common/pagination.jsp">

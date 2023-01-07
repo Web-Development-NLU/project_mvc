@@ -23,7 +23,7 @@ public class AdminCategory extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String infoSearch = request.getParameter("infoSearch");
         ArrayList<Category> categories;
-        if(infoSearch != null){
+        if(infoSearch != null && !infoSearch.equals("null")){
             categories = this.categoryServices.findCategoriesByName(infoSearch);
         }else{
             categories = this.categoryServices.findAll(Category.class);
@@ -37,6 +37,7 @@ public class AdminCategory extends HttpServlet {
             intPage = 0;
         }
         Double numPage = Math.ceil(Double.parseDouble(String.valueOf(categories.size())) / 10);
+        if(numPage < 1) numPage = 1.0;
         if(page == null || intPage < 1) {
             page = "1";
         }

@@ -53,6 +53,7 @@ public class OrderListController extends HttpServlet {
             intPage = 0;
         }
         Double numPage = Math.ceil(Double.parseDouble(String.valueOf(orders.size())) / 10);
+        if(numPage < 1) numPage = 1.0;
         if(page == null || intPage < 1) {
             page = "1";
         }

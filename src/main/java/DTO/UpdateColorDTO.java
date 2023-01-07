@@ -1,6 +1,5 @@
 package DTO;
 
-import ControllerTest.ColorTest;
 import Model.Color;
 
 import java.time.LocalDate;
