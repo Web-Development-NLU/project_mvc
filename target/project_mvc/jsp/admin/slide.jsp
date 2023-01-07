@@ -1,6 +1,14 @@
+<%--
+  Created by IntelliJ IDEA.
+  User: Quang Tho
+  Date: 06/01/2023
+  Time: 11:21
+  To change this template use File | Settings | File Templates.
+--%>
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ page import="Model.Color" %>
 <%@ page import="java.util.ArrayList" %>
-<%@ page import="java.text.DecimalFormat" %>
+<%@ page import="Model.Slide" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%--
   Created by IntelliJ IDEA.
@@ -59,14 +67,7 @@
 </head>
 
 <body>
-<%
-        ArrayList<Color> colors = (ArrayList<Color>) request.getAttribute("colors");
-        int pagination = (int) request.getAttribute("pagination");
-        String numPage = DecimalFormat.getIntegerInstance().format(Double.parseDouble(request.getAttribute("numPage").toString()));
-        int totalPage = Integer.parseInt(numPage);
-
-%>
-
+<% ArrayList<Slide> slides= (ArrayList<Slide>) request.getAttribute("slides"); %>
 <!-- Layout wrapper -->
 <div class="layout-wrapper layout-content-navbar">
     <div class="layout-container">
@@ -79,6 +80,8 @@
         <div class="layout-page">
             <!-- Navbar -->
 
+            <jsp:include page="common/navbar.jsp"/>
+
             <!-- / Navbar -->
 
             <!-- Content wrapper -->
@@ -86,96 +89,50 @@
                 <!-- Content -->
 
                 <div class="container-xxl flex-grow-1 container-p-y">
-                    <h4 class="fw-bold py-3 mb-4"><span class="text-muted fw-light">QUẢN LÝ /</span> MÀU</h4>
-                    <a href="${pageContext.request.contextPath}/admin/createColor">
+                    <h4 class="fw-bold py-3 mb-4"><span class="text-muted fw-light">QUẢN LÝ /</span> Slide</h4>
+                    <form method="post">
+                        <input type="text" class="form-control" id="value" name="txt"
+                               placeholder="Tên màu" required style="width:50%"/>
+                    </form>
+                    <a href="${pageContext.request.contextPath}/admin/createSlide">
                         <button type="button" class="btn btn-outline-dark" style="float: right">Tạo mới</button>
                     </a>
                     <hr class="my-5" />
-                    <div class="row mb-4">
-                        <form action="${pageContext.request.contextPath}/admin/color" methods="post">
-                            <div class="input-group">
-                            <input type="text" class="form-control" name="color"
-                                   placeholder="Tên màu" />
-                            <button class="btn btn-outline-primary" type="submit" id="button-addon2">Tìm kiếm</button>
-                            </div>
-                        </form>
-                    </div>
-                    <div class="row">
-                    <nav aria-label="breadcrumb" class="col-lg-6">
-                        <ol class="breadcrumb">
-                            <li class="breadcrumb-item">
-                                <a href="javascript:void(0);"> Trang <%=pagination%></a>
-                            </li>
-                            <li class="breadcrumb-item">
-                                <a href="javascript:void(0);"><%= numPage%></a>
-                            </li>
-                        </ol>
-                    </nav>
-                        <nav aria-label="Page navigation" class="col-lg-6">
-                    <ul class="pagination justify-content-end">
-                        <li class="page-item prev" style=" display: <%=( pagination ==1) ? "none" : "block"%>">
-                            <a class="page-link" href="${pageContext.request.contextPath}/admin/color?page=<%=pagination - 1%>"
-                            ><i class="tf-icon bx bx-chevrons-left"></i
-                            ></a>
-                        </li>
-                        <li class="page-item">
-                            <a class="page-link" href="${pageContext.request.contextPath}/admin/color?page=<%=pagination%>"><%=pagination%></a>
-                        </li>
-                        <li class="page-item">
-                            <form action="${pageContext.request.contextPath}/admin/color" method="post">
-                                <input
-                                        type="number"
-                                        class="form-control"
-                                        name="page"
-                                        autofocus
-                                        min="1"
-                                />
-                            </form>
-                        </li>
-                        <li class="page-item next" style="display:<%=(pagination == totalPage) ? "none" : "block"%>">
-                            <a class="page-link" href="${pageContext.request.contextPath}/admin/color?page=<%=pagination + 1%>"
-                            ><i class="tf-icon bx bx-chevrons-right"></i
-                            ></a>
-                        </li>
-                    </ul>
-                        </nav>
-                    </div>
-
                     <!-- Bootstrap Dark Table -->
                     <div class="card">
-                        <h5 class="card-header">THÔNG TIN VỀ QUẢN LÝ MÀU</h5>
+                        <h5 class="card-header">THÔNG TIN VỀ QUẢN LÝ SLIDE</h5>
                         <div class="table-responsive text-nowrap">
                             <table class="table table-dark1">
                                 <thead>
                                 <tr>
-                                    <th>MÃ MÀU</th>
-                                    <th>TÊN MÀU</th>
+                                    <th>ID</th>
+                                    <th>TIÊU ĐỀ</th>
                                     <th>NGÀY TẠO</th>
-                                    <th>CHỈNH SỬA</th>
+                                    <th>Hành động</th>
                                 </tr>
                                 </thead>
                                 <tbody class="table-border-bottom-0">
-                        <c:forEach items="<%= colors %>" var="color">
-                                <tr>
-                                    <td>${color.id}</td>
-                                    <td> ${color.name}</td>
-                                    <td>${color.createdAt}</td>
-                                    <td>
-                                        <div class="dropdown">
-                                            <button type="button" class="btn p-0 dropdown-toggle hide-arrow" data-bs-toggle="dropdown">
-                                                <i class="bx bx-dots-vertical-rounded"></i>
-                                            </button>
-                                            <div class="dropdown-menu">
-                                                <a class="dropdown-item" href="${pageContext.request.contextPath}/admin/editColor?id=${color.id}">
-                                                    <i class="bx bx-edit-alt me-1"></i> Chỉnh sửa</a>
-                                                <a class="dropdown-item" href="${pageContext.request.contextPath}/admin/delete?id=${color.id}" methods="post"
-                                                ><i class="bx bx-trash me-1"></i> Xóa</a
-                                                >
+                                <c:forEach items="<%= slides %>" var="slide">
+                                    <tr>
+                                        <td>${slide.id}</td>
+                                        <td> ${slide.title}</td>
+                                        <td>${slide.createdAt}</td>
+                                        <td>
+                                            <div class="dropdown">
+                                                <button type="button" class="btn p-0 dropdown-toggle hide-arrow" data-bs-toggle="dropdown">
+                                                    <i class="bx bx-dots-vertical-rounded"></i>
+                                                </button>
+                                                <div class="dropdown-menu">
+                                                    <a class="dropdown-item" href="${pageContext.request.contextPath}/admin/editSlide?id=${slide.id}">
+                                                        <i class="bx bx-edit-alt me-1"></i> Chỉnh sửa</a>
+                                                    <a class="dropdown-item" href="${pageContext.request.contextPath}/admin/deleteSlide?id=${slide.id}"
+                                                    ><i class="bx bx-trash me-1"></i> Xóa</a
+                                                    >
+                                                </div>
                                             </div>
-                                        </div>
-                                    </td>
-                                </tr>
-                        </c:forEach>
+                                        </td>
+                                    </tr>
+                                </c:forEach>
                                 </tbody>
                             </table>
                         </div>

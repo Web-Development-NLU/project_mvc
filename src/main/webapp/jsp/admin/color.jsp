@@ -1,5 +1,6 @@
 <%@ page import="Model.Color" %>
 <%@ page import="java.util.ArrayList" %>
+<%@ page import="java.text.DecimalFormat" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%--
   Created by IntelliJ IDEA.
@@ -58,7 +59,14 @@
 </head>
 
 <body>
-<% ArrayList<Color> colors= (ArrayList<Color>) request.getAttribute("colors"); %>
+<%
+        ArrayList<Color> colors = (ArrayList<Color>) request.getAttribute("colors");
+        int pagination = (int) request.getAttribute("pagination");
+        String numPage = DecimalFormat.getIntegerInstance().format(Double.parseDouble(request.getAttribute("numPage").toString()));
+        int totalPage = Integer.parseInt(numPage);
+
+%>
+
 <!-- Layout wrapper -->
 <div class="layout-wrapper layout-content-navbar">
     <div class="layout-container">
@@ -71,8 +79,6 @@
         <div class="layout-page">
             <!-- Navbar -->
 
-            <jsp:include page="common/navbar.jsp"/>
-
             <!-- / Navbar -->
 
             <!-- Content wrapper -->
@@ -81,14 +87,60 @@
 
                 <div class="container-xxl flex-grow-1 container-p-y">
                     <h4 class="fw-bold py-3 mb-4"><span class="text-muted fw-light">QUẢN LÝ /</span> MÀU</h4>
-                    <form method="post">
-                    <input type="text" class="form-control" id="value" name="txt"
-                           placeholder="Tên màu" required style="width:50%"/>
-                    </form>
                     <a href="${pageContext.request.contextPath}/admin/createColor">
                         <button type="button" class="btn btn-outline-dark" style="float: right">Tạo mới</button>
                     </a>
                     <hr class="my-5" />
+                    <div class="row mb-4">
+                        <form action="${pageContext.request.contextPath}/admin/color" methods="post">
+                            <div class="input-group">
+                            <input type="text" class="form-control" name="color"
+                                   placeholder="Tên màu" />
+                            <button class="btn btn-outline-primary" type="submit" id="button-addon2">Tìm kiếm</button>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="row">
+                    <nav aria-label="breadcrumb" class="col-lg-6">
+                        <ol class="breadcrumb">
+                            <li class="breadcrumb-item">
+                                <a href="javascript:void(0);"> Trang <%=pagination%></a>
+                            </li>
+                            <li class="breadcrumb-item">
+                                <a href="javascript:void(0);"><%= numPage%></a>
+                            </li>
+                        </ol>
+                    </nav>
+                        <nav aria-label="Page navigation" class="col-lg-6">
+                    <ul class="pagination justify-content-end">
+                        <li class="page-item prev" style=" display: <%=( pagination ==1) ? "none" : "block"%>">
+                            <a class="page-link" href="${pageContext.request.contextPath}/admin/color?page=<%=pagination - 1%>"
+                            ><i class="tf-icon bx bx-chevrons-left"></i
+                            ></a>
+                        </li>
+                        <li class="page-item">
+                            <a class="page-link" href="${pageContext.request.contextPath}/admin/color?page=<%=pagination%>"><%=pagination%></a>
+                        </li>
+                        <li class="page-item">
+                            <form action="${pageContext.request.contextPath}/admin/color" method="post">
+                                <input
+                                        type="number"
+                                        class="form-control"
+                                        name="page"
+                                        autofocus
+                                        min="1"
+                                />
+                            </form>
+                        </li>
+                        <li class="page-item next" style="display:<%=(pagination == totalPage) ? "none" : "block"%>">
+                            <a class="page-link" href="${pageContext.request.contextPath}/admin/color?page=<%=pagination + 1%>"
+                            ><i class="tf-icon bx bx-chevrons-right"></i
+                            ></a>
+                        </li>
+                    </ul>
+                        </nav>
+                    </div>
+
                     <!-- Bootstrap Dark Table -->
                     <div class="card">
                         <h5 class="card-header">THÔNG TIN VỀ QUẢN LÝ MÀU</h5>
@@ -116,7 +168,7 @@
                                             <div class="dropdown-menu">
                                                 <a class="dropdown-item" href="${pageContext.request.contextPath}/admin/editColor?id=${color.id}">
                                                     <i class="bx bx-edit-alt me-1"></i> Chỉnh sửa</a>
-                                                <a class="dropdown-item" href="" method="post"
+                                                <a class="dropdown-item" href="${pageContext.request.contextPath}/admin/delete?id=${color.id}" methods="post"
                                                 ><i class="bx bx-trash me-1"></i> Xóa</a
                                                 >
                                             </div>

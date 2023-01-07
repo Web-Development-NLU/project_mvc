@@ -18,8 +18,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <aside id="layout-menu" class="layout-menu menu-vertical menu bg-menu-theme">
     <div class="app-brand demo">
-        <a href="index.html" class="app-brand-link">
-
+        <a href="${pageContext.request.contextPath}/admin" class="app-brand-link">
             <span class="app-brand-text demo menu-text fw-bolder ms-2">Furniture</span>
         </a>
 
@@ -32,14 +31,43 @@
 
     <ul class="menu-inner py-1">
         <!-- home -->
-        <li class="menu-item active">
+        <li class="menu-item">
             <a href="${pageContext.request.contextPath}/admin" class="menu-link">
                 <i class="menu-icon tf-icons bx bx-home-circle"></i>
                 <div data-i18n="Analytics">Trang chủ</div>
             </a>
         </li>
 
-        <!-- Account customner-->
+        <li class="menu-item">
+            <a href="${pageContext.request.contextPath}/admin/category" class="menu-link">
+                <i class="menu-icon tf-icons bx bx-home-circle"></i>
+                <div data-i18n="Analytics">Danh mục</div>
+            </a>
+        </li>
+        <li class="menu-item">
+            <a href="${pageContext.request.contextPath}/admin/pattern" class="menu-link">
+                <i class="menu-icon tf-icons bx bx-home-circle"></i>
+                <div data-i18n="Analytics">Kiểu dáng</div>
+            </a>
+        </li>
+        <li class="menu-item">
+            <a href="${pageContext.request.contextPath}/admin/color" class="menu-link">
+                <i class="menu-icon tf-icons bx bx-home-circle"></i>
+                <div data-i18n="Analytics">Màu sắc</div>
+            </a>
+        </li>
+        <li class="menu-item">
+            <a href="${pageContext.request.contextPath}/admin/contact" class="menu-link">
+                <i class="menu-icon tf-icons bx bx-home-circle"></i>
+                <div data-i18n="Analytics">Thông tin liên hệ</div>
+            </a>
+        </li>
+        <li class="menu-item">
+            <a href="${pageContext.request.contextPath}/admin/slide" class="menu-link">
+                <i class="menu-icon tf-icons bx bx-home-circle"></i>
+                <div data-i18n="Analytics">Slide</div>
+            </a>
+        </li>
         <li class="menu-item">
             <a href="${pageContext.request.contextPath}/admin/products" class="menu-link menu-toggle">
                 <i class="menu-icon tf-icons bx bx-layout"></i>

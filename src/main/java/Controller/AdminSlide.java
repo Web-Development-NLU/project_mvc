@@ -1,28 +1,27 @@
 package Controller;
 
-import Model.Contact;
-import Services.ContactService;
+import Model.Slide;
+import Services.SlideService;
 
 import javax.servlet.*;
 import javax.servlet.http.*;
 import javax.servlet.annotation.*;
 import java.io.IOException;
 
-@WebServlet(name = "ContactController", value = "/contact")
-public class ContactController extends HttpServlet {
-    private ContactService contactService;
+@WebServlet(name = "AdminSlide", value = "/admin/slide")
+public class AdminSlide extends HttpServlet {
+    private SlideService slideService;
 
     @Override
     public void init() throws ServletException {
         super.init();
-        this.contactService = new ContactService("contact");
+        this.slideService = new SlideService("slide");
     }
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        request.setAttribute("contact", this.contactService.findAll(Contact.class).get(0));
-
-        request.getRequestDispatcher("/jsp/client/contact.jsp").forward(request, response);
+        request.setAttribute("slides", this.slideService.findAll(Slide.class));
+        request.getRequestDispatcher("/jsp/admin/slide.jsp").forward(request, response);
     }
 
     @Override
