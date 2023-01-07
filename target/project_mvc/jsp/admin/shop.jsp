@@ -1,23 +1,18 @@
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<html>
-<head>
-  <title>Title</title>
-</head>
-<body>
-
-</body>
-</html>
-<%@ page import="Model.Color" %>
-<%@ page import="Model.About" %>
-<%--
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ page import="Model.Pattern" %>
+<%@ page import="java.util.ArrayList" %>
+<%@ page import="Model.Shop" %>
+<%@ page import="Model.TypeShop" %><%--
   Created by IntelliJ IDEA.
   User: lyha8
-  Date: 1/1/2023
-  Time: 9:44 PM
+  Date: 12/30/2022
+  Time: 4:31 PM
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ page isELIgnored="false" %>
+<!DOCTYPE html>
+
 <html
         lang="en"
         class="light-style layout-menu-fixed"
@@ -32,7 +27,7 @@
           name="viewport"
           content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0"/>
 
-  <title>Edit Color </title>
+  <title>Pattern </title>
 
   <meta name="description" content=""/>
 
@@ -62,8 +57,18 @@
   <script src="/assets/js_admin/config.js"></script>
 
 </head>
+
 <body>
-<%About about=(About) request.getAttribute("about");%>
+<%
+  ArrayList<Shop> shops= (ArrayList<Shop>) request.getAttribute("shops");
+  int type = Integer.parseInt(request.getAttribute("type").toString());
+  boolean isDisableCreate;
+  if(type == TypeShop.SMALL.ordinal()) {
+    isDisableCreate = shops.size() >= 3;
+  }else {
+    isDisableCreate = shops.size() >= 2;
+  }
+%>
 <!-- Layout wrapper -->
 <div class="layout-wrapper layout-content-navbar">
   <div class="layout-container">
@@ -85,62 +90,61 @@
         <!-- Content -->
 
         <div class="container-xxl flex-grow-1 container-p-y">
-          <h4 class="fw-bold py-3 mb-4"><span class="text-muted fw-light">Chỉnh sửa/ Về chúng tôi</span></h4>
-          <hr class="my-5"/>
-          <div class="col-xxl">
-            <div class="card mb-4">
-              <div class="card-header d-flex align-items-center justify-content-between">
-                <h5 class="mb-0">Về chúng tôi</h5>
-              </div>
-              <div class="card-body">
-                <form action="${pageContext.request.contextPath}/admin/about?idAbout=<%=about.getId()%>" method="post">
-                  <div class="row mb-3">
-                    <label class="col-sm-2 col-form-label" for="intro">Giới thiệu</label>
-                    <div class="col-sm-10">
-                      <input type="text" class="form-control" id="intro" name="intro"
-                             placeholder="Giới thiệu" required value="<%=about.getIntro()%>"/>
-                    </div>
-                  </div>
-                  <div class="row mb-3">
-                    <label class="col-sm-2 col-form-label" for="mission">Nhiệm vụ</label>
-                    <div class="col-sm-10">
-                      <input
-                              type="text"
-                              class="form-control"
-                              id="mission"
-                              placeholder="Nhiệm vụ ..."
-                              name="mission"
-                              value="<%=about.getMission()%>"
-                              required
-                      />
-                    </div>
-                  </div>
-                  <div class="row mb-3">
-                    <label class="col-sm-2 col-form-label" for="ourValue">Giá trị của chúng tôi</label>
-                    <div class="col-sm-10">
-                      <input
-                              type="text"
-                              class="form-control"
-                              id="ourValue"
-                              placeholder="Giá trị ..."
-                              name="ourValue"
-                              value="<%=about.getOurValue()%>"
-                              required
-                      />
-                    </div>
-                  </div>
+          <h4 class="fw-bold py-3 mb-4"><span class="text-muted fw-light">QUẢN LÝ /</span> CỬA HÀNG</h4>
+          <c:choose>
+            <c:when test="<%=isDisableCreate%>">
+              <a href="${pageContext.request.contextPath}/admin/createShop?type=<%=type%>">
+                <button type="button" class="btn btn-outline-dark" style="float: right" disabled>Tạo mới</button>
+              </a>
+            </c:when>
+            <c:otherwise>
+              <a href="${pageContext.request.contextPath}/admin/createShop?type=<%=type%>">
+                <button type="button" class="btn btn-outline-dark" style="float: right">Tạo mới</button>
+              </a>
+            </c:otherwise>
+          </c:choose>
 
-                  <div class="row justify-content-end">
-                    <div class="col-sm-10">
-                      <button type="submit" class="btn btn-primary">Lưu</button>
-                    </div>
-                  </div>
-                </form>
-              </div>
+          <hr class="my-5" />
+
+          <!-- Bootstrap Dark Table -->
+          <div class="card">
+            <h5 class="card-header">THÔNG TIN VỀ QUẢN LÝ CỬA HÀNG</h5>
+            <div class="table-responsive text-nowrap">
+              <table class="table table-dark1">
+                <thead>
+                <tr>
+                  <th>ID</th>
+                  <th>TÊN CỬA HÀNG</th>
+                  <th>NGÀY TẠO</th>
+                  <th>CHỈNH SỬA</th>
+                </tr>
+                </thead>
+                <tbody class="table-border-bottom-0">
+                <c:forEach items="<%= shops %>" var="shop">
+                  <tr>
+                    <td>${shop.id}</td>
+                    <td>${shop.name}</td>
+                    <td>${shop.createdAt}</td>
+                    <td>
+                      <div class="dropdown">
+                        <button type="button" class="btn p-0 dropdown-toggle hide-arrow" data-bs-toggle="dropdown">
+                          <i class="bx bx-dots-vertical-rounded"></i>
+                        </button>
+                        <div class="dropdown-menu">
+                          <a class="dropdown-item" href="${pageContext.request.contextPath}/admin/editShop?id=${shop.id}&type=<%=type%>">
+                            <i class="bx bx-edit-alt me-1"></i> Chỉnh sửa</a>
+                          <a class="dropdown-item" href="${pageContext.request.contextPath}/admin/deleteShop?id=${shop.id}&type=<%=type%>"
+                          ><i class="bx bx-trash me-1"></i> Xóa</a>
+                        </div>
+                      </div>
+                    </td>
+                  </tr>
+                </c:forEach>
+                </tbody>
+              </table>
             </div>
           </div>
-          <!-- Basic with Icons -->
-
+          <!--/ Bootstrap Dark Table -->
         </div>
         <!-- / Content -->
 
@@ -152,9 +156,7 @@
               <script>
                 document.write(new Date().getFullYear());
               </script>
-              <a href="https://themeselection.com" target="_blank" class="footer-link fw-bolder"></a>
             </div>
-
           </div>
         </footer>
         <!-- / Footer -->
@@ -179,19 +181,12 @@
 <script src="/assets/vendor/libs/perfect-scrollbar/perfect-scrollbar.js"></script>
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/chosen/1.8.7/chosen.jquery.min.js"></script>
 <script src="/assets/vendor/js/menu.js"></script>
-<script src="/assets/js/upload.js"></script>
 <!-- endbuild -->
 
 <!-- Vendors JS -->
 
 <!-- Main JS -->
 <script src="/assets/js_admin/main.js"></script>
-<script>
-  $(".chosen-select").chosen({
-    width: '50%',
-    no_results_text: "Không tìm thấy kết quả :"
-  })
-</script>
 <!-- Page JS -->
 
 <!-- Place this tag in your head or just before your close body tag. -->

@@ -1,19 +1,9 @@
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<html>
-<head>
-  <title>Title</title>
-</head>
-<body>
-
-</body>
-</html>
-<%@ page import="Model.Color" %>
-<%@ page import="Model.About" %>
-<%--
+<%@ page import="java.util.ArrayList" %>
+<%@ page import="Model.Color" %><%--
   Created by IntelliJ IDEA.
   User: lyha8
   Date: 1/1/2023
-  Time: 9:44 PM
+  Time: 9:12 PM
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
@@ -32,7 +22,7 @@
           name="viewport"
           content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0"/>
 
-  <title>Edit Color </title>
+  <title>Create Color </title>
 
   <meta name="description" content=""/>
 
@@ -62,8 +52,10 @@
   <script src="/assets/js_admin/config.js"></script>
 
 </head>
+
 <body>
-<%About about=(About) request.getAttribute("about");%>
+
+<% int type = Integer.parseInt(request.getAttribute("type").toString());%>
 <!-- Layout wrapper -->
 <div class="layout-wrapper layout-content-navbar">
   <div class="layout-container">
@@ -85,46 +77,45 @@
         <!-- Content -->
 
         <div class="container-xxl flex-grow-1 container-p-y">
-          <h4 class="fw-bold py-3 mb-4"><span class="text-muted fw-light">Chỉnh sửa/ Về chúng tôi</span></h4>
+          <h4 class="fw-bold py-3 mb-4"><span class="text-muted fw-light">Tạo mới/</span>Cửa hàng</h4>
           <hr class="my-5"/>
           <div class="col-xxl">
             <div class="card mb-4">
               <div class="card-header d-flex align-items-center justify-content-between">
-                <h5 class="mb-0">Về chúng tôi</h5>
+                <h5 class="mb-0">Thông tin chi tiết của cửa hàng</h5>
               </div>
               <div class="card-body">
-                <form action="${pageContext.request.contextPath}/admin/about?idAbout=<%=about.getId()%>" method="post">
+                <form action="${pageContext.request.contextPath}/admin/createShop?type=<%=type%>" method="post">
                   <div class="row mb-3">
-                    <label class="col-sm-2 col-form-label" for="intro">Giới thiệu</label>
+                    <label class="col-sm-2 col-form-label" >Tên cửa hàng</label>
                     <div class="col-sm-10">
-                      <input type="text" class="form-control" id="intro" name="intro"
-                             placeholder="Giới thiệu" required value="<%=about.getIntro()%>"/>
+                      <input type="text" class="form-control" id="name" name="name"
+                             placeholder="tên cửa hàng" required />
                     </div>
                   </div>
                   <div class="row mb-3">
-                    <label class="col-sm-2 col-form-label" for="mission">Nhiệm vụ</label>
+                    <label class="col-sm-2 col-form-label">Đường dẫn</label>
                     <div class="col-sm-10">
                       <input
                               type="text"
                               class="form-control"
-                              id="mission"
-                              placeholder="Nhiệm vụ ..."
-                              name="mission"
-                              value="<%=about.getMission()%>"
+                              id="redirect"
+                              placeholder="link action"
+                              name="redirect"
                               required
+
                       />
                     </div>
                   </div>
                   <div class="row mb-3">
-                    <label class="col-sm-2 col-form-label" for="ourValue">Giá trị của chúng tôi</label>
+                    <label class="col-sm-2 col-form-label">Hình ảnh</label>
                     <div class="col-sm-10">
                       <input
                               type="text"
                               class="form-control"
-                              id="ourValue"
-                              placeholder="Giá trị ..."
-                              name="ourValue"
-                              value="<%=about.getOurValue()%>"
+                              id="image"
+                              placeholder="đường dẫn hình ảnh"
+                              name="image"
                               required
                       />
                     </div>
@@ -132,7 +123,7 @@
 
                   <div class="row justify-content-end">
                     <div class="col-sm-10">
-                      <button type="submit" class="btn btn-primary">Lưu</button>
+                      <button type="submit" class="btn btn-primary">Tạo</button>
                     </div>
                   </div>
                 </form>
@@ -179,22 +170,16 @@
 <script src="/assets/vendor/libs/perfect-scrollbar/perfect-scrollbar.js"></script>
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/chosen/1.8.7/chosen.jquery.min.js"></script>
 <script src="/assets/vendor/js/menu.js"></script>
-<script src="/assets/js/upload.js"></script>
 <!-- endbuild -->
 
 <!-- Vendors JS -->
 
 <!-- Main JS -->
 <script src="/assets/js_admin/main.js"></script>
-<script>
-  $(".chosen-select").chosen({
-    width: '50%',
-    no_results_text: "Không tìm thấy kết quả :"
-  })
-</script>
 <!-- Page JS -->
 
 <!-- Place this tag in your head or just before your close body tag. -->
 <script async defer src="https://buttons.github.io/buttons.js"></script>
 </body>
 </html>
+

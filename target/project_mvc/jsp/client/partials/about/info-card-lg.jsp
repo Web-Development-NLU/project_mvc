@@ -11,13 +11,8 @@
         <img src="https://caston.familab.net/wp-content/uploads/2022/03/about_image_4.jpg">
     </div>
     <div class="about-info-card_content mt-5">
-        <div class="info_title monts">WE ARE A LIFESTYLE BRAND</div>
+        <div class="info_title monts">ĐÔI NÉT VỀ THƯƠNG HIỆU CỦA CHÚNG TÔI</div>
         <div class="info_break-line"></div>
-        <div class="info_description monts">Nullam cursus lacinia erat.
-            Nullam accumsan lorem in dui.Praesent metus semper a,
-            adipiscing nec, purus. Ut a nisl id ante tempus hendrerit.
-            Sed fringilla mauris sit amet nibh. Vestibulum ante ipsum
-            primis in faucibus orci luctus et ultrices posuere cubilia
-            Curae; In ac dui quis mi consectetuer lacinia.</div>
+        <div class="info_description monts"><%=request.getParameter("value")%></div>
     </div>
 </div>

@@ -4,7 +4,10 @@
 <%@ page import="Model.Category" %>
 <%@ page import="DTO.AuthorizationData" %>
 <%@ page import="Model.TypeAccount" %>
+<%@ page import="Model.TypeShop" %><%--
+=======
 <%@ page import="Model.Order" %><%--
+>>>>>>> ff310e064b8d97b3b6c496f43f874ba65fc27590
   Created by IntelliJ IDEA.
   User: Quang Tho
   Date: 29/12/2022
@@ -14,7 +17,6 @@
 
 <%
     ArrayList<Category> categories = (ArrayList<Category>) request.getAttribute("categoriesMenu");
-    ArrayList<Order> orders = (ArrayList<Order>) request.getAttribute("ordersMenu");
     AuthorizationData data = (AuthorizationData) session.getAttribute("adminLogin");
 %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
@@ -91,7 +93,26 @@
                 </c:forEach>
             </ul>
         </li>
-
+        <li class="menu-item">
+            <a href="javascript:void(0);" class="menu-link menu-toggle">
+                <i class="menu-icon tf-icons bx bx-table"></i>
+                <div data-i18n="Authentications">Banner Cửa hàng</div>
+            </a>
+            <ul class="menu-sub">
+                <c:if test="<%=data.getType() == TypeAccount.ROOT_ADMIN.ordinal()%>">
+                    <li class="menu-item">
+                        <a href="${pageContext.request.contextPath}/admin/shop?type=<%=TypeShop.SMALL.ordinal()%>" class="menu-link">
+                            <div data-i18n="Basic">Banner nhỏ</div>
+                        </a>
+                    </li>
+                </c:if>
+                <li class="menu-item">
+                    <a href="${pageContext.request.contextPath}/admin/shop?type=<%=TypeShop.LARGE.ordinal()%>" class="menu-link">
+                        <div data-i18n="Basic">Banner lớn</div>
+                    </a>
+                </li>
+            </ul>
+        </li>
         <li class="menu-item">
             <a href="javascript:void(0);" class="menu-link menu-toggle">
                 <i class="menu-icon tf-icons bx bx-collection"></i>
@@ -136,13 +157,6 @@
                         <div data-i18n="Without menu">Thanh toán khi nhận hàng</div>
                     </a>
                 </li>
-<%--                <c:forEach items="<%=orders%>" var="order">--%>
-<%--                    <li class="menu-item">--%>
-<%--                        <a href="${pageContext.request.contextPath}/admin/products?id=${category.id}" class="menu-link">--%>
-<%--                            <div data-i18n="Without menu">${category.name}</div>--%>
-<%--                        </a>--%>
-<%--                    </li>--%>
-<%--                </c:forEach>--%>
             </ul>
         </li>
 
@@ -167,7 +181,7 @@
                     </a>
                 </li>
             </ul>
-
+        </li>
 
     </ul>
 </aside>

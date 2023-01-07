@@ -114,7 +114,7 @@
                             <ol style="padding-left: 0">
                                 <c:choose>
                                     <c:when test="${pagePrepayment}">
-                                        <form action="/admin/orderPrePayment" class="form-search" method="get">
+                                        <form action="/admin/orderPrePayment" class="form-search">
                                     </c:when>
                                     <c:when test="${pagePostpaid}">
                                         <form action="/admin/orderPostpaid" class="form-search"></c:when>

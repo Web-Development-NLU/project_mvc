@@ -14,6 +14,13 @@ public class ProductService extends BaseService<Product> {
     public ProductService(String tableName) {
         super(tableName);
     }
+
+    public ArrayList<Product> searchByNameAndCategory(String name, String cateogry) {
+        return (ArrayList<Product>) this.jdbi.withHandle(handle -> handle.createQuery("SELECT * FROM " + this.tableName + " WHERE " +
+                "name LIKE ? " +
+                ((cateogry == null) ? "" : "AND categoryId = " + cateogry)).bind(0, "%" + name + "%").mapToBean(Product.class).list());
+    }
+
     public void setStatus(String id, int value) {
         this.jdbi.useHandle(handle -> {
 
