@@ -75,12 +75,6 @@
     <!-- Layout container -->
     <div class="layout-page">
       <!-- Navbar -->
-      <div style="margin:3em 5em 1em 5em">
-      <form action="${pageContext.request.contextPath}/admin/pattern" methods="post">
-        <input type="text" class="form-control" name="pattern"
-               placeholder="Tên mẫu" required style="height: 12%"/>
-      </form>
-      </div>
       <!-- / Navbar -->
 
       <!-- Content wrapper -->
@@ -94,6 +88,15 @@
             <button type="button" class="btn btn-outline-dark" style="float: right">Tạo mới</button>
           </a>
           <hr class="my-5" />
+          <div class="row mb-4">
+            <form action="${pageContext.request.contextPath}/admin/pattern" methods="post">
+              <div class="input-group">
+              <input type="text" class="form-control" name="pattern"
+                     placeholder="Tên mẫu" />
+                <button class="btn btn-outline-primary" type="submit" id="button-addon2">Tìm kiếm</button>
+              </div>
+            </form>
+          </div>
           <div class="row">
             <nav aria-label="breadcrumb" class="col-lg-6">
               <ol class="breadcrumb">

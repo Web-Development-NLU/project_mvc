@@ -18,10 +18,10 @@ public class AboutService extends BaseService<About>{
         if(about !=null){
             this.jdbi.useHandle(handle -> {
                 handle.createUpdate("UPDATE " +this.tableName +
-                        " SET intro=:intro," +
-                        "mission =: mission," +
-                        "ourValue =:ourValue"+
-                        " WHERE id:=id")
+                        " SET intro= :intro, " +
+                        "mission = :mission, " +
+                        "ourValue = :ourValue "+
+                        " WHERE id = :id ")
                         .bind("id",id).bindBean(model).execute();
             });
         }
