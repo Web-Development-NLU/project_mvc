@@ -76,17 +76,43 @@ public class ProductsController extends HttpServlet {
                 priceMin = product.getPrice();
             }
         }
+        ArrayList<Product> productResult = new ArrayList<>();
+        String page = request.getParameter("page");
+        int intPage;
+        try {
+            intPage = Integer.parseInt(page);
+        }catch (Exception e){
+            intPage = 0;
+        }
+        Double numPage = Math.ceil(Double.parseDouble(String.valueOf(products.size())) / 20);
+        if(page == null || intPage < 1) {
+            page = "1";
+        }
+        if(Integer.parseInt(page) > numPage.intValue()) page = ""+ numPage.intValue();
+        int index =1;
+        if(products.size() > 0) {
+            index = (Integer.parseInt(page) - 1) * 20;
+        }
+        for(int i = index; i < (index + 20); i++ ){
+            if(i >= products.size()){
+                break;
+            }
+            productResult.add(products.get(i));
+        }
         request.setAttribute("filterCat", (filter.category == null) ? null :  this.categoryServices.findById(filter.category, Category.class));
         request.setAttribute("filterColor", (filter.color == null) ? null : this.colorService.findById(filter.color, Color.class));
         request.setAttribute("filterPattern", (filter.pattern == null) ? null : this.patternService.findById(filter.pattern, Pattern.class));
         request.setAttribute("filterPrice", ((filter.minFilter == null) || (filter.maxFilter == null)) ?
                 null: DecimalFormat.getInstance().format(Double.parseDouble(filter.minFilter)) + " - " + DecimalFormat.getInstance().format(Double.parseDouble(filter.maxFilter)));
-        request.setAttribute("products", products);
+//        request.setAttribute("products", products);
+        request.setAttribute("products", productResult);
         request.setAttribute("categories", this.categoryServices.findAll(Category.class));
         request.setAttribute("patterns", this.patternService.findAll(Pattern.class));
         request.setAttribute("colors", this.colorService.findAll(Color.class));
         request.setAttribute("priceMax", priceMax);
         request.setAttribute("priceMin", priceMin);
+        request.setAttribute("pagination", Integer.parseInt(page));
+        request.setAttribute("numPage", numPage);
         request.getRequestDispatcher("jsp/client/products.jsp").forward(request, response);
     }
 

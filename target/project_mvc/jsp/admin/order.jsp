@@ -1,4 +1,8 @@
-<%--
+<%@ page import="java.text.DecimalFormat" %>
+<%@ page import="Model.Order" %>
+<%@ page import="java.util.ArrayList" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ page isELIgnored="false" %><%--
   Created by IntelliJ IDEA.
   User: Quang Tho
   Date: 29/12/2022
@@ -22,7 +26,7 @@
             name="viewport"
             content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0"/>
 
-    <title>Order Tables </title>
+    <title>Đơn hàng</title>
 
     <meta name="description" content=""/>
 
@@ -41,7 +45,10 @@
     <link rel="stylesheet" href="../assets/vendor/css/style.css">
     <!-- Vendors CSS -->
     <link rel="stylesheet" href="../assets/vendor/libs/perfect-scrollbar/perfect-scrollbar.css"/>
-
+    <link rel="stylesheet" href="/assets/css/components/search.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css"
+          integrity="sha512-xh6O/CkQoPOWDdYTDqeRdPCVd1SpvCA9XXcUnZS2FmJNp1coAFzvtCN9BmamE+4aHK8yyUHUSCcJHgXloTyT2A=="
+          crossorigin="anonymous" referrerpolicy="no-referrer"/>
     <!-- Page CSS -->
 
     <!-- Helpers -->
@@ -51,6 +58,16 @@
 </head>
 
 <body>
+<%
+    ArrayList<Order> orders = (ArrayList<Order>) request.getAttribute("orders");
+    int pagination = (int) request.getAttribute("pagination");
+    String numPage = DecimalFormat.getIntegerInstance().format(Double.parseDouble(request.getAttribute("numPage").toString()));
+    int totalPage = Integer.parseInt(numPage);
+    boolean pagePostpaid = (boolean) request.getAttribute("pagePostpaid");
+    boolean pagePrepayment = (boolean) request.getAttribute("pagePrepayment");
+    String search = (String) request.getAttribute("search") == null ? "" : "&infoSearch="+ request.getAttribute("search");
+    String search2 = (String) request.getAttribute("search") == null ? "" : "infoSearch="+ request.getAttribute("search");
+%>
 <!-- Layout wrapper -->
 <div class="layout-wrapper layout-content-navbar">
     <div class="layout-container">
@@ -70,254 +87,183 @@
             <!-- Content wrapper -->
             <div class="content-wrapper">
                 <!-- Content -->
-
                 <div class="container-xxl flex-grow-1 container-p-y">
-                    <h4 class="fw-bold py-3 mb-4"><span class="text-muted fw-light">Order /</span> Order Tables</h4>
+                    <c:choose>
+                        <c:when test="${pagePrepayment}">
+                            <h4 class="fw-bold py-3 mb-4"><span class="text-muted fw-light">Đơn hàng /</span> Thanh toán trước</h4>
+                        </c:when>
+                        <c:when test="${pagePostpaid}">
+                            <h4 class="fw-bold py-3 mb-4"><span class="text-muted fw-light">Đơn hàng /</span> Thanh toán khi nhận hàng</h4>
+                        </c:when>
+                        <c:otherwise>
+                            <h4 class="fw-bold py-3 mb-4"><span class="text-muted fw-light"></span>Đơn hàng</h4>
+                        </c:otherwise>
+                    </c:choose>
                     <hr class="my-5"/>
-                    <!-- Basic Bootstrap Table -->
-                    <div class="card">
-                        <h5 class="card-header">Order Detail</h5>
-                        <div class="table-responsive text-nowrap">
-                            <table class="table">
-                                <thead>
-                                <tr>
-                                    <th>ID order</th>
-                                    <th>Client</th>
-                                    <th>Users</th>
-                                    <th>Status</th>
-                                    <th>Actions</th>
-                                </tr>
-                                </thead>
-                                <tbody class="table-border-bottom-0">
-                                <tr>
-                                    <td><a href="Detail_Order.html"><i
-                                            class="fab fa-angular fa-lg text-danger me-3"></i>
-                                        <strong>Ca-01</strong></a></td>
-                                    <td>Albert Cook</td>
-                                    <td>
-                                        <ul class="list-unstyled users-list m-0 avatar-group d-flex align-items-center">
+                    <div class="row">
+                        <nav aria-label="breadcrumb" class="col-lg-6">
+                            <ol class="breadcrumb">
+                                <li class="breadcrumb-item">
+                                    <a href="javascript:void(0);"> Trang <%=pagination%></a>
+                                </li>
+                                <li class="breadcrumb-item">
+                                    <a href="javascript:void(0);"><%=numPage%></a>
+                                </li>
+                            </ol>
 
-                                            <li
-                                                    data-bs-toggle="tooltip"
-                                                    data-popup="tooltip-custom"
-                                                    data-bs-placement="top"
-                                                    class="avatar avatar-xs pull-up"
-                                                    title="Christina Parker"
-                                            >
-                                                <img src="../assets/img_admin/avatars/7.png" alt="Avatar"
-                                                     class="rounded-circle"/>
-                                            </li>
-                                        </ul>
-                                    </td>
-                                    <td><span class="badge bg-label-primary me-1">Wait</span></td>
-                                    <td>
-                                        <div class="dropdown">
-                                            <button type="button" class="btn p-0 dropdown-toggle hide-arrow"
-                                                    data-bs-toggle="dropdown">
-                                                <i class="bx bx-dots-vertical-rounded"></i>
-                                            </button>
-                                            <div class="dropdown-menu">
-                                                <a class="dropdown-item" href="javascript:void(0);"
-                                                ><i class="bx bx-edit-alt me-1"></i> Completed</a
-                                                >
-                                                <a class="dropdown-item" href="javascript:void(0);"
-                                                ><i class="bx bx-trash me-1"></i> Cancel</a
-                                                >
-                                                <a class="dropdown-item" href="javascript:void(0);"
-                                                ><i class="bx bx-edit-alt me-1"></i> Deactive</a
-                                                >
-                                                <a class="dropdown-item" href="javascript:void(0);"
-                                                ><i class="bx bx-trash me-1"></i> Delete</a
-                                                >
-                                            </div>
-                                        </div>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td><a href="Detail_Order.html"><i class="fab fa-react fa-lg text-info me-3"></i>
-                                        <strong>Ca-02</strong></a></td>
-                                    <td>Barry Hunter</td>
-                                    <td>
-                                        <ul class="list-unstyled users-list m-0 avatar-group d-flex align-items-center">
-
-                                            <li
-                                                    data-bs-toggle="tooltip"
-                                                    data-popup="tooltip-custom"
-                                                    data-bs-placement="top"
-                                                    class="avatar avatar-xs pull-up"
-                                                    title="Sophia Wilkerson"
-                                            >
-                                                <img src="../assets/img_admin/avatars/6.png" alt="Avatar"
-                                                     class="rounded-circle"/>
-                                            </li>
-
-                                        </ul>
-                                    </td>
-                                    <td><span class="badge bg-label-success me-1">Completed</span></td>
-                                    <td>
-                                        <div class="dropdown">
-                                            <button type="button" class="btn p-0 dropdown-toggle hide-arrow"
-                                                    data-bs-toggle="dropdown">
-                                                <i class="bx bx-dots-vertical-rounded"></i>
-                                            </button>
-                                            <div class="dropdown-menu">
-                                                <a class="dropdown-item" href="javascript:void(0);"
-                                                ><i class="bx bx-edit-alt me-1"></i> Completed</a
-                                                >
-                                                <a class="dropdown-item" href="javascript:void(0);"
-                                                ><i class="bx bx-trash me-1"></i> Cancel</a
-                                                >
-                                                <a class="dropdown-item" href="javascript:void(0);"
-                                                ><i class="bx bx-edit-alt me-1"></i> Deactive</a
-                                                >
-                                                <a class="dropdown-item" href="javascript:void(0);"
-                                                ><i class="bx bx-trash me-1"></i> Delete</a
-                                                >
-                                            </div>
-                                        </div>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td><a href="Detail_Order.html"><i class="fab fa-vuejs fa-lg text-success me-3"></i>
-                                        <strong>Ca-03</strong></a></td>
-                                    <td>Trevor Baker</td>
-                                    <td>
-                                        <ul class="list-unstyled users-list m-0 avatar-group d-flex align-items-center">
-                                            <li
-                                                    data-bs-toggle="tooltip"
-                                                    data-popup="tooltip-custom"
-                                                    data-bs-placement="top"
-                                                    class="avatar avatar-xs pull-up"
-                                                    title="Lilian Fuller"
-                                            >
-                                                <img src="../assets/img_admin/avatars/5.png" alt="Avatar"
-                                                     class="rounded-circle"/>
-                                            </li>
-
-                                        </ul>
-                                    </td>
-                                    <td><span class="badge bg-label-info me-1">Cancel</span></td>
-                                    <td>
-                                        <div class="dropdown">
-                                            <button type="button" class="btn p-0 dropdown-toggle hide-arrow"
-                                                    data-bs-toggle="dropdown">
-                                                <i class="bx bx-dots-vertical-rounded"></i>
-                                            </button>
-                                            <div class="dropdown-menu">
-                                                <a class="dropdown-item" href="javascript:void(0);"
-                                                ><i class="bx bx-edit-alt me-1"></i> Completed</a
-                                                >
-                                                <a class="dropdown-item" href="javascript:void(0);"
-                                                ><i class="bx bx-trash me-1"></i> Cancel</a
-                                                >
-                                                <a class="dropdown-item" href="javascript:void(0);"
-                                                ><i class="bx bx-edit-alt me-1"></i> Deactive</a
-                                                >
-                                                <a class="dropdown-item" href="javascript:void(0);"
-                                                ><i class="bx bx-trash me-1"></i> Delete</a
-                                                >
-                                            </div>
-                                        </div>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td><a href="Detail_Order.html"><i
-                                            class="fab fa-angular fa-lg text-danger me-3"></i>
-                                        <strong>Ca-04</strong></a></td>
-                                    <td>Albert Cook</td>
-                                    <td>
-                                        <ul class="list-unstyled users-list m-0 avatar-group d-flex align-items-center">
-
-                                            <li
-                                                    data-bs-toggle="tooltip"
-                                                    data-popup="tooltip-custom"
-                                                    data-bs-placement="top"
-                                                    class="avatar avatar-xs pull-up"
-                                                    title="Christina Parker"
-                                            >
-                                                <img src="../assets/img_admin/avatars/7.png" alt="Avatar"
-                                                     class="rounded-circle"/>
-                                            </li>
-                                        </ul>
-                                    </td>
-                                    <td><span class="badge bg-label-primary me-1">Wait</span></td>
-                                    <td>
-                                        <div class="dropdown">
-                                            <button type="button" class="btn p-0 dropdown-toggle hide-arrow"
-                                                    data-bs-toggle="dropdown">
-                                                <i class="bx bx-dots-vertical-rounded"></i>
-                                            </button>
-                                            <div class="dropdown-menu">
-                                                <a class="dropdown-item" href="javascript:void(0);"
-                                                ><i class="bx bx-edit-alt me-1"></i> Completed</a
-                                                >
-                                                <a class="dropdown-item" href="javascript:void(0);"
-                                                ><i class="bx bx-trash me-1"></i> Cancel</a
-                                                >
-                                                <a class="dropdown-item" href="javascript:void(0);"
-                                                ><i class="bx bx-edit-alt me-1"></i> Deactive</a
-                                                >
-                                                <a class="dropdown-item" href="javascript:void(0);"
-                                                ><i class="bx bx-trash me-1"></i> Delete</a
-                                                >
-                                            </div>
-                                        </div>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td><a href="Detail_Order.html"><i class="fab fa-react fa-lg text-info me-3"></i>
-                                        <strong>Ca-05</strong></a></td>
-                                    <td>Barry Hunter</td>
-                                    <td>
-                                        <ul class="list-unstyled users-list m-0 avatar-group d-flex align-items-center">
-
-                                            <li
-                                                    data-bs-toggle="tooltip"
-                                                    data-popup="tooltip-custom"
-                                                    data-bs-placement="top"
-                                                    class="avatar avatar-xs pull-up"
-                                                    title="Sophia Wilkerson"
-                                            >
-                                                <img src="../assets/img_admin/avatars/6.png" alt="Avatar"
-                                                     class="rounded-circle"/>
-                                            </li>
-
-                                        </ul>
-                                    </td>
-                                    <td><span class="badge bg-label-success me-1">Completed</span></td>
-                                    <td>
-                                        <div class="dropdown">
-                                            <button type="button" class="btn p-0 dropdown-toggle hide-arrow"
-                                                    data-bs-toggle="dropdown">
-                                                <i class="bx bx-dots-vertical-rounded"></i>
-                                            </button>
-                                            <div class="dropdown-menu">
-                                                <a class="dropdown-item" href="javascript:void(0);"
-                                                ><i class="bx bx-edit-alt me-1"></i> Completed</a
-                                                >
-                                                <a class="dropdown-item" href="javascript:void(0);"
-                                                ><i class="bx bx-trash me-1"></i> Cancel</a
-                                                >
-                                                <a class="dropdown-item" href="javascript:void(0);"
-                                                ><i class="bx bx-edit-alt me-1"></i> Deactive</a
-                                                >
-                                                <a class="dropdown-item" href="javascript:void(0);"
-                                                ><i class="bx bx-trash me-1"></i> Delete</a
-                                                >
-                                            </div>
-                                        </div>
-                                    </td>
-                                </tr>
-
-                                </tbody>
-                            </table>
-                        </div>
+                            <ol style="padding-left: 0">
+                                <c:choose>
+                                    <c:when test="${pagePrepayment}">
+                                        <form action="/admin/orderPrePayment" class="form-search" method="get">
+                                    </c:when>
+                                    <c:when test="${pagePostpaid}">
+                                        <form action="/admin/orderPostpaid" class="form-search"></c:when>
+                                    <c:otherwise>
+                                        <form action="/admin/order" class="form-search">
+                                    </c:otherwise>
+                                </c:choose>
+                                    <input class="ip_search" type="search" name="infoSearch" placeholder="Tìm kiếm..." style="background: white; border-radius: 10px; width: 50%" >
+                                    <button class="btn-search" style="background: #696CFF; border-radius: 50%; border: 1px solid transparent; outline: none; width: 44px;height: 44px; transform: translate(10px,4px)">
+                                        <i class="fa-solid fa-magnifying-glass" style="color: #FFF3FF;transform: translate(1px,2px);"></i>
+                                    </button>
+                                </form>
+                            </ol>
+                        </nav>
+                        <!-- Basic Bootstrap Table -->
+                        <nav aria-label="Page navigation" class="col-lg-6">
+                            <c:choose>
+                                <c:when test="${pagePrepayment}">
+                                    <ul class="pagination justify-content-end">
+                                        <li class="page-item prev" style="display:<%=(pagination == 1) ? "none" : "block"%> ">
+                                            <a class="page-link" href="${pageContext.request.contextPath}/admin/orderPrePayment?page=<%= (pagination - 1) + search%>"
+                                            ><i class="tf-icon bx bx-chevrons-left"></i
+                                            ></a>
+                                        </li>
+                                        <li class="page-item">
+                                            <a class="page-link" href="${pageContext.request.contextPath}/admin/orderPrePayment?page=<%=pagination+search%>"><%=pagination%></a>
+                                        </li>
+                                        <li class="page-item">
+                                            <form action="${pageContext.request.contextPath}/admin/orderPrePayment?<%=search%>">
+                                                <input
+                                                        type="number"
+                                                        class="form-control"
+                                                        name="page"
+                                                        autofocus
+                                                        min="1"
+                                                />
+                                            </form>
+                                        </li>
+                                        <li class="page-item next" style="display:<%=(pagination == totalPage) ? "none" : "block"%> ">
+                                            <a class="page-link" href="${pageContext.request.contextPath}/admin/orderPrePayment?page=<%= (pagination + 1)+search%>"
+                                            ><i class="tf-icon bx bx-chevrons-right"></i
+                                            ></a>
+                                        </li>
+                                    </ul>
+                                </c:when>
+                                <c:when test="${pagePostpaid}">
+                                    <ul class="pagination justify-content-end">
+                                        <li class="page-item prev" style="display:<%=(pagination == 1) ? "none" : "block"%> ">
+                                            <a class="page-link" href="${pageContext.request.contextPath}/admin/orderPostpaid?page=<%= (pagination - 1)+search%>"
+                                            ><i class="tf-icon bx bx-chevrons-left"></i
+                                            ></a>
+                                        </li>
+                                        <li class="page-item">
+                                            <a class="page-link" href="${pageContext.request.contextPath}/admin/orderPostpaid?page=<%=pagination+search%>"><%=pagination%></a>
+                                        </li>
+                                        <li class="page-item">
+                                            <form action="${pageContext.request.contextPath}/admin/orderPostpaid?<%=search%>">
+                                                <input
+                                                        type="number"
+                                                        class="form-control"
+                                                        name="page"
+                                                        autofocus
+                                                        min="1"
+                                                />
+                                            </form>
+                                        </li>
+                                        <li class="page-item next" style="display:<%=(pagination == totalPage) ? "none" : "block"%> ">
+                                            <a class="page-link" href="${pageContext.request.contextPath}/admin/orderPostpaid?page=<%=(pagination + 1)+search%>"
+                                            ><i class="tf-icon bx bx-chevrons-right"></i
+                                            ></a>
+                                        </li>
+                                    </ul>
+                                </c:when>
+                                <c:otherwise>
+                                    <ul class="pagination justify-content-end">
+                                        <li class="page-item prev" style="display:<%=(pagination == 1) ? "none" : "block"%> ">
+                                            <a class="page-link" href="${pageContext.request.contextPath}/admin/order?page=<%=(pagination - 1)+search%>"
+                                            ><i class="tf-icon bx bx-chevrons-left"></i
+                                            ></a>
+                                        </li>
+                                        <li class="page-item">
+                                            <a class="page-link" href="${pageContext.request.contextPath}/admin/order?page=<%=pagination +search%>"><%=pagination%></a>
+                                        </li>
+                                        <li class="page-item">
+                                            <form action="${pageContext.request.contextPath}/admin/order?<%=search2%>">
+                                                <input
+                                                        type="number"
+                                                        class="form-control"
+                                                        name="page"
+                                                        autofocus
+                                                        min="1"
+                                                />
+                                            </form>
+                                        </li>
+                                        <li class="page-item next" style="display:<%=(pagination == totalPage) ? "none" : "block"%> ">
+                                            <a class="page-link" href="${pageContext.request.contextPath}/admin/order?page=<%=(pagination + 1)+search%>"
+                                            ><i class="tf-icon bx bx-chevrons-right"></i
+                                            ></a>
+                                        </li>
+                                    </ul>
+                                </c:otherwise>
+                            </c:choose>
+                        </nav>
                     </div>
-                    <!--/ Basic Bootstrap Table -->
-
+                    <c:choose>
+                        <c:when test="<%= orders.size() == 0%>">
+                            <div class="card">
+                                <h5 class="card-header" style="text-align: center">Không có danh mục nào</h5>
+                            </div>
+                        </c:when>
+                        <c:otherwise>
+                            <div class="card">
+                                <h5 class="card-header">Table Basic</h5>
+                                <div class="table-responsive text-nowrap">
+                                    <table class="table">
+                                        <thead>
+                                        <tr>
+                                            <th>ID</th>
+                                            <th>Thông tin chi tiết</th>
+                                            <th>Ngày tạo</th>
+                                        </tr>
+                                        </thead>
+                                        <tbody class="table-border-bottom-0">
+                                        <c:forEach items="<%= orders %>" var="order">
+                                            <tr>
+                                                <td><a href="${pageContext.request.contextPath}/admin/adminOrderDetail?id=${order.id}"><strong>${order.id}</strong></a></td>
+                                                <td>${order.info}</td>
+                                                <td>${order.createdAt}</td>
+                                                <td>
+                                                    <div class="dropdown">
+                                                        <button type="button" class="btn p-0 dropdown-toggle hide-arrow"
+                                                                data-bs-toggle="dropdown">
+                                                            <i class="bx bx-dots-vertical-rounded"></i>
+                                                        </button>
+                                                        <div class="dropdown-menu">
+                                                            <a class="dropdown-item" href="${pageContext.request.contextPath}/admin/deleteOrder?id=${order.id}"><i
+                                                                    class="bx bx-trash me-1"></i> Delete</a>
+                                                        </div>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                        </c:forEach>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </c:otherwise>
+                    </c:choose>
                 </div>
-                <!-- / Content -->
-
                 <!-- Footer -->
                 <footer class="content-footer footer bg-footer-theme">
                     <div class="container-xxl d-flex flex-wrap justify-content-between py-2 flex-md-row flex-column">
@@ -347,19 +293,26 @@
 
 <!-- Core JS -->
 <!-- build:js assets/vendor/js/core.js -->
-<script src="../assets/vendor/libs/jquery/jquery.js"></script>
-<script src="../assets/vendor/libs/popper/popper.js"></script>
-<script src="../assets/vendor/js/bootstrap.js"></script>
-<script src="../assets/vendor/libs/perfect-scrollbar/perfect-scrollbar.js"></script>
-
-<script src="../assets/vendor/js/menu.js"></script>
+<script src="/assets/vendor/libs/jquery/jquery.js"></script>
+<script src="/assets/vendor/libs/popper/popper.js"></script>
+<script src="/assets/vendor/js/bootstrap.js"></script>
+<script src="/assets/vendor/libs/perfect-scrollbar/perfect-scrollbar.js"></script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/chosen/1.8.7/chosen.jquery.min.js"></script>
+<script src="/assets/vendor/js/menu.js"></script>
+<script src="/assets/js/upload.js"></script>
 <!-- endbuild -->
 
 <!-- Vendors JS -->
 
 <!-- Main JS -->
-<script src="../assets/js_admin/main.js"></script>
-
+<script src="/assets/js_admin/main.js"></script>
+<script>
+    $(".chosen-select").chosen({
+        allow_single_deselect: true,
+        width: '50%',
+        no_results_text: "Không tìm thấy kết quả :"
+    })
+</script>
 <!-- Page JS -->
 
 <!-- Place this tag in your head or just before your close body tag. -->

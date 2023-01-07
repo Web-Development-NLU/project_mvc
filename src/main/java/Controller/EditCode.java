@@ -30,11 +30,21 @@ public class EditCode extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String id = request.getParameter("id");
+        boolean delete = Boolean.parseBoolean(request.getParameter("delete"));
+        if(delete) {
+            this.codeService.delete(id, Code.class);
+            response.sendRedirect("/admin/code");
+            return;
+        }
         String value = request.getParameter("value");
         String productId = request.getParameter("productId");
+        boolean errorInput = Boolean.parseBoolean(request.getParameter("errorInput"));
+        boolean errorCategoryId = Boolean.valueOf(request.getParameter("errorCategoryId"));
+        boolean errorProductId = Boolean.valueOf(request.getParameter("errorProductId"));
+        boolean errorValueCode = Boolean.parseBoolean(request.getParameter("errorValueCode"));
         Code code;
         int categoryId = 0;
-        if(id != null){
+        if(!errorCategoryId && !errorInput && !errorProductId && !errorValueCode){
             code = this.codeService.findById(id, Code.class);
         }else{
             code = new Code(value);
@@ -46,10 +56,7 @@ public class EditCode extends HttpServlet {
             }
             code.setCategoryId(categoryId);
         }
-        boolean errorInput = Boolean.parseBoolean(request.getParameter("errorInput"));
-        boolean errorCategoryId = Boolean.valueOf(request.getParameter("errorCategoryId"));
-        boolean errorProductId = Boolean.valueOf(request.getParameter("errorProductId"));
-        boolean errorValueCode = Boolean.parseBoolean(request.getParameter("errorValueCode"));
+        code.setId(Integer.parseInt(id));
         request.setAttribute("code",code);
         request.setAttribute("errorInput",errorInput);
         request.setAttribute("errorCategoryId",errorCategoryId);
@@ -60,8 +67,8 @@ public class EditCode extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        Boolean errorValueCode = false,errorInput= false,errorCategoryId = false, errorProductId = false;
         String id = request.getParameter("id");
+        Boolean errorValueCode = false,errorInput= false,errorCategoryId = false, errorProductId = false;
         String value = request.getParameter("value");
         String productId = request.getParameter("productId");
         int categoryId = 0;
@@ -77,7 +84,7 @@ public class EditCode extends HttpServlet {
             errorInput = true;
         }
         if(errorInput || errorCategoryId || errorProductId || errorValueCode) {
-            response.sendRedirect("/admin/editCode?value="+value+"&productId="+productId+"&categoryId="+categoryId+"&errorProductId="+errorProductId+"&errorInput="+errorInput+"&errorCategoryId="+errorCategoryId+"&errorValueCode="+errorValueCode);
+            response.sendRedirect("/admin/editCode?id="+id+"&value="+value+"&productId="+productId+"&categoryId="+categoryId+"&errorProductId="+errorProductId+"&errorInput="+errorInput+"&errorCategoryId="+errorCategoryId+"&errorValueCode="+errorValueCode);
             return;
         }
         UpdateCodeDTO dto = new UpdateCodeDTO(value,categoryId, productId);
