@@ -9,7 +9,7 @@
 <%@ page isELIgnored = "false" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <div class="card-benefit col-12 col-md-6 col-lg-4">
-  <div class="text-icon-benefit ">
+  <div class="text-icon-benefit " style="height: 100%">
     <div class="img_benefit">
       <img src="${param.img}" alt="Not found">
     </div>
