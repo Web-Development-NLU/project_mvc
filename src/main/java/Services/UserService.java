@@ -2,10 +2,7 @@ package Services;
 
 import DTO.BaseDTO;
 import DTO.CartDTO;
-import Model.Cart;
-import Model.StatusAccount;
-import Model.TypeAccount;
-import Model.User;
+import Model.*;
 import at.favre.lib.crypto.bcrypt.BCrypt;
 import org.jdbi.v3.core.Handle;
 import org.jdbi.v3.core.HandleCallback;
@@ -200,4 +197,12 @@ public class UserService extends BaseService<User> {
         this.jdbi.useHandle(handle ->
             handle.createUpdate("DELETE FROM cart WHERE idUser = :idUser").bind("idUser", idUser).execute());
     }
+    public ArrayList<User> getNameUser() {
+        return (ArrayList<User>) this.jdbi.withHandle(handle -> {
+            return handle.createQuery("SELECT * FROM " + this.tableName +
+                            " where status = 2 ")
+                    .mapToBean(User.class)
+                    .list();
+        });
+    };
 }
