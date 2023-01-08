@@ -6,6 +6,8 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ page isELIgnored="false" %>
 <html>
 <head>
   <jsp:include page="common/head.jsp">
@@ -15,6 +17,7 @@
 <body>
 <%
   Contact contact = (Contact) request.getAttribute("contact");
+  String success = (request.getAttribute("success") == null) ? null : request.getAttribute("success").toString();
 %>
   <div id="contact-contariner">
     <header>
@@ -53,28 +56,28 @@
           <div class="header-send-us">
             <div class="title-content-swap">
               <span class="icon-email"><i class="bi bi-envelope"></i></span>
-              <span class="title-head monts">TRÒ CHUYỆN VỚI CHÚNG TÔI</span>
+              <span class="title-head monts">BẠN MUỐN ĐƯỢC TƯ VẤN ?</span>
             </div>
           </div>
-          <form>
+          <form action="${pageContext.request.contextPath}/customer?page=contact" method="post">
             <div class="form-send-us-container">
               <div class="form-send-us-swap">
                 <div class="form-container">
                   <div class="input-area">
                     <div class="field-ip-container">
                       <div class="ip_name-container">
-                        <input class="input-primary monts" type="text" placeholder="Tên của bạn *">
+                        <input class="input-primary monts" type="text" name="name" placeholder="Tên của bạn *">
                       </div>
                       <div class="ip_email-container">
-                        <input class="input-primary monts" type="text" placeholder="Email của bạn *">
+                        <input class="input-primary monts" type="email" name="email" placeholder="Email của bạn *">
                       </div>
                     </div>
                     <div class="field-area-container">
-                      <textarea class="text-area monts" placeholder="Bạn muốn hỏi điều gì"></textarea>
+                      <textarea class="text-area monts" name="message" placeholder="Bạn muốn hỏi điều gì"></textarea>
                     </div>
                   </div>
                   <div class="submit-container">
-                    <a href="#"><button class="btn-text-lg bgr-black hover-bg-red monts">GỬI CHO CHÚNG TÔI</button></a>
+                    <button class="btn-text-lg bgr-black hover-bg-red monts">GỬI CHO CHÚNG TÔI</button>
                   </div>
                 </div>
               </div>
@@ -84,6 +87,14 @@
       </div>
 
     </div>
+    <c:if test="<%=success != null%>">
+      <div class="alert-success alert alert-dismissible fade show fixed-top" role="alert">
+        <strong>Thành công</strong> <%=success%>
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+    </c:if>
     <jsp:include page="common/footer.jsp"/>
   </div>
   <jsp:include page="common/tail.jsp"/>
