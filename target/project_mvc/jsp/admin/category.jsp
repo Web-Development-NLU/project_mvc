@@ -107,7 +107,7 @@
                             </ol>
                         </nav>
                         <!-- Basic Bootstrap Table -->
-                        <nav aria-label="Page navigation" class="col-lg-6">
+                        <nav aria-label="Page navigation" class="col-lg-6" style="display: <%=totalPage == 1 ? "none" : "block"%>">
                             <ul class="pagination justify-content-end">
                                 <li class="page-item prev" style="display:<%=(pagination == 1) ? "none" : "block"%> ">
                                     <a class="page-link" href="${pageContext.request.contextPath}/admin/category?page=<%= pagination - 1%>"

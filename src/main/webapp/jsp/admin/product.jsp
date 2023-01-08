@@ -119,7 +119,7 @@
                             </ol>
                         </nav>
                         <!-- Basic Bootstrap Table -->
-                        <nav aria-label="Page navigation" class="col-lg-6">
+                        <nav aria-label="Page navigation" class="col-lg-6" style="display: <%=numPage == 1 ? "none" : "block"%>">
                             <ul class="pagination justify-content-end">
                                 <li class="page-item prev">
                                     <a class="page-link" href="${pageContext.request.contextPath}/admin/products?<%=idParam + search%>page=<%=pagination - 1%>"

@@ -124,13 +124,13 @@
                                 </c:choose>
                                     <input class="ip_search" type="search" name="infoSearch" placeholder="Tìm kiếm..." style="background: white; border-radius: 10px; width: 50%" >
                                     <button class="btn-search" style="background: #696CFF; border-radius: 50%; border: 1px solid transparent; outline: none; width: 44px;height: 44px; transform: translate(10px,4px)">
-                                        <i class="fa-solid fa-magnifying-glass" style="color: #FFF3FF;transform: translate(1px,2px);"></i>
+                                        <i class="fa-solid fa-magnifying-glass" style="color: #FFF3FF;transform: translate(1px,1px);"></i>
                                     </button>
                                 </form>
                             </ol>
                         </nav>
                         <!-- Basic Bootstrap Table -->
-                        <nav aria-label="Page navigation" class="col-lg-6">
+                        <nav aria-label="Page navigation" class="col-lg-6" style="display: <%=totalPage == 1 ? "none" : "block"%>">
                             <c:choose>
                                 <c:when test="${pagePrepayment}">
                                     <ul class="pagination justify-content-end">
