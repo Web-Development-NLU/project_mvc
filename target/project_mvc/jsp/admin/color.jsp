@@ -124,17 +124,6 @@
                         <li class="page-item">
                             <a class="page-link" href="${pageContext.request.contextPath}/admin/color?page=<%=pagination%>"><%=pagination%></a>
                         </li>
-                        <li class="page-item">
-                            <form action="${pageContext.request.contextPath}/admin/color" method="post">
-                                <input
-                                        type="number"
-                                        class="form-control"
-                                        name="page"
-                                        autofocus
-                                        min="1"
-                                />
-                            </form>
-                        </li>
                         <li class="page-item next" style="display:<%=(pagination == totalPage) ? "none" : "block"%>">
                             <a class="page-link" href="${pageContext.request.contextPath}/admin/color?page=<%=pagination + 1%>"
                             ><i class="tf-icon bx bx-chevrons-right"></i
