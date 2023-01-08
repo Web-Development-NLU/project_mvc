@@ -99,7 +99,7 @@
 
                                     <div class="row justify-content-end">
                                         <div class="col-sm-10">
-                                            <button type="submit" class="btn btn-primary">Create</button>
+                                            <button type="submit" class="btn btn-primary">Tạo</button>
                                         </div>
                                     </div>
                                 </form>

@@ -77,12 +77,12 @@
         <!-- Content -->
 
         <div class="container-xxl flex-grow-1 container-p-y">
-          <h4 class="fw-bold py-3 mb-4"><span class="text-muted fw-light">Edit/</span> Edit Category</h4>
+          <h4 class="fw-bold py-3 mb-4"><span class="text-muted fw-light">Chỉnh sửa/</span> Danh mục</h4>
           <hr class="my-5"/>
           <div class="col-xxl">
             <div class="card mb-4">
               <div class="card-header d-flex align-items-center justify-content-between">
-                <h5 class="mb-0">Category Information</h5>
+                <h5 class="mb-0">Thông tin danh mục</h5>
               </div>
               <div class="card-body">
                 <form action="${pageContext.request.contextPath}/admin/editCategory" method="post">
@@ -96,7 +96,7 @@
                   </div>
                   <div class="row justify-content-end">
                     <div class="col-sm-10">
-                      <button type="submit" class="btn btn-primary">Update</button>
+                      <button type="submit" class="btn btn-primary">Lưu</button>
                     </div>
                   </div>
                 </form>

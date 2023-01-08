@@ -67,6 +67,12 @@
             </a>
         </li>
         <li class="menu-item">
+            <a href="${pageContext.request.contextPath}/admin/about" class="menu-link">
+                <i class="menu-icon tf-icons bx bx-detail"></i>
+                <div data-i18n="Analytics">Về chúng tôi</div>
+            </a>
+        </li>
+        <li class="menu-item">
             <a href="${pageContext.request.contextPath}/admin/slide" class="menu-link">
                 <i class="menu-icon tf-icons bx bx-home-circle"></i>
                 <div data-i18n="Analytics">Slide</div>
