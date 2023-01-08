@@ -27,7 +27,7 @@
       <jsp:include page="common/searchBarMenu.jsp"/>
       <jsp:include page="common/head-bottom-page.jsp">
         <jsp:param name="title" value="ĐĂNG NHẬP"/>
-        <jsp:param name="page" value="login"/>
+        <jsp:param name="page" value="Đăng nhập / Đăng ký"/>
       </jsp:include>
     </header>
     <div id="login-content" class="container-fluid">
