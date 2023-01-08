@@ -24,7 +24,8 @@ public class SearchProductController extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         ArrayList<Product> products;
         String infoSearch = request.getParameter("infoSearch");
-        if (infoSearch != null){
+        if (infoSearch != null && !infoSearch.equals("null")){
+            request.setAttribute("infoSearch", infoSearch);
             products = this.productService.findByName(infoSearch);
         }else{
             products = this.productService.findAll(Product.class);
@@ -38,6 +39,7 @@ public class SearchProductController extends HttpServlet {
             intPage = 0;
         }
         Double numPage = Math.ceil(Double.parseDouble(String.valueOf(products.size())) / 20);
+        if(numPage < 1) numPage = 1.0;
         if(page == null || intPage < 1) {
             page = "1";
         }
