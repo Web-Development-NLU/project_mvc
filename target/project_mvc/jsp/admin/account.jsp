@@ -126,7 +126,7 @@
                     }
                   %>
                   <tr>
-                    <td><i class="fab fa-angular fa-lg text-danger me-3"></i> <strong><%=name%></strong></td>
+                    <td><strong><%=name%></strong></td>
                     <td><c:out value="${user.email}"/></td>
                     <td><span class="badge bg-label-primary me-1"><%=type%></span></td>
                     <td><span class="badge bg-label-primary me-1"><%=status%></span></td>

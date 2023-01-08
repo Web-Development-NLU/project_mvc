@@ -92,7 +92,7 @@
                 <!-- Content -->
 
                 <div class="container-xxl flex-grow-1 container-p-y">
-                    <h4 class="fw-bold py-3 mb-4"><span class="text-muted fw-light">Chỉnh sửa/ Thông tin liên hệ</span></h4>
+                    <h4 class="fw-bold py-3 mb-4"><span class="text-muted fw-light">Chỉnh sửa / </span>Thông tin liên hệ</h4>
                     <hr class="my-5"/>
                     <div class="col-xxl">
                         <div class="card mb-4">

@@ -184,8 +184,7 @@
                                                 }
                                             %>
                                             <tr>
-                                                <td><a href="${pageContext.request.contextPath}/admin/editProduct?id=${product.id}"> <i
-                                                        class="fab fa-angular fa-lg text-danger me-3"></i> <strong><c:out value="${product.name}"/></strong></a></td>
+                                                <td><a href="${pageContext.request.contextPath}/admin/editProduct?id=${product.id}"><strong><c:out value="${product.name}"/></strong></a></td>
                                                 <td><%=price%> VNĐ</td>
                                                 <td><c:out value="${product.createdAt}"/></td>
                                                 <td><span class="badge bg-label-primary me-1"><%=status%></span></td>
