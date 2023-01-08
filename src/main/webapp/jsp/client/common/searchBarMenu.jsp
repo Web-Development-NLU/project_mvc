@@ -7,9 +7,9 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <div class="search-bar container-fluid" id="menu-search-bar">
-  <form action="">
+  <form action="/searchProduct">
     <div class="input-line menu_list-search">
-      <input type="email" placeholder="Search your keywords">
+      <input type="text" name="infoSearch" placeholder="Tìm kiếm...">
       <button type="submit">
         <i class="fa-solid fa-magnifying-glass"></i>
       </button>

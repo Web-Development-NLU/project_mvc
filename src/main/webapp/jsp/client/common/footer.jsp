@@ -6,20 +6,21 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ page isELIgnored="false" %>
 <footer>
   <div class="footer">
     <div class="footer-wrap">
       <div class="wrap-content-foot">
         <div class="footer-column">
-          <div class="icon-title-foot">
-            <img class="icon-coston-style" src="../assets/imgs/icons/coston-icon.svg" alt="">
+          <div class="icon-title-foot menu_logo">
+            <h2 class="monts">FURNITURE</h2>
           </div>
           <div class="sub-text-foot">
-                <span class="sub-text-style">Nam quam nunc, blandit vel, luctus pulvinar, <br> hendrerit id, lorem.
-                  Donec elit libero,</span>
+                <span class="sub-text-style">Sáng tạo, hiện đại, hiệu quả</span>
           </div>
           <div class="element-widget-foot">
-            <h2>FOLLOW US</h2>
+            <h2>Theo dõi chúng tôi</h2>
           </div>
           <div class="social-media-foot">
             <a href="#">
@@ -40,7 +41,7 @@
         </div>
         <div class="footer-column">
           <div class="title-footer-column">
-            <h4>ABOUT US</h4>
+            <h4>Thông tin về chúng tôi</h4>
           </div>
           <div class="horizontal-line">
             <div class="line"></div>
@@ -48,26 +49,17 @@
           <div class="element-content-container">
             <ul>
               <li>
-                <a href="#"><span class="sub-text-style">Our Story</span></a>
+                <a href="${pageContext.request.contextPath}/about"><span class="sub-text-style">Về chúng tôi</span></a>
               </li>
               <li>
-                <a href="#"><span class="sub-text-style">Visit Melbourne Studio</span></a>
-              </li>
-              <li>
-                <a href="#"><span class="sub-text-style">Visit Sydney Studio</span></a>
-              </li>
-              <li>
-                <a href="#"><span class="sub-text-style">Design</span></a>
-              </li>
-              <li>
-                <a href="#"><span class="sub-text-style">How Brosa Works</span></a>
+                <a href="${pageContext.request.contextPath}/products"><span class="sub-text-style">Các sản phẩm</span></a>
               </li>
             </ul>
           </div>
         </div>
         <div class="footer-column help-res">
           <div class="title-footer-column">
-            <h4>HELP</h4>
+            <h4>Hỗ trợ</h4>
           </div>
           <div class="horizontal-line">
             <div class="line"></div>
@@ -75,23 +67,17 @@
           <div class="element-content-container">
             <ul>
               <li>
-                <a href="#"><span class="sub-text-style">Contact & FAQ</span></a>
+                <a href="${pageContext.request.contextPath}/contact"><span class="sub-text-style">Liên hệ và đặt câu hỏi</span></a>
               </li>
               <li>
-                <a href="#"><span class="sub-text-style">Track Your Order</span></a>
-              </li>
-              <li>
-                <a href="#"><span class="sub-text-style">Refunds</span></a>
-              </li>
-              <li>
-                <a href="#"><span class="sub-text-style">Shipping & Delivery</span></a>
+                <a href="#"><span class="sub-text-style">Tra cứu đơn hàng</span></a>
               </li>
             </ul>
           </div>
         </div>
         <div class="footer-column">
           <div class="title-footer-column">
-            <h4>SERVICES</h4>
+            <h4>Tính năng</h4>
           </div>
           <div class="horizontal-line">
             <div class="line"></div>
@@ -99,19 +85,13 @@
           <div class="element-content-container">
             <ul>
               <li>
-                <a href="#"><span class=" sub-text-style">Need Interior Design Help?</span></a>
+                <a href="${pageContext.request.contextPath}/login"><span class=" sub-text-style">Đăng nhập</span></a>
               </li>
               <li>
-                <a href="#"><span class=" sub-text-style">Free Swatches</span></a>
+                <a href="${pageContext.request.contextPath}/login"><span class=" sub-text-style">Đăng ký</span></a>
               </li>
               <li>
-                <a href="#"><span class="sub-text-style">Support Centre</span></a>
-              </li>
-              <li>
-                <a href="#"><span class="sub-text-style">Assembly Guides</span></a>
-              </li>
-              <li>
-                <a href="#"><span class="sub-text-style">Trade Programme</span></a>
+                <a href="${pageContext.request.contextPath}/forgotPassword"><span class="sub-text-style">Quên mật khẩu</span></a>
               </li>
             </ul>
           </div>

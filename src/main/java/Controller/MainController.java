@@ -3,7 +3,9 @@ package Controller;
 import DTO.FilterProduct;
 import Model.Product;
 import Model.Slide;
+import Model.TypeShop;
 import Services.ProductService;
+import Services.ShopService;
 import Services.SlideService;
 
 import javax.servlet.*;
@@ -16,12 +18,14 @@ import java.util.ArrayList;
 public class MainController extends HttpServlet {
     private ProductService productService;
     private SlideService slideService;
+    private ShopService shopService;
 
     @Override
     public void init() throws ServletException {
         super.init();
         this.productService = new ProductService("product");
         this.slideService = new SlideService("slide");
+        this.shopService = new ShopService("shop");
     }
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -31,6 +35,8 @@ public class MainController extends HttpServlet {
         for(int i = 0; i < end; i++) {
             productsResult.add(products.get(i));
         }
+        request.setAttribute("smallShop", this.shopService.findByType(TypeShop.SMALL.ordinal()));
+        request.setAttribute("largeShop", this.shopService.findByType(TypeShop.LARGE.ordinal()));
         request.setAttribute("slides", slideService.findAll(Slide.class));
         request.setAttribute("products", productsResult);
         request.getRequestDispatcher("/jsp/client/index.jsp").forward(request, response);

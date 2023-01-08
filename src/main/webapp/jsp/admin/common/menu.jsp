@@ -3,7 +3,11 @@
 <%@ page import="java.util.ArrayList" %>
 <%@ page import="Model.Category" %>
 <%@ page import="DTO.AuthorizationData" %>
-<%@ page import="Model.TypeAccount" %><%--
+<%@ page import="Model.TypeAccount" %>
+<%@ page import="Model.TypeShop" %><%--
+=======
+<%@ page import="Model.Order" %><%--
+>>>>>>> ff310e064b8d97b3b6c496f43f874ba65fc27590
   Created by IntelliJ IDEA.
   User: Quang Tho
   Date: 29/12/2022
@@ -89,7 +93,26 @@
                 </c:forEach>
             </ul>
         </li>
-
+        <li class="menu-item">
+            <a href="javascript:void(0);" class="menu-link menu-toggle">
+                <i class="menu-icon tf-icons bx bx-table"></i>
+                <div data-i18n="Authentications">Banner Cửa hàng</div>
+            </a>
+            <ul class="menu-sub">
+                <c:if test="<%=data.getType() == TypeAccount.ROOT_ADMIN.ordinal()%>">
+                    <li class="menu-item">
+                        <a href="${pageContext.request.contextPath}/admin/shop?type=<%=TypeShop.SMALL.ordinal()%>" class="menu-link">
+                            <div data-i18n="Basic">Banner nhỏ</div>
+                        </a>
+                    </li>
+                </c:if>
+                <li class="menu-item">
+                    <a href="${pageContext.request.contextPath}/admin/shop?type=<%=TypeShop.LARGE.ordinal()%>" class="menu-link">
+                        <div data-i18n="Basic">Banner lớn</div>
+                    </a>
+                </li>
+            </ul>
+        </li>
         <li class="menu-item">
             <a href="javascript:void(0);" class="menu-link menu-toggle">
                 <i class="menu-icon tf-icons bx bx-collection"></i>
@@ -114,11 +137,27 @@
             </ul>
         </li>
         <li class="menu-item">
-            <a href="/dashboard/order" class="menu-link ">
+            <a href="/admin/order" class="menu-link menu-toggle">
                 <i class="menu-icon tf-icons bx bx-dock-top"></i>
-                <div data-i18n="Account Settings">Order Management</div>
+                <div data-i18n="Account Settings">Quản lý đơn hàng</div>
             </a>
-
+            <ul class="menu-sub">
+                <li class="menu-item">
+                    <a href="${pageContext.request.contextPath}/admin/order" class="menu-link">
+                        <div data-i18n="Without menu">Tất cả</div>
+                    </a>
+                </li>
+                <li class="menu-item">
+                    <a href="${pageContext.request.contextPath}/admin/orderPrePayment" class="menu-link">
+                        <div data-i18n="Without menu">Thanh toán trước</div>
+                    </a>
+                </li>
+                <li class="menu-item">
+                    <a href="${pageContext.request.contextPath}/admin/orderPostpaid" class="menu-link">
+                        <div data-i18n="Without menu">Thanh toán khi nhận hàng</div>
+                    </a>
+                </li>
+            </ul>
         </li>
 
 
@@ -142,7 +181,7 @@
                     </a>
                 </li>
             </ul>
-
+        </li>
 
     </ul>
 </aside>

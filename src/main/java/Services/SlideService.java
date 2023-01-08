@@ -20,8 +20,8 @@ public class SlideService extends BaseService<Slide> {
 
     @Override
     public boolean update(String id, BaseDTO model) throws Exception {
-        Slide color = this.findById(id, Slide.class);
-        if(color != null) {
+        Slide slide = this.findById(id, Slide.class);
+        if(slide != null) {
             this.jdbi.useHandle(handle -> {
 
                 handle.createUpdate("UPDATE " + this.tableName +
@@ -35,6 +35,6 @@ public class SlideService extends BaseService<Slide> {
                 ).bind("id", id).bindBean(model).execute();
             });
         }
-        return color != null;
+        return slide != null;
     }
 }

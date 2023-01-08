@@ -16,16 +16,11 @@
         <img src="https://caston.familab.net/wp-content/uploads/2022/03/about_image_5.jpg" alt="" class="info-img-lg">
       </div>
       <div class="about-info-card_content right-content">
-        <div class="info_title monts">WE ARE A LIFESTYLE BRAND</div>
+        <div class="info_title monts"><%=request.getParameter("title")%>></div>
         <div class="info_break-line"></div>
-        <div class="info_description monts">Nullam cursus lacinia erat.
-          Nullam accumsan lorem in dui.Praesent metus semper a,
-          adipiscing nec, purus. Ut a nisl id ante tempus hendrerit.
-          Sed fringilla mauris sit amet nibh. Vestibulum ante ipsum
-          primis in faucibus orci luctus et ultrices posuere cubilia
-          Curae; In ac dui quis mi consectetuer lacinia.</div>
+        <div class="info_description monts"><%=request.getParameter("value")%></div>
         <div class="info_action">
-          <a href="#"><button class="btn-text bgr-white hover-bg-red outline-black">SHOP NOW</button></a>
+          <a href="${pageContext.request.contextPath}/products"><button class="btn-text bgr-white hover-bg-red outline-black">XEM CÁC SẢN PHẨM</button></a>
         </div>
       </div>
     </div>
@@ -36,16 +31,11 @@
         <img src="https://caston.familab.net/wp-content/uploads/2022/03/about_image_5.jpg" alt="" class="info-img-sm">
       </div>
       <div class="about-info-card_content left-content">
-        <div class="info_title monts">WE ARE A LIFESTYLE BRAND</div>
+        <div class="info_title monts"><%=request.getParameter("title")%></div>
         <div class="info_break-line"></div>
-        <div class="info_description monts">Nullam cursus lacinia erat.
-          Nullam accumsan lorem in dui.Praesent metus semper a,
-          adipiscing nec, purus. Ut a nisl id ante tempus hendrerit.
-          Sed fringilla mauris sit amet nibh. Vestibulum ante ipsum
-          primis in faucibus orci luctus et ultrices posuere cubilia
-          Curae; In ac dui quis mi consectetuer lacinia.</div>
+        <div class="info_description monts"><%=request.getParameter("value")%></div>
         <div class="info_action">
-          <a href="#"><button class="btn-text bgr-white hover-bg-red outline-black">SHOP NOW</button></a>
+          <a href="${pageContext.request.contextPath}/products"><button class="btn-text bgr-white hover-bg-red outline-black">XEM CÁC SẢN PHẨM</button></a>
         </div>
       </div>
     </div>

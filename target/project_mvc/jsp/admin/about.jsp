@@ -111,7 +111,6 @@
                               placeholder="Nhiệm vụ ..."
                               name="mission"
                               value="<%=about.getMission()%>"
-                              maxlength="10"
                               required
                       />
                     </div>
