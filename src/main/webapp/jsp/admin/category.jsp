@@ -61,6 +61,7 @@
     int pagination = (int) request.getAttribute("pagination");
     String numPage = DecimalFormat.getIntegerInstance().format(Double.parseDouble(request.getAttribute("numPage").toString()));
     int totalPage = Integer.parseInt(numPage);
+    String search = (request.getParameter("infoSearch") == null) ? "" : "&infoSearch=" + request.getParameter("infoSearch");
 %>
 <!-- Layout wrapper -->
 <div class="layout-wrapper layout-content-navbar">
@@ -110,15 +111,15 @@
                         <nav aria-label="Page navigation" class="col-lg-6" style="display: <%=totalPage == 1 ? "none" : "block"%>">
                             <ul class="pagination justify-content-end">
                                 <li class="page-item prev" style="display:<%=(pagination == 1) ? "none" : "block"%> ">
-                                    <a class="page-link" href="${pageContext.request.contextPath}/admin/category?page=<%= pagination - 1%>"
+                                    <a class="page-link" href="${pageContext.request.contextPath}/admin/category?page=<%= pagination - 1%><%=search%>"
                                     ><i class="tf-icon bx bx-chevrons-left"></i
                                     ></a>
                                 </li>
                                 <li class="page-item">
-                                    <a class="page-link" href="${pageContext.request.contextPath}/admin/category?page=<%=pagination%>"><%=pagination%></a>
+                                    <a class="page-link" href="${pageContext.request.contextPath}/admin/category?page=<%=pagination%><%=search%>"><%=pagination%></a>
                                 </li>
                                 <li class="page-item next" style="display:<%=(pagination == totalPage) ? "none" : "block"%> ">
-                                    <a class="page-link" href="${pageContext.request.contextPath}/admin/category?page=<%= pagination + 1%>"
+                                    <a class="page-link" href="${pageContext.request.contextPath}/admin/category?page=<%= pagination + 1%><%=search%>"
                                     ><i class="tf-icon bx bx-chevrons-right"></i
                                     ></a>
                                 </li>

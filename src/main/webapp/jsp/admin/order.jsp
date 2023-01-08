@@ -64,7 +64,7 @@
     int totalPage = Integer.parseInt(numPage);
     boolean pagePostpaid = (boolean) request.getAttribute("pagePostpaid");
     boolean pagePrepayment = (boolean) request.getAttribute("pagePrepayment");
-    String search = (String) request.getAttribute("search") == null ? "" : "&infoSearch="+ request.getAttribute("search");
+    String search = (String) request.getAttribute("infoSearch") == null ? "" : "&infoSearch="+ request.getAttribute("infoSearch");
     int end = pagination + 4 > totalPage ? totalPage : pagination + 4;
     int startOgirin = pagination - 4 > 0 ? (pagination - 4) : 1;
 %>

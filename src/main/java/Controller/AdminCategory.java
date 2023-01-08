@@ -24,6 +24,7 @@ public class AdminCategory extends HttpServlet {
         String infoSearch = request.getParameter("infoSearch");
         ArrayList<Category> categories;
         if(infoSearch != null && !infoSearch.equals("null")){
+            request.setAttribute("infoSearch", infoSearch);
             categories = this.categoryServices.findCategoriesByName(infoSearch);
         }else{
             categories = this.categoryServices.findAll(Category.class);
