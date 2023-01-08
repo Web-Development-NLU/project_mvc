@@ -66,7 +66,11 @@
     boolean pagePostpaid = (boolean) request.getAttribute("pagePostpaid");
     boolean pagePrepayment = (boolean) request.getAttribute("pagePrepayment");
     String search = (String) request.getAttribute("search") == null ? "" : "&infoSearch="+ request.getAttribute("search");
-    String search2 = (String) request.getAttribute("search") == null ? "" : "infoSearch="+ request.getAttribute("search");
+//    int start = ((pagination % 10) == 0) ? ((pagination / 10) - 1) * 10 + 1 : (pagination / 10) * 10 + 1;
+//    int end = Math.min(start + 4, totalPage);
+//    int startOgirin = Math.max(start -4, start);
+    int end = pagination + 4 > totalPage ? totalPage : pagination + 4;
+    int startOgirin = pagination - 4 > 0 ? (pagination - 4) : 1;
 %>
 <!-- Layout wrapper -->
 <div class="layout-wrapper layout-content-navbar">
@@ -139,20 +143,16 @@
                                             ><i class="tf-icon bx bx-chevrons-left"></i
                                             ></a>
                                         </li>
-                                        <li class="page-item">
-                                            <a class="page-link" href="${pageContext.request.contextPath}/admin/orderPrePayment?page=<%=pagination+search%>"><%=pagination%></a>
-                                        </li>
-                                        <li class="page-item">
-                                            <form action="${pageContext.request.contextPath}/admin/orderPrePayment?<%=search%>">
-                                                <input
-                                                        type="number"
-                                                        class="form-control"
-                                                        name="page"
-                                                        autofocus
-                                                        min="1"
-                                                />
-                                            </form>
-                                        </li>
+                                        <c:forEach begin="<%=startOgirin%>" end="<%=pagination-1%>" var="i">
+                                            <li class="page-item">
+                                                <a class="page-link" href="${pageContext.request.contextPath}/admin/orderPrePayment?page=${i}<%=search%>">${i}</a>
+                                            </li>
+                                        </c:forEach>
+                                        <c:forEach begin="<%=pagination%>" end="<%=end%>" var="i">
+                                            <li class="page-item">
+                                                <a class="page-link" href="${pageContext.request.contextPath}/admin/orderPrePayment?page=${i}<%=search%>">${i}</a>
+                                            </li>
+                                        </c:forEach>
                                         <li class="page-item next" style="display:<%=(pagination == totalPage) ? "none" : "block"%> ">
                                             <a class="page-link" href="${pageContext.request.contextPath}/admin/orderPrePayment?page=<%= (pagination + 1)+search%>"
                                             ><i class="tf-icon bx bx-chevrons-right"></i
@@ -167,20 +167,16 @@
                                             ><i class="tf-icon bx bx-chevrons-left"></i
                                             ></a>
                                         </li>
-                                        <li class="page-item">
-                                            <a class="page-link" href="${pageContext.request.contextPath}/admin/orderPostpaid?page=<%=pagination+search%>"><%=pagination%></a>
-                                        </li>
-                                        <li class="page-item">
-                                            <form action="${pageContext.request.contextPath}/admin/orderPostpaid?<%=search%>">
-                                                <input
-                                                        type="number"
-                                                        class="form-control"
-                                                        name="page"
-                                                        autofocus
-                                                        min="1"
-                                                />
-                                            </form>
-                                        </li>
+                                        <c:forEach begin="<%=startOgirin%>" end="<%=pagination-1%>" var="i">
+                                            <li class="page-item">
+                                                <a class="page-link" href="${pageContext.request.contextPath}/admin/orderPostpaid?page=${i}<%=search%>">${i}</a>
+                                            </li>
+                                        </c:forEach>
+                                        <c:forEach begin="<%=pagination%>" end="<%=end%>" var="i">
+                                            <li class="page-item">
+                                                <a class="page-link" href="${pageContext.request.contextPath}/admin/orderPostpaid?page=${i}<%=search%>">${i}</a>
+                                            </li>
+                                        </c:forEach>
                                         <li class="page-item next" style="display:<%=(pagination == totalPage) ? "none" : "block"%> ">
                                             <a class="page-link" href="${pageContext.request.contextPath}/admin/orderPostpaid?page=<%=(pagination + 1)+search%>"
                                             ><i class="tf-icon bx bx-chevrons-right"></i
@@ -195,20 +191,16 @@
                                             ><i class="tf-icon bx bx-chevrons-left"></i
                                             ></a>
                                         </li>
-                                        <li class="page-item">
-                                            <a class="page-link" href="${pageContext.request.contextPath}/admin/order?page=<%=pagination +search%>"><%=pagination%></a>
-                                        </li>
-                                        <li class="page-item">
-                                            <form action="${pageContext.request.contextPath}/admin/order?<%=search2%>">
-                                                <input
-                                                        type="number"
-                                                        class="form-control"
-                                                        name="page"
-                                                        autofocus
-                                                        min="1"
-                                                />
-                                            </form>
-                                        </li>
+                                        <c:forEach begin="<%=startOgirin%>" end="<%=pagination-1%>" var="i">
+                                            <li class="page-item">
+                                                <a class="page-link" href="${pageContext.request.contextPath}/admin/order?page=${i}<%=search%>">${i}</a>
+                                            </li>
+                                        </c:forEach>
+                                        <c:forEach begin="<%=pagination%>" end="<%=end%>" var="i">
+                                            <li class="page-item">
+                                                <a class="page-link" href="${pageContext.request.contextPath}/admin/order?page=${i}<%=search%>">${i}</a>
+                                            </li>
+                                        </c:forEach>
                                         <li class="page-item next" style="display:<%=(pagination == totalPage) ? "none" : "block"%> ">
                                             <a class="page-link" href="${pageContext.request.contextPath}/admin/order?page=<%=(pagination + 1)+search%>"
                                             ><i class="tf-icon bx bx-chevrons-right"></i

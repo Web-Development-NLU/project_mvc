@@ -70,8 +70,8 @@
     int numPage = (int) request.getAttribute("numPage");
     String idParam = (category == null) ? "" : "id="+category.getId()+"&";
     String search = (request.getParameter("search") == null) ? "" : "search=" + request.getParameter("search") + "&";
-    int start = ((pagination % 10) == 0) ? ((pagination / 10) - 1) * 10 + 1 : (pagination / 10) * 10 + 1;
-    int end = Math.min(start + 9, numPage);
+    int end = pagination + 4 > numPage ? numPage : pagination + 4;
+    int startOgirin = pagination - 4 > 0 ? (pagination -4) : 1;
 %>
 <!-- Layout wrapper -->
 <div class="layout-wrapper layout-content-navbar">
@@ -128,27 +128,37 @@
                                     ><i class="tf-icon bx bx-chevrons-left"></i
                                     ></a>
                                 </li>
-
-                                <c:forEach begin="<%=start%>" end="<%=end%>" var="index">
-                                    <c:set var="i" scope="request" value="${index}"/>
-                                    <% int index = (int) request.getAttribute("i"); %>
-                                    <c:choose>
-                                        <c:when test="<%=index == pagination%>">
-                                            <li class="page-item active">
-                                                <a class="page-link" href="${pageContext.request.contextPath}/admin/products?<%=idParam + search%>page=<%=Integer.parseInt(request.getAttribute("i").toString())%>">
-                                                    <%=Integer.parseInt(request.getAttribute("i").toString())%>
-                                                </a>
-                                            </li>
-                                        </c:when>
-                                        <c:otherwise>
-                                            <li class="page-item">
-                                                <a class="page-link" href="${pageContext.request.contextPath}/admin/products?<%=idParam + search%>page=<%=Integer.parseInt(request.getAttribute("i").toString())%>">
-                                                    <%=Integer.parseInt(request.getAttribute("i").toString())%>
-                                                </a>
-                                            </li>
-                                        </c:otherwise>
-                                    </c:choose>
+                                <c:forEach begin="<%=startOgirin%>" end="<%=pagination-1%>" var="i">
+                                    <li class="page-item">
+                                        <a class="page-link" href="${pageContext.request.contextPath}/admin/products?<%=idParam + search%>page=${i}">${i}</a>
+                                    </li>
                                 </c:forEach>
+                                <c:forEach begin="<%=pagination%>" end="<%=end%>" var="i">
+                                    <li class="page-item ${i == pagination ? "active" : ""}">
+                                        <a class="page-link" href="${pageContext.request.contextPath}/admin/products?<%=idParam + search%>page=${i}">${i}</a>
+                                    </li>
+                                </c:forEach>
+
+<%--                                <c:forEach begin="<%=start%>" end="<%=end%>" var="index">--%>
+<%--                                    <c:set var="i" scope="request" value="${index}"/>--%>
+<%--                                    <% int index = (int) request.getAttribute("i"); %>--%>
+<%--                                    <c:choose>--%>
+<%--                                        <c:when test="<%=index == pagination%>">--%>
+<%--                                            <li class="page-item active">--%>
+<%--                                                <a class="page-link" href="${pageContext.request.contextPath}/admin/products?<%=idParam + search%>page=<%=Integer.parseInt(request.getAttribute("i").toString())%>">--%>
+<%--                                                    <%=Integer.parseInt(request.getAttribute("i").toString())%>--%>
+<%--                                                </a>--%>
+<%--                                            </li>--%>
+<%--                                        </c:when>--%>
+<%--                                        <c:otherwise>--%>
+<%--                                            <li class="page-item">--%>
+<%--                                                <a class="page-link" href="${pageContext.request.contextPath}/admin/products?<%=idParam + search%>page=<%=Integer.parseInt(request.getAttribute("i").toString())%>">--%>
+<%--                                                    <%=Integer.parseInt(request.getAttribute("i").toString())%>--%>
+<%--                                                </a>--%>
+<%--                                            </li>--%>
+<%--                                        </c:otherwise>--%>
+<%--                                    </c:choose>--%>
+<%--                                </c:forEach>--%>
                                 <li class="page-item next">
                                     <a class="page-link" href="${pageContext.request.contextPath}/admin/products?<%=idParam + search%>page=<%=pagination + 1%>"
                                     ><i class="tf-icon bx bx-chevrons-right"></i
