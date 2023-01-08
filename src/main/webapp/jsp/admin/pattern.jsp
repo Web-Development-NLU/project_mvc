@@ -78,6 +78,7 @@
     <!-- Layout container -->
     <div class="layout-page">
       <!-- Navbar -->
+      <jsp:include page="common/navbar.jsp"/>
       <!-- / Navbar -->
 
       <!-- Content wrapper -->

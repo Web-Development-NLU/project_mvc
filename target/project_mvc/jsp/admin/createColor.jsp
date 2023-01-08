@@ -77,7 +77,7 @@
                 <!-- Content -->
 
                 <div class="container-xxl flex-grow-1 container-p-y">
-                    <h4 class="fw-bold py-3 mb-4"><span class="text-muted fw-light">Tạo mới/</span>Màu</h4>
+                    <h4 class="fw-bold py-3 mb-4"><span class="text-muted fw-light">Tạo mới / </span>Màu</h4>
                     <hr class="my-5"/>
                     <div class="col-xxl">
                         <div class="card mb-4">
@@ -109,7 +109,7 @@
 
                                     <div class="row justify-content-end">
                                         <div class="col-sm-10">
-                                            <button type="submit" class="btn btn-primary">Create</button>
+                                            <button type="submit" class="btn btn-primary">Tạo</button>
                                         </div>
                                     </div>
                                 </form>

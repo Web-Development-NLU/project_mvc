@@ -66,9 +66,6 @@
     boolean pagePostpaid = (boolean) request.getAttribute("pagePostpaid");
     boolean pagePrepayment = (boolean) request.getAttribute("pagePrepayment");
     String search = (String) request.getAttribute("search") == null ? "" : "&infoSearch="+ request.getAttribute("search");
-//    int start = ((pagination % 10) == 0) ? ((pagination / 10) - 1) * 10 + 1 : (pagination / 10) * 10 + 1;
-//    int end = Math.min(start + 4, totalPage);
-//    int startOgirin = Math.max(start -4, start);
     int end = pagination + 4 > totalPage ? totalPage : pagination + 4;
     int startOgirin = pagination - 4 > 0 ? (pagination - 4) : 1;
 %>
@@ -100,7 +97,7 @@
                             <h4 class="fw-bold py-3 mb-4"><span class="text-muted fw-light">Đơn hàng /</span> Thanh toán khi nhận hàng</h4>
                         </c:when>
                         <c:otherwise>
-                            <h4 class="fw-bold py-3 mb-4"><span class="text-muted fw-light"></span>Đơn hàng</h4>
+                            <h4 class="fw-bold py-3 mb-4"><span class="text-muted fw-light">Đơn hàng /</span> Tất cả đơn hàng</h4>
                         </c:otherwise>
                     </c:choose>
                     <hr class="my-5"/>
@@ -219,7 +216,7 @@
                         </c:when>
                         <c:otherwise>
                             <div class="card">
-                                <h5 class="card-header">Table Basic</h5>
+                                <h5 class="card-header">Bảng đơn hàng</h5>
                                 <div class="table-responsive text-nowrap">
                                     <table class="table">
                                         <thead>
@@ -243,7 +240,7 @@
                                                         </button>
                                                         <div class="dropdown-menu">
                                                             <a class="dropdown-item" href="${pageContext.request.contextPath}/admin/deleteOrder?id=${order.id}"><i
-                                                                    class="bx bx-trash me-1"></i> Delete</a>
+                                                                    class="bx bx-trash me-1"></i> Xóa</a>
                                                         </div>
                                                     </div>
                                                 </td>

@@ -59,7 +59,10 @@
 </head>
 
 <body>
-<% ArrayList<Product> products= (ArrayList<Product>) request.getAttribute("products"); %>
+<%
+    ArrayList<Product> products= (ArrayList<Product>) request.getAttribute("products");
+
+%>
 <!-- Layout wrapper -->
 <div class="layout-wrapper layout-content-navbar">
     <div class="layout-container">

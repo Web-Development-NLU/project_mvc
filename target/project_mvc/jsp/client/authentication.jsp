@@ -43,20 +43,20 @@
               </c:if>
               <div class="ip_user-name">
                 <input id="ip_name-account" type="text" name="email" value="<%= emailLogin %>">
-                <label for="ip_name-account">Email address *</label>
+                <label for="ip_name-account">Địa chỉ email *</label>
               </div>
               <div id="ip_password" class="ip_password">
                 <input class="ip_password-login" id="ip_password-login" name="password" type="password">
-                <label for="ip_password-login">Password *</label>
+                <label for="ip_password-login">Mật khẩu *</label>
                 <span class="show-password" id="show-password">
                   <i class="bi bi-eye-slash"></i>
                 </span>
               </div>
               <div class="lost-password-container">
-                <a href="${pageContext.request.contextPath}/forgotPassword" class="btn-link hover-text-red color-black monts">Lost your password?</a>
+                <a href="${pageContext.request.contextPath}/forgotPassword" class="btn-link hover-text-red color-black monts">Quên mật khẩu?</a>
               </div>
               <div class="btn-login">
-                <button class="btn-text-lg bgr-black hover-bg-red">LOG IN</button>
+                <button class="btn-text-lg bgr-black hover-bg-red">Đăng nhập</button>
               </div>
             </form>
           </div>

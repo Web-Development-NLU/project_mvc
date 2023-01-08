@@ -82,7 +82,7 @@
             <div class="content-wrapper">
                 <!-- Content -->
                 <div class="container-xxl flex-grow-1 container-p-y">
-                    <h4 class="fw-bold py-3 mb-4"><span class="text-muted fw-light"></span>Danh mục</h4>
+                    <h4 class="fw-bold py-3 mb-4"><span class="text-muted fw-light">Quản lý / </span>Danh mục</h4>
                     <a href="${pageContext.request.contextPath}/admin/createCategory">
                         <button type="button" class="btn btn-outline-dark" style="float: right">Thêm danh mục</button>
                     </a>
@@ -91,7 +91,7 @@
                         <nav aria-label="breadcrumb" class="col-lg-6">
                             <ol class="breadcrumb">
                                 <li class="breadcrumb-item">
-                                    <a href="javascript:void(0);"> Trang <%=pagination%></a>
+                                    <a href="javascript:void(0);"> Trang  <%= pagination%> </a>
                                 </li>
                                 <li class="breadcrumb-item">
                                     <a href="javascript:void(0);"><%=numPage%></a>
@@ -117,17 +117,6 @@
                                 <li class="page-item">
                                     <a class="page-link" href="${pageContext.request.contextPath}/admin/category?page=<%=pagination%>"><%=pagination%></a>
                                 </li>
-                                <li class="page-item">
-                                    <form action="${pageContext.request.contextPath}/admin/category" method="post">
-                                        <input
-                                                type="number"
-                                                class="form-control"
-                                                name="page"
-                                                autofocus
-                                                min="1"
-                                        />
-                                    </form>
-                                </li>
                                 <li class="page-item next" style="display:<%=(pagination == totalPage) ? "none" : "block"%> ">
                                     <a class="page-link" href="${pageContext.request.contextPath}/admin/category?page=<%= pagination + 1%>"
                                     ><i class="tf-icon bx bx-chevrons-right"></i
@@ -144,7 +133,7 @@
                         </c:when>
                         <c:otherwise>
                             <div class="card">
-                                <h5 class="card-header">Category</h5>
+                                <h5 class="card-header">Bảng danh mục</h5>
                                 <div class="table-responsive text-nowrap">
                                     <table class="table">
                                         <thead>
@@ -168,9 +157,9 @@
                                                         </button>
                                                         <div class="dropdown-menu">
                                                             <a class="dropdown-item" href="${pageContext.request.contextPath}/admin/editCategory?id=${category.id}"><i
-                                                                    class="bx bx-edit-alt me-2"></i> Edit</a>
+                                                                    class="bx bx-edit-alt me-2"></i> Chỉnh sửa</a>
                                                             <a class="dropdown-item" href="${pageContext.request.contextPath}/admin/editCategory?id=${category.id}&delete=true"><i
-                                                                    class="bx bx-trash me-2"></i> Delete</a>
+                                                                    class="bx bx-trash me-2"></i> Xóa</a>
                                                         </div>
                                                     </div>
                                                 </td>
