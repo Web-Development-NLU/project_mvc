@@ -66,10 +66,10 @@
                   <div class="input-area">
                     <div class="field-ip-container">
                       <div class="ip_name-container">
-                        <input class="input-primary monts" type="text" name="name" placeholder="Tên của bạn *">
+                        <input class="input-primary monts" type="text" name="name" placeholder="Tên của bạn *" required>
                       </div>
                       <div class="ip_email-container">
-                        <input class="input-primary monts" type="email" name="email" placeholder="Email của bạn *">
+                        <input class="input-primary monts" type="email" name="email" placeholder="Email của bạn *" required>
                       </div>
                     </div>
                     <div class="field-area-container">

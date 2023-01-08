@@ -59,7 +59,7 @@
 </head>
 
 <body>
-<% ArrayList<Product> products= (ArrayList<Product>) request.getAttribute("products"); %>
+<% ArrayList<Product> products = (ArrayList<Product>) request.getAttribute("products"); %>
 <!-- Layout wrapper -->
 <div class="layout-wrapper layout-content-navbar">
     <div class="layout-container">
@@ -91,41 +91,41 @@
                                     <div class="col-md mb-4 mb-md-0">
                                         <small class="text-light fw-semibold">Product Detail </small>
                                         <div class="accordion mt-3" id="accordionExample">
-                                    <c:forEach items="<%=products%>" var="product">
-                                            <div class="card accordion-item active">
+<%--                                            <c:forEach items="<%=products%>" var="product">--%>
+<%--                                                <div class="card accordion-item">--%>
 
-                                                <h2 class="accordion-header" id="headingOne">
-                                                    <button
-                                                            type="button"
-                                                            class="accordion-button"
-                                                            data-bs-toggle="collapse"
-                                                            data-bs-target="#accordionOne"
-                                                            aria-expanded="true"
-                                                            aria-controls="accordionOne"
-                                                    >
-                                                        ${product.name}
-                                                    </button>
-                                                </h2>
+<%--                                                    <h2 class="accordion-header" id="headingOne">--%>
+<%--                                                        <button--%>
+<%--                                                                type="button"--%>
+<%--                                                                class="accordion-button"--%>
+<%--                                                                data-bs-toggle="collapse"--%>
+<%--                                                                data-bs-target="#accordion${product.id}"--%>
+<%--                                                                aria-expanded="true"--%>
+<%--                                                                aria-controls="accordion${product.id}"--%>
+<%--                                                        >--%>
+<%--                                                                ${product.name}--%>
+<%--                                                        </button>--%>
+<%--                                                    </h2>--%>
 
-                                                <div
-                                                        id="accordionOne"
-                                                        class="accordion-collapse collapse show"
-                                                        data-bs-parent="#accordionExample"
-                                                >
-                                                    <div class="accordion-body">
-                                                        ${product.description}
-                                                        <br><br>
-                                                        Kích thước: ${product.dimensions}
-                                                        <br>
-                                                        Giá:&nbsp; ${product.price}
-                                                        <br>
-                                                        Vật liệu:&nbsp; ${product.material}
+<%--                                                    <div--%>
+<%--                                                            id="accordion${product.id}"--%>
+<%--                                                            class="accordion-collapse collapse show"--%>
+<%--                                                            data-bs-parent="#accordionExample"--%>
+<%--                                                    >--%>
+<%--                                                        <div class="accordion-body">--%>
+<%--                                                                ${product.description}--%>
+<%--                                                            <br><br>--%>
+<%--                                                            Kích thước: ${product.dimensions}--%>
+<%--                                                            <br>--%>
+<%--                                                            Giá:&nbsp; ${product.price}--%>
+<%--                                                            <br>--%>
+<%--                                                            Vật liệu:&nbsp; ${product.material}--%>
 
 
-                                                    </div>
-                                                </div>
-                                            </div
-                                    </c:forEach>
+<%--                                                        </div>--%>
+<%--                                                    </div>--%>
+<%--                                                </div--%>
+<%--                                            </c:forEach>--%>
 
                                         </div>
                                     </div>
@@ -149,16 +149,16 @@
                                     </ol>
 
                                     <div class="carousel-inner">
-                                        <c:forEach items="<%=products%>" var="product">
-                                        <div class="carousel-item active">
-                                            <img class="d-block w-100" src="${product.thumbnail.split(",")[0]}"
-                                                 alt="First slide"/>
-                                            <div class="carousel-caption d-none d-md-block">
-                                                <h3>${product.name}</h3>
-                                                <p>${product.shortDescription}</p>
-                                            </div>
-                                        </div>
-                                        </c:forEach>
+<%--                                        <c:forEach items="<%=products%>" var="product">--%>
+<%--                                            <div class="carousel-item active">--%>
+<%--                                                <img class="d-block w-100" src="${product.thumbnail.split(",")[0]}"--%>
+<%--                                                     alt="First slide"/>--%>
+<%--                                                <div class="carousel-caption d-none d-md-block">--%>
+<%--                                                    <h3>${product.name}</h3>--%>
+<%--                                                    <p>${product.shortDescription}</p>--%>
+<%--                                                </div>--%>
+<%--                                            </div>--%>
+<%--                                        </c:forEach>--%>
                                     </div>
 
                                     <a class="carousel-control-prev" href="#carouselExample-cf" role="button"
@@ -177,7 +177,6 @@
                     </div>
 
                     <!-- Total Revenue -->
-
 
 
                     <style>

@@ -9,11 +9,6 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page isELIgnored="false" %>
 
-<%
-    String error = (request.getAttribute("error") == null) ? null : request.getAttribute("error").toString();
-    String email = (request.getAttribute("email") == null) ? null : request.getAttribute("email").toString();
-%>
-
 <!DOCTYPE html>
 
 <html
@@ -44,23 +39,26 @@
     />
 
     <!-- Icons. Uncomment required icon fonts -->
-    <link rel="stylesheet" href="/assets/vendor/fonts/boxicons.css"/>
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/vendor/fonts/boxicons.css"/>
 
     <!-- Core CSS -->
-    <link rel="stylesheet" href="/assets/vendor/css/style.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/vendor/css/style.css">
     <!-- Vendors CSS -->
-    <link rel="stylesheet" href="/assets/vendor/libs/perfect-scrollbar/perfect-scrollbar.css"/>
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/vendor/libs/perfect-scrollbar/perfect-scrollbar.css"/>
 
     <!-- Page CSS -->
     <!-- Page -->
-    <link rel="stylesheet" href="/assets/vendor/css/pages/page-auth.css"/>
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/vendor/css/pages/page-auth.css"/>
     <!-- Helpers -->
-    <script src="/assets/vendor/js/helpers.js"></script>
-    <script src="/assets/js_admin/config.js"></script>
+    <script src="${pageContext.request.contextPath}/assets/vendor/js/helpers.js"></script>
+    <script src="${pageContext.request.contextPath}/assets/js_admin/config.js"></script>
 
 </head>
-
 <body>
+<%
+    String error = (request.getAttribute("error") == null) ? null : request.getAttribute("error").toString();
+    String email = (request.getAttribute("email") == null) ? null : request.getAttribute("email").toString();
+%>
 <!-- Content -->
 
 <div class="container-xxl">
@@ -114,12 +112,6 @@
                             </div>
                         </div>
                         <div class="mb-3">
-                            <div class="form-check">
-                                <input class="form-check-input" type="checkbox" id="remember-me"/>
-                                <label class="form-check-label" for="remember-me"> Remember Me </label>
-                            </div>
-                        </div>
-                        <div class="mb-3">
                             <button class="btn btn-primary d-grid w-100" type="submit">Sign in</button>
                         </div>
                     </form>
@@ -138,18 +130,18 @@
 
 <!-- Core JS -->
 <!-- build:js assets/vendor/js/core.js -->
-<script src="/assets/vendor/libs/jquery/jquery.js"></script>
-<script src="/assets/vendor/libs/popper/popper.js"></script>
-<script src="/assets/vendor/js/bootstrap.js"></script>
-<script src="/assets/vendor/libs/perfect-scrollbar/perfect-scrollbar.js"></script>
+<script src="${pageContext.request.contextPath}/assets/vendor/libs/jquery/jquery.js"></script>
+<script src="${pageContext.request.contextPath}/assets/vendor/libs/popper/popper.js"></script>
+<script src="${pageContext.request.contextPath}/assets/vendor/js/bootstrap.js"></script>
+<script src="${pageContext.request.contextPath}/assets/vendor/libs/perfect-scrollbar/perfect-scrollbar.js"></script>
 
-<script src="/assets/vendor/js/menu.js"></script>
+<script src="${pageContext.request.contextPath}/assets/vendor/js/menu.js"></script>
 <!-- endbuild -->
 
 <!-- Vendors JS -->
 
 <!-- Main JS -->
-<script src="/assets/js_admin/main.js"></script>
+<script src="${pageContext.request.contextPath}/assets/js_admin/main.js"></script>
 
 <!-- Page JS -->
 
