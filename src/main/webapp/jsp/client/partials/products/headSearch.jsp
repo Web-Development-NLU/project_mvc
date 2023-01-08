@@ -9,7 +9,7 @@
 <div class="head_bottom-shop">
     <div class="head_bottom-content container-fluid">
         <div class="head_bottom-title color-white">
-            <h1 class="monts">The Shop</h1>
+            <h1 class="monts">Sản phẩm</h1>
         </div>
         <form action="/searchProduct" class="form-search" style="justify-content: center">
             <input class="ip_search" type="text" name="infoSearch" placeholder="Tìm kiếm..." style="width: 60%">

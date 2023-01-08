@@ -1,4 +1,7 @@
-<%--
+<%@ page import="DTO.AuthorizationData" %>
+<%@ page import="Services.UserService" %>
+<%@ page import="Model.User" %>
+<%@ page import="Model.TypeAccount" %><%--
   Created by IntelliJ IDEA.
   User: Quang Tho
   Date: 29/12/2022
@@ -8,7 +11,12 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page isELIgnored="false" %>
-
+<%
+    AuthorizationData data = (AuthorizationData) session.getAttribute("adminLogin");
+    UserService userService = new UserService("users");
+    User user = userService.findById(data.getId(), User.class);
+    String nameAdmin = user.getFirstName() +" "+ user.getLastName();
+%>
 <nav
         class="layout-navbar container-xxl navbar navbar-expand-xl navbar-detached align-items-center bg-navbar-theme"
         id="layout-navbar"
@@ -23,13 +31,7 @@
         <!-- Search -->
         <div class="navbar-nav align-items-center">
             <div class="nav-item d-flex align-items-center">
-                <i class="bx bx-search fs-4 lh-0"></i>
-                <input
-                        type="text"
-                        class="form-control border-0 shadow-none"
-                        placeholder="Search."
-                        aria-label="Search."
-                />
+                <h3 style="margin-bottom: 0">Xin chào <%=data.getType() == TypeAccount.ROOT_ADMIN.ordinal() ? "Root" : "Admin"%></h3>
             </div>
         </div>
         <!-- /Search -->
@@ -43,7 +45,7 @@
                 <a class="nav-link dropdown-toggle hide-arrow" href="javascript:void(0);"
                    data-bs-toggle="dropdown">
                     <div class="avatar avatar-online">
-                        <img src="/assets/img_admin/avatars/1.png" alt
+                        <img src="https://scontent.fsgn5-11.fna.fbcdn.net/v/t39.30808-6/318025381_1798229290534958_7635655280474646079_n.jpg?_nc_cat=110&ccb=1-7&_nc_sid=09cbfe&_nc_ohc=pJYPwpzcSw8AX-qPL3o&_nc_ht=scontent.fsgn5-11.fna&oh=00_AfALRuvRztwOoRqDcl9ycEAY7u9CeRXvB4cbXl1DroNW3A&oe=63BF056A" alt
                              class="w-px-40 h-auto rounded-circle"/>
                     </div>
                 </a>
@@ -53,13 +55,13 @@
                             <div class="d-flex">
                                 <div class="flex-shrink-0 me-3">
                                     <div class="avatar avatar-online">
-                                        <img src="/assets/img_admin/avatars/1.png" alt
+                                        <img src="https://scontent.fsgn5-11.fna.fbcdn.net/v/t39.30808-6/318025381_1798229290534958_7635655280474646079_n.jpg?_nc_cat=110&ccb=1-7&_nc_sid=09cbfe&_nc_ohc=pJYPwpzcSw8AX-qPL3o&_nc_ht=scontent.fsgn5-11.fna&oh=00_AfALRuvRztwOoRqDcl9ycEAY7u9CeRXvB4cbXl1DroNW3A&oe=63BF056A" alt
                                              class="w-px-40 h-auto rounded-circle"/>
                                     </div>
                                 </div>
                                 <div class="flex-grow-1">
-                                    <span class="fw-semibold d-block">John Doe</span>
-                                    <small class="text-muted">Admin</small>
+                                    <span class="fw-semibold d-block"><%=nameAdmin%></span>
+                                    <small class="text-muted"><%=data.getType() == TypeAccount.ROOT_ADMIN.ordinal() ? "Root" : "Admin"%></small>
                                 </div>
                             </div>
                         </a>

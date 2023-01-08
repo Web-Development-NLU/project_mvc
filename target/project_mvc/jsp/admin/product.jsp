@@ -68,8 +68,8 @@
     int numPage = (int) request.getAttribute("numPage");
     String idParam = (category == null) ? "" : "id="+category.getId()+"&";
     String search = (request.getParameter("search") == null) ? "" : "search=" + request.getParameter("search") + "&";
-    int start = ((pagination % 10) == 0) ? ((pagination / 10) - 1) * 10 + 1 : (pagination / 10) * 10 + 1;
-    int end = Math.min(start + 9, numPage);
+    int end = pagination + 4 > numPage ? numPage : pagination + 4;
+    int startOgirin = pagination - 4 > 0 ? (pagination -4) : 1;
 %>
 <!-- Layout wrapper -->
 <div class="layout-wrapper layout-content-navbar">
@@ -119,33 +119,22 @@
                             </ol>
                         </nav>
                         <!-- Basic Bootstrap Table -->
-                        <nav aria-label="Page navigation" class="col-lg-6">
+                        <nav aria-label="Page navigation" class="col-lg-6" style="display: <%=numPage == 1 ? "none" : "block"%>">
                             <ul class="pagination justify-content-end">
                                 <li class="page-item prev">
                                     <a class="page-link" href="${pageContext.request.contextPath}/admin/products?<%=idParam + search%>page=<%=pagination - 1%>"
                                     ><i class="tf-icon bx bx-chevrons-left"></i
                                     ></a>
                                 </li>
-
-                                <c:forEach begin="<%=start%>" end="<%=end%>" var="index">
-                                    <c:set var="i" scope="request" value="${index}"/>
-                                    <% int index = (int) request.getAttribute("i"); %>
-                                    <c:choose>
-                                        <c:when test="<%=index == pagination%>">
-                                            <li class="page-item active">
-                                                <a class="page-link" href="${pageContext.request.contextPath}/admin/products?<%=idParam + search%>page=<%=Integer.parseInt(request.getAttribute("i").toString())%>">
-                                                    <%=Integer.parseInt(request.getAttribute("i").toString())%>
-                                                </a>
-                                            </li>
-                                        </c:when>
-                                        <c:otherwise>
-                                            <li class="page-item">
-                                                <a class="page-link" href="${pageContext.request.contextPath}/admin/products?<%=idParam + search%>page=<%=Integer.parseInt(request.getAttribute("i").toString())%>">
-                                                    <%=Integer.parseInt(request.getAttribute("i").toString())%>
-                                                </a>
-                                            </li>
-                                        </c:otherwise>
-                                    </c:choose>
+                                <c:forEach begin="<%=startOgirin%>" end="<%=pagination-1%>" var="i">
+                                    <li class="page-item">
+                                        <a class="page-link" href="${pageContext.request.contextPath}/admin/products?<%=idParam + search%>page=${i}">${i}</a>
+                                    </li>
+                                </c:forEach>
+                                <c:forEach begin="<%=pagination%>" end="<%=end%>" var="i">
+                                    <li class="page-item ${i == pagination ? "active" : ""}">
+                                        <a class="page-link" href="${pageContext.request.contextPath}/admin/products?<%=idParam + search%>page=${i}">${i}</a>
+                                    </li>
                                 </c:forEach>
                                 <li class="page-item next">
                                     <a class="page-link" href="${pageContext.request.contextPath}/admin/products?<%=idParam + search%>page=<%=pagination + 1%>"
@@ -155,70 +144,77 @@
                             </ul>
                         </nav>
                     </div>
-
-                    <div class="card">
-                        <h5 class="card-header">CHI TIẾT</h5>
-                        <div class="table-responsive text-nowrap">
-                            <table class="table">
-                                <thead>
-                                <tr>
-                                    <th>Tên</th>
-                                    <th>Giá</th>
-                                    <th>Ngày thêm</th>
-                                    <th>Trạng thái</th>
-                                    <th>Thao tác</th>
-                                </tr>
-                                </thead>
-                                <tbody class="table-border-bottom-0">
-                                <c:forEach items="<%=products%>" var="product">
-                                    <c:set var="status" value="${product.status}" scope="request"/>
-                                    <c:set var="price" value="${product.price}" scope="request"/>
-                                    <%
-                                        String price = DecimalFormat.getIntegerInstance().format(Double.parseDouble(request.getAttribute("price").toString()));
-                                        String status;
-                                        int oppositeStatus;
-                                        String nameOppositeStatus;
-                                        if (Integer.parseInt(request.getAttribute("status").toString()) == StatusProduct.AVAILABLE.ordinal()) {
-                                            status = "còn hàng";
-                                            oppositeStatus = StatusProduct.UNAVAILABLE.ordinal();
-                                            nameOppositeStatus = "hết hàng";
-                                        } else {
-                                            status = "hết hàng";
-                                            oppositeStatus = StatusProduct.AVAILABLE.ordinal();
-                                            nameOppositeStatus = "còn hàng";
-                                        }
-                                    %>
-                                    <tr>
-                                        <td><a href="${pageContext.request.contextPath}/admin/editProduct?id=${product.id}"> <i
-                                                class="fab fa-angular fa-lg text-danger me-3"></i> <strong><c:out value="${product.name}"/></strong></a></td>
-                                        <td><%=price%> VNĐ</td>
-                                        <td><c:out value="${product.createdAt}"/></td>
-                                        <td><span class="badge bg-label-primary me-1"><%=status%></span></td>
-                                        <td>
-                                            <div class="dropdown">
-                                                <button type="button" class="btn p-0 dropdown-toggle hide-arrow"
-                                                        data-bs-toggle="dropdown">
-                                                    <i class="bx bx-dots-vertical-rounded"></i>
-                                                </button>
-                                                <div class="dropdown-menu">
-                                                    <a class="dropdown-item" href="${pageContext.request.contextPath}/admin/editProduct?id=${product.id}"
-                                                    ><i class="bx bx-edit-alt me-1"></i> Chỉnh sửa</a
-                                                    >
-                                                    <a class="dropdown-item" href="${pageContext.request.contextPath}/admin/setStatusProduct?id=${product.id}&<%=(category == null) ? "" : "category="+category.getId()+"&"%>value=<%=oppositeStatus%>"
-                                                    ><i class="bx bx-edit-alt me-1"></i>Đánh dấu là <%=nameOppositeStatus%></a
-                                                    >
-                                                    <a class="dropdown-item" href="${pageContext.request.contextPath}/admin/deleteProduct?id=${product.id}<%=(category == null) ? "" : "&id="+category.getId()%>"
-                                                    ><i class="bx bx-trash me-1"></i>xóa</a
-                                                    >
-                                                </div>
-                                            </div>
-                                        </td>
-                                    </tr>
-                                </c:forEach>
-                                </tbody>
-                            </table>
-                        </div>
-                    </div>
+                    <c:choose>
+                        <c:when test="<%=products.size() == 0%>">
+                            <div class="card">
+                                <h5 class="card-header" style="text-align: center">Không có sản phẩm nào</h5>
+                            </div>
+                        </c:when>
+                        <c:otherwise>
+                            <div class="card">
+                                <h5 class="card-header">Bảng sản phẩm</h5>
+                                <div class="table-responsive text-nowrap">
+                                    <table class="table">
+                                        <thead>
+                                        <tr>
+                                            <th>Tên</th>
+                                            <th>Giá</th>
+                                            <th>Ngày thêm</th>
+                                            <th>Trạng thái</th>
+                                            <th>Thao tác</th>
+                                        </tr>
+                                        </thead>
+                                        <tbody class="table-border-bottom-0">
+                                        <c:forEach items="<%=products%>" var="product">
+                                            <c:set var="status" value="${product.status}" scope="request"/>
+                                            <c:set var="price" value="${product.price}" scope="request"/>
+                                            <%
+                                                String price = DecimalFormat.getIntegerInstance().format(Double.parseDouble(request.getAttribute("price").toString()));
+                                                String status;
+                                                int oppositeStatus;
+                                                String nameOppositeStatus;
+                                                if (Integer.parseInt(request.getAttribute("status").toString()) == StatusProduct.AVAILABLE.ordinal()) {
+                                                    status = "còn hàng";
+                                                    oppositeStatus = StatusProduct.UNAVAILABLE.ordinal();
+                                                    nameOppositeStatus = "hết hàng";
+                                                } else {
+                                                    status = "hết hàng";
+                                                    oppositeStatus = StatusProduct.AVAILABLE.ordinal();
+                                                    nameOppositeStatus = "còn hàng";
+                                                }
+                                            %>
+                                            <tr>
+                                                <td><a href="${pageContext.request.contextPath}/admin/editProduct?id=${product.id}"><strong><c:out value="${product.name}"/></strong></a></td>
+                                                <td><%=price%> VNĐ</td>
+                                                <td><c:out value="${product.createdAt}"/></td>
+                                                <td><span class="badge bg-label-primary me-1"><%=status%></span></td>
+                                                <td>
+                                                    <div class="dropdown">
+                                                        <button type="button" class="btn p-0 dropdown-toggle hide-arrow"
+                                                                data-bs-toggle="dropdown">
+                                                            <i class="bx bx-dots-vertical-rounded"></i>
+                                                        </button>
+                                                        <div class="dropdown-menu">
+                                                            <a class="dropdown-item" href="${pageContext.request.contextPath}/admin/editProduct?id=${product.id}"
+                                                            ><i class="bx bx-edit-alt me-1"></i> Chỉnh sửa</a
+                                                            >
+                                                            <a class="dropdown-item" href="${pageContext.request.contextPath}/admin/setStatusProduct?id=${product.id}&<%=(category == null) ? "" : "category="+category.getId()+"&"%>value=<%=oppositeStatus%>"
+                                                            ><i class="bx bx-edit-alt me-1"></i>Đánh dấu là <%=nameOppositeStatus%></a
+                                                            >
+                                                            <a class="dropdown-item" href="${pageContext.request.contextPath}/admin/deleteProduct?id=${product.id}<%=(category == null) ? "" : "&id="+category.getId()%>"
+                                                            ><i class="bx bx-trash me-1"></i>xóa</a
+                                                            >
+                                                        </div>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                        </c:forEach>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </c:otherwise>
+                    </c:choose>
                     <!--/ Basic Bootstrap Table -->
 
                 </div>

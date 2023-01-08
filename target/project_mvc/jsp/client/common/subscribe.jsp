@@ -18,7 +18,7 @@
     </div>
     <form action="${pageContext.request.contextPath}/customer<%=param%>" method="post">
         <div class="input-line">
-            <input type="email" name="email" placeholder="Your Email Address">
+            <input type="email" name="email" placeholder="Địa chỉ email của bạn">
             <button type="submit">GỬI
                 <i class="fa-solid fa-chevron-right"></i>
             </button>

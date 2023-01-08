@@ -27,14 +27,14 @@
       <jsp:include page="common/searchBarMenu.jsp"/>
       <jsp:include page="common/head-bottom-page.jsp">
         <jsp:param name="title" value="ĐĂNG NHẬP"/>
-        <jsp:param name="page" value="login"/>
+        <jsp:param name="page" value="Đăng nhập / Đăng ký"/>
       </jsp:include>
     </header>
     <div id="login-content" class="container-fluid">
       <div class="row">
         <div class="col-12 col-md">
           <div class="login-container">
-            <h2>Login</h2>
+            <h2>Đăng nhập</h2>
             <form class="form-swap" action="${pageContext.request.contextPath}/login" method="post">
               <c:if test="<%= !errorLogin.isEmpty() %>">
                 <div class="color-red mb-3 overflow-hidden">
@@ -43,20 +43,20 @@
               </c:if>
               <div class="ip_user-name">
                 <input id="ip_name-account" type="text" name="email" value="<%= emailLogin %>">
-                <label for="ip_name-account">Email address *</label>
+                <label for="ip_name-account">Địa chỉ email *</label>
               </div>
               <div id="ip_password" class="ip_password">
                 <input class="ip_password-login" id="ip_password-login" name="password" type="password">
-                <label for="ip_password-login">Password *</label>
+                <label for="ip_password-login">Mật khẩu *</label>
                 <span class="show-password" id="show-password">
                   <i class="bi bi-eye-slash"></i>
                 </span>
               </div>
               <div class="lost-password-container">
-                <a href="${pageContext.request.contextPath}/forgotPassword" class="btn-link hover-text-red color-black monts">Lost your password?</a>
+                <a href="${pageContext.request.contextPath}/forgotPassword" class="btn-link hover-text-red color-black monts">Quên mật khẩu?</a>
               </div>
               <div class="btn-login">
-                <button class="btn-text-lg bgr-black hover-bg-red">LOG IN</button>
+                <button class="btn-text-lg bgr-black hover-bg-red">Đăng nhập</button>
               </div>
             </form>
           </div>
@@ -64,7 +64,7 @@
 
         <div class="col-12 col-md">
           <div class="register-container">
-            <h2>REGISTER</h2>
+            <h2>Đăng ký</h2>
             <form class="form-swap" action="${pageContext.request.contextPath}/signup" method="post">
               <c:if test="<%= !error.isEmpty() %>">
                 <div class="color-red mb-3 overflow-hidden">
@@ -74,21 +74,19 @@
 
               <div class="ip_user-name">
                 <input id="ip_new-name" name="email" type="email" required value="<%=email%>">
-                <label for="ip_new-name">Email *</label>
+                <label for="ip_new-name">Địa chỉ email *</label>
               </div>
               <div class="ip_email">
                 <input id="ip_password_register" name="password" type="password" required>
-                <label for="ip_password_register">Password *</label>
+                <label for="ip_password_register">Mật khẩu *</label>
               </div>
-              <p class="monts">A password will be sent to your email address.</p>
+              <p class="monts">Mã xác nhận sẽ gửi về email của bạn.</p>
               <div class="privacy-policy-text">
-                <p class="monts">Your personal data will be used to support your experience throughout this website,
-                  to
-                  manage access to your account, and for other purposes described in our <a class="monts" href="#">privacy
-                    policy.</a></p>
+                <p class="monts">Dữ liệu cá nhân của bạn sẽ được sử dụng để hỗ trợ trải nghiệm của bạn trên toàn trang web này, để quản lý quyền truy cập vào tài khoản của bạn và cho các mục đích khác được mô tả trong
+                  <a class="monts" href="#">chính sách bảo mật của chúng tôi.</a></p>
               </div>
               <div class="btn-register">
-                <button class="btn-text-lg bgr-black hover-bg-red">REGISTER</button>
+                <button class="btn-text-lg bgr-black hover-bg-red">Đăng ký</button>
               </div>
             </form>
           </div>
