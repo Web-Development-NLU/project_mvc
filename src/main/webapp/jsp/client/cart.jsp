@@ -26,7 +26,7 @@
         <jsp:include page="common/searchBarMenu.jsp"/>
         <jsp:include page="common/head-bottom-page.jsp">
             <jsp:param name="title" value="GIỎ HÀNG"/>
-            <jsp:param name="page" value="cart"/>
+            <jsp:param name="page" value="GIỎ HÀNG"/>
         </jsp:include>
     </header>
 
@@ -42,9 +42,9 @@
                 <div class="card-store-empty-container">
                     <div class="card-store-swap">
                         <div class="content-area">
-                            <p>Your cart is currently empty.</p>
+                            <p>GIỎ HÀNG CỦA BẠN ĐANG TRỐNG</p>
                             <div class="btn-return-shop">
-                                <span><a class="btn-text-lg bgr-black hover-bg-red" href="#">RETURN TO SHOP</a></span>
+                                <span><a class="btn-text-lg bgr-black hover-bg-red" href="/product">TRỞ VỀ CỬA HÀNG</a></span>
                             </div>
                         </div>
                     </div>
@@ -56,11 +56,11 @@
                         <table class="table table-bordered">
                             <thead>
                             <tr>
-                                <th class="smart-cell">PRODUCT</th>
-                                <th>Name</th>
-                                <th>PRICE</th>
-                                <th>QUANTITY</th>
-                                <th>SUBTOTAL</th>
+                                <th class="smart-cell">SẢN PHẨM</th>
+                                <th>TÊN</th>
+                                <th>GIÁ</th>
+                                <th>SỐ LƯỢNG</th>
+                                <th>XÓA SẢN PHẨM</th>
                             </tr>
                             </thead>
                             <tbody class="cart-list">

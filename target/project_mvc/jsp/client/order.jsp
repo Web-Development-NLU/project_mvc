@@ -53,7 +53,7 @@
         <jsp:include page="common/searchBarMenu.jsp"/>
         <jsp:include page="common/head-bottom-page.jsp">
             <jsp:param name="title" value="GIỎ HÀNG"/>
-            <jsp:param name="page" value="cart"/>
+            <jsp:param name="page" value="GIỎ HÀNG"/>
         </jsp:include>
     </header>
 
@@ -67,7 +67,7 @@
         <div class="checkout-other-action mt-5 mb-5">
             <div class="action-link">
                 <i class="fa-regular fa-user action-icon"></i>
-                <a href="#" class="action-content">BẤM VÀO ĐÂY ĐỂ ĐĂNG NHẬP</a>
+                <a href="/login" class="action-content">BẤM VÀO ĐÂY ĐỂ ĐĂNG NHẬP</a>
             </div>
         </div>
 
@@ -82,32 +82,32 @@
                     </c:if>
                     <div class="billing-name row">
                         <div class="input-secondary col">
-                            <label for="firstName">Frist Name *</label>
+                            <label for="firstName">Họ *</label>
                             <input type="text" id="firstName" name="firstName" value="<%= firstName %>">
                         </div>
                         <div class="input-secondary col">
-                            <label for="lastName">Last Name *</label>
+                            <label for="lastName">Tên *</label>
                             <input type="text" id="lastName" name="lastName" value="<%= lastName %>">
                         </div>
                     </div>
                     <div class="input-secondary">
-                        <label for="country">Country *</label>
+                        <label for="country">Quốc gia *</label>
                         <input type="text" id="country" name="country" value="<%= country %>">
                     </div>
                     <div class="input-secondary">
-                        <label for="city">City/Province *</label>
+                        <label for="city">Thành phố/ Tỉnh *</label>
                         <input type="text" id="city" name="city" value="<%= city %>">
                     </div>
                     <div class="input-secondary">
-                        <label for="district">District *</label>
+                        <label for="district">Quận *</label>
                         <input type="text" id="district" name="district" value="<%= district %>">
                     </div>
                     <div class="input-secondary">
-                        <label for="address">Address *</label>
+                        <label for="address">Địa chỉ cụ thể *</label>
                         <input type="text" id="address" name="address" value="<%= address %>">
                     </div>
                     <div class="input-secondary">
-                        <label for="phone">Phone *</label>
+                        <label for="phone">Số điện thoại *</label>
                         <input type="text" id="phone" name="phone" value="<%= phone %>">
                     </div>
                     <div class="input-secondary">
@@ -115,8 +115,8 @@
                         <input type="text" id="email" name="email" VALUE="<%= email %>">
                     </div>
                     <div class="checkout-additional-info">
-                        <div class="checkout-additional-info_title">Additional Infomation</div>
-                        <textarea class="text-area mt-4" placeholder="Additional info" name="additionalInfo"></textarea>
+                        <div class="checkout-additional-info_title">Thông tin bổ sung</div>
+                        <textarea class="text-area mt-4" placeholder="Thông tin bổ sung" name="additionalInfo"></textarea>
                     </div>
                 </div>
 

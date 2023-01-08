@@ -6,6 +6,9 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%
+  Boolean logged = (Boolean) request.getAttribute("logged");
+%>
 <div class="foot-end-bgr-white foot-end ">
   <div class="wrap-foot-end">
     <div class="foot-end-column">
@@ -16,7 +19,7 @@
           </div>
         </div>
         <div class="cpw-container">
-          <h2 class="hide-content">Copyright @ 2022 Caston. All rights reserved.</h2>
+          <h2 class="hide-content">Furniture</h2>
         </div>
       </div>
     </div>
@@ -24,9 +27,9 @@
       <div class="wrap-content">
         <div class="col-foot-right">
           <ul>
-            <li><a href="#"><span>Contact & FAQ</span></a></li>
-            <li><a href="#"><span>Refunds</span></a></li>
-            <li><a href="#"><span>Shipping & Delivery</span></a></li>
+            <li><a href="/contact"><span>Liên hệ và Hỏi đáp</span></a></li>
+            <li><a href="<%=logged ? "/orderList" : "/searchOrder" %>"><span>Tra cứu đơn hàng</span></a></li>
+            <li><a href="/about"><span>Về chúng tôi</span></a></li>
           </ul>
           <div class="social-media-foot">
             <a href="#">
@@ -51,6 +54,11 @@
     </div>
   </div>
   <div class="visible-res">
-    <h2 class="cpw-res">Copyright @ 2022 Caston. All rights reserved.</h2>
+    <h2 class="cpw-res"> <div class="mb-2 mb-md-0">
+      ©
+      <script>
+        document.write(new Date().getFullYear());
+      </script>
+    </div></h2>
   </div>
 </div>

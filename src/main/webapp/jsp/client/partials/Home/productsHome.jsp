@@ -15,7 +15,7 @@
 %>
 <div class="products-container bgr-white-02">
   <div class="products">
-    <div class="product_title monts">New arrivvals</div>
+    <div class="product_title monts">Sản phẩm vừa xem</div>
     <div class="container-fluid">
       <div class="product-list row mb-5 ">
         <c:forEach items="<%=products%>" var="product"  >

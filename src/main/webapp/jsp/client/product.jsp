@@ -1,6 +1,7 @@
 <%@ page import="Model.Product" %>
 <%@ page import="java.util.ArrayList" %>
-<%@ page import="java.util.List" %><%--
+<%@ page import="java.util.List" %>
+<%@ page import="DTO.StatReview" %><%--
   Created by IntelliJ IDEA.
   User: Quang Tho
   Date: 02/12/2022
@@ -21,6 +22,7 @@
     Product product = (Product) request.getAttribute("product");
     String[] thumbnails = product.getThumbnail().split(",");
     ArrayList<Product> relatedProduct = (ArrayList<Product>) request.getAttribute("relatedProducts");
+    StatReview statReview = (StatReview) request.getAttribute("statReview");
 %>
 
 <div id="container">
@@ -31,9 +33,10 @@
     <div class="head-bottom-breadcrumb">
         <div aria-label="breadcrumb">
             <ol class="breadcrumb color-black">
-                <li class="breadcrumb-item monts" aria-current="page"><a href="#" class="color-black">Home</a></li>
-                <li class="breadcrumb-item monts" aria-current="page">Product</li>
+                <li class="breadcrumb-item monts" aria-current="page"><a href="#" class="color-black">Trang chủ</a></li>
+                <li class="breadcrumb-item monts" aria-current="page">Sản phẩm</li>
                 <li class="breadcrumb-item monts" aria-current="page">/ <%=product.getName()%></li>
+
             </ol>
         </div>
     </div>
@@ -77,7 +80,7 @@
                 <div class="nav-item tab-item" id="tab-reviews" role="tab" data-toggle="tab"
                      data-target="#content-reviews"
                      aria-controls="content-reviews" aria-selected="false">ĐÁNH GIÁ <span
-                        class="reviews-number">(4)</span></div>
+                        class="reviews-number">(<%=statReview.getSum()%>)</span></div>
             </div>
 
             <div class="content-list tab-content">

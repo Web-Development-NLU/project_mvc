@@ -110,12 +110,12 @@
                             </div>
                         </div>
                         <div class="mb-3">
-                            <button class="btn btn-primary d-grid w-100" type="submit">Sign in</button>
+                            <button class="btn btn-primary d-grid w-100" type="submit">Đăng nhập</button>
                         </div>
                     </form>
 
                     <p class="text-center">
-                        <span>New on our platform?</span>
+                        <span></span>
 
                     </p>
                 </div>

@@ -1,10 +1,8 @@
 <%@ page import="java.text.DecimalFormat" %>
 <%@ page import="java.util.ArrayList" %>
-<%@ page import="Model.Color" %>
-<%@ page import="Model.Product" %>
-<%@ page import="Model.Pattern" %>
 <%@ page import="DTO.StatReview" %>
-<%@ page import="Model.StatusProduct" %><%--
+<%@ page import="Model.*" %>
+<%@ page import="Services.CategoryServices" %><%--
 =======
 <%@ page import="Model.Pattern" %><%--
 >>>>>>> a54fe1ac2474d64b9373d2e8acf7d69699fc7c06
@@ -23,11 +21,13 @@
   ArrayList<Pattern> patterns = (ArrayList<Pattern>) request.getAttribute("patterns");
   StatReview statReview = (StatReview) request.getAttribute("statReview");
   boolean isUnavailable = product.getStatus() == StatusProduct.UNAVAILABLE.ordinal();
+  CategoryServices categoryServices = new CategoryServices("category");
+  Category category = categoryServices.findById(String.valueOf(product.getCategoryId()), Category.class);
 %>
 <div class="product-detail col col-lg-4">
   <div class="product_rate-point">
     <div class="star-rate" data-rate="<%=statReview.getAvg()%>"></div>
-    <div class="rate-number">(<%=statReview.getSum()%> reviews)</div>
+    <div class="rate-number">(<%=statReview.getSum()%> đánh giá)</div>
   </div>
   <div class="product_name monts">
     <h2><%=product.getName()%></h2>
@@ -40,7 +40,7 @@
     <div class="product_options">
       <c:if test="<%=!colors.isEmpty()%>">
         <div class="gallery-action product_options-choice">
-            <div class="product_option_title">Color:</div>
+            <div class="product_option_title">Màu :</div>
             <c:forEach items="<%=colors%>" var="color">
               <div class="input-radio">
                 <label>
@@ -53,7 +53,7 @@
       </c:if>
       <c:if test="<%=!patterns.isEmpty()%>">
         <div class="product_size product_options-choice">
-          <div class="product_option_title">Pattern: </div>
+          <div class="product_option_title">Mẫu : </div>
           <c:forEach items="<%=patterns%>" var="pattern">
             <div class="input-radio-text">
               <label>
@@ -83,18 +83,15 @@
       </div>
     </div>
   </form>
-  <div class="product_btn-add-wishlist">
-    <div class="wishlist-btn-icon"><i class="fa-regular fa-heart"></i></div>
-    <div class="wishlist-title">Add to wishlist</div>
-  </div>
+
   <div class="product_info">
     <div class="product_info-item">
-      <div class="product_info-type">Category:</div>
-      <div class="product_info-name">Storage</div>
+      <div class="product_info-type">Danh mục:</div>
+      <div class="product_info-name"><%=category.getName()%></div>
     </div>
   </div>
   <div class="action-share-social">
-    <span class="title">Share:</span>
+    <span class="title">Chia sẻ:</span>
     <a href="#"><button class="social-item hover-text-red br-50"><i
             class="fa-brands fa-facebook-f"></i></button></a>
     <a href="#"><button class="social-item hover-text-red br-50"><i
