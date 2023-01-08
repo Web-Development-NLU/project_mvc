@@ -114,10 +114,7 @@
                         <label for="email">Email *</label>
                         <input type="text" id="email" name="email" VALUE="<%= email %>">
                     </div>
-                    <div class="checkout-additional-info">
-                        <div class="checkout-additional-info_title">Thông tin bổ sung</div>
-                        <textarea class="text-area mt-4" placeholder="Thông tin bổ sung" name="additionalInfo"></textarea>
-                    </div>
+
                 </div>
 
                 <div class="checkout-action col-12 col-lg-4">

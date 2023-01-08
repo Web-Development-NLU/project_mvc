@@ -71,7 +71,7 @@
         <!-- Content -->
 
         <div class="container-xxl flex-grow-1 container-p-y">
-          <h4 class="fw-bold py-3 mb-4"><span class="text-muted fw-light">Tài khoản /</span> Tài khoản admin</h4>
+          <h4 class="fw-bold py-3 mb-4"><span class="text-muted fw-light">Tài khoản /</span> Tài khoản user</h4>
           <c:if test="<%=param%>">
             <a href="${pageContext.request.contextPath}/admin/account/createAdmin"> <button type="button" class="btn btn-outline-dark" style="float: right">Tạo một admin</button></a>
           </c:if>
