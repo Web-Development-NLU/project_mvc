@@ -152,7 +152,7 @@
                         </c:when>
                         <c:otherwise>
                             <div class="card">
-                                <h5 class="card-header">CHI TIẾT</h5>
+                                <h5 class="card-header">Bảng sản phẩm</h5>
                                 <div class="table-responsive text-nowrap">
                                     <table class="table">
                                         <thead>

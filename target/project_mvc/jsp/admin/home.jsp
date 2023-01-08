@@ -82,8 +82,7 @@
                                                                     <div class="row">
                                                                         <div class="col-md mb-4 mb-md-0">
                                                                             <small
-                                                                                class="text-light fw-semibold">Product
-                                                                                Detail </small>
+                                                                                class="text-light fw-semibold">Chi tiết sản phẩm </small>
                                                                             <div class="accordion mt-3"
                                                                                 id="accordionExample">
                                                                                 <c:forEach items="<%=products%>"

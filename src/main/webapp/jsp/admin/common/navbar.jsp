@@ -31,7 +31,7 @@
         <!-- Search -->
         <div class="navbar-nav align-items-center">
             <div class="nav-item d-flex align-items-center">
-                <h3 style="margin-bottom: 0">Welcom Admin</h3>
+                <h3 style="margin-bottom: 0">Xin chào <%=data.getType() == TypeAccount.ROOT_ADMIN.ordinal() ? "Root" : "Admin"%></h3>
             </div>
         </div>
         <!-- /Search -->
