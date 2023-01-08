@@ -32,8 +32,8 @@
     <jsp:include page="common/menu.jsp"/>
     <jsp:include page="common/searchBarMenu.jsp"/>
     <jsp:include page="common/head-bottom-page.jsp">
-      <jsp:param name="title" value="GIỎ HÀNG"/>
-      <jsp:param name="page" value="cart"/>
+      <jsp:param name="title" value="Trang chủ"/>
+      <jsp:param name="page" value="Tra cứu đơn hàng"/>
     </jsp:include>
   </header>
 
