@@ -9,7 +9,6 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ page isELIgnored="false" %>
-<!DOCTYPE html>
 
 <html
         lang="en"
@@ -39,27 +38,30 @@
     />
 
     <!-- Icons. Uncomment required icon fonts -->
-    <link rel="stylesheet" href="/assets/vendor/fonts/boxicons.css"/>
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/vendor/fonts/boxicons.css"/>
 
     <!-- Core CSS -->
-    <link rel="stylesheet" href="/assets/vendor/css/style.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/vendor/css/style.css">
     <!-- Vendors CSS -->
-    <link rel="stylesheet" href="/assets/vendor/libs/perfect-scrollbar/perfect-scrollbar.css"/>
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/vendor/libs/perfect-scrollbar/perfect-scrollbar.css"/>
 
-    <link rel="stylesheet" href="/assets/vendor/libs/apex-charts/apex-charts.css"/>
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/vendor/libs/apex-charts/apex-charts.css"/>
 
     <!-- Page CSS -->
 
     <!-- Helpers -->
-    <script src="/assets/vendor/js/helpers.js"></script>
+    <script src="${pageContext.request.contextPath}/assets/vendor/js/helpers.js"></script>
 
     <!--! Template customizer & Theme config files MUST be included after core stylesheets and helpers.js in the <head> section -->
     <!--? Config:  Mandatory theme config file contain global vars & default theme options, Set your preferred theme option in this file.  -->
-    <script src="/assets/js_admin/config.js"></script>
+    <script src="${pageContext.request.contextPath}/assets/js_admin/config.js"></script>
 </head>
 
 <body>
-<% ArrayList<Product> products= (ArrayList<Product>) request.getAttribute("products"); %>
+<%
+    ArrayList<Product> products = (ArrayList<Product>) request.getAttribute("products");
+    boolean activeCollapse = true;
+%>
 <!-- Layout wrapper -->
 <div class="layout-wrapper layout-content-navbar">
     <div class="layout-container">
@@ -91,41 +93,77 @@
                                     <div class="col-md mb-4 mb-md-0">
                                         <small class="text-light fw-semibold">Product Detail </small>
                                         <div class="accordion mt-3" id="accordionExample">
-                                    <c:forEach items="<%=products%>" var="product">
-                                            <div class="card accordion-item active">
+                                            <c:forEach items="<%=products%>" var="product">
+                                                <c:choose>
+                                                    <c:when test="<%=activeCollapse%>">
+                                                        <div class="card accordion-item active">
+                                                            <h2 class="accordion-header">
+                                                                <button
+                                                                        type="button"
+                                                                        class="accordion-button"
+                                                                        data-bs-toggle="collapse"
+                                                                        data-bs-target="#accordion${product.id}"
+                                                                        aria-expanded="true"
+                                                                        aria-controls="accordion${product.id}"
+                                                                >
+                                                                        ${product.name}
+                                                                </button>
+                                                            </h2>
+                                                            <div
+                                                                    id="accordion${product.id}"
+                                                                    class="accordion-collapse collapse show"
+                                                                    data-bs-parent="#accordionExample"
+                                                            >
+                                                                <div class="accordion-body">
+                                                                        ${product.description}
+                                                                    <br><br>
+                                                                    Kích thước: ${product.dimensions}
+                                                                    <br>
+                                                                    Giá:&nbsp; ${product.price}
+                                                                    <br>
+                                                                    Vật liệu:&nbsp; ${product.material}
 
-                                                <h2 class="accordion-header" id="headingOne">
-                                                    <button
-                                                            type="button"
-                                                            class="accordion-button"
-                                                            data-bs-toggle="collapse"
-                                                            data-bs-target="#accordionOne"
-                                                            aria-expanded="true"
-                                                            aria-controls="accordionOne"
-                                                    >
-                                                        ${product.name}
-                                                    </button>
-                                                </h2>
 
-                                                <div
-                                                        id="accordionOne"
-                                                        class="accordion-collapse collapse show"
-                                                        data-bs-parent="#accordionExample"
-                                                >
-                                                    <div class="accordion-body">
-                                                        ${product.description}
-                                                        <br><br>
-                                                        Kích thước: ${product.dimensions}
-                                                        <br>
-                                                        Giá:&nbsp; ${product.price}
-                                                        <br>
-                                                        Vật liệu:&nbsp; ${product.material}
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <%activeCollapse = false;%>
+                                                    </c:when>
+                                                    <c:otherwise>
+                                                        <div class="card accordion-item">
+                                                            <h2 class="accordion-header">
+                                                                <button
+                                                                        type="button"
+                                                                        class="accordion-button"
+                                                                        data-bs-toggle="collapse"
+                                                                        data-bs-target="#accordion${product.id}"
+                                                                        aria-expanded="true"
+                                                                        aria-controls="accordion${product.id}"
+                                                                >
+                                                                        ${product.name}
+                                                                </button>
+                                                            </h2>
+                                                            <div
+                                                                    id="accordion${product.id}"
+                                                                    class="accordion-collapse collapse"
+                                                                    data-bs-parent="#accordionExample"
+                                                            >
+                                                                <div class="accordion-body">
+                                                                        ${product.description}
+                                                                    <br><br>
+                                                                    Kích thước: ${product.dimensions}
+                                                                    <br>
+                                                                    Giá:&nbsp; ${product.price}
+                                                                    <br>
+                                                                    Vật liệu:&nbsp; ${product.material}
 
 
-                                                    </div>
-                                                </div>
-                                            </div
-                                    </c:forEach>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </c:otherwise>
+                                                </c:choose>
+                                            </c:forEach>
 
                                         </div>
                                     </div>
@@ -142,25 +180,51 @@
                                         data-bs-ride="carousel"
                                 >
                                     <ol class="carousel-indicators">
-                                        <li data-bs-target="#carouselExample-cf" data-bs-slide-to="0"
-                                            class="active"></li>
-                                        <li data-bs-target="#carouselExample-cf" data-bs-slide-to="1"></li>
-                                        <li data-bs-target="#carouselExample-cf" data-bs-slide-to="2"></li>
+                                        <c:set var="iIndicator" value="0"/>
+                                        <c:forEach items="<%=products%>" var="product">
+                                            <c:choose>
+                                                <c:when test="${iIndicator == 0}">
+                                                    <li data-bs-target="#carouselExample-cf" data-bs-slide-to="${iIndicator}"
+                                                        class="active"></li>
+                                                </c:when>
+                                                <c:otherwise>
+                                                    <li data-bs-target="#carouselExample-cf" data-bs-slide-to="${iIndicator}"></li>
+                                                </c:otherwise>
+                                            </c:choose>
+
+                                            <c:set var="iIndicator" value="${iIndicator + 1}"/>
+                                        </c:forEach>
                                     </ol>
 
                                     <div class="carousel-inner">
+                                        <c:set var="iCarousel" value="0"/>
                                         <c:forEach items="<%=products%>" var="product">
-                                        <div class="carousel-item active">
-                                            <img class="d-block w-100" src="${product.thumbnail.split(",")[0]}"
-                                                 alt="First slide"/>
-                                            <div class="carousel-caption d-none d-md-block">
-                                                <h3>${product.name}</h3>
-                                                <p>${product.shortDescription}</p>
-                                            </div>
-                                        </div>
+                                            <c:choose>
+                                                <c:when test="${iCarousel == 0}">
+                                                    <div class="carousel-item active">
+                                                        <img class="d-block w-100" src="${product.thumbnail.split(",")[0]}"
+                                                             alt="First slide"/>
+                                                        <div class="carousel-caption d-none d-md-block bg-gray p-2" style="opacity: 0.9; bottom: 3.25rem">
+                                                            <h3 class="text-white">${product.name}</h3>
+                                                            <p class="text-white">${product.shortDescription}</p>
+                                                        </div>
+                                                    </div>
+                                                </c:when>
+                                                <c:otherwise>
+                                                    <div class="carousel-item">
+                                                        <img class="d-block w-100" src="${product.thumbnail.split(",")[0]}"
+                                                             alt="First slide"/>
+                                                        <div class="carousel-caption d-none d-md-block bg-gray p-2" style="opacity: 0.9; bottom: 3.25rem">
+                                                            <h3 class="text-white">${product.name}</h3>
+                                                            <p class="text-white">${product.shortDescription}</p>
+                                                        </div>
+                                                    </div>
+                                                </c:otherwise>
+                                            </c:choose>
+
+                                            <c:set var="iCarousel" value="${iCarousel + 1}"/>
                                         </c:forEach>
                                     </div>
-
                                     <a class="carousel-control-prev" href="#carouselExample-cf" role="button"
                                        data-bs-slide="prev">
                                         <span class="carousel-control-prev-icon" aria-hidden="true"></span>
@@ -177,7 +241,6 @@
                     </div>
 
                     <!-- Total Revenue -->
-
 
 
                     <style>

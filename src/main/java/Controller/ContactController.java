@@ -7,6 +7,7 @@ import javax.servlet.*;
 import javax.servlet.http.*;
 import javax.servlet.annotation.*;
 import java.io.IOException;
+import java.util.Objects;
 
 @WebServlet(name = "ContactController", value = "/contact")
 public class ContactController extends HttpServlet {
@@ -20,6 +21,8 @@ public class ContactController extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        String success = request.getParameter("success");
+        if(Objects.equals(success, "mail")) request.setAttribute("success", "chúng tôi đã nhận được và phản hồi qua email của bạn");
         request.setAttribute("contact", this.contactService.findAll(Contact.class).get(0));
 
         request.getRequestDispatcher("/jsp/client/contact.jsp").forward(request, response);

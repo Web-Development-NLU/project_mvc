@@ -1,3 +1,4 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page import="Model.Contact" %>
 <%@ page import="Model.About" %><%--
   Created by IntelliJ IDEA.
@@ -9,6 +10,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%
     About about = (About) request.getAttribute("about");
+    String success = (request.getAttribute("success") == null) ? null : request.getAttribute("success").toString();
 %>
 <html>
 <head>
@@ -60,7 +62,17 @@
             </div>
         </div>
 
-        <jsp:include page="common/subscribe.jsp"/>
+        <jsp:include page="common/subscribe.jsp">
+            <jsp:param name="page" value="about"/>
+        </jsp:include>
+        <c:if test="<%=success != null%>">
+            <div class="alert-success alert alert-dismissible fade show fixed-top" role="alert">
+                <strong>Thành công</strong> <%=success%>
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+        </c:if>
         <jsp:include page="common/footer.jsp"/>
     </div>
 
