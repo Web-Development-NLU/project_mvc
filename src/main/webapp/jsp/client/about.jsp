@@ -25,7 +25,7 @@
             <jsp:include page="common/searchBarMenu.jsp"/>
             <jsp:include page="common/head-bottom-page.jsp">
                 <jsp:param name="title" value="VỀ CHÚNG TÔI"/>
-                <jsp:param name="page" value="about"/>
+                <jsp:param name="page" value="Về chúng tôi"/>
             </jsp:include>
         </header>
         <jsp:include page="partials/about/info-card-lg.jsp">
