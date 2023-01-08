@@ -34,10 +34,10 @@ public class PaymentController extends HttpServlet {
                     .append(" x ")
                     .append(cart.getAmount());
                     if(cart.getColor() != null) {
-                        name.append(", color: ").append(cart.getColor());
+                        name.append(", Màu sắc: ").append(cart.getColor());
                     }
                     if(cart.getPattern() != null) {
-                        name.append(", pattern: ").append(cart.getPattern());
+                        name.append(", Kiểu dáng: ").append(cart.getPattern());
                     }
                     name.append(" \n");
         }
