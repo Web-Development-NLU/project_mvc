@@ -52,29 +52,29 @@
           <i class="fa-regular fa-star"></i>
         </label>
       </div>
-      <div class="title monts">YOUR RATING*</div>
+      <div class="title monts">Xếp hạng của bạn*</div>
     </div>
     <br>
     <div class="review-box row">
       <div class="review-col-2 col-12 col-md">
         <div class="input-secondary">
-          <label for="email">Your comment *</label>
+          <label for="email">Bình luận của bạn*</label>
           <textarea class="text-area" name="comment" required></textarea>
         </div>
       </div>
       <div class="review-col-1 col-12 col-md">
         <div class="input-secondary">
-          <label for="ip_name">Your Name *</label>
+          <label for="ip_name">Tên của bạn *</label>
           <input type="text" id="ip_name" name="name" value="<%= (user != null) ? user.getFirstName() + " " + user.getLastName() : ""%>" required>
         </div>
         <br>
         <div class="input-secondary">
-          <label for="email">Your Email *</label>
+          <label for="email">Email của bạn *</label>
           <input type="email" id="email" name="email" value="<%= (user != null) ? user.getEmail() : ""%>" required>
         </div>
         <div class="review-submit">
           <br>
-          <button class="btn-text-lg bgr-black" value="<%=product.getId()%>" name="product" type="submit">SUBMIT</button>
+          <button class="btn-text-lg bgr-black" value="<%=product.getId()%>" name="product" type="submit">Gửi</button>
         </div>
       </div>
     </div>
@@ -82,13 +82,12 @@
       <div class="checkbox">
         <br>
         <input type="checkbox" name="isSave" id="check_box">
-        <label for="check_box">Save my name, email, and website in this browser for the next time I
-          comment.</label>
+        <label for="check_box">Lưu tên, email, và bình luận của bạn.</label>
       </div>
     </div>
   </form>
   <div class="reviews-list">
-    <div class="reviews-list_title">Other Reviews</div>
+    <div class="reviews-list_title">Các đánh giá khác</div>
     <c:forEach items="<%=reviews%>" var="review">
       <div class="card-review">
         <div class="card-review-info">

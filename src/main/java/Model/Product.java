@@ -1,7 +1,5 @@
 package Model;
 
-import java.time.LocalDate;
-
 public class Product extends BaseModelUUID {
 
     private String name;
