@@ -107,28 +107,6 @@
         </div>
     </div>
 
-<%--    <div class="products-container">--%>
-<%--        <div class="products">--%>
-<%--            <div class="product_title monts">Related products</div>--%>
-<%--            <div class="container-fluid">--%>
-<%--                <div class="product-list row mb-5 ">--%>
-<%--                    <jsp:include page="common/card.jsp">--%>
-<%--                        <jsp:param name="type" value="1"/>--%>
-<%--                    </jsp:include>--%>
-<%--                    <jsp:include page="common/card.jsp">--%>
-<%--                        <jsp:param name="type" value="1"/>--%>
-<%--                    </jsp:include>--%>
-<%--                    <jsp:include page="common/card.jsp">--%>
-<%--                        <jsp:param name="type" value="1"/>--%>
-<%--                    </jsp:include>--%>
-<%--                    <jsp:include page="common/card.jsp">--%>
-<%--                        <jsp:param name="type" value="1"/>--%>
-<%--                    </jsp:include>--%>
-<%--                </div>--%>
-<%--            </div>--%>
-<%--        </div>--%>
-<%--    </div>--%>
-
     <jsp:include page="common/footer.jsp"/>
 </div>
 
