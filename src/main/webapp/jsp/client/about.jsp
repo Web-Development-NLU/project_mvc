@@ -47,17 +47,17 @@
                 <jsp:include page="partials/about/benefit-item.jsp">
                     <jsp:param name="img" value="../assets/imgs/icons/icon-benefit.svg"/>
                     <jsp:param name="title" value="Miễn phí giao hàng"/>
-                    <jsp:param name="des" value="Miễn phí giao hàng cho những đơn có giá trị trên 5 triệu đồng"/>
+                    <jsp:param name="des" value="Miễn phí giao hàng cho những đơn có giá trị trên 5 triệu đồng."/>
                 </jsp:include>
                 <jsp:include page="partials/about/benefit-item.jsp">
                     <jsp:param name="img" value="../assets/imgs/icons/icon-benefit.svg"/>
                     <jsp:param name="title" value="Sản phẩm chất lượng cao"/>
-                    <jsp:param name="des" value="Được sử dụng từ những nguyên vật liệu cao cấp"/>
+                    <jsp:param name="des" value="Được tạo ra từ những nguyên vật liệu cao cấp, chính hãng."/>
                 </jsp:include>
                 <jsp:include page="partials/about/benefit-item.jsp">
                     <jsp:param name="img" value="../assets/imgs/icons/icon-benefit.svg"/>
                     <jsp:param name="title" value="Được chứng nhận"/>
-                    <jsp:param name="des" value="Được quốc tế công nhận là các sản phẩm có chất lượng cao và đảm bảo độ bền lâu trong quá trình sử dụng"/>
+                    <jsp:param name="des" value="Được cộng đồng trong nước và quốc tế công nhận, tin dùng."/>
                 </jsp:include>
             </div>
         </div>
