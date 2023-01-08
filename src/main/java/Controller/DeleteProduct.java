@@ -24,14 +24,16 @@ public class DeleteProduct extends HttpServlet {
         String id = request.getParameter("id");
         String categoryId = request.getParameter("category");
 
-        if(id == null || categoryId == null) {
+        if(id == null) {
             response.sendRedirect("/admin");
             return;
         }
 
         this.productService.delete(id, Product.class);
 
-        response.sendRedirect("/admin/products?id=" + categoryId);
+        String idParam = (categoryId == null) ? "" : "?id=" + categoryId;
+
+        response.sendRedirect("/admin/products" + idParam);
     }
 
     @Override
