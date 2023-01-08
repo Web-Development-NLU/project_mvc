@@ -129,7 +129,7 @@ public class UserService extends BaseService<User> {
 
     public List<CartDTO> getCart(String idUser) {
         return this.jdbi.withHandle(handle -> handle.createQuery(
-                "SELECT c.id, c.amount, c.idProduct, p.name, p.price, p.categoryId, c.pattern, c.color " +
+                "SELECT c.id, c.amount, c.idProduct, p.name, p.price, p.categoryId, c.pattern, c.color, c.image " +
                         "FROM cart as c " +
                         "RIGHT JOIN product as p ON p.id = c.idProduct " +
                         "WHERE c.idUser = :idUser"
@@ -164,14 +164,15 @@ public class UserService extends BaseService<User> {
     private void createCart(String idUser, Cart cart) {
         this.jdbi.useHandle(handle -> {
             handle.createUpdate(
-                            "INSERT INTO cart (idUser, idProduct, createdAt, amount, color, pattern) " +
-                                    "VALUES (:idUser, :idProduct, :createdAt, :amount, :color, :pattern)")
+                            "INSERT INTO cart (idUser, idProduct, createdAt, amount, color, pattern, image) " +
+                                    "VALUES (:idUser, :idProduct, :createdAt, :amount, :color, :pattern, :image)")
                     .bind("idUser", idUser)
                     .bind("idProduct", cart.getIdProduct())
                     .bind("createdAt", LocalDate.now())
                     .bind("amount", cart.getAmount())
                     .bind("color", cart.getColor())
                     .bind("pattern", cart.getPattern())
+                    .bind("image", cart.getImage())
                     .execute();
         });
     }

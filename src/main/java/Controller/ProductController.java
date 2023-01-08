@@ -1,5 +1,6 @@
 package Controller;
 
+import DTO.FilterProduct;
 import Model.Product;
 import Services.ProductService;
 import Services.ReviewService;
@@ -43,7 +44,7 @@ public class ProductController extends HttpServlet {
         request.setAttribute("product", product);
         request.setAttribute("patterns", this.productService.getPatterns(id));
         request.setAttribute("colors", this.productService.getColors(id));
-
+        request.setAttribute("relatedProducts", this.productService.getRelatedProduct(product.getCategoryId(), id));
         request.getRequestDispatcher("/jsp/client/product.jsp").forward(request, response);
     }
 

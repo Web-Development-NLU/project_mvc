@@ -13,6 +13,7 @@ import javax.servlet.http.*;
 import javax.servlet.annotation.*;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Objects;
 
 @WebServlet("")
 public class MainController extends HttpServlet {
@@ -35,6 +36,10 @@ public class MainController extends HttpServlet {
         for(int i = 0; i < end; i++) {
             productsResult.add(products.get(i));
         }
+
+        String success = request.getParameter("success");
+        if(Objects.equals(success, "mail")) request.setAttribute("success", "chúng tôi đã nhận được và phản hồi qua email của bạn");
+
         request.setAttribute("smallShop", this.shopService.findByType(TypeShop.SMALL.ordinal()));
         request.setAttribute("largeShop", this.shopService.findByType(TypeShop.LARGE.ordinal()));
         request.setAttribute("slides", slideService.findAll(Slide.class));

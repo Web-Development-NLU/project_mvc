@@ -47,8 +47,8 @@
     <div class="card-product-1 col-6 col-md-4 col-lg-3">
         <div class="product-item-wrap">
             <div class="img-product-container">
-                <a href="#">
-                    <img class="img-product transt-04-linear" src="../assets/imgs/card-shop/chair-product.jpg" alt="">
+                <a href="${pageContext.request.contextPath}/product?id=<%=id%>">
+                    <img class="img-product transt-04-linear" src="<%=thumbnails[0]%>" alt="">
                 </a>
                 <div class="btn-card-product translateX-bottom-btn">
                     <a class="tf-2" href="#"><button class="btn-icon bgr-white hover-bg-red color-black shadow-01"><i
@@ -58,12 +58,12 @@
                 </div>
             </div>
             <div class="info-product">
-                <div class="star-rate" data-rate="4"></div>
+                <div class="star-rate" data-rate="<%=point%>"></div>
                 <h2 class="product-name">
-                    <a href="#"><span>Pauline Barstool</span></a>
+                    <a href="${pageContext.request.contextPath}/product?id=<%=id%>"><span><%=name%></span></a>
                 </h2>
                 <div class="card-price">
-                    <span class="current-price">560.00$</span>
+                    <span class="current-price"><%=price%> VNĐ</span>
                     <span class="cost cl-text-price"></span>
                 </div>
             </div>
