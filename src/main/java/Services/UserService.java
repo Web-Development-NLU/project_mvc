@@ -113,8 +113,9 @@ public class UserService extends BaseService<User> {
                 public User withHandle(Handle handle) throws Exception {
                     try {
                         return handle.createQuery(
-                                        "SELECT * FROM " + tableName + " WHERE email = ?")
+                                        "SELECT * FROM " + tableName + " WHERE email = ? and status = ?")
                                 .bind(0, email)
+                                .bind(1, StatusAccount.ACTIVE.ordinal())
                                 .mapToBean(User.class).first();
                     } catch (IllegalStateException exception) {
                         return null;
