@@ -142,13 +142,11 @@ public class UserService extends BaseService<User> {
             exist = this.jdbi.withHandle(handle -> handle.createQuery(
                             "SELECT id, amount FROM cart WHERE " +
                                     "idUser = :idUser AND " +
-                                    "idProduct = :idProduct AND " +
-                                    "color = :color AND " +
-                                    "pattern = :pattern"
+                                    "idProduct = :idProduct " +
+                                    ((cart.getColor() != null) ? ("AND color = '" + cart.getColor()) + "'" : "") +
+                                    ((cart.getPattern() != null) ? (" AND pattern = '" +  cart.getPattern()) +"'" : "")
                     ).bind("idUser", idUser)
                     .bind("idProduct", cart.getIdProduct())
-                    .bind("color", cart.getColor())
-                    .bind("pattern", cart.getPattern())
                     .mapToBean(CartDTO.class).first());
         } catch (IllegalStateException exception) {
             exist = null;
