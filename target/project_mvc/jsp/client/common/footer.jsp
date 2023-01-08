@@ -8,6 +8,9 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page isELIgnored="false" %>
+<%
+  Boolean logged = (Boolean) request.getAttribute("logged");
+%>
 <footer>
   <div class="footer">
     <div class="footer-wrap">
@@ -70,7 +73,7 @@
                 <a href="${pageContext.request.contextPath}/contact"><span class="sub-text-style">Liên hệ và đặt câu hỏi</span></a>
               </li>
               <li>
-                <a href="#"><span class="sub-text-style">Tra cứu đơn hàng</span></a>
+                <a href="<%=logged ? "/orderList" : "/searchOrder" %> "><span class="sub-text-style">Tra cứu đơn hàng</span></a>
               </li>
             </ul>
           </div>

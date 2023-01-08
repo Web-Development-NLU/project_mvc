@@ -33,6 +33,7 @@
             <ol class="breadcrumb color-black">
                 <li class="breadcrumb-item monts" aria-current="page"><a href="#" class="color-black">Home</a></li>
                 <li class="breadcrumb-item monts" aria-current="page">Product</li>
+                <li class="breadcrumb-item monts" aria-current="page">/ <%=product.getName()%></li>
             </ol>
         </div>
     </div>

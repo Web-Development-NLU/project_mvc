@@ -24,9 +24,7 @@
                     <img class="img-product transt-04-linear" src="<%=thumbnails[0]%>" alt="">
                 </a>
                 <div class="btn-card-product translateY-bottom-btn">
-                    <a href="#"><button class="btn-icon bgr-white hover-bg-red br-50 shadow-01"><i
-                            class="fa-regular fa-heart fw-500"></i></button></a>
-                    <a href="#"><button class="btn-icon bgr-white hover-bg-red br-50 shadow-01"><i
+                    <a href="${pageContext.request.contextPath}/product?id=<%=id%>"><button class="btn-icon bgr-white hover-bg-red br-50 shadow-01"><i
                             class="fa-sharp fa-solid fa-magnifying-glass"></i></button></a>
                 </div>
             </div>
@@ -51,9 +49,9 @@
                     <img class="img-product transt-04-linear" src="<%=thumbnails[0]%>" alt="">
                 </a>
                 <div class="btn-card-product translateX-bottom-btn">
-                    <a class="tf-2" href="#"><button class="btn-icon bgr-white hover-bg-red color-black shadow-01"><i
-                            class="fa-regular fa-heart"></i></button></a>
-                    <a class="tf-3" href="#"><button class="btn-icon bgr-white hover-bg-red color-black shadow-01"><i
+<%--                    <a class="tf-2" href="#"><button class="btn-icon bgr-white hover-bg-red color-black shadow-01"><i--%>
+<%--                            class="fa-regular fa-heart"></i></button></a>--%>
+                    <a class="tf-3" href="${pageContext.request.contextPath}/product?id=<%=id%>"><button class="btn-icon bgr-white hover-bg-red color-black shadow-01"><i
                             class="fa-sharp fa-solid fa-magnifying-glass"></i></button></a>
                 </div>
             </div>
