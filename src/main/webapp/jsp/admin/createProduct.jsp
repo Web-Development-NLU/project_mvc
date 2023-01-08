@@ -82,26 +82,26 @@
                 <!-- Content -->
 
                 <div class="container-xxl flex-grow-1 container-p-y">
-                    <h4 class="fw-bold py-3 mb-4"><span class="text-muted fw-light">Tạo mới/</span>Tạo sản phẩm</h4>
+                    <h4 class="fw-bold py-3 mb-4"><span class="text-muted fw-light">Tạo mới / </span>Tạo sản phẩm</h4>
                     <hr class="my-5"/>
                     <div class="col-xxl">
                         <div class="card mb-4">
                             <div class="card-header d-flex align-items-center justify-content-between">
-                                <h5 class="mb-0">Product Information</h5>
+                                <h5 class="mb-0">Thông tin sản phẩm</h5>
                             </div>
                             <div class="card-body">
                                 <form action="${pageContext.request.contextPath}/admin/createProduct" method="post">
 
                                     <div class="row mb-3">
                                         <label class="col-sm-2 col-form-label" for="name">Tên sản phẩm
-                                            Product</label>
+                                            </label>
                                         <div class="col-sm-10">
                                             <input type="text" class="form-control" id="name" name="name"
-                                                   placeholder="name" required/>
+                                                   placeholder="Tên" required/>
                                         </div>
                                     </div>
                                     <div class="row mb-3">
-                                        <label class="col-sm-2 col-form-label" for="price">Gía</label>
+                                        <label class="col-sm-2 col-form-label" for="price">Giá</label>
                                         <div class="col-sm-10">
                                             <input
                                                     type="number"
@@ -115,7 +115,7 @@
                                     </div>
                                     <div class="row mb-3">
                                         <label class="col-sm-2 col-form-label"
-                                               for="category">Danh mục:</label>
+                                               for="category">Danh mục</label>
                                         <div class="col-sm-10">
                                             <select name="category" id="category"
                                                     class="chosen-select form-control form-control-chosen" required>
@@ -128,7 +128,7 @@
                                     </div>
                                     <div class="row mb-3">
                                         <label class="col-sm-2 col-form-label"
-                                               for="size">Size:</label>
+                                               for="size">Kích cỡ</label>
                                         <div class="col-sm-10">
                                             <select name="size" id="size"
                                                     class="chosen-select form-control form-control-chosen" required>
@@ -141,7 +141,7 @@
                                     </div>
                                     <div class="row mb-3">
                                         <label class="col-sm-2 col-form-label"
-                                               for="dimension">Dimensions:</label>
+                                               for="dimension">Kích thước</label>
                                         <div class="col-sm-10">
                                             <input
                                                     type="text"
@@ -175,33 +175,32 @@
                                         </div>
                                     </div>
                                     <div class="row mb-3">
-                                        <label class="col-sm-2 col-form-label" for="material">Main
-                                            Material</label>
+                                        <label class="col-sm-2 col-form-label" for="material">Vật liệu chính</label>
                                         <div class="col-sm-10">
                                             <input
                                                     type="text"
                                                     class="form-control"
                                                     id="material"
-                                                    placeholder="wooden"
+                                                    placeholder="Gỗ,..."
                                                     name="material"
                                             />
                                         </div>
                                     </div>
                                     <div class="row mb-3">
-                                        <label class="col-sm-2 col-form-label" for="product-thumbnails">Images</label>
+                                        <label class="col-sm-2 col-form-label" for="product-thumbnails">Hình ảnh</label>
                                         <div class="col-sm-10">
                                             <textarea type="file" class="form-control" id="product-thumbnails"
-                                                      name="thumbnail" placeholder="Link of image, separated by comma" multiple required></textarea>
+                                                      name="thumbnail" placeholder="Đường dẫn của hình ảnh, cách nhau bởi dấu phẩy" multiple required></textarea>
                                         </div>
                                     </div>
                                     <div class="row mb-3">
                                         <label class="col-sm-2 col-form-label"
-                                               for="basic-default-message">Short Description</label>
+                                               for="basic-default-message">Mô tả ngắn</label>
                                         <div class="col-sm-10">
                             <textarea
                                     id="basic-default-message"
                                     class="form-control"
-                                    placeholder="Product detail - Size - Color - Pattern"
+                                    placeholder="Sản phẩm: Chi tiết sản phẩm - kích thước - màu sắc - mẫu"
                                     aria-label="Hi, Do you have a moment to talk Joe?"
                                     aria-describedby="basic-icon-default-message2"
                                     name="shortDescription"
@@ -211,12 +210,12 @@
                                     </div>
                                     <div class="row mb-3">
                                         <label class="col-sm-2 col-form-label"
-                                               for="basic-default-message">Description</label>
+                                               for="basic-default-message">Mô tả chi tiết</label>
                                         <div class="col-sm-10">
                             <textarea style="height: 10rem"
                                       id="basic-default-message2"
                                       class="form-control"
-                                      placeholder="description about product"
+                                      placeholder="Mô tả chi tiết về sản phẩm"
                                       aria-describedby="basic-icon-default-message2"
                                       name="description"
                             ></textarea>
@@ -224,7 +223,7 @@
                                     </div>
                                     <div class="row justify-content-end">
                                         <div class="col-sm-10">
-                                            <button type="submit" class="btn btn-primary">Create</button>
+                                            <button type="submit" class="btn btn-primary">Tạo</button>
                                         </div>
                                     </div>
                                 </form>

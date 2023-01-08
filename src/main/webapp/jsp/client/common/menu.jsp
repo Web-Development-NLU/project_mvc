@@ -72,7 +72,7 @@
                     <c:choose>
                         <c:when test="<%= logged%>">
                             <div class="dropdown-person">
-                                <button class="btn-icon br-50 bgr-blue" data-toggle="dropdown" aria-expanded="false">
+                                <button class="btn-icon br-50 bgr-blue" data-toggle="dropdown" aria-expanded="false" style="background: var(--ctb-09)">
                                     <i class="bi bi-person"></i>
                                 </button>
                                 <div class="dropdown-menu">

@@ -76,6 +76,7 @@
     <!-- Layout container -->
     <div class="layout-page">
       <!-- Navbar -->
+      <jsp:include page="common/navbar.jsp"/>
       <!-- / Navbar -->
 
       <!-- Content wrapper -->
@@ -100,8 +101,16 @@
                   <a href="javascript:void(0);"><%= numPage%></a>
                 </li>
               </ol>
+              <ol style="padding-left: 0">
+                <form action="${pageContext.request.contextPath}/admin/pattern" class="form-search">
+                  <input class="ip_search" type="search" name="pattern" placeholder="Tìm kiếm..." style="background: white; border-radius: 10px; width: 50%" >
+                  <button class="btn-search" style="background: #696CFF; border-radius: 50%; border: 1px solid transparent; outline: none; width: 44px;height: 44px; transform: translate(10px,4px)">
+                    <i class="fa-solid fa-magnifying-glass" style="color: #FFF3FF;transform: translate(1px,1px);"></i>
+                  </button>
+                </form>
+              </ol>
             </nav>
-            <nav aria-label="Page navigation" class="col-lg-6">
+            <nav aria-label="Page navigation" class="col-lg-6" style="display: <%=totalPage == 1 ? "none" : "block"%>">
               <ul class="pagination justify-content-end">
                 <li class="page-item prev" style=" display: <%=( pagination ==1) ? "none" : "block"%>">
                   <a class="page-link" href="${pageContext.request.contextPath}/admin/pattern?page=<%=pagination - 1%>">
@@ -111,17 +120,6 @@
                 <li class="page-item">
                   <a class="page-link" href="${pageContext.request.contextPath}/admin/pattern?page=<%=pagination%>"><%=pagination%></a>
                 </li>
-                <li class="page-item">
-                  <form action="${pageContext.request.contextPath}/admin/pattern" method="post">
-                    <input
-                            type="number"
-                            class="form-control"
-                            name="page"
-                            autofocus
-                            min="1"
-                    />
-                  </form>
-                </li>
                 <li class="page-item next" style="display:<%=(pagination == totalPage) ? "none" : "block"%>">
                   <a class="page-link" href="${pageContext.request.contextPath}/admin/pattern?page=<%=pagination + 1%>">
                   <i class="tf-icon bx bx-chevrons-right"></i
@@ -130,52 +128,54 @@
               </ul>
             </nav>
           </div>
-          <ol style="padding-left: 0">
-            <form action="${pageContext.request.contextPath}/admin/pattern" class="form-search">
-              <input class="ip_search" type="search" name="pattern" placeholder="Tìm kiếm..." style="background: white; border-radius: 10px; width: 50%" >
-              <button class="btn-search" style="background: #696CFF; border-radius: 50%; border: 1px solid transparent; outline: none; width: 44px;height: 44px; transform: translate(10px,4px)">
-                <i class="fa-solid fa-magnifying-glass" style="color: #FFF3FF;transform: translate(1px,2px);"></i>
-              </button>
-            </form>
-          </ol>
+
           <!-- Bootstrap Dark Table -->
-          <div class="card">
-            <h5 class="card-header">THÔNG TIN VỀ QUẢN LÝ MẪU</h5>
-            <div class="table-responsive text-nowrap">
-              <table class="table table-dark1">
-                <thead>
-                <tr>
-                  <th>MÃ MẪU</th>
-                  <th>TÊN MẪU</th>
-                  <th>NGÀY TẠO</th>
-                  <th>CHỈNH SỬA</th>
-                </tr>
-                </thead>
-                <tbody class="table-border-bottom-0">
-              <c:forEach items="<%= patterns %>" var="pattern">
-                <tr>
-                  <td>${pattern.id}</td>
-                  <td>${pattern.name}</td>
-                  <td>${pattern.createdAt}</td>
-                  <td>
-                    <div class="dropdown">
-                      <button type="button" class="btn p-0 dropdown-toggle hide-arrow" data-bs-toggle="dropdown">
-                        <i class="bx bx-dots-vertical-rounded"></i>
-                      </button>
-                      <div class="dropdown-menu">
-                        <a class="dropdown-item" href="${pageContext.request.contextPath}/admin/editPattern?id=${pattern.id}">
-                          <i class="bx bx-edit-alt me-1"></i> Chỉnh sửa</a>
-                        <a class="dropdown-item" href="${pageContext.request.contextPath}/admin/deletePattern?id=${pattern.id}" methods="post"
-                        ><i class="bx bx-trash me-1"></i> Xóa</a>
-                      </div>
-                    </div>
-                  </td>
-                </tr>
-              </c:forEach>
-                </tbody>
-              </table>
-            </div>
-          </div>
+          <c:choose>
+            <c:when test="<%=patterns.size() == 0%>">
+              <div class="card">
+                <h5 class="card-header" style="text-align: center">Không có mẫu nào</h5>
+              </div>
+            </c:when>
+            <c:otherwise>
+              <div class="card">
+                <h5 class="card-header">THÔNG TIN VỀ QUẢN LÝ MẪU</h5>
+                <div class="table-responsive text-nowrap">
+                  <table class="table table-dark1">
+                    <thead>
+                    <tr>
+                      <th>MÃ MẪU</th>
+                      <th>TÊN MẪU</th>
+                      <th>NGÀY TẠO</th>
+                      <th>CHỈNH SỬA</th>
+                    </tr>
+                    </thead>
+                    <tbody class="table-border-bottom-0">
+                    <c:forEach items="<%= patterns %>" var="pattern">
+                      <tr>
+                        <td>${pattern.id}</td>
+                        <td>${pattern.name}</td>
+                        <td>${pattern.createdAt}</td>
+                        <td>
+                          <div class="dropdown">
+                            <button type="button" class="btn p-0 dropdown-toggle hide-arrow" data-bs-toggle="dropdown">
+                              <i class="bx bx-dots-vertical-rounded"></i>
+                            </button>
+                            <div class="dropdown-menu">
+                              <a class="dropdown-item" href="${pageContext.request.contextPath}/admin/editPattern?id=${pattern.id}">
+                                <i class="bx bx-edit-alt me-1"></i> Chỉnh sửa</a>
+                              <a class="dropdown-item" href="${pageContext.request.contextPath}/admin/deletePattern?id=${pattern.id}" methods="post"
+                              ><i class="bx bx-trash me-1"></i> Xóa</a>
+                            </div>
+                          </div>
+                        </td>
+                      </tr>
+                    </c:forEach>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </c:otherwise>
+          </c:choose>
           <!--/ Bootstrap Dark Table -->
         </div>
         <!-- / Content -->

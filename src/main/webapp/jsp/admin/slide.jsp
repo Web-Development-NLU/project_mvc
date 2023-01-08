@@ -88,10 +88,6 @@
 
                 <div class="container-xxl flex-grow-1 container-p-y">
                     <h4 class="fw-bold py-3 mb-4"><span class="text-muted fw-light">QUẢN LÝ /</span> Slide</h4>
-                    <form method="post">
-                        <input type="text" class="form-control" id="value" name="txt"
-                               placeholder="Tên màu" required style="width:50%"/>
-                    </form>
                     <a href="${pageContext.request.contextPath}/admin/createSlide">
                         <button type="button" class="btn btn-outline-dark" style="float: right">Tạo mới</button>
                     </a>

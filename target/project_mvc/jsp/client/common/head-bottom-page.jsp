@@ -11,7 +11,7 @@
         <h2 class="head-page-title monts color-white"><%= request.getParameter("title") %></h2>
         <div aria-label="breadcrumb">
             <ol class="breadcrumb color-white">
-                <li class="breadcrumb-item monts" aria-current="page"><a href="#" class="color-white">Home</a></li>
+                <li class="breadcrumb-item monts" aria-current="page"><a href="#" class="color-white">Trang chủ</a></li>
                 <li class="breadcrumb-item monts" aria-current="page"><%= request.getParameter("page") %></li>
             </ol>
         </div>

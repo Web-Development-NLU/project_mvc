@@ -64,8 +64,9 @@
     int totalPage = Integer.parseInt(numPage);
     boolean pagePostpaid = (boolean) request.getAttribute("pagePostpaid");
     boolean pagePrepayment = (boolean) request.getAttribute("pagePrepayment");
-    String search = (String) request.getAttribute("search") == null ? "" : "&infoSearch="+ request.getAttribute("search");
-    String search2 = (String) request.getAttribute("search") == null ? "" : "infoSearch="+ request.getAttribute("search");
+    String search = (String) request.getAttribute("infoSearch") == null ? "" : "&infoSearch="+ request.getAttribute("infoSearch");
+    int end = pagination + 4 > totalPage ? totalPage : pagination + 4;
+    int startOgirin = pagination - 4 > 0 ? (pagination - 4) : 1;
 %>
 <!-- Layout wrapper -->
 <div class="layout-wrapper layout-content-navbar">
@@ -95,7 +96,7 @@
                             <h4 class="fw-bold py-3 mb-4"><span class="text-muted fw-light">Đơn hàng /</span> Thanh toán khi nhận hàng</h4>
                         </c:when>
                         <c:otherwise>
-                            <h4 class="fw-bold py-3 mb-4"><span class="text-muted fw-light"></span>Đơn hàng</h4>
+                            <h4 class="fw-bold py-3 mb-4"><span class="text-muted fw-light">Đơn hàng /</span> Tất cả đơn hàng</h4>
                         </c:otherwise>
                     </c:choose>
                     <hr class="my-5"/>
@@ -123,13 +124,13 @@
                                 </c:choose>
                                     <input class="ip_search" type="search" name="infoSearch" placeholder="Tìm kiếm..." style="background: white; border-radius: 10px; width: 50%" >
                                     <button class="btn-search" style="background: #696CFF; border-radius: 50%; border: 1px solid transparent; outline: none; width: 44px;height: 44px; transform: translate(10px,4px)">
-                                        <i class="fa-solid fa-magnifying-glass" style="color: #FFF3FF;transform: translate(1px,2px);"></i>
+                                        <i class="fa-solid fa-magnifying-glass" style="color: #FFF3FF;transform: translate(1px,1px);"></i>
                                     </button>
                                 </form>
                             </ol>
                         </nav>
                         <!-- Basic Bootstrap Table -->
-                        <nav aria-label="Page navigation" class="col-lg-6">
+                        <nav aria-label="Page navigation" class="col-lg-6" style="display: <%=totalPage == 1 ? "none" : "block"%>">
                             <c:choose>
                                 <c:when test="${pagePrepayment}">
                                     <ul class="pagination justify-content-end">
@@ -138,20 +139,16 @@
                                             ><i class="tf-icon bx bx-chevrons-left"></i
                                             ></a>
                                         </li>
-                                        <li class="page-item">
-                                            <a class="page-link" href="${pageContext.request.contextPath}/admin/orderPrePayment?page=<%=pagination+search%>"><%=pagination%></a>
-                                        </li>
-                                        <li class="page-item">
-                                            <form action="${pageContext.request.contextPath}/admin/orderPrePayment?<%=search%>">
-                                                <input
-                                                        type="number"
-                                                        class="form-control"
-                                                        name="page"
-                                                        autofocus
-                                                        min="1"
-                                                />
-                                            </form>
-                                        </li>
+                                        <c:forEach begin="<%=startOgirin%>" end="<%=pagination-1%>" var="i">
+                                            <li class="page-item">
+                                                <a class="page-link" href="${pageContext.request.contextPath}/admin/orderPrePayment?page=${i}<%=search%>">${i}</a>
+                                            </li>
+                                        </c:forEach>
+                                        <c:forEach begin="<%=pagination%>" end="<%=end%>" var="i">
+                                            <li class="page-item">
+                                                <a class="page-link" href="${pageContext.request.contextPath}/admin/orderPrePayment?page=${i}<%=search%>">${i}</a>
+                                            </li>
+                                        </c:forEach>
                                         <li class="page-item next" style="display:<%=(pagination == totalPage) ? "none" : "block"%> ">
                                             <a class="page-link" href="${pageContext.request.contextPath}/admin/orderPrePayment?page=<%= (pagination + 1)+search%>"
                                             ><i class="tf-icon bx bx-chevrons-right"></i
@@ -166,20 +163,16 @@
                                             ><i class="tf-icon bx bx-chevrons-left"></i
                                             ></a>
                                         </li>
-                                        <li class="page-item">
-                                            <a class="page-link" href="${pageContext.request.contextPath}/admin/orderPostpaid?page=<%=pagination+search%>"><%=pagination%></a>
-                                        </li>
-                                        <li class="page-item">
-                                            <form action="${pageContext.request.contextPath}/admin/orderPostpaid?<%=search%>">
-                                                <input
-                                                        type="number"
-                                                        class="form-control"
-                                                        name="page"
-                                                        autofocus
-                                                        min="1"
-                                                />
-                                            </form>
-                                        </li>
+                                        <c:forEach begin="<%=startOgirin%>" end="<%=pagination-1%>" var="i">
+                                            <li class="page-item">
+                                                <a class="page-link" href="${pageContext.request.contextPath}/admin/orderPostpaid?page=${i}<%=search%>">${i}</a>
+                                            </li>
+                                        </c:forEach>
+                                        <c:forEach begin="<%=pagination%>" end="<%=end%>" var="i">
+                                            <li class="page-item">
+                                                <a class="page-link" href="${pageContext.request.contextPath}/admin/orderPostpaid?page=${i}<%=search%>">${i}</a>
+                                            </li>
+                                        </c:forEach>
                                         <li class="page-item next" style="display:<%=(pagination == totalPage) ? "none" : "block"%> ">
                                             <a class="page-link" href="${pageContext.request.contextPath}/admin/orderPostpaid?page=<%=(pagination + 1)+search%>"
                                             ><i class="tf-icon bx bx-chevrons-right"></i
@@ -194,20 +187,16 @@
                                             ><i class="tf-icon bx bx-chevrons-left"></i
                                             ></a>
                                         </li>
-                                        <li class="page-item">
-                                            <a class="page-link" href="${pageContext.request.contextPath}/admin/order?page=<%=pagination +search%>"><%=pagination%></a>
-                                        </li>
-                                        <li class="page-item">
-                                            <form action="${pageContext.request.contextPath}/admin/order?<%=search2%>">
-                                                <input
-                                                        type="number"
-                                                        class="form-control"
-                                                        name="page"
-                                                        autofocus
-                                                        min="1"
-                                                />
-                                            </form>
-                                        </li>
+                                        <c:forEach begin="<%=startOgirin%>" end="<%=pagination-1%>" var="i">
+                                            <li class="page-item">
+                                                <a class="page-link" href="${pageContext.request.contextPath}/admin/order?page=${i}<%=search%>">${i}</a>
+                                            </li>
+                                        </c:forEach>
+                                        <c:forEach begin="<%=pagination%>" end="<%=end%>" var="i">
+                                            <li class="page-item">
+                                                <a class="page-link" href="${pageContext.request.contextPath}/admin/order?page=${i}<%=search%>">${i}</a>
+                                            </li>
+                                        </c:forEach>
                                         <li class="page-item next" style="display:<%=(pagination == totalPage) ? "none" : "block"%> ">
                                             <a class="page-link" href="${pageContext.request.contextPath}/admin/order?page=<%=(pagination + 1)+search%>"
                                             ><i class="tf-icon bx bx-chevrons-right"></i
@@ -226,7 +215,7 @@
                         </c:when>
                         <c:otherwise>
                             <div class="card">
-                                <h5 class="card-header">Table Basic</h5>
+                                <h5 class="card-header">Bảng đơn hàng</h5>
                                 <div class="table-responsive text-nowrap">
                                     <table class="table">
                                         <thead>
@@ -250,7 +239,7 @@
                                                         </button>
                                                         <div class="dropdown-menu">
                                                             <a class="dropdown-item" href="${pageContext.request.contextPath}/admin/deleteOrder?id=${order.id}"><i
-                                                                    class="bx bx-trash me-1"></i> Delete</a>
+                                                                    class="bx bx-trash me-1"></i> Xóa</a>
                                                         </div>
                                                     </div>
                                                 </td>

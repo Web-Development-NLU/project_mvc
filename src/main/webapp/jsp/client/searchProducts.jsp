@@ -33,6 +33,7 @@
     int pagination = (int) request.getAttribute("pagination");
     String numPage = DecimalFormat.getIntegerInstance().format(Double.parseDouble(request.getAttribute("numPage").toString()));
     int totalPage = Integer.parseInt(numPage);
+    String infoSearch = (request.getParameter("infoSearch") == null) ? "" : "search=" + request.getParameter("infoSearch") + "&";
 %>
 <div id="shop-container">
     <header>
@@ -68,6 +69,7 @@
                 <jsp:param name="path" value="searchProduct"/>
                 <jsp:param name="number" value="<%= totalPage %>"/>
                 <jsp:param name="active" value="${pagination}"/>
+                <jsp:param name="search" value="${infoSearch}"/>
             </jsp:include>
         </div>
     </div>

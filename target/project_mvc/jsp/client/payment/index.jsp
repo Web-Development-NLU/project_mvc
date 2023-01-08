@@ -40,8 +40,8 @@
                     <div class="checkout-other-action mt-5 mb-5">
                         <div class="action-link">
                             <i class="fa-regular fa-user action-icon"></i>
-                            RETURNING CUSTOMER?
-                            <a href="#" class="action-content">CLICK HERE TO LOGIN</a>
+
+                            <a href="/login" class="action-content">TRỞ VỀ TRANG ĐĂNG NHẬP</a>
                         </div>
                     </div>
 
