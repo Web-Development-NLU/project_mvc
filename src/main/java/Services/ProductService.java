@@ -15,6 +15,17 @@ public class ProductService extends BaseService<Product> {
         super(tableName);
     }
 
+    public ArrayList<Product> getRelatedProduct(int categoryId, String id) {
+        return (ArrayList<Product>) this.jdbi.withHandle(handle -> {
+            return handle.createQuery(
+                    "SELECT pd.id, pd.thumbnail, pd.name, pd.price, pd.createdAt, pd.status, AVG(r.point) avg FROM " + this.tableName + " pd" +
+                    " LEFT JOIN review r ON r.productId = pd.id WHERE pd.categoryId = ? AND pd.id != ?" +
+                            "GROUP BY pd.id ORDER BY pd.createdAt DESC LIMIT 8"
+            ).bind(0, categoryId).bind(1, id)
+                    .mapToBean(Product.class).list();
+        });
+    }
+
     public ArrayList<Product> searchByNameAndCategory(String name, String cateogry) {
         return (ArrayList<Product>) this.jdbi.withHandle(handle -> handle.createQuery("SELECT * FROM " + this.tableName + " WHERE " +
                 "name LIKE ? " +

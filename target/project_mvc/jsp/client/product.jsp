@@ -20,6 +20,7 @@
 <%
     Product product = (Product) request.getAttribute("product");
     String[] thumbnails = product.getThumbnail().split(",");
+    ArrayList<Product> relatedProduct = (ArrayList<Product>) request.getAttribute("relatedProducts");
 %>
 
 <div id="container">
@@ -86,27 +87,25 @@
         </div>
     </div>
 
-<%--    <div class="products-container">--%>
-<%--        <div class="products">--%>
-<%--            <div class="product_title monts">You may so like</div>--%>
-<%--            <div class="container-fluid">--%>
-<%--                <div class="product-list row mb-5 ">--%>
-<%--                    <jsp:include page="common/card.jsp">--%>
-<%--                        <jsp:param name="type" value="1"/>--%>
-<%--                    </jsp:include>--%>
-<%--                    <jsp:include page="common/card.jsp">--%>
-<%--                        <jsp:param name="type" value="1"/>--%>
-<%--                    </jsp:include>--%>
-<%--                    <jsp:include page="common/card.jsp">--%>
-<%--                        <jsp:param name="type" value="1"/>--%>
-<%--                    </jsp:include>--%>
-<%--                    <jsp:include page="common/card.jsp">--%>
-<%--                        <jsp:param name="type" value="1"/>--%>
-<%--                    </jsp:include>--%>
-<%--                </div>--%>
-<%--            </div>--%>
-<%--        </div>--%>
-<%--    </div>--%>
+    <div class="products-container">
+        <div class="products">
+            <div class="product_title monts">Sản phẩm liên quan</div>
+            <div class="container-fluid">
+                <div class="product-list row mb-5 ">
+                    <c:forEach items="<%=relatedProduct%>" var="product">
+                        <jsp:include page="common/card.jsp">
+                            <jsp:param name="type" value="1"/>
+                            <jsp:param name="name" value="${product.name}"/>
+                            <jsp:param name="thumbnails" value="${product.thumbnail}"/>
+                            <jsp:param name="price" value="${product.price}"/>
+                            <jsp:param name="id" value="${product.id}"/>
+                            <jsp:param name="avg" value="${product.avg}"/>
+                        </jsp:include>
+                    </c:forEach>
+                </div>
+            </div>
+        </div>
+    </div>
 
 <%--    <div class="products-container">--%>
 <%--        <div class="products">--%>
