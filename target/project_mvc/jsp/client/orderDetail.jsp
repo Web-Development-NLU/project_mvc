@@ -3,7 +3,6 @@
 <%@ taglib prefix = "c" uri = "http://java.sun.com/jsp/jstl/core" %>
 <%@ page isELIgnored = "false" %>
 
-<!DOCTYPE html>
 <html lang="en">
     <head>
         <jsp:include page="common/head.jsp">
@@ -25,7 +24,7 @@
                 <jsp:include page="common/searchBarMenu.jsp"/>
                 <jsp:include page="common/head-bottom-page.jsp">
                     <jsp:param name="title" value="KẾT QUẢ THANH TOÁN"/>
-                    <jsp:param name="page" value="payment_done"/>
+                    <jsp:param name="page" value="Thanh toán thành công"/>
                 </jsp:include>
             </header>
             <div class="container mt-5 mb-5">

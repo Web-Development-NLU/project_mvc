@@ -47,8 +47,8 @@
         <div class="cart-place" style="margin-top: 2rem">
             <c:choose>
                 <c:when test="${!orders.isEmpty()}">
-                    <form class="form-search" action="/orderList" accept-charset="utf-8" method="post">
-                        <input class="ip_search" type="search" placeholder="Nhập mã đơn hàng..." name="search_order">
+                    <form class="form-search" action="/orderList" accept-charset="utf-8">
+                        <input class="ip_search" type="search" placeholder="Nhập mã đơn hàng..." name="infoSearch">
                         <button class="btn-search">
                             <i class="fa-solid fa-magnifying-glass"></i>
                         </button>
@@ -75,8 +75,8 @@
                     </div>
                 </c:when>
                 <c:otherwise>
-                    <form class="form-search" action="/orderList" method="post">
-                        <input class="ip_search" type="search" placeholder="Nhập mã đơn hàng..." name="search_order">
+                    <form class="form-search" action="/orderList">
+                        <input class="ip_search" type="search" placeholder="Nhập mã đơn hàng..." name="infoSearch">
                         <button class="btn-search">
                             <i class="fa-solid fa-magnifying-glass"></i>
                         </button>

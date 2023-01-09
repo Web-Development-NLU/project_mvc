@@ -34,7 +34,7 @@ public class OrderListController extends HttpServlet {
         }
         String userId = (String) authorizationData.getId();
         ArrayList<Order> orders = new ArrayList<>();
-        if(infoSearch != null){
+        if(infoSearch != null && !infoSearch.equals("null")){
             Order order = this.orderService.findOrderUserById(userId, infoSearch);
             if(order != null){
                 orders.add(order);
