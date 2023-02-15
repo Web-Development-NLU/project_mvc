@@ -14,6 +14,7 @@ import javax.servlet.*;
 import javax.servlet.http.*;
 import javax.servlet.annotation.*;
 import java.io.IOException;
+
 @WebServlet(name = "SignupController", value = "/signup")
 public class SignupController extends HttpServlet {
 
@@ -39,16 +40,16 @@ public class SignupController extends HttpServlet {
         try {
             String email = request.getParameter("email");
             String password = request.getParameter("password");
-            if(email.isEmpty() || password.isEmpty()) {
-                request.setAttribute ("error", "Email và mật khẩu không được bỏ trống");
+            if (email.isEmpty() || password.isEmpty()) {
+                request.setAttribute("error", "Email và mật khẩu không được bỏ trống");
                 request.getRequestDispatcher("/jsp/client/authentication.jsp").forward(request, response);
                 return;
             }
-            if(this.userService.findByEmail(email) != null){
-                request.setAttribute ("error", "Email của bạn đã được sử dụng");
+            if (this.userService.findByEmail(email) != null) {
+                request.setAttribute("error", "Email của bạn đã được sử dụng");
                 request.setAttribute("email", request.getParameter("email"));
                 request.getRequestDispatcher("/jsp/client/authentication.jsp").forward(request, response);
-            }else {
+            } else {
                 String passwordHash = BCrypt.withDefaults().hashToString(8, password.toCharArray());
                 User model = new User(email, passwordHash, StatusAccount.DISABLE.ordinal(), TypeAccount.USER.ordinal());
 
@@ -59,7 +60,7 @@ public class SignupController extends HttpServlet {
 
                 session.setAttribute("id", id);
                 session.setAttribute(email, rand);
-                response.sendRedirect("/verify");
+                response.sendRedirect(request.getContextPath() + "/verify");
             }
         } catch (Exception e) {
             throw new RuntimeException(e);
