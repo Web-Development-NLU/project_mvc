@@ -7,6 +7,7 @@ import Model.User;
 import Services.AuthenticationService;
 import Services.MailService;
 import Services.UserService;
+import Utils.Utils;
 import at.favre.lib.crypto.bcrypt.BCrypt;
 import org.apache.commons.lang3.RandomStringUtils;
 
@@ -38,18 +39,23 @@ public class SignupController extends HttpServlet {
         HttpSession session = request.getSession(true);
 
         try {
-            String email = request.getParameter("email");
             String password = request.getParameter("password");
+            String email = request.getParameter("email");
             if (email.isEmpty() || password.isEmpty()) {
                 request.setAttribute("error", "Email và mật khẩu không được bỏ trống");
                 request.getRequestDispatcher("/jsp/client/authentication.jsp").forward(request, response);
-                return;
             }
-            if (this.userService.findByEmail(email) != null) {
+            else if (this.userService.findByEmail(email) != null) {
                 request.setAttribute("error", "Email của bạn đã được sử dụng");
                 request.setAttribute("email", request.getParameter("email"));
                 request.getRequestDispatcher("/jsp/client/authentication.jsp").forward(request, response);
-            } else {
+            }
+            else if (!new Utils().handleCheckPasswordIsValid(password)) {
+                request.setAttribute("error", "Mật khẩu ít nhất 6 kí tự và có ít nhất 1 chữ cái in hoa và chứ số");
+
+                request.getRequestDispatcher("/jsp/client/authentication.jsp").forward(request, response);
+            }
+            else {
                 String passwordHash = BCrypt.withDefaults().hashToString(8, password.toCharArray());
                 User model = new User(email, passwordHash, StatusAccount.DISABLE.ordinal(), TypeAccount.USER.ordinal());
 
