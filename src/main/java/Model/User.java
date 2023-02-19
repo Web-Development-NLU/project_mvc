@@ -1,6 +1,6 @@
 package Model;
 
-public class User extends BaseModelUUID{
+public class User extends BaseModelUUID {
     private String firstName;
     private String lastName;
     private String phone;
@@ -12,6 +12,16 @@ public class User extends BaseModelUUID{
     private String address;
     private int status;
     private int type;
+
+//    public int getCountWrong() {
+//        return countWrong;
+//    }
+//
+//    public void setCountWrong(int countWrong) {
+//        this.countWrong = countWrong;
+//    }
+//
+//    private int countWrong;
 
     public User() {
     }
