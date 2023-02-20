@@ -38,7 +38,6 @@ public class AddToCartController extends HttpServlet {
         String color = request.getParameter("color");
         int amount = Integer.parseInt(request.getParameter("amount"));
         Product product = this.productService.findById(idProduct, Product.class);
-        System.out.print("RUN");
         HttpSession session = request.getSession(true);
         AuthorizationData authorizationData = (session.getAttribute("authorization") == null)
                 ? new AuthorizationData() : (AuthorizationData) session.getAttribute("authorization");

@@ -55,7 +55,13 @@ public class CartController extends HttpServlet {
             }
         } else {
             int amount = Integer.parseInt(request.getParameter("amount"));
-
+            if (amount
+                    < 1) {
+                session.setAttribute("authorization", authorizationData);
+                response.sendRedirect("/cart");
+                return;
+            }
+            ;
             if ((boolean) request.getAttribute("logged")) {
                 this.userService.updateCart(id, amount);
                 authorizationData.setCarts((ArrayList<CartDTO>) this.userService.getCart(authorizationData.getId()));
