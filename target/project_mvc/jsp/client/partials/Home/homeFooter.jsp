@@ -15,7 +15,13 @@
       <div class="wrap-content">
         <div class="col-foot-left">
           <div class="icon-title-foot">
-            <img class="icon-coston-style" src="../assets/imgs/icons/coston-icon.svg" alt="">
+<%--            <h2 class="cpw-res"> <div class="mb-2 mb-md-0">--%>
+<%--              ©--%>
+<%--              <script>--%>
+<%--                document.write(new Date().getFullYear());--%>
+<%--              </script>--%>
+<%--            </div></h2>--%>
+            Furniture
           </div>
         </div>
         <div class="cpw-container">

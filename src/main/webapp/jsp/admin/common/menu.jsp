@@ -63,7 +63,7 @@
         <li class="menu-item">
             <a href="${pageContext.request.contextPath}/admin/contact" class="menu-link">
                 <i class="menu-icon tf-icons bx bx-detail"></i>
-                <div data-i18n="Analytics">Thông tin liên hệ</div>
+                <div data-i18n="Analytics">Thông tin liên hệ</div>-m
             </a>
         </li>
         <li class="menu-item">
