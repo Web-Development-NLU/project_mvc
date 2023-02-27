@@ -46,7 +46,7 @@
                     <c:forEach items="<%=colors%>" var="color">
                         <div class="input-radio">
                             <label>
-                                <input type="radio" name="color" value="${color.name}" required>
+                                <input type="radio" name="color" value="${color.name}">
                                 <div class="radio-bg" style="background: ${color.value}"></div>
                             </label>
                         </div>
@@ -59,7 +59,7 @@
                     <c:forEach items="<%=patterns%>" var="pattern">
                         <div class="input-radio-text">
                             <label>
-                                <input type="radio" name="pattern" value="${pattern.name}" required>
+                                <input type="radio" name="pattern" value="${pattern.name}">
                                 <div class="radio-btn">${pattern.name}</div>
                             </label>
                         </div>
@@ -70,7 +70,7 @@
 
         <div class="product_action row flex-row-reverse">
             <div class="product_number col-3 col-sm-2 col-lg-3">
-                <input type="number" class="input-number" name="amount" value="1" min=1 >
+                <input type="number" class="input-number" name="amount" value="1" min=1 required>
             </div>
             <div class="col-9 col-lg">
                 <c:choose>
@@ -83,6 +83,8 @@
                 </c:choose>
 
             </div>
+        </div>
+        <div class="color-red mt-2"><%=session.getAttribute("error" + product.getId()) != null ? session.getAttribute("error" + product.getId()) : ""%>
         </div>
     </form>
 

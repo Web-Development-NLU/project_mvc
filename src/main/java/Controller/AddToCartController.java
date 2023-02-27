@@ -36,13 +36,40 @@ public class AddToCartController extends HttpServlet {
         String idProduct = request.getParameter("id");
         String pattern = request.getParameter("pattern");
         String color = request.getParameter("color");
-        int amount = Integer.parseInt(request.getParameter("amount"));
-        Product product = this.productService.findById(idProduct, Product.class);
         HttpSession session = request.getSession(true);
+        session.removeAttribute("error" + idProduct);
+        Product product = this.productService.findById(idProduct, Product.class);
+        boolean hasPattern = this.productService.getPatterns(product.getId()).size() > 0;
+        boolean hasColor = this.productService.getColors(product.getId()).size() > 0;
+        if (hasPattern && hasColor) {
+            if (pattern == null || color == null) {
+                session.setAttribute("error" + idProduct, "Please choose pattern and color!");
+                response.sendRedirect("/product?id=" + idProduct);
+                return;
+            }
+        } else if (hasPattern) {
+            if (pattern == null) {
+                System.out.print("Run2");
+                session.setAttribute("error" + idProduct, "Please choose pattern!");
+                response.sendRedirect("/product?id=" + idProduct);
+                return;
+            }
+        } else if (hasColor) {
+            if (color == null) {
+                session.setAttribute("error" + idProduct, "Please choose color!");
+                response.sendRedirect("/product?id=" + idProduct);
+                return;
+            }
+        }
+        System.out.print("Run");
+
+        int amount = request.getParameter("amount") != null ? Integer.parseInt(request.getParameter("amount")) : 0;
+        if (amount <= 0) response.sendRedirect("/product?id=" + idProduct);
+
         AuthorizationData authorizationData = (session.getAttribute("authorization") == null)
                 ? new AuthorizationData() : (AuthorizationData) session.getAttribute("authorization");
         String image = product.getThumbnail().split(",")[0];
-        if((boolean) request.getAttribute("logged")) {
+        if ((boolean) request.getAttribute("logged")) {
             Cart cart = new Cart(
                     authorizationData.getId(),
                     product.getId(),
@@ -54,7 +81,7 @@ public class AddToCartController extends HttpServlet {
 
             this.userService.setCart(authorizationData.getId(), cart);
             authorizationData.setCarts((ArrayList<CartDTO>) this.userService.getCart(authorizationData.getId()));
-        }else {
+        } else {
             authorizationData.addToCart(new CartDTO(
                     product.getName(),
                     amount,
