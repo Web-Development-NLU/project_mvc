@@ -66,4 +66,8 @@
       <version>1.33.0</version>
     </dependency>
   </dependencies>
+
+  <build>
+    <finalName>project_mvc</finalName>
+  </build>
 </project>
