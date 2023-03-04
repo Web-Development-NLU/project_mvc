@@ -20,9 +20,20 @@ public class UserService extends BaseService<User> {
         super(tableName);
     }
 
+//    public void isWrongPassword(String email) {
+//        User user = this.findByEmail(email);
+//        if (user != null) {
+//            System.out.print("RUNNN");
+//            this.jdbi.useHandle(handle -> handle.createUpdate("UPDATE " + this.tableName + " SET countWrong = :countWrong WHERE id = :id")
+//                    .bind("countWrong", user.getCountWrong() + 1)
+//                    .bind("id", user.getId()).execute());
+//        }
+//
+//    }
+
     public boolean changeStatusAdmin(String id) {
         User user = this.findById(id, User.class);
-        if((user == null) || (user.getType() < TypeAccount.ADMIN.ordinal())) {
+        if ((user == null) || (user.getType() < TypeAccount.ADMIN.ordinal())) {
             return false;
         }
         int newStatus = (user.getStatus() == StatusAccount.ACTIVE.ordinal()) ? StatusAccount.DISABLE.ordinal() : StatusAccount.ACTIVE.ordinal();
@@ -37,7 +48,7 @@ public class UserService extends BaseService<User> {
     public boolean changePassword(String id, String oldPassword, String newPassword) {
         User user = this.findById(id, User.class);
 
-        if(!BCrypt.verifyer().verify(oldPassword.toCharArray(), user.getPassword()).verified) {
+        if (!BCrypt.verifyer().verify(oldPassword.toCharArray(), user.getPassword()).verified) {
             return false;
         }
 
@@ -47,11 +58,12 @@ public class UserService extends BaseService<User> {
 
         return true;
     }
+
     public ArrayList<User> findUser(TypeAccount type) {
-        if(type == TypeAccount.ADMIN) {
+        if (type == TypeAccount.ADMIN) {
             return (ArrayList<User>) this.jdbi.withHandle(handle -> handle.createQuery("SELECT * FROM " + this.tableName
                     + " WHERE type = ?").bind(0, type.ordinal()).mapToBean(User.class).list());
-        }else {
+        } else {
             return (ArrayList<User>) this.jdbi.withHandle(handle -> handle.createQuery("SELECT * FROM " + this.tableName
                     + " WHERE type = ?").bind(0, type.ordinal()).mapToBean(User.class).list());
         }
@@ -145,7 +157,7 @@ public class UserService extends BaseService<User> {
                                     "idUser = :idUser AND " +
                                     "idProduct = :idProduct " +
                                     ((cart.getColor() != null) ? ("AND color = '" + cart.getColor()) + "'" : "") +
-                                    ((cart.getPattern() != null) ? (" AND pattern = '" +  cart.getPattern()) +"'" : "")
+                                    ((cart.getPattern() != null) ? (" AND pattern = '" + cart.getPattern()) + "'" : "")
                     ).bind("idUser", idUser)
                     .bind("idProduct", cart.getIdProduct())
                     .mapToBean(CartDTO.class).first());
@@ -196,8 +208,9 @@ public class UserService extends BaseService<User> {
                     .execute();
         });
     }
+
     public void removeAllCart(String idUser) {
         this.jdbi.useHandle(handle ->
-            handle.createUpdate("DELETE FROM cart WHERE idUser = :idUser").bind("idUser", idUser).execute());
+                handle.createUpdate("DELETE FROM cart WHERE idUser = :idUser").bind("idUser", idUser).execute());
     }
 }

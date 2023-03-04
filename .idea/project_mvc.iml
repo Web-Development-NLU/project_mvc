@@ -1,9 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<module version="4">
-  <component name="NewModuleRootManager">
-    <content url="file://$MODULE_DIR$">
-      <excludeFolder url="file://$MODULE_DIR$/apache-tomcat-9.0.71" />
-      <excludeFolder url="file://$MODULE_DIR$/jdk-11.0.18" />
-    </content>
-  </component>
-</module>

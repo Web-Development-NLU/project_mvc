@@ -9,6 +9,7 @@ import org.jdbi.v3.core.Jdbi;
 
 import java.lang.reflect.Array;
 import java.util.ArrayList;
+import java.util.List;
 
 public abstract class BaseService<M extends IModel> {
     protected Jdbi jdbi;
