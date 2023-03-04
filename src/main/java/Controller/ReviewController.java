@@ -40,9 +40,8 @@ public class ReviewController extends HttpServlet {
             String name = request.getParameter("name");
             review = new Review(productId, name, email, comment, point);
         }
-        if(review.getName()!=null && review.getEmail()!=null && review.getComment()!=null && point>0 && point<=5) {
-            this.reviewService.create(review);
-        }
+
+        this.reviewService.create(review);
         response.sendRedirect("/product?id=" + productId);
     }
 }
