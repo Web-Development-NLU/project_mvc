@@ -26,13 +26,13 @@ public class CartController extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         HttpSession session = request.getSession(true);
         AuthorizationData authorizationData = (AuthorizationData) session.getAttribute("authorization");
-        if((boolean) request.getAttribute("logged")) {
-             ArrayList<CartDTO> carts = authorizationData.getCarts();
+        if ((boolean) request.getAttribute("logged")) {
+            ArrayList<CartDTO> carts = authorizationData.getCarts();
             request.setAttribute("carts", carts);
-        }else {
-            if(authorizationData == null) {
+        } else {
+            if (authorizationData == null) {
                 request.setAttribute("carts", new ArrayList<CartDTO>());
-            }else {
+            } else {
                 request.setAttribute("carts", authorizationData.getCarts());
             }
         }
@@ -46,19 +46,26 @@ public class CartController extends HttpServlet {
         int id = Integer.parseInt(request.getParameter("id"));
         HttpSession session = request.getSession(true);
         AuthorizationData authorizationData = (AuthorizationData) session.getAttribute("authorization");
-        if(Objects.equals(action, "DELETE")) {
-            if((boolean) request.getAttribute("logged")) {
+        if (Objects.equals(action, "DELETE")) {
+            if ((boolean) request.getAttribute("logged")) {
                 this.userService.deleteCart(id);
                 authorizationData.setCarts((ArrayList<CartDTO>) this.userService.getCart(authorizationData.getId()));
-            }else {
+            } else {
                 authorizationData.removeCart(id);
             }
-        }else {
+        } else {
             int amount = Integer.parseInt(request.getParameter("amount"));
-            if((boolean) request.getAttribute("logged")) {
+            if (amount
+                    < 1) {
+                session.setAttribute("authorization", authorizationData);
+                response.sendRedirect("/cart");
+                return;
+            }
+            ;
+            if ((boolean) request.getAttribute("logged")) {
                 this.userService.updateCart(id, amount);
                 authorizationData.setCarts((ArrayList<CartDTO>) this.userService.getCart(authorizationData.getId()));
-            }else {
+            } else {
                 authorizationData.updateCart(id, amount);
             }
         }
