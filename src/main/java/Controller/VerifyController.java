@@ -2,6 +2,7 @@ package Controller;
 
 import DTO.AuthorizationData;
 import DTO.UpdateUserDTO;
+import Model.Cart;
 import Model.MailContent;
 import Model.StatusAccount;
 import Model.User;
@@ -23,6 +24,7 @@ public class VerifyController extends HttpServlet {
 
     private UserService userService;
     private AuthenticationService authenticationService;
+
     @Override
     public void init() throws ServletException {
         super.init();
@@ -32,8 +34,15 @@ public class VerifyController extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        HttpSession session = request.getSession(true);
+        String id = (String) session.getAttribute("id");
+        if (id == null) {
+            response.sendRedirect("/");
+            return;
+        }
         request.getRequestDispatcher("/jsp/client/verifyAccount.jsp").forward(request, response);
     }
+
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         HttpSession session = request.getSession(true);
@@ -41,33 +50,45 @@ public class VerifyController extends HttpServlet {
         String action = request.getParameter("action");
         User user = this.userService.findById(id, User.class);
 
-        switch (action){
-            case "resend":
-            {
+        switch (action) {
+            case "resend": {
                 String rand = RandomStringUtils.randomAlphabetic(6);
                 this.authenticationService.sendVerify(rand, user.getEmail());
                 session.setAttribute("id", id);
                 session.setAttribute(user.getEmail(), rand);
                 response.sendRedirect("/verify");
-            }break;
-            case "verify":
-            {
+            }
+            break;
+            case "verify": {
                 String code = request.getParameter("code");
                 String verify = (String) session.getAttribute(user.getEmail());
-
-                if(!Objects.equals(code, verify)) {
+//                AuthorizationData authorizationData = (session.getAttribute("authorization") == null)
+//                        ? new AuthorizationData() : (AuthorizationData) session.getAttribute("authorization");
+                if (!Objects.equals(code, verify)) {
                     request.setAttribute("error", "Mã xác minh sai hãy nhập lại!!");
                     request.getRequestDispatcher("/jsp/client/verifyAccount.jsp").forward(request, response);
-                }else {
+                } else {
+//                    Cart cart = new Cart(
+//                            authorizationData.getId(),
+//                            product.getId(),
+//                            pattern,
+//                            color,
+//                            amount,
+//                            image
+//                    );
+//
                     user.setStatus(StatusAccount.ACTIVE.ordinal());
                     UpdateUserDTO dto = new UpdateUserDTO(user);
                     this.userService.update(id, dto);
+
                     session.removeAttribute("id");
                     session.removeAttribute(user.getEmail());
+
                     session.setAttribute("authorization", new AuthorizationData(id, user.getType()));
                     response.sendRedirect("/");
                 }
-            }break;
+            }
+            break;
         }
 
     }

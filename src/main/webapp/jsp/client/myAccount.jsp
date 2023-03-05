@@ -33,7 +33,7 @@
       <jsp:include page="common/searchBarMenu.jsp"/>
       <jsp:include page="common/head-bottom-page.jsp">
         <jsp:param name="title" value="TÀI KHOẢN CỦA TÔI"/>
-        <jsp:param name="page" value="/myAccount"/>
+        <jsp:param name="page" value="Tài khoản của tôi"/>
       </jsp:include>
     </header>
 
@@ -79,7 +79,7 @@
             </div>
           </div>
         </div>
-        <button class="btn-text-lg bgr-black hover-bg-red">SAVE</button>
+        <button class="btn-text-lg bgr-black hover-bg-red">Lưu</button>
       </form>
       <form action="${pageContext.request.contextPath}/changePasswordUser" method="post">
         <div class="checkout-detail row mt-5">

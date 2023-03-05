@@ -21,12 +21,15 @@
             src="<%=image%>">
     </td>
     <td>
-        <div><a href="#"><h4><%=name%></h4></a></div>
+        <div><a href="#"><h4><%=name%>
+        </h4></a></div>
         <c:if test="<%= !pattern.isEmpty() %>">
-            <div class="mb-1"><%=pattern%></div>
+            <div class="mb-1"><%=pattern%>
+            </div>
         </c:if>
         <c:if test="<%= !color.isEmpty() %>">
-            <div class="mb-1"><%=color%></div>
+            <div class="mb-1"><%=color%>
+            </div>
         </c:if>
     </td>
     <td class="cart-price">

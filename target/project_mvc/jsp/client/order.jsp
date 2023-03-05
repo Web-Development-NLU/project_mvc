@@ -1,7 +1,8 @@
 <%@ page import="java.util.ArrayList" %>
 <%@ page import="DTO.CartDTO" %>
 <%@ page import="Model.User" %>
-<%@ page import="java.text.DecimalFormat" %><%--
+<%@ page import="java.text.DecimalFormat" %>
+<%@ page import="DTO.AuthorizationData" %><%--
   Created by IntelliJ IDEA.
   User: Quang Tho
   Date: 03/12/2022
@@ -19,6 +20,8 @@
 </head>
 <body>
 <%
+    AuthorizationData authorizationData = (AuthorizationData) session.getAttribute("authorization");
+    boolean logged = (boolean) request.getAttribute("logged");
     ArrayList<CartDTO> carts = (ArrayList<CartDTO>) request.getAttribute("carts");
     User user = (User) request.getAttribute("user");
     String error = (request.getAttribute("error") == null) ? "" : request.getAttribute("error").toString();
@@ -67,7 +70,7 @@
         <div class="checkout-other-action mt-5 mb-5">
             <div class="action-link">
                 <i class="fa-regular fa-user action-icon"></i>
-                <a href="/login" class="action-content">BẤM VÀO ĐÂY ĐỂ ĐĂNG NHẬP</a>
+                <a href="/login" disabled="<%=logged ? "true":"false"%>" class="action-content">BẤM VÀO ĐÂY ĐỂ ĐĂNG NHẬP</a>
             </div>
         </div>
 

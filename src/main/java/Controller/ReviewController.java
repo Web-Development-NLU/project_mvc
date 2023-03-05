@@ -33,15 +33,15 @@ public class ReviewController extends HttpServlet {
         String comment = request.getParameter("comment");
         Review review;
 
-        if(user != null) {
-             review = new Review(user.getId(), productId, comment, point, user.getFirstName() + user.getLastName(), user.getEmail());
-        }else {
+        if (user != null) {
+            review = new Review(user.getId(), productId, comment, point, user.getFirstName() + user.getLastName(), user.getEmail());
+        } else {
             String email = request.getParameter("email");
             String name = request.getParameter("name");
             review = new Review(productId, name, email, comment, point);
         }
+            this.reviewService.create(review);
 
-        this.reviewService.create(review);
         response.sendRedirect("/product?id=" + productId);
     }
 }

@@ -26,14 +26,14 @@ public class AuthenticationContoller extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        request.getRequestDispatcher("jsp/client/authentication.jsp").forward(request,response);
+        request.getRequestDispatcher("jsp/client/authentication.jsp").forward(request, response);
     }
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String email = request.getParameter("email");
         String password = request.getParameter("password");
-        if(email.isEmpty() || password.isEmpty()) {
+        if (email.isEmpty() || password.isEmpty()) {
             request.setAttribute("errorLogin", "Email và mật khẩu không được bỏ trống");
             request.getRequestDispatcher("/jsp/client/authentication.jsp").forward(request, response);
             return;
@@ -41,15 +41,16 @@ public class AuthenticationContoller extends HttpServlet {
         User user = userService.findByEmail(email);
         HttpSession session = request.getSession(true);
         try {
-            if((user != null) && BCrypt.verifyer().verify(password.toCharArray(), user.getPassword()).verified){
+            if ((user != null) && BCrypt.verifyer().verify(password.toCharArray(), user.getPassword()).verified) {
                 ArrayList<CartDTO> carts = (ArrayList<CartDTO>) this.userService.getCart(user.getId());
                 AuthorizationData data = new AuthorizationData(user.getId(), user.getType());
                 data.setCarts(carts);
                 session.setAttribute("authorization", data);
                 response.sendRedirect("/");
-            }else {
+            } else {
                 request.setAttribute("errorLogin", "Email hoặc Mật khẩu của bạn bị sai");
                 request.setAttribute("emailLogin", email);
+//                userService.isWrongPassword(email);
                 request.getRequestDispatcher("/jsp/client/authentication.jsp").forward(request, response);
             }
         } catch (Exception e) {

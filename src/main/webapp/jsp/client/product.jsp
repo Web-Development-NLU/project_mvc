@@ -33,9 +33,9 @@
     <div class="head-bottom-breadcrumb">
         <div aria-label="breadcrumb">
             <ol class="breadcrumb color-black">
-                <li class="breadcrumb-item monts" aria-current="page"><a href="#" class="color-black">Trang chủ</a></li>
+                <li class="breadcrumb-item monts" aria-current="page"><a href="#" class="color-black">Trang chủ ></a></li>
                 <li class="breadcrumb-item monts" aria-current="page">Sản phẩm</li>
-                <li class="breadcrumb-item monts" aria-current="page">/ <%=product.getName()%></li>
+                <li class="breadcrumb-item monts" aria-current="page">> <%=product.getName()%></li>
 
             </ol>
         </div>
