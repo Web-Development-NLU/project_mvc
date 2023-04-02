@@ -20,17 +20,6 @@ public class UserService extends BaseService<User> {
         super(tableName);
     }
 
-//    public void isWrongPassword(String email) {
-//        User user = this.findByEmail(email);
-//        if (user != null) {
-//            System.out.print("RUNNN");
-//            this.jdbi.useHandle(handle -> handle.createUpdate("UPDATE " + this.tableName + " SET countWrong = :countWrong WHERE id = :id")
-//                    .bind("countWrong", user.getCountWrong() + 1)
-//                    .bind("id", user.getId()).execute());
-//        }
-//
-//    }
-
     public boolean changeStatusAdmin(String id) {
         User user = this.findById(id, User.class);
         if ((user == null) || (user.getType() < TypeAccount.ADMIN.ordinal())) {
@@ -88,8 +77,8 @@ public class UserService extends BaseService<User> {
             String id = handle.createQuery("SELECT UUID()").mapTo(String.class).first();
             model.setId(id);
             handle.createUpdate(
-                    "INSERT INTO " + this.tableName + " (id, email, password, status, type, createdAt) " +
-                            "VALUES (:id, :email, :password, :status, :type, :createdAt)"
+                    "INSERT INTO " + this.tableName + " (id, email, password, isGoogle, status, type, createdAt) " +
+                            "VALUES (:id, :email, :password, :isGoogle, :status, :type, :createdAt)"
             ).bindBean(model).execute();
 
             return id;
@@ -117,6 +106,26 @@ public class UserService extends BaseService<User> {
         }
 
         return user != null;
+    }
+
+    public User findAllUserEmail(String email) {
+        try {
+            return this.jdbi.withHandle(new HandleCallback<User, Exception>() {
+                public User withHandle(Handle handle) throws Exception {
+                    try {
+                        return handle.createQuery(
+                                        "SELECT * FROM " + tableName + " WHERE email = ?")
+                                .bind(0, email)
+                                .mapToBean(User.class).first();
+                    } catch (IllegalStateException exception) {
+                        return null;
+                    }
+
+                }
+            });
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
     }
 
     public User findByEmail(String email) {

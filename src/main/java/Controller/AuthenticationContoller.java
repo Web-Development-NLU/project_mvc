@@ -40,8 +40,9 @@ public class AuthenticationContoller extends HttpServlet {
         }
         User user = userService.findByEmail(email);
         HttpSession session = request.getSession(true);
+        boolean isPasswordValid = (user.getPassword() != null) ? BCrypt.verifyer().verify(password.toCharArray(), user.getPassword()).verified : false;
         try {
-            if ((user != null) && BCrypt.verifyer().verify(password.toCharArray(), user.getPassword()).verified) {
+            if ((user != null) && isPasswordValid && (user.getIsGoogle() == 0)) {
                 ArrayList<CartDTO> carts = (ArrayList<CartDTO>) this.userService.getCart(user.getId());
                 AuthorizationData data = new AuthorizationData(user.getId(), user.getType());
                 data.setCarts(carts);
@@ -50,7 +51,6 @@ public class AuthenticationContoller extends HttpServlet {
             } else {
                 request.setAttribute("errorLogin", "Email hoặc Mật khẩu của bạn bị sai");
                 request.setAttribute("emailLogin", email);
-//                userService.isWrongPassword(email);
                 request.getRequestDispatcher("/jsp/client/authentication.jsp").forward(request, response);
             }
         } catch (Exception e) {

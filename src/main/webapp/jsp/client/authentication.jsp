@@ -58,6 +58,26 @@
               <div class="btn-login">
                 <button class="btn-text-lg bgr-black hover-bg-red">Đăng nhập</button>
               </div>
+              <div>
+                <script src="https://accounts.google.com/gsi/client" async defer></script>
+                <div id="g_id_onload"
+                     data-client_id="508149570053-5u4qqa8j5kk0u6od6c12dtnr4ascf1b7.apps.googleusercontent.com"
+                     data-context="signin"
+                     data-ux_mode="popup"
+                     data-login_uri="${pageContext.request.contextPath}/loginGoogle"
+                     data-auto_prompt="false">
+                </div>
+
+                <div class="g_id_signin"
+                     data-type="standard"
+                     data-shape="rectangular"
+                     data-theme="outline"
+                     data-text="signin_with"
+                     data-size="large"
+                     data-locale="vi"
+                     data-logo_alignment="left">
+                </div>
+              </div>
             </form>
           </div>
         </div>
