@@ -49,7 +49,21 @@ public class AuthenticationContoller extends HttpServlet {
                 data.setCarts(carts);
                 session.setAttribute("authorization", data);
                 response.sendRedirect("/");
-            } else {
+            }
+            else if(user!=null && user.getIsWrong() >=5){
+                request.setAttribute("errorLogin", "Tài khoản của bạn đã bị khóa, Vui lòng chọn quên mật khẩu để lấy lại");
+                request.setAttribute("emailLogin", email);
+                request.getRequestDispatcher("/jsp/client/authentication.jsp").forward(request, response);
+            }
+            else if((user != null) && !isPasswordValid && (user.getIsGoogle() == 0)){
+                System.out.print("Run");
+                userService.updateIsWrong(user.getId(),user.getIsWrong()+1);
+                request.setAttribute("errorLogin", "Email hoặc Mật khẩu của bạn bị sai");
+                request.setAttribute("emailLogin", email);
+                request.getRequestDispatcher("/jsp/client/authentication.jsp").forward(request, response);
+            }
+
+            else {
                 request.setAttribute("errorLogin", "Email hoặc Mật khẩu của bạn bị sai");
                 request.setAttribute("emailLogin", email);
                 request.getRequestDispatcher("/jsp/client/authentication.jsp").forward(request, response);

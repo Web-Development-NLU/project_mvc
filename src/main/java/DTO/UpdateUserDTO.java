@@ -13,6 +13,7 @@ public class UpdateUserDTO implements BaseDTO{
     private String district;
     private String address;
     private LocalDate updatedAt;
+    private int isWrong;
     private int status;
     public UpdateUserDTO(String firstName, String lastName, String phone, String country, String city, String district, String address) {
         this.firstName = firstName;
@@ -25,7 +26,6 @@ public class UpdateUserDTO implements BaseDTO{
         this.status = 0;
         this.updatedAt = LocalDate.now();
     }
-
     public  UpdateUserDTO(User model) {
         this.firstName = model.getFirstName();
         this.lastName = model.getLastName();
