@@ -100,13 +100,30 @@ public class UserService extends BaseService<User> {
                         "city = :city, " +
                         "district = :district, " +
                         "address = :address, " +
-                        "status = :status" + " WHERE id = :id "
+                        "status = :status" +
+                        "isWrong= :isWrong" +
+                        " WHERE id = :id "
                 ).bind("id", id).bindBean(model).execute();
             });
         }
 
         return user != null;
     }
+
+//    public boolean updateIsWrong(String id, int quantity, BaseDTO model) {
+//        User user = this.findById(id, User.class);
+//
+//        if (user != null) {
+//            this.jdbi.useHandle(handle -> {
+//
+//                handle.createUpdate("UPDATE " + this.tableName +
+//                        " SET isWrong = :quantity,  " + "WHERE id =:id"
+//                ).bind("id", id).bindBean(model).execute();
+//            });
+//        }
+//
+//        return user != null;
+//    }
 
     public User findAllUserEmail(String email) {
         try {

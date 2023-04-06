@@ -13,6 +13,7 @@ public class User extends BaseModelUUID {
     private int status;
     private int type;
     private int isGoogle = 0;
+    private int isWrong = 0;
 
     public User() {
     }
@@ -24,12 +25,19 @@ public class User extends BaseModelUUID {
         this.status = status;
         this.type = type; // 0, 1, 2
     }
+
     public User(String email, int status, int type, int isGoogle) {
         super();
         this.email = email;
         this.status = status;
         this.type = type; // 0, 1, 2
         this.isGoogle = isGoogle;
+    }
+
+    public User(String email, int status, int isWrong) {
+        this.email = email;
+        this.status = status;
+        this.isWrong = isWrong;
     }
 
     public String getFirstName() {
@@ -76,7 +84,9 @@ public class User extends BaseModelUUID {
         return type;
     }
 
-    public int getIsGoogle() { return isGoogle; }
+    public int getIsGoogle() {
+        return isGoogle;
+    }
 
     public void setFirstName(String firstName) {
         this.firstName = firstName;
@@ -121,7 +131,19 @@ public class User extends BaseModelUUID {
     public void setType(int type) {
         this.type = type;
     }
-    public void setIsGoogle(int isGoogle) { this.isGoogle = isGoogle; }
+
+    public void setIsGoogle(int isGoogle) {
+        this.isGoogle = isGoogle;
+    }
+
+    public int getIsWrong() {
+        return isWrong;
+    }
+
+    public void setIsWrong(int isWrong) {
+        this.isWrong = isWrong;
+    }
+
     @Override
     public String toString() {
         return "User{" +
@@ -137,6 +159,7 @@ public class User extends BaseModelUUID {
                 ", status=" + status +
                 ", type=" + type +
                 ", isGoogle=" + isGoogle +
+                ", isWrong=" + isWrong +
                 '}';
     }
 }
