@@ -12,7 +12,8 @@
 </head>
 <%
     ArrayList<Slide> slides = (ArrayList<Slide>) request.getAttribute("slides");
-    String success = (request.getAttribute("success") == null) ? null : request.getAttribute("success").toString();
+        String success = (request.getAttribute("success") == null) ? null : request.getAttribute("success").toString();
+    String error = (request.getParameter("error") == null) ? null : request.getParameter("error").toString();
 %>
 <body>
     <div id="home-container">
@@ -46,6 +47,14 @@
         <c:if test="<%=success != null%>">
             <div class="alert-success alert alert-dismissible fade show fixed-top" role="alert">
                 <strong>Thành công</strong> <%=success%>
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+        </c:if>
+        <c:if test="<%=error != null%>">
+            <div class="alert-warning alert alert-dismissible fade show fixed-top" role="alert">
+                <strong>Thất bại</strong> <%=error%>
                 <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
