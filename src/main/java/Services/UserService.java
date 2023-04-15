@@ -71,6 +71,17 @@ public class UserService extends BaseService<User> {
                 .bind("password", hashPassword).execute());
     }
 
+    public void updateIsWrong(String id, int isWrong) {
+        User user = this.findById(id, User.class);
+        if (user == null) return;
+        this.jdbi.useHandle(handle -> handle.createUpdate(
+                        "UPDATE " + this.tableName +
+                                " SET isWrong = :isWrong" +
+                                " WHERE id = :id "
+                ).bind("id", id).bind("isWrong", isWrong)
+                .execute());
+    }
+
     @Override
     public String create(User model) {
         return this.jdbi.withHandle(handle -> {
@@ -100,13 +111,16 @@ public class UserService extends BaseService<User> {
                         "city = :city, " +
                         "district = :district, " +
                         "address = :address, " +
-                        "status = :status" + " WHERE id = :id "
+                        "status = :status" +
+                        "isWrong= :isWrong" +
+                        " WHERE id = :id "
                 ).bind("id", id).bindBean(model).execute();
             });
         }
 
         return user != null;
     }
+
 
     public User findAllUserEmail(String email) {
         try {

@@ -32,13 +32,21 @@ public class CustomerController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String page = request.getParameter("page");
+        String email =  request.getParameter("email");
+
         if(page == null) page = "";
         InfoCustomer model = new InfoCustomer(
-                request.getParameter("name"),
-                request.getParameter("email"),
+                request.getParameter("name"),email
+               ,
                 request.getParameter("message")
         );
+        if(email==null || email=="") {
+     String res=
+             "Please fill your emails";
+     response.sendRedirect("/" + page + "?error="+res);
 
+            return;
+        }
         this.customerService.create(model);
         MailContent mailContent = new MailContent("FURNITURE THIẾT KẾ NỘI THẤT",
                 "Chào " + request.getParameter("name") + " chúng tôi đã nhận dược câu hỏi của bạn chúng tôi sẽ sớm liên hệ bạn");
