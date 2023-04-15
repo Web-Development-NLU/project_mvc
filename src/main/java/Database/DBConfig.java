@@ -7,3 +7,4 @@ public class DBConfig {
     public static String host = "database-1.ctgbzqfqli9s.ap-southeast-2.rds.amazonaws.com";
     public static String port = "3306";
 }
+
