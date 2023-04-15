@@ -1,6 +1,6 @@
 Manifest-Version: 1.0
 Created-By: IntelliJ IDEA
-Built-By:thai
+Built-By: thai
 Build-Jdk: Oracle OpenJDK version 18.0.2
 
 
