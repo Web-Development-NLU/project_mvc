@@ -54,7 +54,7 @@
         </c:if>
         <c:if test="<%=error != null%>">
             <div class="alert-warning alert alert-dismissible fade show fixed-top" role="alert">
-                <strong>Thất bại</strong> <%=error%>
+                <strong>Failed</strong> <%=error%>
                 <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
