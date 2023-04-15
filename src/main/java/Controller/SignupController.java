@@ -45,7 +45,7 @@ public class SignupController extends HttpServlet {
                 request.setAttribute("error", "Email và mật khẩu không được bỏ trống");
                 request.getRequestDispatcher("/jsp/client/authentication.jsp").forward(request, response);
             }
-            else if (this.userService.findByEmail(email) != null) {
+            else if (this.userService.findAllUserEmail(email) != null) {
                 request.setAttribute("error", "Email của bạn đã được sử dụng");
                 request.setAttribute("email", request.getParameter("email"));
                 request.getRequestDispatcher("/jsp/client/authentication.jsp").forward(request, response);
