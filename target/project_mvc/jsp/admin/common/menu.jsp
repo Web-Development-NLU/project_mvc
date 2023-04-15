@@ -171,7 +171,7 @@
         <li class="menu-item">
             <a href="javascript:void(0);" class="menu-link menu-toggle">
                 <i class="menu-icon tf-icons bx bx-table"></i>
-                <div data-i18n="Authentications">Tài khoản người dùng</div>
+                <div data-i18n="Authentications">Quản lý tài khoản</div>
             </a>
             <ul class="menu-sub">
                 <c:if test="<%=data.getType() == TypeAccount.ROOT_ADMIN.ordinal()%>">

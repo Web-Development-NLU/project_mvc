@@ -2108,7 +2108,9 @@ progress {
   overflow-x: auto;
   -webkit-overflow-scrolling: touch;
 }
-
+.table-responsive.text-nowrap {
+  overflow: visible;
+}
 @media (max-width: 575.98px) {
   .table-responsive-sm {
     overflow-x: auto;
