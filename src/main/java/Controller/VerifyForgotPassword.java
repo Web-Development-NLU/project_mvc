@@ -63,6 +63,7 @@ public class VerifyForgotPassword extends HttpServlet {
                     request.getRequestDispatcher("/jsp/client/verifyForgotPassword.jsp").forward(request, response);
                 } else {
                     this.userService.resetPassword(user.getId(), newPassword);
+                    this.userService.updateIsWrong(user.getId(), 0);
                     session.removeAttribute("id");
                     session.removeAttribute(user.getEmail());
                     response.sendRedirect("/CompleteForgotPassword");
