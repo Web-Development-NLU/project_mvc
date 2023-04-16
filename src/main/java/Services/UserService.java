@@ -112,7 +112,7 @@ public class UserService extends BaseService<User> {
                         "district = :district, " +
                         "address = :address, " +
                         "status = :status" +
-                        "isWrong= :isWrong" +
+//                        "isWrong= :isWrong" +
                         " WHERE id = :id "
                 ).bind("id", id).bindBean(model).execute();
             });
