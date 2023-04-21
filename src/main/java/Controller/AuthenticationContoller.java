@@ -41,7 +41,6 @@ public class AuthenticationContoller extends HttpServlet {
         User user = userService.findByEmail(email);
         HttpSession session = request.getSession(true);
         boolean isPasswordValid = (user != null && user.getPassword() != null) ? BCrypt.verifyer().verify(password.toCharArray(), user.getPassword()).verified : false;
-        System.out.print("user" + user);
         try {
             if ((user != null) && isPasswordValid && (user.getIsGoogle() == 0)&& user.getIsWrong() <5) {
                 ArrayList<CartDTO> carts = (ArrayList<CartDTO>) this.userService.getCart(user.getId());
