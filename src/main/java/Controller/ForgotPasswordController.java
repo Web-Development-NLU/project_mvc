@@ -9,6 +9,7 @@ import javax.servlet.*;
 import javax.servlet.http.*;
 import javax.servlet.annotation.*;
 import java.io.IOException;
+import java.sql.Timestamp;
 
 @WebServlet(name = "ForgotPasswordController", value = "/forgotPassword")
 public class ForgotPasswordController extends HttpServlet {
@@ -33,7 +34,7 @@ public class ForgotPasswordController extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String email = request.getParameter("email");
         User user = this.userService.findByEmail(email);
-
+        Timestamp timeSendOTP=new Timestamp(System.currentTimeMillis());
         if(user == null) {
             request.setAttribute("errorForgot", "Email của bạn chưa được sử dụng để đăng ký hãy nhập lại");
             request.getRequestDispatcher("/jsp/client/forgotPassword.jsp").forward(request, response);
@@ -41,6 +42,7 @@ public class ForgotPasswordController extends HttpServlet {
             HttpSession session = request.getSession(true);
             String rand = RandomStringUtils.randomAlphabetic(6);
             this.authenticationService.sendVerify(rand, user.getEmail());
+            this.userService.updateTimeout(user.getId(),timeSendOTP);
             session.setAttribute("id", user.getId());
             session.setAttribute(user.getEmail(), rand);
             response.sendRedirect("/verifyForgotPassword");

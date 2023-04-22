@@ -2,21 +2,17 @@ package Controller;
 
 import DTO.AuthorizationData;
 import DTO.UpdateUserDTO;
-import Model.Cart;
-import Model.MailContent;
 import Model.StatusAccount;
 import Model.User;
 import Services.AuthenticationService;
-import Services.MailService;
 import Services.UserService;
-import com.mailjet.client.errors.MailjetException;
-import com.mailjet.client.errors.MailjetSocketTimeoutException;
 import org.apache.commons.lang3.RandomStringUtils;
 
 import javax.servlet.*;
 import javax.servlet.http.*;
 import javax.servlet.annotation.*;
 import java.io.IOException;
+import java.sql.Timestamp;
 import java.util.Objects;
 
 @WebServlet(name = "VerifyController", value = "/verify")
@@ -52,8 +48,10 @@ public class VerifyController extends HttpServlet {
 
         switch (action) {
             case "resend": {
+                Timestamp resettime=new Timestamp(System.currentTimeMillis());
                 String rand = RandomStringUtils.randomAlphabetic(6);
                 this.authenticationService.sendVerify(rand, user.getEmail());
+                this.userService.updateTimeout(user.getId(),resettime);
                 session.setAttribute("id", id);
                 session.setAttribute(user.getEmail(), rand);
                 response.sendRedirect("/verify");
@@ -62,31 +60,40 @@ public class VerifyController extends HttpServlet {
             case "verify": {
                 String code = request.getParameter("code");
                 String verify = (String) session.getAttribute(user.getEmail());
+                Timestamp time= this.userService.time(user.getEmail()).getTimeCurrent();
+                long timeSendOTP=time.getTime();
+                long timeCurrent=System.currentTimeMillis();
 //                AuthorizationData authorizationData = (session.getAttribute("authorization") == null)
 //                        ? new AuthorizationData() : (AuthorizationData) session.getAttribute("authorization");
                 if (!Objects.equals(code, verify)) {
                     request.setAttribute("error", "Mã xác minh sai hãy nhập lại!!");
                     request.getRequestDispatcher("/jsp/client/verifyAccount.jsp").forward(request, response);
-                } else {
+
+                 } else {
 //                    Cart cart = new Cart(
 //                            authorizationData.getId(),
 //                            product.getId(),
 //                            pattern,
 //                            color,
 //                            amount,
-//                            image
+//                            imagess
 //                    );
-//
-                    user.setStatus(StatusAccount.ACTIVE.ordinal());
-                    UpdateUserDTO dto = new UpdateUserDTO(user);
-                    this.userService.update(id, dto);
+//                   ==> 3*60*1000=150000(3 phut)
+                        if(timeCurrent-timeSendOTP>=180000){
+                        request.setAttribute("error", "Mã otp đã hết hạn sau 3 phút, Vui lòng gửi lại để lấy mã otp mới");
+                        request.getRequestDispatcher("/jsp/client/verifyAccount.jsp").forward(request, response);
+                    }else {
+                        user.setStatus(StatusAccount.ACTIVE.ordinal());
+                        UpdateUserDTO dto = new UpdateUserDTO(user);
+                        this.userService.update(id, dto);
 
-                    session.removeAttribute("id");
-                    session.removeAttribute(user.getEmail());
+                        session.removeAttribute("id");
+                        session.removeAttribute(user.getEmail());
 
-                    session.setAttribute("authorization", new AuthorizationData(id, user.getType()));
-                    response.sendRedirect("/");
-                }
+                        session.setAttribute("authorization", new AuthorizationData(id, user.getType()));
+                        response.sendRedirect("/");
+                    }
+                    }
             }
             break;
         }

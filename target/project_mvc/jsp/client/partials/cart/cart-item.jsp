@@ -5,6 +5,8 @@
   Time: 14:56
   To change this template use File | Settings | File Templates.
 --%>
+<%@ page import="Model.Product" %>
+<%@ page import="java.util.ArrayList" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page isELIgnored="false" %>
@@ -15,13 +17,14 @@
     String pattern = request.getParameter("pattern");
     String color = request.getParameter("color");
     String image = request.getParameter("image");
+    Product product = (Product) request.getAttribute("product");
 %>
 <tr class="cart-item">
-    <td class="cart-item_img"><img
-            src="<%=image%>">
+    <td class="cart-item_img"><a href="/products"><img
+            src="<%=image%>"></a>
     </td>
     <td>
-        <div><a href="#"><h4><%=name%>
+        <div><a href="/products"><h4><%=name%>
         </h4></a></div>
         <c:if test="<%= !pattern.isEmpty() %>">
             <div class="mb-1"><%=pattern%>

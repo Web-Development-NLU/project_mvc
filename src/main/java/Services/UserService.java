@@ -2,15 +2,12 @@ package Services;
 
 import DTO.BaseDTO;
 import DTO.CartDTO;
-import Model.Cart;
-import Model.StatusAccount;
-import Model.TypeAccount;
-import Model.User;
+import Model.*;
 import at.favre.lib.crypto.bcrypt.BCrypt;
 import org.jdbi.v3.core.Handle;
 import org.jdbi.v3.core.HandleCallback;
 
-import java.lang.reflect.Type;
+import java.sql.Timestamp;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
@@ -81,6 +78,16 @@ public class UserService extends BaseService<User> {
                 ).bind("id", id).bind("isWrong", isWrong)
                 .execute());
     }
+    public void updateTimeout(String id, Timestamp timeout) {
+        User user = this.findById(id, User.class);
+        if (user == null) return;
+        this.jdbi.useHandle(handle -> handle.createUpdate(
+                        "UPDATE " + this.tableName +
+                                " SET timeCurrent = :timeout" +
+                                " WHERE id = :id "
+                ).bind("id", id).bind("timeout", timeout)
+                .execute());
+    }
 
     @Override
     public String create(User model) {
@@ -112,7 +119,7 @@ public class UserService extends BaseService<User> {
                         "district = :district, " +
                         "address = :address, " +
                         "status = :status" +
-                        "isWrong= :isWrong" +
+//                        "isWrong= :isWrong" +
                         " WHERE id = :id "
                 ).bind("id", id).bindBean(model).execute();
             });
@@ -129,6 +136,26 @@ public class UserService extends BaseService<User> {
                     try {
                         return handle.createQuery(
                                         "SELECT * FROM " + tableName + " WHERE email = ?")
+                                .bind(0, email)
+                                .mapToBean(User.class).first();
+                    } catch (IllegalStateException exception) {
+                        return null;
+                    }
+
+                }
+            });
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    public User time(String email) {
+        try {
+            return this.jdbi.withHandle(new HandleCallback<User, Exception>() {
+                public User withHandle(Handle handle) throws Exception {
+                    try {
+                        return handle.createQuery(
+                                        "SELECT timeCurrent FROM " + tableName + " WHERE email = ? " )
                                 .bind(0, email)
                                 .mapToBean(User.class).first();
                     } catch (IllegalStateException exception) {

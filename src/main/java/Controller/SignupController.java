@@ -1,9 +1,6 @@
 package Controller;
 
-import Model.MailContent;
-import Model.StatusAccount;
-import Model.TypeAccount;
-import Model.User;
+import Model.*;
 import Services.AuthenticationService;
 import Services.MailService;
 import Services.UserService;
@@ -15,6 +12,9 @@ import javax.servlet.*;
 import javax.servlet.http.*;
 import javax.servlet.annotation.*;
 import java.io.IOException;
+import java.sql.Timestamp;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 @WebServlet(name = "SignupController", value = "/signup")
 public class SignupController extends HttpServlet {
@@ -56,16 +56,17 @@ public class SignupController extends HttpServlet {
                 request.getRequestDispatcher("/jsp/client/authentication.jsp").forward(request, response);
             }
             else {
+                Timestamp timeCurrent=new Timestamp(System.currentTimeMillis());
                 String passwordHash = BCrypt.withDefaults().hashToString(8, password.toCharArray());
                 User model = new User(email, passwordHash, StatusAccount.DISABLE.ordinal(), TypeAccount.USER.ordinal());
-
                 String id = this.userService.create(model);
                 String rand = RandomStringUtils.randomAlphabetic(6);
 
                 this.authenticationService.sendVerify(rand, email);
-
+                this.userService.updateTimeout(id,timeCurrent);
                 session.setAttribute("id", id);
                 session.setAttribute(email, rand);
+
                 response.sendRedirect(request.getContextPath() + "/verify");
             }
         } catch (Exception e) {
