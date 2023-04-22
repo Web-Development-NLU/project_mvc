@@ -64,8 +64,7 @@ public class AuthenticationContoller extends HttpServlet {
                 request.setAttribute("errorLogin", "Email hoặc Mật khẩu của bạn bị sai");
                 request.setAttribute("emailLogin", email);
                 request.getRequestDispatcher("/jsp/client/authentication.jsp").forward(request, response);
-            }
-            else {
+            }else {
                 request.setAttribute("errorLogin", "Email hoặc Mật khẩu của bạn bị sai");
                 request.setAttribute("emailLogin", email);
                 request.getRequestDispatcher("/jsp/client/authentication.jsp").forward(request, response);

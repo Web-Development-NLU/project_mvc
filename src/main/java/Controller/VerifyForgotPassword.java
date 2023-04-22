@@ -64,8 +64,7 @@ public class VerifyForgotPassword extends HttpServlet {
                 if (!Objects.equals(code, verify)) {
                     request.setAttribute("error", "Mã xác minh sai hãy nhập lại!!");
                     request.getRequestDispatcher("/jsp/client/verifyForgotPassword.jsp").forward(request, response);
-                }
-                else {
+                } else {
                     Timestamp time=this.userService.time(user.getEmail()).getTimeCurrent();
                     // chuyển thời tgian lấy được từ type timestamp thành type long
                     long timeSendOTP=time.getTime();
