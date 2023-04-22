@@ -43,24 +43,22 @@ public class AuthenticationContoller extends HttpServlet {
         }
         User user = userService.findByEmail(email);
         HttpSession session = request.getSession(true);
-        boolean isPasswordValid = (user !=null && user.getPassword() != null) ? BCrypt.verifyer().verify(password.toCharArray(), user.getPassword()).verified : false;
-        System.out.print(user);
+        boolean isPasswordValid = (user != null && user.getPassword() != null) ? BCrypt.verifyer().verify(password.toCharArray(), user.getPassword()).verified : false;
+        System.out.print("user" + user);
         try {
-            if ((user != null) && isPasswordValid && (user.getIsGoogle() == 0)) {
+            if ((user != null) && isPasswordValid && (user.getIsGoogle() == 0)&& user.getIsWrong() <5) {
                 ArrayList<CartDTO> carts = (ArrayList<CartDTO>) this.userService.getCart(user.getId());
                 AuthorizationData data = new AuthorizationData(user.getId(), user.getType());
                 data.setCarts(carts);
                 session.setAttribute("authorization", data);
                 response.sendRedirect("/");
-            }
-            else if(user!=null && user.getIsWrong() >=5){
+            } else if (user != null && user.getIsWrong() >= 5) {
                 request.setAttribute("errorLogin", "Tài khoản của bạn đã bị khóa, Vui lòng chọn quên mật khẩu để lấy lại");
                 request.setAttribute("emailLogin", email);
                 request.getRequestDispatcher("/jsp/client/authentication.jsp").forward(request, response);
-            }
-            else if((user != null) && !isPasswordValid && (user.getIsGoogle() == 0)){
+            } else if ((user != null) && !isPasswordValid && (user.getIsGoogle() == 0)) {
                 System.out.print("Run");
-                userService.updateIsWrong(user.getId(),user.getIsWrong()+1);
+                userService.updateIsWrong(user.getId(), user.getIsWrong() + 1);
                 request.setAttribute("errorLogin", "Email hoặc Mật khẩu của bạn bị sai");
                 request.setAttribute("emailLogin", email);
                 request.getRequestDispatcher("/jsp/client/authentication.jsp").forward(request, response);

@@ -65,11 +65,20 @@ public class VerifyForgotPassword extends HttpServlet {
                     request.setAttribute("error", "Mã xác minh sai hãy nhập lại!!");
                     request.getRequestDispatcher("/jsp/client/verifyForgotPassword.jsp").forward(request, response);
                 } else {
-                    this.userService.resetPassword(user.getId(), newPassword);
-                    this.userService.updateIsWrong(user.getId(), 0);
-                    session.removeAttribute("id");
-                    session.removeAttribute(user.getEmail());
-                    response.sendRedirect("/CompleteForgotPassword");
+                    Timestamp time=this.userService.time(user.getEmail()).getTimeCurrent();
+                    // chuyển thời tgian lấy được từ type timestamp thành type long
+                    long timeSendOTP=time.getTime();
+                    long timeCurrent=System.currentTimeMillis();
+                    if((timeCurrent-timeSendOTP)>180000){
+                        request.setAttribute("error", "Mã otp đã hết hạn sau 3 phút vui lòng gửi lại để nhận mã otp mới");
+                        request.getRequestDispatcher("/jsp/client/verifyForgotPassword.jsp").forward(request, response);
+                    }else {
+                        this.userService.resetPassword(user.getId(), newPassword);
+                        this.userService.updateIsWrong(user.getId(), 0);
+                        session.removeAttribute("id");
+                        session.removeAttribute(user.getEmail());
+                        response.sendRedirect("/CompleteForgotPassword");
+                    }
                 }
             }
             break;
