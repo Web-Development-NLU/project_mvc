@@ -1,4 +1,4 @@
-<%--
+<%@ page import="Model.Timeout" %><%--
   Created by IntelliJ IDEA.
   User: Quang Tho
   Date: 04/12/2022
@@ -31,7 +31,7 @@
           <div class="forgot-password container-fluid">
               <div class="forgot-password-swap">
                   <div class="form-reset-password">
-                      <p class="monts">Chúng tôi đã gửi một đoạn code xác minh email đến email đăng ký của bạn hãy kiểm tra email và nhập đoạn code vào ô bên dưới</p>
+                      <p class="monts">Chúng tôi đã gửi một đoạn code xác minh email đến email đăng ký của bạn hãy kiểm tra email và nhập đoạn code vào ô bên dưới </p>
                       <c:if test="<%= !error.isEmpty() %>">
                           <div class="color-red mb-3 overflow-hidden">
                               <%= error %>

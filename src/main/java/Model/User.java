@@ -1,5 +1,7 @@
 package Model;
 
+import java.sql.Timestamp;
+
 public class User extends BaseModelUUID {
     private String firstName;
     private String lastName;
@@ -14,6 +16,7 @@ public class User extends BaseModelUUID {
     private int type;
     private int isGoogle = 0;
     private int isWrong = 0;
+    private Timestamp timeCurrent;
 
     public User() {
     }
@@ -38,6 +41,14 @@ public class User extends BaseModelUUID {
         this.email = email;
         this.status = status;
         this.isWrong = isWrong;
+    }
+    public User(String email, Timestamp timeCurrent) {
+        this.email = email;
+        this.timeCurrent = timeCurrent;
+    }
+
+    public User(Timestamp timeCurrent) {
+        this.timeCurrent = timeCurrent;
     }
 
     public String getFirstName() {
@@ -140,6 +151,14 @@ public class User extends BaseModelUUID {
         return isWrong;
     }
 
+    public Timestamp getTimeCurrent() {
+        return timeCurrent;
+    }
+
+    public void setTimeCurrent(Timestamp timeCurrent) {
+        this.timeCurrent = timeCurrent;
+    }
+
     public void setIsWrong(int isWrong) {
         this.isWrong = isWrong;
     }
@@ -160,6 +179,7 @@ public class User extends BaseModelUUID {
                 ", type=" + type +
                 ", isGoogle=" + isGoogle +
                 ", isWrong=" + isWrong +
+                ", timeCurrent=" + timeCurrent +
                 '}';
     }
 }
