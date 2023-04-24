@@ -106,7 +106,7 @@
                   <a class="monts" href="#">chính sách bảo mật của chúng tôi.</a></p>
               </div>
               <div class="btn-register">
-                <button class="btn-text-lg bgr-black hover-bg-red">Đăng ký</button>
+                <button class="btn-text-lg bgr-black hover-bg-red" >Đăng ký</button>
               </div>
             </form>
           </div>
