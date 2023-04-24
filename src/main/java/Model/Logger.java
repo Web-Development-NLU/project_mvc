@@ -10,6 +10,9 @@ public class Logger {
     private String request;
     private String userId;
     private String agent;
+    private String data;
+    private int status;
+    private String message;
     private LocalDateTime createdAt;
 
     public Logger(String method, String request, String userId, String agent) {
@@ -19,6 +22,18 @@ public class Logger {
         this.userId = userId;
         this.agent = agent;
         this.createdAt = LocalDateTime.now();
+    }
+
+    public String getData() {
+        return data;
+    }
+
+    public int getStatus() {
+        return status;
+    }
+
+    public String getMessage() {
+        return message;
     }
 
     public String getId() {
@@ -54,7 +69,7 @@ public class Logger {
     }
 
     public void setUserId(String userId) {
-        userId = userId;
+        this.userId = userId;
     }
 
     public void setCreatedAt(LocalDateTime createdAt) {
@@ -67,5 +82,17 @@ public class Logger {
 
     public void setAgent(String agent) {
         this.agent = agent;
+    }
+
+    public void setData(String data) {
+        this.data = data;
+    }
+
+    public void setStatus(int status) {
+        this.status = status;
+    }
+
+    public void setMessage(String message) {
+        this.message = message;
     }
 }
