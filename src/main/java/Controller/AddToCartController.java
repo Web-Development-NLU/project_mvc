@@ -49,7 +49,6 @@ public class AddToCartController extends HttpServlet {
             }
         } else if (hasPattern) {
             if (pattern == null) {
-                System.out.print("Run2");
                 session.setAttribute("error" + idProduct, "Please choose pattern!");
                 response.sendRedirect("/product?id=" + idProduct);
                 return;
@@ -61,7 +60,6 @@ public class AddToCartController extends HttpServlet {
                 return;
             }
         }
-        System.out.print("Run");
 
         int amount = request.getParameter("amount") != null ? Integer.parseInt(request.getParameter("amount")) : 0;
         if (amount <= 0) response.sendRedirect("/product?id=" + idProduct);
