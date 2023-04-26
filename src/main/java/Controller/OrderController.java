@@ -55,6 +55,7 @@ public class OrderController extends HttpServlet {
         String phone = request.getParameter("phone");
         String email = request.getParameter("email");
         HttpSession session = request.getSession(true);
+        System.out.print(city);
         AuthorizationData authorizationData = (AuthorizationData) session.getAttribute("authorization");
         if (firstName.isEmpty() || lastName.isEmpty() || country.isEmpty() || city.isEmpty() || district.isEmpty() || address.isEmpty() || phone.isEmpty() || email.isEmpty()) {
             response.sendRedirect("/order?error=emptyInfo");

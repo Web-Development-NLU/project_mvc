@@ -23,18 +23,18 @@ public class MyAccount extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         boolean logged = (boolean) request.getAttribute("logged");
-        if(!logged) {
+        if (!logged) {
             response.sendRedirect("/");
-        }else {
+        } else {
             boolean errorChangePass = request.getParameter("errorChangePass") != null;
-            if(errorChangePass) {
+            if (errorChangePass) {
                 request.setAttribute("errorChangePass", "Mật khẩu cũ không chính xác");
             }
 
             String success = (request.getParameter("success") == null) ? "" : request.getParameter("success");
-            if(success.equals("changePass")) {
+            if (success.equals("changePass")) {
                 request.setAttribute("success", "Thay đổi mật khẩu thành công");
-            }else if(success.equals("changeInfo")){
+            } else if (success.equals("changeInfo")) {
                 request.setAttribute("success", "Cập nhật thông tin thành công");
             }
 
@@ -46,11 +46,11 @@ public class MyAccount extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         HttpSession session = request.getSession(true);
 
-        if(!((boolean) request.getAttribute("logged"))) {
+        if (!((boolean) request.getAttribute("logged"))) {
             response.sendRedirect("/login");
             return;
         }
-
+        System.out.print(request.getParameter("city"));
         AuthorizationData data = (AuthorizationData) session.getAttribute("authorization");
 
         UpdateUserDTO dto = new UpdateUserDTO(
@@ -62,7 +62,7 @@ public class MyAccount extends HttpServlet {
                 request.getParameter("district"),
                 request.getParameter("address")
         );
-         dto.setStatus(StatusAccount.ACTIVE.ordinal());
+        dto.setStatus(StatusAccount.ACTIVE.ordinal());
 
         this.userService.update(data.getId(), dto);
 

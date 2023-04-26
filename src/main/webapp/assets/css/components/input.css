@@ -70,7 +70,7 @@
 .input-secondary {
     position: relative;
 }
-.input-secondary > input {
+.input-secondary > input,.input-secondary > select {
     padding: 0 1.25rem;
     border: 1px solid var(--cta-02);
     outline: none;

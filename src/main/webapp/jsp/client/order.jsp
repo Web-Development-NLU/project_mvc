@@ -99,15 +99,42 @@
                     </div>
                     <div class="input-secondary">
                         <label for="city">Thành phố/ Tỉnh *</label>
-                        <input type="text" id="city" name="city" value="<%= city %>">
+<%--                        <input type="text" id="city" name="city" value="<%= city %>">--%>
+                        <select name="city" id="city">
+                            <option value=" <%=city%>" name="city" selected>
+                                <%=city%>
+                            </option>
+                            <option value="HCM" name="city">
+                                HCM
+                            </option>
+                            <option value="Thu Duc" name="city">
+                                Thu Duc
+                            </option>
+                        </select>
                     </div>
                     <div class="input-secondary">
                         <label for="district">Quận *</label>
-                        <input type="text" id="district" name="district" value="<%= district %>">
+<%--                        <input type="text" id="district" name="district" value="<%= district %>">--%>
+                        <select name="district" id="district">
+                            <option value=" <%=district%>" name="district" selected>
+                                <%=district%>
+                            </option>
+                            <option value="quan 10" name="district" label="Ho Chi Minh">
+                                10
+                            </option>
+                        </select>
                     </div>
                     <div class="input-secondary">
                         <label for="address">Địa chỉ cụ thể *</label>
-                        <input type="text" id="address" name="address" value="<%= address %>">
+<%--                        <input type="text" id="address" name="address" value="<%= address %>">--%>
+                        <select name="address" id="address">
+                            <option value=" <%=address%>" name="address" selected>
+                                <%=address%>
+                            </option>
+                            <option value="Tang nhon phu B" name="address" label="Ho Chi Minh">
+                                Tang nhon phu B
+                            </option>
+                        </select>
                     </div>
                     <div class="input-secondary">
                         <label for="phone">Số điện thoại *</label>
