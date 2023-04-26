@@ -1,6 +1,7 @@
 @import url('./base/_base.css');
 @import url('./components/_components.css');
 @import url('./sections/_sections.css');
+@import url('./components/OrderStatus.css');
 * {
   margin: 0;
   padding: 0;

@@ -35,6 +35,7 @@
                         <div class="cart-menu_item">GIỎ HÀNG</div>
                         <div class="cart-menu_item">NHẬP THÔNG TIN </div>
                         <div class="cart-menu_item selected">THANH TOÁN</div>
+                        <div class="cart-menu_item">TRẠNG THÁI ĐƠN HÀNG</div>
                     </div>
                     <div class="checkout-other-action mt-5 mb-5">
                         <div class="action-link">
@@ -109,7 +110,6 @@
                                             <option value="en">English</option>
                                         </select>
                                     </div>
-                                    <button type="submit" class="btn btn-text bgr-black">Thanh toán</button>
                                 </form>
                             </div>
                         </div>
