@@ -79,7 +79,7 @@
                                     <a class="dropdown-item" href="${pageContext.request.contextPath}/myAccount">Tài khoản của tôi</a>
                                     <a class="dropdown-item" href="${pageContext.request.contextPath}/orderList">Đơn hàng của tôi
                                         <span><i class="fa-solid fa-list"></i></span></a>
-                                    <a class="dropdown-item" href="${pageContext.request.contextPath}/OrderStatusController"> trang thai Đơn hàng của tôi
+                                    <a class="dropdown-item" href="${pageContext.request.contextPath}/Ordered">Trạng thái đơn hàng
                                         <span><i class="fa-solid fa-list"></i></span></a>
                                     <a class="dropdown-item" href="${pageContext.request.contextPath}/logout">Đăng xuất
                                         <span><i class="fa-solid fa-right-from-bracket"></i></span></a>
