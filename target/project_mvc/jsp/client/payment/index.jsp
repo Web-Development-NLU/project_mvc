@@ -110,6 +110,7 @@
                                             <option value="en">English</option>
                                         </select>
                                     </div>
+                                    <button type="submit" class="btn btn-text bgr-black">Thanh toán</button>
                                 </form>
                             </div>
                         </div>
