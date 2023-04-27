@@ -27,52 +27,128 @@
                     <jsp:param name="page" value="Thanh toán thành công"/>
                 </jsp:include>
             </header>
-            <div class="container mt-5 mb-5">
-                <div class="header clearfix">
-                    <h3 class="text-muted">VNPAY RESPONSE</h3>
-                </div>
-                <div class="table-responsive">
-                    <div class="form-group">
-                        <label >Mã đơn hàng:</label>
-                        <label><%=order.getId()%></label>
-                    </div>
-                    <c:if test="<%= order.getTransID() != null %>">
-                        <div class="form-group">
-                            <label>Mã giao dịch VNPAY:</label>
-                            <label><%=order.getTransID()%></label>
-                        </div>
-                    </c:if>
-                    <div class="form-group">
-                        <label >Tên khách hàng:</label>
-                        <label><%=order.getUsername()%></label>
-                    </div>
-                    <div class="form-group">
-                        <label>Quốc gia:</label>
-                        <label><%=order.getCountry()%></label>
-                    </div>
-                    <div class="form-group">
-                        <label >Thành phố:</label>
-                        <label><%=order.getCity()%></label>
-                    </div>
-                    <div class="form-group">
-                        <label >Quận/Huyện:</label>
-                        <label><%=order.getDistrict()%></label>
-                    </div>
-                    <div class="form-group">
-                        <label >Số điện thoại:</label>
-                        <label><%=order.getPhone()%></label>
-                    </div>
-                    <div class="form-group">
-                        <label >Email:</label>
-                        <label><%=order.getEmail()%></label>
-                    </div>
-                </div>
+            <section class="h-100 gradient-custom" >
+                <div class="container py-5 h-100">
+                    <div class="row d-flex justify-content-center align-items-center h-100" style="width: auto" >
+                        <div class="col-lg-10 col-xl-8" style="width:1400px">
+                            <div class="card" style="border-radius: 10px;width:1400px;margin-left:-330px">
+                                <div class="card-header">
+                                    <div class="card-body p-4">
 
-            </div>
+                                        <div class="d-flex justify-content-between align-items-center">
+                                            <div class="d-flex flex-column">
+                                                <span class="lead fw-normal">Trạng thái đơn hàng của bạn</span>
+                                            </div>
+                                        </div>
+                                        <hr class="my-4">
+
+                                        <div class="d-flex flex-row justify-content-between align-items-center align-content-center">
+                                            <span class="big-dot active d-flex justify-content-center align-items-center"><i class="fa fa-check text-white"></i></span>
+                                            <hr class="flex-fill track-line "><span
+                                                class="d-flex justify-content-center align-items-center big-dot dot ">
+                                    <i class="fa fa-check text-white"></i></span>
+                                            <hr class="flex-fill track-line"><span
+                                                class="d-flex justify-content-center align-items-center big-dot dot">
+                                    <i class="fa fa-check text-white"></i></span>
+                                        </div>
+
+                                        <div class="d-flex flex-row justify-content-between align-items-center">
+                                            <div class="d-flex flex-column align-items-start"><a class="nav-link" type="button" href="${pageContext.request.contextPath}/Ordered"><span class="color-black">Đã đặt hàng</span></a></div>
+                                            <div class="d-flex flex-column align-items-center"><a class="nav-link" type="button" href="${pageContext.request.contextPath}/OrderDelivery"><span class="color-black">Đang giao hàng</span></a></div>
+                                            <div class="d-flex flex-column align-items-end"><a class="nav-link" type="button" href="${pageContext.request.contextPath}/DeliverySuccess"><span class="color-black">Giao hàng thành công</span></a></div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="cart-table mt-5 col-12 col-md-8">
+                                    <table class="table table-bordered" style="width:1365px">
+                                        <thead>
+                                        <tr>
+                                            <th>MÃ ĐƠN HÀNG</th>
+                                            <th class="smart-cell">SẢN PHẨM</th>
+                                            <th>TÊN</th>
+                                            <th>Mẫu</th>
+                                            <th>Màu</th>
+                                            <th>Số lượng</th>
+                                            <th>Tổng</th>
+                                        </tr>
+                                        </thead>
+                                        <tbody class="cart-list">
+                                        <tr>
+                                            <td>MariaAnders</td>
+                                            <td><img src="https://mdbcdn.b-cdn.net/img/Photos/Horizontal/E-commerce/Products/13.webp"
+                                                     class="img-fluid" alt="Phone"></td>
+                                            <td>Maria Anders</td>
+                                            <td>Germany</td>
+                                            <td>Alfreds Futterkiste</td>
+                                            <td>Maria Anders</td>
+                                            <td>Germany</td>
+                                        </tr>
+                                        <tr>
+                                            <td colspan="100" style="text-align: center">
+                                                Thời gian đặt hàng thành công: 15-12-2023 đến 20-12-2023 <br>
+                                                Thời gian giao hàng dự kiến: 15-12-2023 đến 20-12-2023                                            </td>
+                                        </tr>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
             <jsp:include page="common/footer.jsp"/>
         </div>
 
         <jsp:include page="common/tail.jsp"/>
         <script src="/assets/payment/jquery-1.11.3.min.js"></script>
     </body>
+    <style>
+        .track-line {
+            height: 2px !important;
+            background-color: darkgray;
+            opacity: 1;
+        }
+
+        .dot {
+            height: 10px;
+            width: 10px;
+            margin-left: 3px;
+            margin-right: 3px;
+            margin-top: 0px;
+            background-color: darkgray;
+            border-radius: 50%;
+            display: inline-block
+        }
+
+        .big-dot {
+            height: 25px;
+            width: 25px;
+            margin-left: 0px;
+            margin-right: 0px;
+            margin-top: 0px;
+            background-color: darkgray;
+            border-radius: 50%;
+            display: inline-block;
+        }
+
+        .big-dot i {
+            font-size: 12px;
+        }
+
+        .card-stepper {
+            z-index: 0
+        }
+        .gradient-custom {
+            /* fallback for old browsers */
+            background: white;
+
+            /* Chrome 10-25, Safari 5.1-6 */
+            /*background: -webkit-linear-gradient(to top left, rgba(205, 156, 242, 1), rgba(246, 243, 255, 1));*/
+
+            /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+            /*background: linear-gradient(to top left, rgba(205, 156, 242, 1), rgba(246, 243, 255, 1))*/
+        }
+        .active{
+            background-color: red;
+        }
+    </style>
 </html>

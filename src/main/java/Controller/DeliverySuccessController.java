@@ -9,7 +9,7 @@ import java.io.IOException;
 public class DeliverySuccessController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        request.getRequestDispatcher("/jsp/client/StatusOrder/DeliverySuccess.jsp").forward(request,response);
+        request.getRequestDispatcher("/jsp/client/DeliverySuccess.jsp").forward(request,response);
     }
 
     @Override

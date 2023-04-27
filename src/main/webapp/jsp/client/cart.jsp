@@ -35,8 +35,6 @@
             <div class="cart-menu_item selected">GIỎ HÀNG</div>
             <div class="cart-menu_item">NHẬP THÔNG TIN</div>
             <div class="cart-menu_item">THANH TOÁN</div>
-            <div class="cart-menu_item">TRẠNG THÁI ĐƠN HÀNG</div>
-
         </div>
 
         <c:choose>
