@@ -33,7 +33,7 @@
     String address = "";
     String phone = "";
     String email = "";
-    if(user != null) {
+    if (user != null) {
         firstName = (user.getFirstName() != null) ? user.getFirstName() : "";
         lastName = (user.getLastName() != null) ? user.getLastName() : "";
         country = (user.getCountry() != null) ? user.getCountry() : "";
@@ -46,7 +46,7 @@
 
     double sumPrice = 0;
 
-    for(CartDTO cart: carts) {
+    for (CartDTO cart : carts) {
         sumPrice += cart.getPrice() * cart.getAmount();
     }
 %>
@@ -63,14 +63,15 @@
     <section id="checkout-content" class="container-fluid">
         <div class="cart-menu">
             <div class="cart-menu_item">GIỎ HÀNG</div>
-            <div class="cart-menu_item selected">NHẬP THÔNG TIN </div>
+            <div class="cart-menu_item selected">NHẬP THÔNG TIN</div>
             <div class="cart-menu_item">THANH TOÁN</div>
         </div>
 
         <div class="checkout-other-action mt-5 mb-5">
             <div class="action-link">
                 <i class="fa-regular fa-user action-icon"></i>
-                <a href="/login" disabled="<%=logged ? "true":"false"%>" class="action-content">BẤM VÀO ĐÂY ĐỂ ĐĂNG NHẬP</a>
+                <a href="/login" disabled="<%=logged ? "true":"false"%>" class="action-content">BẤM VÀO ĐÂY ĐỂ ĐĂNG
+                    NHẬP</a>
             </div>
         </div>
 
@@ -99,40 +100,29 @@
                     </div>
                     <div class="input-secondary">
                         <label for="city">Thành phố/ Tỉnh *</label>
-<%--                        <input type="text" id="city" name="city" value="<%= city %>">--%>
+                        <%--                        <input type="text" id="city" name="city" value="<%= city %>">--%>
                         <select name="city" id="city">
                             <option value=" <%=city%>" name="city" selected>
                                 <%=city%>
-                            </option>
-                            <option value="HCM" name="city">
-                                HCM
-                            </option>
-                            <option value="Thu Duc" name="city">
-                                Thu Duc
                             </option>
                         </select>
                     </div>
                     <div class="input-secondary">
                         <label for="district">Quận *</label>
-<%--                        <input type="text" id="district" name="district" value="<%= district %>">--%>
+                        <%--                        <input type="text" id="district" name="district" value="<%= district %>">--%>
                         <select name="district" id="district">
                             <option value=" <%=district%>" name="district" selected>
                                 <%=district%>
                             </option>
-                            <option value="quan 10" name="district" label="Ho Chi Minh">
-                                10
-                            </option>
+
                         </select>
                     </div>
                     <div class="input-secondary">
                         <label for="address">Địa chỉ cụ thể *</label>
-<%--                        <input type="text" id="address" name="address" value="<%= address %>">--%>
+                        <%--                        <input type="text" id="address" name="address" value="<%= address %>">--%>
                         <select name="address" id="address">
                             <option value=" <%=address%>" name="address" selected>
                                 <%=address%>
-                            </option>
-                            <option value="Tang nhon phu B" name="address" label="Ho Chi Minh">
-                                Tang nhon phu B
                             </option>
                         </select>
                     </div>
@@ -185,3 +175,7 @@
 <jsp:include page="common/tail.jsp"/>
 </body>
 </html>
+<script src="../../assets/js/account.js" type="module">
+
+</script>
+

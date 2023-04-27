@@ -60,14 +60,8 @@
                     <div class="input-secondary">
                         <label for="city">Thành phố</label>
                         <select name="city" id="city">
-                            <option value=" <%=city%>" name="city" selected>
+                            <option value="<%=city%>" name="city" selected>
                                 <%=city%>
-                            </option>
-                            <option value="HCM" name="city">
-                                HCM
-                            </option>
-                            <option value="Thu Duc" name="city">
-                                Thu Duc
                             </option>
                         </select>
                     </div>
@@ -77,9 +71,7 @@
                             <option value=" <%=district%>" name="district" selected>
                                 <%=district%>
                             </option>
-                            <option value="quan 10" name="district" label="Ho Chi Minh">
-                                10
-                            </option>
+
                         </select>
                     </div>
                     <div class="input-secondary">
@@ -88,9 +80,7 @@
                             <option value=" <%=address%>" name="address" selected>
                                 <%=address%>
                             </option>
-                            <option value="Tang nhon phu B" name="address" label="Ho Chi Minh">
-                                Tang nhon phu B
-                            </option>
+
                         </select>
                     </div>
                     <div class="input-secondary">
@@ -149,3 +139,6 @@
 <jsp:include page="common/tail.jsp"/>
 </body>
 </html>
+<script src="../../assets/js/account.js" type="module">
+
+</script>

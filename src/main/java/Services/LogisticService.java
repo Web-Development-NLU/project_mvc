@@ -1,5 +1,7 @@
 package Services;
 
+import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import org.apache.http.HttpResponse;
 import org.apache.http.NameValuePair;
 import org.apache.http.client.HttpClient;
@@ -17,13 +19,17 @@ import java.util.List;
 import java.util.Map;
 
 public class LogisticService {
-    public static void loginLogistic(String email, String password, String endpoint) throws IOException {
+    public String loginLogistic(String email, String password, String endpoint) throws IOException {
         Map<String, String> values = new HashMap<>();
         values.put("email", email);
         values.put("password", password);
         String data = formPostRequest(endpoint, "", false, values);
-        System.out.println(data);
 
+        ObjectMapper objectMapper = new ObjectMapper();
+        JsonNode jsonNode = objectMapper.readTree(data);
+        String accessToken = jsonNode.get("access_token").asText();
+        System.out.println(accessToken);
+        return accessToken;
     }
 
     public static void signupLogistic(String email, String password, String name, String passwordConfirm, String endpoint) throws IOException {
@@ -146,7 +152,7 @@ public class LogisticService {
 
     public static void main(String[] args) throws IOException {
         String token = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOi8vMTQwLjIzOC41NC4xMzYvYXBpL2F1dGgvbG9naW4iLCJpYXQiOjE2ODI0MTI2MDQsImV4cCI6MTY4MjQxMzIwNCwibmJmIjoxNjgyNDEyNjA0LCJqdGkiOiJsaVhMZ1k3R3Zoc2U3dVNTIiwic3ViIjoiNTdiM2M0NjI5YTM1NDY1OGE0ZDM2ZDhjYjQ0N2FmMWQiLCJwcnYiOiIyM2JkNWM4OTQ5ZjYwMGFkYjM5ZTcwMWM0MDA4NzJkYjdhNTk3NmY3In0.ijVcQ0sx7M34kZApMsC6MiOFh6FAzNqctcWEQSifYYA";
-//         LogisticService.loginLogistic("thanh@1234", "123456", "/auth/login");
+        new LogisticService().loginLogistic("thanh@1234", "123456", "/auth/login");
 //        LogisticService.signupLogistic("thanh@1234", "123456","thanh","123456","/auth/login");
 //        LogisticService.getDistrictByProvince("269", "/district", token);
 //        LogisticService.getWardByDistrict("2264", "/ward",token);
