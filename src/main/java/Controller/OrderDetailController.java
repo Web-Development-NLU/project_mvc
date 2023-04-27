@@ -1,7 +1,10 @@
 package Controller;
 
+import DTO.ProductOrderDTO;
 import Model.Order;
+import Model.ProductOrder;
 import Services.OrderService;
+import Services.ProductOrderService;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -9,15 +12,17 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.util.ArrayList;
 
 @WebServlet(name="OrderDetailController", value="/orderDetail")
 public class OrderDetailController extends HttpServlet {
     private OrderService orderService;
-
+    private ProductOrderService productOrderService;
     @Override
     public void init() throws ServletException {
         super.init();
         this.orderService = new OrderService("orders");
+        this.productOrderService = new ProductOrderService();
     }
 
     @Override
@@ -28,6 +33,8 @@ public class OrderDetailController extends HttpServlet {
             return;
         }
         request.setAttribute("order", this.orderService.findById(id, Order.class));
+        ArrayList<ProductOrderDTO> list = this.productOrderService.getByOrderId(id);
+        request.setAttribute("productOrders", this.productOrderService.getByOrderId(id));
         request.getRequestDispatcher("/jsp/client/orderDetail.jsp").forward(request, response);
     }
 

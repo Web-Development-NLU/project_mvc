@@ -5,9 +5,11 @@ import DTO.CartDTO;
 import DTO.OrderDTO;
 import Model.MailContent;
 import Model.Order;
+import Model.ProductOrder;
 import Model.User;
 import Services.MailService;
 import Services.OrderService;
+import Services.ProductOrderService;
 import Services.UserService;
 import com.mailjet.client.errors.MailjetException;
 import com.mailjet.client.errors.MailjetSocketTimeoutException;
@@ -24,12 +26,14 @@ public class CodOrderController extends HttpServlet {
     private UserService userService;
     private MailService mailService;
     private OrderService orderService;
+    private ProductOrderService productOrderService;
     @Override
     public void init() throws ServletException {
         super.init();
         this.userService = new UserService("users");
         this.mailService = new MailService();
         this.orderService = new OrderService("orders");
+        this.productOrderService = new ProductOrderService();
     }
 
     @Override
@@ -55,9 +59,17 @@ public class CodOrderController extends HttpServlet {
             orderSave.setUserId(authorizationData.getId());
             this.userService.removeAllCart(authorizationData.getId());
         }
-        authorizationData.setCarts(new ArrayList<CartDTO>());
-
         this.orderService.create(orderSave);
+        for (CartDTO cart : authorizationData.getCarts()) {
+            this.productOrderService.create(new ProductOrder(
+                    orderSave.getId(),
+                    cart.getIdProduct(),
+                    cart.getPattern(),
+                    cart.getColor(),
+                    cart.getAmount()
+            ));
+        }
+        authorizationData.setCarts(new ArrayList<CartDTO>());
         session.setAttribute("authorization", authorizationData);
         session.removeAttribute("order");
         this.sendEmail(orderSave);
