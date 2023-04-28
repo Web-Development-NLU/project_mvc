@@ -53,9 +53,9 @@
                                         </div>
 
                                         <div class="d-flex flex-row justify-content-between align-items-center">
-                                            <div class="d-flex flex-column align-items-start"><a class="nav-link" type="button" href="${pageContext.request.contextPath}/orderList"><span class="color-black">Đã đặt hàng</span></a></div>
-                                            <div class="d-flex flex-column align-items-center"><a class="nav-link" type="button" href="${pageContext.request.contextPath}/orderList"><span class="color-black">Đang giao hàng</span></a></div>
-                                            <div class="d-flex flex-column align-items-end"><a class="nav-link" type="button" href="${pageContext.request.contextPath}/orderList"><span class="color-black">Giao hàng thành công</span></a></div>
+                                            <div class="d-flex flex-column align-items-start"><span class="color-black">Đã đặt hàng</span></div>
+                                            <div class="d-flex flex-column align-items-center"><span class="color-black">Đang giao hàng</span></div>
+                                            <div class="d-flex flex-column align-items-end"><span class="color-black">Giao hàng thành công</span></div>
                                         </div>
                                     </div>
                                 </div>
