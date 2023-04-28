@@ -82,7 +82,6 @@
                      aria-controls="content-reviews" aria-selected="false">ĐÁNH GIÁ <span
                         class="reviews-number">(<%=statReview.getSum()%>)</span></div>
             </div>
-
             <div class="content-list tab-content">
                 <jsp:include page="partials/product/tab-content-des.jsp"/>
                 <jsp:include page="partials/product/tab-content-info.jsp"/>
