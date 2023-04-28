@@ -57,9 +57,6 @@ public class CodOrderController extends HttpServlet {
         authorizationData.setCarts(new ArrayList<CartDTO>());
 
         this.orderService.create(orderSave);
-//        this.orderService.getTotal();
-//        this.orderService.getTotalByDate(LocalDate.now());
-//t       this.orderService.ge
         session.setAttribute("authorization", authorizationData);
         session.removeAttribute("order");
         this.sendEmail(orderSave);
