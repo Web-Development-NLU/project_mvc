@@ -30,14 +30,14 @@ public class OrderController extends HttpServlet {
             return;
         }
 
-        if(request.getParameter("error") != null) {
+        if (request.getParameter("error") != null) {
             request.setAttribute("error", "Hãy nhập đủ thông tin");
         }
 
         HttpSession session = request.getSession(true);
         AuthorizationData authorizationData = (AuthorizationData) session.getAttribute("authorization");
         request.setAttribute("carts", authorizationData.getCarts());
-        if(!((boolean) request.getAttribute("logged"))) {
+        if (!((boolean) request.getAttribute("logged"))) {
             request.setAttribute("user", session.getAttribute("user"));
         }
 
@@ -54,7 +54,11 @@ public class OrderController extends HttpServlet {
         String address = request.getParameter("address");
         String phone = request.getParameter("phone");
         String email = request.getParameter("email");
+        String toDistrictID = request.getParameter("toDistrictID");
+        String toWardID = request.getParameter("toWardID");
+
         HttpSession session = request.getSession(true);
+
         System.out.print(city);
         AuthorizationData authorizationData = (AuthorizationData) session.getAttribute("authorization");
         if (firstName.isEmpty() || lastName.isEmpty() || country.isEmpty() || city.isEmpty() || district.isEmpty() || address.isEmpty() || phone.isEmpty() || email.isEmpty()) {
@@ -62,7 +66,7 @@ public class OrderController extends HttpServlet {
             return;
         }
 
-        if((boolean) request.getAttribute("logged")) {
+        if ((boolean) request.getAttribute("logged")) {
 
             User user = (User) request.getAttribute("user");
             user.setFirstName(firstName);
@@ -74,9 +78,9 @@ public class OrderController extends HttpServlet {
             user.setPhone(phone);
 
             this.userService.update(authorizationData.getId(), new UpdateUserDTO(user));
-        }else {
+        } else {
             User user = new User();
-            if(session.getAttribute("user") != null) {
+            if (session.getAttribute("user") != null) {
                 user = (User) session.getAttribute("user");
             }
             user.setFirstName(firstName);
@@ -87,12 +91,14 @@ public class OrderController extends HttpServlet {
             user.setAddress(address);
             user.setPhone(phone);
             session.setAttribute("user", user);
+
         }
 
         OrderDTO order = new OrderDTO();
         order.setEmail(email);
         session.setAttribute("order", order);
-
+        session.setAttribute("toDistrictID", toDistrictID);
+        session.setAttribute("toWardID", toWardID);
 
         response.sendRedirect("/payment");
     }

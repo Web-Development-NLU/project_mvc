@@ -2,6 +2,8 @@ package Services;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.google.gson.Gson;
+import com.google.gson.JsonObject;
 import org.apache.http.HttpResponse;
 import org.apache.http.NameValuePair;
 import org.apache.http.client.HttpClient;
@@ -64,7 +66,7 @@ public class LogisticService {
         System.out.print(data);
     }
 
-    public static void getEstimateTimeDeliveryOrRegisterDelivery(String fromDistrictId, String fromWardId, String toDistrictId, String toWardId, int height, int length, int width, int weight, String endpoint, String token) throws IOException {
+    public String getEstimateTimeDeliveryOrRegisterDelivery(String fromDistrictId, String fromWardId, String toDistrictId, String toWardId, int height, int length, int width, int weight, String endpoint, String token, int type) throws IOException {
         // Determine the API endpoint
         Map<String, String> values = new HashMap<>();
         values.put("from_district_id", fromDistrictId);
@@ -76,7 +78,15 @@ public class LogisticService {
         values.put("width", String.valueOf(width));
         values.put("weight", String.valueOf(weight));
         String data = formPostRequest(endpoint, token, true, values);
-        System.out.println(data);
+        if (type == 1) {
+            JsonObject jsonObject = new Gson().fromJson(data, JsonObject.class);
+            String id = jsonObject.getAsJsonObject("Transport").get("id").getAsString();
+            System.out.print(id);
+            return id;
+
+        }
+        return "";
+
     }
 
     public static void getAllGoodsRegistered(String endpoint, String token) throws IOException {
@@ -103,8 +113,7 @@ public class LogisticService {
         HttpGet getRequest = new HttpGet(endpointUrl);
 
         // Set any headers that are required
-        if (isNeedToken)
-            getRequest.setHeader("Authorization", "Bearer " + token);
+        if (isNeedToken) getRequest.setHeader("Authorization", "Bearer " + token);
 
         // Execute the request and get the response
         HttpResponse apiResponse = httpClient.execute(getRequest);
@@ -135,8 +144,7 @@ public class LogisticService {
         postRequest.setEntity(new UrlEncodedFormEntity(params));
 
         // Set any headers that are required
-        if (isNeedToken)
-            postRequest.setHeader("Authorization", "Bearer " + token);
+        if (isNeedToken) postRequest.setHeader("Authorization", "Bearer " + token);
 
         // Execute the request and get the response
         HttpResponse apiResponse = httpClient.execute(postRequest);
@@ -151,14 +159,14 @@ public class LogisticService {
 
 
     public static void main(String[] args) throws IOException {
-        String token = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOi8vMTQwLjIzOC41NC4xMzYvYXBpL2F1dGgvbG9naW4iLCJpYXQiOjE2ODI0MTI2MDQsImV4cCI6MTY4MjQxMzIwNCwibmJmIjoxNjgyNDEyNjA0LCJqdGkiOiJsaVhMZ1k3R3Zoc2U3dVNTIiwic3ViIjoiNTdiM2M0NjI5YTM1NDY1OGE0ZDM2ZDhjYjQ0N2FmMWQiLCJwcnYiOiIyM2JkNWM4OTQ5ZjYwMGFkYjM5ZTcwMWM0MDA4NzJkYjdhNTk3NmY3In0.ijVcQ0sx7M34kZApMsC6MiOFh6FAzNqctcWEQSifYYA";
-        new LogisticService().loginLogistic("thanh@1234", "123456", "/auth/login");
+        String token = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOi8vMTQwLjIzOC41NC4xMzYvYXBpL2F1dGgvbG9naW4iLCJpYXQiOjE2ODI3MTg5MDksImV4cCI6MTY4MjcxOTUwOSwibmJmIjoxNjgyNzE4OTA5LCJqdGkiOiI0QmlOMzVnd3hLZlRKaWhaIiwic3ViIjoiNTdiM2M0NjI5YTM1NDY1OGE0ZDM2ZDhjYjQ0N2FmMWQiLCJwcnYiOiIyM2JkNWM4OTQ5ZjYwMGFkYjM5ZTcwMWM0MDA4NzJkYjdhNTk3NmY3In0.0N_YKyQE6E2QahkdTKglYOrFVsdUjgFSA-CXRHmSxfs";
+//        new LogisticService().loginLogistic("thanh@1234", "123456", "/auth/login");
 //        LogisticService.signupLogistic("thanh@1234", "123456","thanh","123456","/auth/login");
 //        LogisticService.getDistrictByProvince("269", "/district", token);
 //        LogisticService.getWardByDistrict("2264", "/ward",token);
-//        LogisticService.getEstimateTimeDeliveryOrRegisterDelivery("2264", "90816", "2270", "231013", 100, 100, 100, 100, "/registerTransport", token);
+        new LogisticService().getEstimateTimeDeliveryOrRegisterDelivery("2264", "90816", "2270", "231013", 100, 100, 100, 100, "/registerTransport", token, 1);
 //        LogisticService.getAllGoodsRegistered("/allTransports", token);
-//        LogisticService.getGoodsById("06e6bfc8139f45d1a71f562243823781", "/getInfoTransport", token);
+//        new LogisticService().getGoodsById("7b45e06f665940bfbf5f175861200955", "/getInfoTransport", token);
     }
 
 }

@@ -79,6 +79,8 @@
             <div class="checkout-detail row">
                 <div class="checkout-billing col-12 col-lg-8">
                     <div class="checkout-billing_title">Chi tiết đơn hàng</div>
+                    <input type="hidden" name="toDistrictID">
+                    <input type="hidden" name="toWardID">
                     <c:if test="<%= !error.isEmpty() %>">
                         <div class="color-red mb-3 overflow-hidden">
                             <%= error %>

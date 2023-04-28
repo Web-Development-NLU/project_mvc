@@ -1,6 +1,6 @@
 package Model;
 
-public class Order extends BaseModelUUID{
+public class Order extends BaseModelUUID {
     private String info;
     private int price;
     private String transID;
@@ -12,6 +12,8 @@ public class Order extends BaseModelUUID{
     private String phone;
     private String email;
     private String userId;
+    private String deliveryId;
+
     public Order() {
     }
 
@@ -29,8 +31,17 @@ public class Order extends BaseModelUUID{
         this.email = email;
     }
 
+
     public String getInfo() {
         return info;
+    }
+
+    public String getDeliveryId() {
+        return deliveryId;
+    }
+
+    public void setDeliveryId(String deliveryId) {
+        this.deliveryId = deliveryId;
     }
 
     public int getPrice() {

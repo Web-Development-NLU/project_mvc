@@ -6,6 +6,7 @@ import DTO.OrderDTO;
 import Model.MailContent;
 import Model.Order;
 import Model.User;
+import Services.LogisticService;
 import Services.MailService;
 import Services.OrderService;
 import Services.UserService;
@@ -24,12 +25,15 @@ public class CodOrderController extends HttpServlet {
     private UserService userService;
     private MailService mailService;
     private OrderService orderService;
+    private LogisticService logisticService;
+
     @Override
     public void init() throws ServletException {
         super.init();
         this.userService = new UserService("users");
         this.mailService = new MailService();
         this.orderService = new OrderService("orders");
+        this.logisticService = new LogisticService();
     }
 
     @Override
@@ -38,6 +42,13 @@ public class CodOrderController extends HttpServlet {
         AuthorizationData authorizationData = (AuthorizationData) session.getAttribute("authorization");
         OrderDTO order = (OrderDTO) session.getAttribute("order");
         User user = ((boolean) request.getAttribute("logged")) ? (User) request.getAttribute("user") : (User) session.getAttribute("user");
+
+        String toDistrictID = (String) session.getAttribute("toDistrictID");
+        String toWardID = (String) session.getAttribute("toWardID");
+
+        String token = (String) session.getAttribute("token");
+        String deliveryId = (toDistrictID != null && toWardID != null) ? logisticService.getEstimateTimeDeliveryOrRegisterDelivery("2264", "90816", toDistrictID, toWardID, 100, 100, 100, 100, "/registerTransport", token, 1) : null;
+
         Order orderSave = new Order();
         String rand = RandomStringUtils.randomAlphabetic(10);
         orderSave.setEmail(order.getEmail());
@@ -50,6 +61,8 @@ public class CodOrderController extends HttpServlet {
         orderSave.setPhone(user.getPhone());
         orderSave.setUsername(user.getFirstName() + " " + user.getLastName());
         orderSave.setId(rand);
+
+        orderSave.setDeliveryId(deliveryId);
 
         if ((boolean) request.getAttribute("logged")) {
             orderSave.setUserId(authorizationData.getId());
@@ -74,8 +87,8 @@ public class CodOrderController extends HttpServlet {
             this.mailService.send(order.getEmail(), new MailContent(
                     "FURNIURE | XÁC NHẬN ĐƠN HÀNG",
                     "Mã đơn hàng: " + order.getId() + "\n" +
-                            "Thông tin đơn hàng: " + order.getInfo() +"\n" +
-                            "Gía tiền: " + order.getPrice() +"\n" +
+                            "Thông tin đơn hàng: " + order.getInfo() + "\n" +
+                            "Gía tiền: " + order.getPrice() + "\n" +
                             "Tên khách hàng: " + order.getUsername() + "\n" +
                             "Quốc gia: " + order.getCountry() + "\n" +
                             "Thành phố: " + order.getCity() + "\n" +
