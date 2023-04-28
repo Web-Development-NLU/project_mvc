@@ -86,7 +86,7 @@ public class VerifyController extends HttpServlet {
                         user.setStatus(StatusAccount.ACTIVE.ordinal());
                         UpdateUserDTO dto = new UpdateUserDTO(user);
                         this.userService.update(id, dto);
-
+                        this.userService.updateTimeout(user.getId(), null);
                         session.removeAttribute("id");
                         session.removeAttribute(user.getEmail());
 

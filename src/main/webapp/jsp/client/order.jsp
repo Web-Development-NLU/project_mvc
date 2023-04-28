@@ -65,6 +65,7 @@
             <div class="cart-menu_item">GIỎ HÀNG</div>
             <div class="cart-menu_item selected">NHẬP THÔNG TIN </div>
             <div class="cart-menu_item">THANH TOÁN</div>
+
         </div>
 
         <div class="checkout-other-action mt-5 mb-5">

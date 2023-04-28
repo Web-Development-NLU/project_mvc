@@ -75,6 +75,7 @@ public class VerifyForgotPassword extends HttpServlet {
                     }else {
                         this.userService.resetPassword(user.getId(), newPassword);
                         this.userService.updateIsWrong(user.getId(), 0);
+                        this.userService.updateTimeout(user.getId(), null);
                         session.removeAttribute("id");
                         session.removeAttribute(user.getEmail());
                         response.sendRedirect("/CompleteForgotPassword");
