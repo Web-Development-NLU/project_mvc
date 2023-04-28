@@ -53,9 +53,9 @@
                                         </div>
 
                                         <div class="d-flex flex-row justify-content-between align-items-center">
-                                            <div class="d-flex flex-column align-items-start"><a class="nav-link" type="button" href="${pageContext.request.contextPath}/Ordered"><span class="color-black">Đã đặt hàng</span></a></div>
-                                            <div class="d-flex flex-column align-items-center"><a class="nav-link" type="button" href="${pageContext.request.contextPath}/OrderDelivery"><span class="color-black">Đang giao hàng</span></a></div>
-                                            <div class="d-flex flex-column align-items-end"><a class="nav-link" type="button" href="${pageContext.request.contextPath}/DeliverySuccess"><span class="color-black">Giao hàng thành công</span></a></div>
+                                            <div class="d-flex flex-column align-items-start"><a class="nav-link" type="button" href="${pageContext.request.contextPath}/orderList"><span class="color-black">Đã đặt hàng</span></a></div>
+                                            <div class="d-flex flex-column align-items-center"><a class="nav-link" type="button" href="${pageContext.request.contextPath}/orderList"><span class="color-black">Đang giao hàng</span></a></div>
+                                            <div class="d-flex flex-column align-items-end"><a class="nav-link" type="button" href="${pageContext.request.contextPath}/orderList"><span class="color-black">Giao hàng thành công</span></a></div>
                                         </div>
                                     </div>
                                 </div>
@@ -86,7 +86,8 @@
                                         <tr>
                                             <td colspan="100" style="text-align: center">
                                                 Thời gian đặt hàng thành công: 15-12-2023<br>
-                                                Thời gian giao hàng dự kiến: 15-12-2023 đến 20-12-2023                                            </td>
+                                                Thời gian giao hàng dự kiến: 15-12-2023 đến 20-12-2023
+                                            </td>
                                         </tr>
                                     </table>
                                 </div>

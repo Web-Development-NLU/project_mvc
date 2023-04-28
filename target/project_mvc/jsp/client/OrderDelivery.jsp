@@ -85,7 +85,7 @@
                                 </tr>
                                 <tr>
                                     <td colspan="100" style="text-align: center">
-                                        Thời gian đặt hàng thành công: 15-12-2023 đến 20-12-2023 <br>
+                                        Thời gian đặt hàng thành công: 15-12-2023 <br>
                                         Thời gian giao hàng dự kiến: 15-12-2023 đến 20-12-2023
                                     </td>
                                 </tr>
