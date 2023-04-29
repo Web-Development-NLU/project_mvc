@@ -1,5 +1,7 @@
 package Model;
 
+import java.math.BigInteger;
+
 public class Order extends BaseModelUUID {
     private String info;
     private int price;
@@ -14,8 +16,11 @@ public class Order extends BaseModelUUID {
     private String userId;
     private String deliveryId;
 
+    private long timestamp;
+
     public Order() {
     }
+
 
     public Order(String info, int price, String transId, String username, String country, String city, String district, String address, String phone, String email) {
         super();
@@ -31,6 +36,13 @@ public class Order extends BaseModelUUID {
         this.email = email;
     }
 
+    public long getTimestamp() {
+        return timestamp;
+    }
+
+    public void setTimestamp(long timestamp) {
+        this.timestamp = timestamp;
+    }
 
     public String getInfo() {
         return info;

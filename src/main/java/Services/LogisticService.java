@@ -3,6 +3,7 @@ package Services;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.gson.Gson;
+import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import org.apache.http.HttpResponse;
 import org.apache.http.NameValuePair;
@@ -81,11 +82,15 @@ public class LogisticService {
         if (type == 1) {
             JsonObject jsonObject = new Gson().fromJson(data, JsonObject.class);
             String id = jsonObject.getAsJsonObject("Transport").get("id").getAsString();
-            System.out.print(id);
             return id;
 
         }
-        return "";
+        JsonObject jsonObject = new Gson().fromJson(data, JsonObject.class);
+        JsonArray dataArray = jsonObject.getAsJsonArray("data");
+        JsonObject dataObject = dataArray.get(0).getAsJsonObject();
+        long timestamp = dataObject.get("timestamp").getAsLong();
+        System.out.print(String.valueOf(timestamp));
+        return String.valueOf(timestamp);
 
     }
 
@@ -159,12 +164,12 @@ public class LogisticService {
 
 
     public static void main(String[] args) throws IOException {
-        String token = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOi8vMTQwLjIzOC41NC4xMzYvYXBpL2F1dGgvbG9naW4iLCJpYXQiOjE2ODI3MTg5MDksImV4cCI6MTY4MjcxOTUwOSwibmJmIjoxNjgyNzE4OTA5LCJqdGkiOiI0QmlOMzVnd3hLZlRKaWhaIiwic3ViIjoiNTdiM2M0NjI5YTM1NDY1OGE0ZDM2ZDhjYjQ0N2FmMWQiLCJwcnYiOiIyM2JkNWM4OTQ5ZjYwMGFkYjM5ZTcwMWM0MDA4NzJkYjdhNTk3NmY3In0.0N_YKyQE6E2QahkdTKglYOrFVsdUjgFSA-CXRHmSxfs";
+        String token = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOi8vMTQwLjIzOC41NC4xMzYvYXBpL2F1dGgvbG9naW4iLCJpYXQiOjE2ODI3NjI5MDQsImV4cCI6MTY4Mjc2MzUwNCwibmJmIjoxNjgyNzYyOTA0LCJqdGkiOiJUZDVlQ2tHb245R2tKTE9vIiwic3ViIjoiNTdiM2M0NjI5YTM1NDY1OGE0ZDM2ZDhjYjQ0N2FmMWQiLCJwcnYiOiIyM2JkNWM4OTQ5ZjYwMGFkYjM5ZTcwMWM0MDA4NzJkYjdhNTk3NmY3In0.6zmu7Oh2poQddEykMmaBo_ITd4qKNr-Q7O1j5iMNxu4";
 //        new LogisticService().loginLogistic("thanh@1234", "123456", "/auth/login");
 //        LogisticService.signupLogistic("thanh@1234", "123456","thanh","123456","/auth/login");
 //        LogisticService.getDistrictByProvince("269", "/district", token);
 //        LogisticService.getWardByDistrict("2264", "/ward",token);
-        new LogisticService().getEstimateTimeDeliveryOrRegisterDelivery("2264", "90816", "2270", "231013", 100, 100, 100, 100, "/registerTransport", token, 1);
+        new LogisticService().getEstimateTimeDeliveryOrRegisterDelivery("2264", "90816", "2270", "231013", 100, 100, 100, 100, "/leadTime", token, 0);
 //        LogisticService.getAllGoodsRegistered("/allTransports", token);
 //        new LogisticService().getGoodsById("7b45e06f665940bfbf5f175861200955", "/getInfoTransport", token);
     }

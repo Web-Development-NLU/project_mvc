@@ -48,6 +48,7 @@ public class CodOrderController extends HttpServlet {
 
         String token = (String) session.getAttribute("token");
         String deliveryId = (toDistrictID != null && toWardID != null) ? logisticService.getEstimateTimeDeliveryOrRegisterDelivery("2264", "90816", toDistrictID, toWardID, 100, 100, 100, 100, "/registerTransport", token, 1) : null;
+        String timestamp = (toDistrictID != null && toWardID != null) ? logisticService.getEstimateTimeDeliveryOrRegisterDelivery("2264", "90816", toDistrictID, toWardID, 100, 100, 100, 100, "/leadTime", token, 0) : null;
 
         Order orderSave = new Order();
         String rand = RandomStringUtils.randomAlphabetic(10);
@@ -61,7 +62,7 @@ public class CodOrderController extends HttpServlet {
         orderSave.setPhone(user.getPhone());
         orderSave.setUsername(user.getFirstName() + " " + user.getLastName());
         orderSave.setId(rand);
-
+        orderSave.setTimestamp(Long.parseLong(timestamp));
         orderSave.setDeliveryId(deliveryId);
 
         if ((boolean) request.getAttribute("logged")) {
