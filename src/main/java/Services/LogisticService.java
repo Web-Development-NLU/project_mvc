@@ -31,7 +31,7 @@ public class LogisticService {
         ObjectMapper objectMapper = new ObjectMapper();
         JsonNode jsonNode = objectMapper.readTree(data);
         String accessToken = jsonNode.get("access_token").asText();
-        System.out.println(accessToken);
+//        System.out.println(accessToken);
         return accessToken;
     }
 
@@ -79,7 +79,7 @@ public class LogisticService {
         values.put("width", String.valueOf(width));
         values.put("weight", String.valueOf(weight));
         String data = formPostRequest(endpoint, token, true, values);
-        System.out.print(data);
+//        System.out.print(data);
         if (type == 1) {
             JsonObject jsonObject = new Gson().fromJson(data, JsonObject.class);
             String id = jsonObject.getAsJsonObject("Transport").get("id").getAsString();
@@ -90,7 +90,7 @@ public class LogisticService {
         JsonArray dataArray = jsonObject.getAsJsonArray("data");
         JsonObject dataObject = dataArray.get(0).getAsJsonObject();
         long timestamp = dataObject.get("timestamp").getAsLong();
-        System.out.print(String.valueOf(timestamp));
+//        System.out.print(String.valueOf(timestamp));
         return String.valueOf(timestamp);
 
     }
@@ -170,7 +170,7 @@ public class LogisticService {
 //        LogisticService.signupLogistic("thanh@1234", "123456","thanh","123456","/auth/login");
 //        LogisticService.getDistrictByProvince("269", "/district", token);
 //        LogisticService.getWardByDistrict("2264", "/ward",token);
-        new LogisticService().getEstimateTimeDeliveryOrRegisterDelivery("2264", "90816", "2270", "231013", 100, 100, 100, 100, "/leadTime", token, 0);
+//        new LogisticService().getEstimateTimeDeliveryOrRegisterDelivery("2264", "90816", "2270", "231013", 100, 100, 100, 100, "/leadTime", token, 0);
 //        LogisticService.getAllGoodsRegistered("/allTransports", token);
 //        new LogisticService().getGoodsById("7b45e06f665940bfbf5f175861200955", "/getInfoTransport", token);
     }

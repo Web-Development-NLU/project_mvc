@@ -43,8 +43,10 @@ public class OrderController extends HttpServlet {
         if (!((boolean) request.getAttribute("logged"))) {
             request.setAttribute("user", session.getAttribute("user"));
         }
-        String token = this.logisticService.loginLogistic("thanh@1234", "123456", "/auth/login");
-        session.setAttribute("token", token);
+        if (session.getAttribute("token") == null) {
+            String token = this.logisticService.loginLogistic("thanh@1234", "123456", "/auth/login");
+            session.setAttribute("token", token);
+        }
 
         request.getRequestDispatcher("/jsp/client/order.jsp").forward(request, response);
     }

@@ -20,6 +20,9 @@ import logisticApi from "./logisticApi.js";
             listDistricts = await logisticApi.getDistrictByProvince(idCity);
             let optionELDistrict;
             listDistricts?.map((district) => {
+                if (selectInputDistrict.value.trim() === district.DistrictName && selectInputDistrict.selectedIndex >= 0) {
+                    selectInputDistrict.options[selectInputDistrict.selectedIndex].setAttribute("data-id", district.DistrictID);
+                }
                 optionELDistrict = document.createElement('option');
                 optionELDistrict.setAttribute("value", district.DistrictName);
                 optionELDistrict.setAttribute("name", "city");
@@ -33,6 +36,9 @@ import logisticApi from "./logisticApi.js";
             listWards = await logisticApi.getWardByDistrict(idDistrict);
             let optionELWard;
             listWards?.map((ward) => {
+                if (selectInputWard.value.trim() === ward.WardName && selectInputWard.selectedIndex >= 0) {
+                    selectInputWard.options[selectInputWard.selectedIndex].setAttribute("data-id", ward.WardCode);
+                }
                 optionELWard = document.createElement('option');
                 optionELWard.setAttribute("value", ward.WardName);
                 optionELWard.setAttribute("name", "city");
@@ -48,7 +54,6 @@ import logisticApi from "./logisticApi.js";
             inputDistrictId.setAttribute("value", idDistrict);
         }
     })()
-
     //event
     if (selectInputCity && listProvinces) {
         let optionELCity;
@@ -108,6 +113,9 @@ import logisticApi from "./logisticApi.js";
             flagDistrict = true;
         }
         listProvinces?.map((province) => {
+            if (selectInputCity.value.trim() === province.ProvinceName && selectInputCity.selectedIndex >= 0) {
+                selectInputCity.options[selectInputCity.selectedIndex].setAttribute("data-id", province.ProvinceID);
+            }
             optionELCity = document.createElement('option');
             optionELCity.setAttribute("value", province.ProvinceName);
             optionELCity.setAttribute("name", "city");
@@ -125,6 +133,5 @@ import logisticApi from "./logisticApi.js";
 
         }
     }
-
 })()
 
