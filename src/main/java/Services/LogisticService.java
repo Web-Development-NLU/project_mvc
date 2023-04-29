@@ -31,7 +31,6 @@ public class LogisticService {
         ObjectMapper objectMapper = new ObjectMapper();
         JsonNode jsonNode = objectMapper.readTree(data);
         String accessToken = jsonNode.get("access_token").asText();
-//        System.out.println(accessToken);
         return accessToken;
     }
 
@@ -43,19 +42,16 @@ public class LogisticService {
         values.put("password_confirm", passwordConfirm);
         values.put("name", name);
         String data = formPostRequest(endpoint, "", false, values);
-        System.out.println(data);
     }
 
     public static void getAllProvinces(String endpoint, String token) throws IOException {
         String data = formGetRequest(endpoint, token, true);
-        System.out.print(data);
     }
 
     public static void getDistrictByProvince(String provinceId, String endpoint, String token) throws IOException {
         // Determine the API endpoint
         String endpointUrl = endpoint + "?provinceID=" + provinceId;
         String data = formGetRequest(endpointUrl, token, true);
-        System.out.print(data);
 
     }
 
@@ -64,7 +60,6 @@ public class LogisticService {
         String endpointUrl = endpoint + "?districtID=" + districtId;
         String data = formGetRequest(endpointUrl, token, true);
 
-        System.out.print(data);
     }
 
     public String getEstimateTimeDeliveryOrRegisterDelivery(String fromDistrictId, String fromWardId, String toDistrictId, String toWardId, int height, int length, int width, int weight, String endpoint, String token, int type) throws IOException {
@@ -79,33 +74,27 @@ public class LogisticService {
         values.put("width", String.valueOf(width));
         values.put("weight", String.valueOf(weight));
         String data = formPostRequest(endpoint, token, true, values);
-//        System.out.print(data);
         if (type == 1) {
             JsonObject jsonObject = new Gson().fromJson(data, JsonObject.class);
             String id = jsonObject.getAsJsonObject("Transport").get("id").getAsString();
             return id;
-
         }
         JsonObject jsonObject = new Gson().fromJson(data, JsonObject.class);
         JsonArray dataArray = jsonObject.getAsJsonArray("data");
         JsonObject dataObject = dataArray.get(0).getAsJsonObject();
         long timestamp = dataObject.get("timestamp").getAsLong();
-//        System.out.print(String.valueOf(timestamp));
         return String.valueOf(timestamp);
-
     }
 
     public static void getAllGoodsRegistered(String endpoint, String token) throws IOException {
         // Determine the API endpoint
         String data = formGetRequest(endpoint, token, true);
-        System.out.print(data);
     }
 
     public static void getGoodsById(String goodsId, String endpoint, String token) throws IOException {
         Map<String, String> values = new HashMap<String, String>();
         values.put("id", goodsId);
         String data = formPostRequest(endpoint, token, true, values);
-        System.out.print(data);
     }
 
     public static String formGetRequest(String endpoint, String token, boolean isNeedToken) throws IOException {
