@@ -68,9 +68,9 @@
 </div>
 
 <jsp:include page="common/tail.jsp"/>
-<%--<c:if test="<%=token!=""%>">--%>
+<c:if test='<%=token!=""%>'>
     <input type="hidden" name="token" value="<%=token%>">
-<%--</c:if>--%>
+</c:if>
 </body>
 </html>
 <script type="module" src="../../assets/js/login.js"></script>

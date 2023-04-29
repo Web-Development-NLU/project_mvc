@@ -76,10 +76,6 @@ public class AuthenticationContoller extends HttpServlet {
 //                token
                 String token = this.logisticService.loginLogistic("thanh@1234", "123456", "/auth/login");
                 session.setAttribute("token", token);
-                String jsCode = "localStorage.setItem('token', " + "'" + token + "');";
-                response.setContentType("text/javascript");
-                PrintWriter out = response.getWriter();
-                out.println(jsCode);
 //                reset isWrong
                 userService.updateIsWrong(user.getId(), 0);
 

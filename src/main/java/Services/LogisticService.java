@@ -79,6 +79,7 @@ public class LogisticService {
         values.put("width", String.valueOf(width));
         values.put("weight", String.valueOf(weight));
         String data = formPostRequest(endpoint, token, true, values);
+        System.out.print(data);
         if (type == 1) {
             JsonObject jsonObject = new Gson().fromJson(data, JsonObject.class);
             String id = jsonObject.getAsJsonObject("Transport").get("id").getAsString();

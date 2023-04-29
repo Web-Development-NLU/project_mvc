@@ -68,7 +68,7 @@
                     <div class="input-secondary">
                         <label for="district">Quận Huyện</label>
                         <select name="district" id="district">
-                            <option value=" <%=district%>" name="district" selected>
+                            <option value="<%=district%>" name="district" selected>
                                 <%=district%>
                             </option>
 
@@ -77,7 +77,7 @@
                     <div class="input-secondary">
                         <label for="address">Địa chỉ</label>
                         <select name="address" id="address">
-                            <option value=" <%=address%>" name="address" selected>
+                            <option value="<%=address%>" name="address" selected>
                                 <%=address%>
                             </option>
 

@@ -15,10 +15,8 @@ import logisticApi from "./logisticApi.js";
     // load
     await (async () => {
 
-        const idCity = listProvinces?.find((province) => province.ProvinceName === selectInputCity.options[selectInputCity.selectedIndex].value?.trim())?.ProvinceID;
+        const idCity = listProvinces?.find((province) => province.ProvinceName === selectInputCity?.options[selectInputCity?.selectedIndex]?.value?.trim())?.ProvinceID;
         if (idCity) {
-
-
             listDistricts = await logisticApi.getDistrictByProvince(idCity);
             let optionELDistrict;
             listDistricts?.map((district) => {
@@ -30,7 +28,7 @@ import logisticApi from "./logisticApi.js";
                 selectInputDistrict.appendChild(optionELDistrict);
             });
         }
-        const idDistrict = listDistricts?.find((district) => district.DistrictName === selectInputDistrict.value?.trim())?.DistrictID;
+        const idDistrict = listDistricts?.find((district) => district.DistrictName === selectInputDistrict?.value?.trim())?.DistrictID;
         if (idDistrict) {
             listWards = await logisticApi.getWardByDistrict(idDistrict);
             let optionELWard;
@@ -44,7 +42,7 @@ import logisticApi from "./logisticApi.js";
             });
         }
         if (inputWardId && inputDistrictId) {
-            const idWard = listWards?.find((ward) => ward.WardName.trim() === selectInputWard.value?.trim())?.WardCode;
+            const idWard = listWards?.find((ward) => ward.WardName.trim() === selectInputWard?.value?.trim())?.WardCode;
 
             inputWardId.setAttribute("value", idWard);
             inputDistrictId.setAttribute("value", idDistrict);
@@ -56,7 +54,7 @@ import logisticApi from "./logisticApi.js";
         let optionELCity;
         if (!flagCity) {
             selectInputCity.addEventListener("change", async function (event) {
-                listDistricts = await logisticApi.getDistrictByProvince(Number.parseInt(event.target.options[event.target.selectedIndex].dataset.id));
+                listDistricts = await logisticApi.getDistrictByProvince(Number.parseInt(event.target?.options[event.target?.selectedIndex]?.dataset?.id));
                 selectInputDistrict.innerHTML = '';
                 let optionELDistrict;
                 listDistricts?.map((district) => {
@@ -67,7 +65,7 @@ import logisticApi from "./logisticApi.js";
                     optionELDistrict.setAttribute("data-id", district.DistrictID);
                     selectInputDistrict.appendChild(optionELDistrict);
                 });
-                listWards = await logisticApi.getWardByDistrict(listDistricts[0].DistrictID);
+                listWards = await logisticApi.getWardByDistrict(listDistricts[0]?.DistrictID);
                 selectInputWard.innerHTML = '';
                 let optionELWard;
                 listWards?.map((ward) => {
@@ -79,8 +77,8 @@ import logisticApi from "./logisticApi.js";
                     selectInputWard.appendChild(optionELWard);
                 });
                 if (inputWardId && inputDistrictId) {
-                    const idDistrict = listDistricts?.find((district) => district.DistrictName === selectInputDistrict.value?.trim())?.DistrictID;
-                    const idWard = listWards.find((ward) => ward.WardName.trim() === selectInputWard.value?.trim())?.WardCode;
+                    const idDistrict = listDistricts?.find((district) => district.DistrictName === selectInputDistrict?.value?.trim())?.DistrictID;
+                    const idWard = listWards?.find((ward) => ward.WardName.trim() === selectInputWard?.value?.trim())?.WardCode;
                     inputWardId.setAttribute("value", idWard);
                     inputDistrictId.setAttribute("value", idDistrict);
                 }
@@ -90,7 +88,7 @@ import logisticApi from "./logisticApi.js";
         }
         if (!flagDistrict) {
             selectInputDistrict.addEventListener("change", async function (event) {
-                listWards = await logisticApi.getWardByDistrict(Number.parseInt(event.target.options[event.target.selectedIndex].dataset.id));
+                listWards = await logisticApi.getWardByDistrict(Number.parseInt(event.target.options[event.target?.selectedIndex]?.dataset?.id));
                 selectInputWard.innerHTML = '';
                 let optionELWard;
                 listWards?.map((ward) => {
@@ -102,8 +100,8 @@ import logisticApi from "./logisticApi.js";
                     selectInputWard.appendChild(optionELWard);
                 });
                 if (inputWardId && inputDistrictId) {
-                    inputDistrictId.setAttribute("value", event.target.options[event.target.selectedIndex].dataset.id);
-                    const idWard = listWards?.find((ward) => ward.WardName.trim() === selectInputWard.value?.trim())?.WardCode;
+                    inputDistrictId.setAttribute("value", event.target.options[event.target.selectedIndex]?.dataset?.id);
+                    const idWard = listWards?.find((ward) => ward.WardName.trim() === selectInputWard?.value?.trim())?.WardCode;
                     inputWardId.setAttribute("value", idWard);
                 }
             })
@@ -121,7 +119,7 @@ import logisticApi from "./logisticApi.js";
             flagWard = true;
             selectInputWard.addEventListener("change", async function (event) {
                 if (inputWardId && inputDistrictId) {
-                    inputWardId.setAttribute("value", event.target.options[event.target.selectedIndex].dataset.id);
+                    inputWardId.setAttribute("value", event.target.options[event.target.selectedIndex]?.dataset?.id);
                 }
             })
 

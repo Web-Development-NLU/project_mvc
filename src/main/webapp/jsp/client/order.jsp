@@ -49,6 +49,8 @@
     for (CartDTO cart : carts) {
         sumPrice += cart.getPrice() * cart.getAmount();
     }
+    String token = session.getAttribute("token") != null ? (String) session.getAttribute("token") : "";
+
 %>
 <div id="order-container">
     <header>
@@ -104,7 +106,7 @@
                         <label for="city">Thành phố/ Tỉnh *</label>
                         <%--                        <input type="text" id="city" name="city" value="<%= city %>">--%>
                         <select name="city" id="city">
-                            <option value=" <%=city%>" name="city" selected>
+                            <option value="<%=city%>" name="city" selected>
                                 <%=city%>
                             </option>
                         </select>
@@ -113,7 +115,7 @@
                         <label for="district">Quận *</label>
                         <%--                        <input type="text" id="district" name="district" value="<%= district %>">--%>
                         <select name="district" id="district">
-                            <option value=" <%=district%>" name="district" selected>
+                            <option value="<%=district%>" name="district" selected>
                                 <%=district%>
                             </option>
 
@@ -123,7 +125,7 @@
                         <label for="address">Địa chỉ cụ thể *</label>
                         <%--                        <input type="text" id="address" name="address" value="<%= address %>">--%>
                         <select name="address" id="address">
-                            <option value=" <%=address%>" name="address" selected>
+                            <option value="<%=address%>" name="address" selected>
                                 <%=address%>
                             </option>
                         </select>
@@ -175,9 +177,12 @@
 </div>
 
 <jsp:include page="common/tail.jsp"/>
+<c:if test='<%=token!=""%>'>
+    <input type="hidden" name="token" value="<%=token%>">
+</c:if>
 </body>
 </html>
+<script type="module" src="../../assets/js/login.js"></script>
 <script src="../../assets/js/account.js" type="module">
-
 </script>
 

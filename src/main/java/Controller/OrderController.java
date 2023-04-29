@@ -4,6 +4,7 @@ import DTO.AuthorizationData;
 import DTO.OrderDTO;
 import DTO.UpdateUserDTO;
 import Model.User;
+import Services.LogisticService;
 import Services.UserService;
 
 import javax.servlet.*;
@@ -15,11 +16,13 @@ import java.io.IOException;
 public class OrderController extends HttpServlet {
 
     private UserService userService;
+    private LogisticService logisticService;
 
     @Override
     public void init() throws ServletException {
         super.init();
         this.userService = new UserService("users");
+        this.logisticService = new LogisticService();
     }
 
     @Override
@@ -40,6 +43,8 @@ public class OrderController extends HttpServlet {
         if (!((boolean) request.getAttribute("logged"))) {
             request.setAttribute("user", session.getAttribute("user"));
         }
+        String token = this.logisticService.loginLogistic("thanh@1234", "123456", "/auth/login");
+        session.setAttribute("token", token);
 
         request.getRequestDispatcher("/jsp/client/order.jsp").forward(request, response);
     }
