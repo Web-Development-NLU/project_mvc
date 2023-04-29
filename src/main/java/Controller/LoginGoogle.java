@@ -14,6 +14,7 @@ import javax.servlet.*;
 import javax.servlet.http.*;
 import javax.servlet.annotation.*;
 import java.io.IOException;
+import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.Base64;
 
@@ -48,10 +49,10 @@ public class LoginGoogle extends HttpServlet {
                 }
                 User model = new User(email, StatusAccount.DISABLE.ordinal(), TypeAccount.USER.ordinal(), 1);
                 String id = this.userService.create(model);
-
+                Timestamp time=new Timestamp(System.currentTimeMillis());
                 String rand = RandomStringUtils.randomAlphabetic(6);
-
                 this.authenticationService.sendVerify(rand, email);
+                this.userService.updateTimeout(id,time);
 
                 session.setAttribute("id", id);
                 session.setAttribute(email, rand);
