@@ -13,17 +13,6 @@ public class Utils {
         }
         return false;
 
-//        if (!password.matches("\\.*[aA-zZ0-9].*") || !password.matches("\\.*\\w*[A-Z].*") ||
-//                !password.matches("\\.*[a-z].*")) {
-//
-//            return false;
-//        }
-//        return true;
-    }
 
-//    public static void main(String[] args) {
-//        Utils u = new Utils();
-//        System.out.print(u.handleCheckPasswordIsValid("123TTTTa"));
-//    }
 
 }

@@ -50,9 +50,7 @@ public class MyAccount extends HttpServlet {
             response.sendRedirect("/login");
             return;
         }
-        System.out.print(request.getParameter("city"));
         AuthorizationData data = (AuthorizationData) session.getAttribute("authorization");
-
         UpdateUserDTO dto = new UpdateUserDTO(
                 request.getParameter("firstName"),
                 request.getParameter("lastName"),
@@ -60,6 +58,7 @@ public class MyAccount extends HttpServlet {
                 request.getParameter("country"),
                 request.getParameter("city"),
                 request.getParameter("district"),
+                request.getParameter("ward"),
                 request.getParameter("address")
         );
         dto.setStatus(StatusAccount.ACTIVE.ordinal());

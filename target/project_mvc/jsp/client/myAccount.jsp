@@ -24,6 +24,7 @@
     String address = (user.getAddress() != null) ? user.getAddress() : "";
     String phone = (user.getPhone() != null) ? user.getPhone() : "";
     String email = (user.getEmail() != null) ? user.getEmail() : "";
+    String ward = (user.getWard() != null) ? user.getWard() : "";
     String success = (request.getAttribute("success") == null) ? null : request.getAttribute("success").toString();
 %>
 <body>
@@ -75,13 +76,16 @@
                         </select>
                     </div>
                     <div class="input-secondary">
-                        <label for="address">Địa chỉ</label>
-                        <select name="address" id="address">
-                            <option value="<%=address%>" name="address" selected>
-                                <%=address%>
+                        <label for="ward">Xã</label>
+                        <select name="ward" id="ward">
+                            <option value="<%=ward%>" name="ward" selected>
+                                <%=ward%>
                             </option>
-
                         </select>
+                    </div>
+                    <div class="input-secondary">
+                        <label for="address">Địa chỉ cụ thể</label>
+                        <input type="text" id="address" name="address" value="<%= ward %>">
                     </div>
                     <div class="input-secondary">
                         <label for="phone">Số điện thoại</label>

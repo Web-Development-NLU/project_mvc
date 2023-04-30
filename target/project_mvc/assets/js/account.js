@@ -9,7 +9,7 @@ import logisticApi from "./logisticApi.js";
     let flagWard = false;
     const selectInputCity = document.querySelector("select[name='city']");
     const selectInputDistrict = document.querySelector("select[name='district']");
-    const selectInputWard = document.querySelector("select[name='address']");
+    const selectInputWard = document.querySelector("select[name='ward']");
     const inputWardId = document.querySelector("input[name='toWardID']");
     const inputDistrictId = document.querySelector("input[name='toDistrictID']");
     // load
@@ -41,7 +41,7 @@ import logisticApi from "./logisticApi.js";
                 }
                 optionELWard = document.createElement('option');
                 optionELWard.setAttribute("value", ward.WardName);
-                optionELWard.setAttribute("name", "city");
+                optionELWard.setAttribute("name", "ward");
                 optionELWard.textContent = ward.WardName;
                 optionELWard.setAttribute("data-id", ward.WardCode);
                 selectInputWard.appendChild(optionELWard);
@@ -65,7 +65,7 @@ import logisticApi from "./logisticApi.js";
                 listDistricts?.map((district) => {
                     optionELDistrict = document.createElement('option');
                     optionELDistrict.setAttribute("value", district.DistrictName);
-                    optionELDistrict.setAttribute("name", "city");
+                    optionELDistrict.setAttribute("name", "district");
                     optionELDistrict.textContent = district.DistrictName;
                     optionELDistrict.setAttribute("data-id", district.DistrictID);
                     selectInputDistrict.appendChild(optionELDistrict);
@@ -76,7 +76,7 @@ import logisticApi from "./logisticApi.js";
                 listWards?.map((ward) => {
                     optionELWard = document.createElement('option');
                     optionELWard.setAttribute("value", ward.WardName);
-                    optionELWard.setAttribute("name", "city");
+                    optionELWard.setAttribute("name", "ward");
                     optionELWard.textContent = ward.WardName;
                     optionELWard.setAttribute("data-id", ward.WardCode);
                     selectInputWard.appendChild(optionELWard);
@@ -99,7 +99,7 @@ import logisticApi from "./logisticApi.js";
                 listWards?.map((ward) => {
                     optionELWard = document.createElement('option');
                     optionELWard.setAttribute("value", ward.WardName);
-                    optionELWard.setAttribute("name", "city");
+                    optionELWard.setAttribute("name", "ward");
                     optionELWard.textContent = ward.WardName;
                     optionELWard.setAttribute("data-id", ward.WardCode);
                     selectInputWard.appendChild(optionELWard);

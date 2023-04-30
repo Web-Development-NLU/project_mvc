@@ -33,6 +33,7 @@
     String address = "";
     String phone = "";
     String email = "";
+    String ward = "";
     if (user != null) {
         firstName = (user.getFirstName() != null) ? user.getFirstName() : "";
         lastName = (user.getLastName() != null) ? user.getLastName() : "";
@@ -42,6 +43,7 @@
         address = (user.getAddress() != null) ? user.getAddress() : "";
         phone = (user.getPhone() != null) ? user.getPhone() : "";
         email = (user.getEmail() != null) ? user.getEmail() : "";
+        ward = (user.getWard() != null) ? user.getWard() : "";
     }
 
     double sumPrice = 0;
@@ -122,13 +124,16 @@
                         </select>
                     </div>
                     <div class="input-secondary">
-                        <label for="address">Địa chỉ cụ thể *</label>
-                        <%--                        <input type="text" id="address" name="address" value="<%= address %>">--%>
-                        <select name="address" id="address">
-                            <option value="<%=address%>" name="address" selected>
-                                <%=address%>
+                        <label for="ward">Xã  *</label>
+                        <select name="ward" id="ward">
+                            <option value="<%=ward%>" name="ward" selected>
+                                <%=ward%>
                             </option>
                         </select>
+                    </div>
+                    <div class="input-secondary">
+                        <label for="address">Địa chỉ cụ thể</label>
+                        <input type="text" id="address" name="address" value="<%= address %>">
                     </div>
                     <div class="input-secondary">
                         <label for="phone">Số điện thoại *</label>

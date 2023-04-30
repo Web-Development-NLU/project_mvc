@@ -61,14 +61,14 @@ public class OrderController extends HttpServlet {
         String address = request.getParameter("address");
         String phone = request.getParameter("phone");
         String email = request.getParameter("email");
+        String ward = request.getParameter("ward");
         String toDistrictID = request.getParameter("toDistrictID");
         String toWardID = request.getParameter("toWardID");
 
         HttpSession session = request.getSession(true);
 
-        System.out.print(city);
         AuthorizationData authorizationData = (AuthorizationData) session.getAttribute("authorization");
-        if (firstName.isEmpty() || lastName.isEmpty() || country.isEmpty() || city.isEmpty() || district.isEmpty() || address.isEmpty() || phone.isEmpty() || email.isEmpty()) {
+        if (firstName.isEmpty() || lastName.isEmpty() || country.isEmpty() || city.isEmpty() || district.isEmpty()||ward.isEmpty()|| address.isEmpty() || phone.isEmpty() || email.isEmpty()) {
             response.sendRedirect("/order?error=emptyInfo");
             return;
         }
@@ -81,6 +81,7 @@ public class OrderController extends HttpServlet {
             user.setCountry(country);
             user.setCity(city);
             user.setDistrict(district);
+            user.setWard(ward);
             user.setAddress(address);
             user.setPhone(phone);
 
@@ -95,6 +96,7 @@ public class OrderController extends HttpServlet {
             user.setCountry(country);
             user.setCity(city);
             user.setDistrict(district);
+            user.setWard(ward);
             user.setAddress(address);
             user.setPhone(phone);
             session.setAttribute("user", user);
