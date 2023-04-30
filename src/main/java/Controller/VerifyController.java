@@ -93,6 +93,7 @@ public class VerifyController extends HttpServlet {
                         String token = this.logisticService.loginLogistic("thanh@1234", "123456", "/auth/login");
                         session.setAttribute("token", token);
 
+                        this.userService.updateTimeout(user.getId(), null);
                         session.removeAttribute("id");
                         session.removeAttribute(user.getEmail());
 
