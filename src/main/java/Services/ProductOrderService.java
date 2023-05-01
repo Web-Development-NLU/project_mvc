@@ -18,8 +18,9 @@ public class ProductOrderService {
         ArrayList<ProductOrderDTO> list = (ArrayList<ProductOrderDTO>) this.jdbi.withHandle(handle -> {
             return handle.createQuery((
                     "SELECT po.id, po.orderId, po.productId, p.name, p.thumbnail as image ,po.pattern, po.color, po.amount, p.price FROM productOrder as po" +
-                            " INNER JOIN product as p on p.id = po.productId"
-                    )).mapToBean(ProductOrderDTO.class).list();
+                            " INNER JOIN product as p on p.id = po.productId" +
+                            " WHERE po.orderId = ?"
+                    )).bind(0, orderId).mapToBean(ProductOrderDTO.class).list();
         });
         list.forEach(productOrderDTO -> {
             String[] images = productOrderDTO.getImage().split(",");

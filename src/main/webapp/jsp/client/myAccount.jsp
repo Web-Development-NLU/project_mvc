@@ -85,7 +85,7 @@
                     </div>
                     <div class="input-secondary">
                         <label for="address">Địa chỉ cụ thể</label>
-                        <input type="text" id="address" name="address" value="<%= ward %>">
+                        <input type="text" id="address" name="address" value="<%= address %>">
                     </div>
                     <div class="input-secondary">
                         <label for="phone">Số điện thoại</label>

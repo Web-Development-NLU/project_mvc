@@ -1,6 +1,7 @@
 package Model;
 
 import java.math.BigInteger;
+import java.time.LocalDate;
 
 public class Order extends BaseModelUUID {
     private String info;
@@ -16,7 +17,8 @@ public class Order extends BaseModelUUID {
     private String userId;
     private String deliveryId;
 
-    private long timestamp;
+    private LocalDate estimateDate;
+    private int status;
 
     public Order() {
     }
@@ -36,12 +38,20 @@ public class Order extends BaseModelUUID {
         this.email = email;
     }
 
-    public long getTimestamp() {
-        return timestamp;
+    public int getStatus() {
+        return status;
     }
 
-    public void setTimestamp(long timestamp) {
-        this.timestamp = timestamp;
+    public void setStatus(int status) {
+        this.status = status;
+    }
+
+    public LocalDate getEstimateDate() {
+        return estimateDate;
+    }
+
+    public void setEstimateDate(LocalDate estimateDate) {
+        this.estimateDate = estimateDate;
     }
 
     public String getInfo() {

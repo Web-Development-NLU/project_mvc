@@ -32,9 +32,14 @@ public class OrderDetailController extends HttpServlet {
             response.sendRedirect("/");
             return;
         }
-        request.setAttribute("order", this.orderService.findById(id, Order.class));
-        ArrayList<ProductOrderDTO> list = this.productOrderService.getByOrderId(id);
-        request.setAttribute("productOrders", this.productOrderService.getByOrderId(id));
+        Order order = this.orderService.findById(id, Order.class);
+        if(order == null) {
+            response.sendRedirect("/");
+            return;
+        }
+        request.setAttribute("order", order);
+        ArrayList<ProductOrderDTO> productOrders = this.productOrderService.getByOrderId(id);
+        request.setAttribute("productOrders", productOrders);
         request.getRequestDispatcher("/jsp/client/orderDetail.jsp").forward(request, response);
     }
 

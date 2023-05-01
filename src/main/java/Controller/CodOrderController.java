@@ -20,6 +20,8 @@ import javax.servlet.*;
 import javax.servlet.http.*;
 import javax.servlet.annotation.*;
 import java.io.IOException;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 
 @WebServlet(name = "CodOrderController", value = "/codOrder")
@@ -66,7 +68,7 @@ public class CodOrderController extends HttpServlet {
         orderSave.setPhone(user.getPhone());
         orderSave.setUsername(user.getFirstName() + " " + user.getLastName());
         orderSave.setId(rand);
-        orderSave.setTimestamp(Long.parseLong(timestamp));
+        orderSave.setEstimateDate(LocalDate.parse(timestamp));
         orderSave.setDeliveryId(deliveryId);
 
         if ((boolean) request.getAttribute("logged")) {
