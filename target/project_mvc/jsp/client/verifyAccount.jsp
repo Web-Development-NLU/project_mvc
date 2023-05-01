@@ -1,4 +1,4 @@
-<%@ page import="Model.Timeout" %><%--
+<%--
   Created by IntelliJ IDEA.
   User: Quang Tho
   Date: 04/12/2022

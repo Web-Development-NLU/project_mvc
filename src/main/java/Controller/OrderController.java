@@ -4,6 +4,7 @@ import DTO.AuthorizationData;
 import DTO.OrderDTO;
 import DTO.UpdateUserDTO;
 import Model.User;
+import Services.LogisticService;
 import Services.UserService;
 
 import javax.servlet.*;
@@ -15,11 +16,13 @@ import java.io.IOException;
 public class OrderController extends HttpServlet {
 
     private UserService userService;
+    private LogisticService logisticService;
 
     @Override
     public void init() throws ServletException {
         super.init();
         this.userService = new UserService("users");
+        this.logisticService = new LogisticService();
     }
 
     @Override
@@ -30,15 +33,19 @@ public class OrderController extends HttpServlet {
             return;
         }
 
-        if(request.getParameter("error") != null) {
+        if (request.getParameter("error") != null) {
             request.setAttribute("error", "Hãy nhập đủ thông tin");
         }
 
         HttpSession session = request.getSession(true);
         AuthorizationData authorizationData = (AuthorizationData) session.getAttribute("authorization");
         request.setAttribute("carts", authorizationData.getCarts());
-        if(!((boolean) request.getAttribute("logged"))) {
+        if (!((boolean) request.getAttribute("logged"))) {
             request.setAttribute("user", session.getAttribute("user"));
+        }
+        if (session.getAttribute("token") == null) {
+            String token = this.logisticService.loginLogistic("thanh@1234", "123456", "/auth/login");
+            session.setAttribute("token", token);
         }
 
         request.getRequestDispatcher("/jsp/client/order.jsp").forward(request, response);
@@ -54,14 +61,19 @@ public class OrderController extends HttpServlet {
         String address = request.getParameter("address");
         String phone = request.getParameter("phone");
         String email = request.getParameter("email");
+        String ward = request.getParameter("ward");
+        String toDistrictID = request.getParameter("toDistrictID");
+        String toWardID = request.getParameter("toWardID");
+
         HttpSession session = request.getSession(true);
+
         AuthorizationData authorizationData = (AuthorizationData) session.getAttribute("authorization");
-        if (firstName.isEmpty() || lastName.isEmpty() || country.isEmpty() || city.isEmpty() || district.isEmpty() || address.isEmpty() || phone.isEmpty() || email.isEmpty()) {
+        if (firstName.isEmpty() || lastName.isEmpty() || country.isEmpty() || city.isEmpty() || district.isEmpty()||ward.isEmpty()|| address.isEmpty() || phone.isEmpty() || email.isEmpty()) {
             response.sendRedirect("/order?error=emptyInfo");
             return;
         }
 
-        if((boolean) request.getAttribute("logged")) {
+        if ((boolean) request.getAttribute("logged")) {
 
             User user = (User) request.getAttribute("user");
             user.setFirstName(firstName);
@@ -69,13 +81,14 @@ public class OrderController extends HttpServlet {
             user.setCountry(country);
             user.setCity(city);
             user.setDistrict(district);
+            user.setWard(ward);
             user.setAddress(address);
             user.setPhone(phone);
 
             this.userService.update(authorizationData.getId(), new UpdateUserDTO(user));
-        }else {
+        } else {
             User user = new User();
-            if(session.getAttribute("user") != null) {
+            if (session.getAttribute("user") != null) {
                 user = (User) session.getAttribute("user");
             }
             user.setFirstName(firstName);
@@ -83,15 +96,18 @@ public class OrderController extends HttpServlet {
             user.setCountry(country);
             user.setCity(city);
             user.setDistrict(district);
+            user.setWard(ward);
             user.setAddress(address);
             user.setPhone(phone);
             session.setAttribute("user", user);
+
         }
 
         OrderDTO order = new OrderDTO();
         order.setEmail(email);
         session.setAttribute("order", order);
-
+        session.setAttribute("toDistrictID", toDistrictID);
+        session.setAttribute("toWardID", toWardID);
 
         response.sendRedirect("/payment");
     }

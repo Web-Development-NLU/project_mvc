@@ -43,19 +43,21 @@ public class AddToCartController extends HttpServlet {
         boolean hasColor = this.productService.getColors(product.getId()).size() > 0;
         if (hasPattern && hasColor) {
             if (pattern == null || color == null) {
-                session.setAttribute("error" + idProduct, "Please choose pattern and color!");
+                session.setAttribute("error" + idProduct, "Vui lòng chọn mẫu và màu sắc!");
                 response.sendRedirect("/product?id=" + idProduct);
                 return;
             }
         } else if (hasPattern) {
             if (pattern == null) {
-                session.setAttribute("error" + idProduct, "Please choose pattern!");
+
+                session.setAttribute("error" + idProduct, "Vui lòng chọn mẫu!");
+
                 response.sendRedirect("/product?id=" + idProduct);
                 return;
             }
         } else if (hasColor) {
             if (color == null) {
-                session.setAttribute("error" + idProduct, "Please choose color!");
+                session.setAttribute("error" + idProduct, "Vui lòng chọn màu sắc!");
                 response.sendRedirect("/product?id=" + idProduct);
                 return;
             }
