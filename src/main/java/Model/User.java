@@ -17,7 +17,7 @@ public class User extends BaseModelUUID {
     private int isGoogle = 0;
     private int isWrong = 0;
     private Timestamp timeCurrent;
-
+    private String ward;
     public User() {
     }
 
@@ -45,6 +45,14 @@ public class User extends BaseModelUUID {
     public User(String email, Timestamp timeCurrent) {
         this.email = email;
         this.timeCurrent = timeCurrent;
+    }
+
+    public String getWard() {
+        return ward;
+    }
+
+    public void setWard(String ward) {
+        this.ward = ward;
     }
 
     public User(Timestamp timeCurrent) {
@@ -180,6 +188,7 @@ public class User extends BaseModelUUID {
                 ", isGoogle=" + isGoogle +
                 ", isWrong=" + isWrong +
                 ", timeCurrent=" + timeCurrent +
+                ", ward='" + ward + '\'' +
                 '}';
     }
 }

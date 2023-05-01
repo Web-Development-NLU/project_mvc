@@ -33,7 +33,8 @@
     String address = "";
     String phone = "";
     String email = "";
-    if(user != null) {
+    String ward = "";
+    if (user != null) {
         firstName = (user.getFirstName() != null) ? user.getFirstName() : "";
         lastName = (user.getLastName() != null) ? user.getLastName() : "";
         country = (user.getCountry() != null) ? user.getCountry() : "";
@@ -42,13 +43,16 @@
         address = (user.getAddress() != null) ? user.getAddress() : "";
         phone = (user.getPhone() != null) ? user.getPhone() : "";
         email = (user.getEmail() != null) ? user.getEmail() : "";
+        ward = (user.getWard() != null) ? user.getWard() : "";
     }
 
     double sumPrice = 0;
 
-    for(CartDTO cart: carts) {
+    for (CartDTO cart : carts) {
         sumPrice += cart.getPrice() * cart.getAmount();
     }
+    String token = session.getAttribute("token") != null ? (String) session.getAttribute("token") : "";
+
 %>
 <div id="order-container">
     <header>
@@ -63,14 +67,16 @@
     <section id="checkout-content" class="container-fluid">
         <div class="cart-menu">
             <div class="cart-menu_item">GIỎ HÀNG</div>
-            <div class="cart-menu_item selected">NHẬP THÔNG TIN </div>
+            <div class="cart-menu_item selected">NHẬP THÔNG TIN</div>
             <div class="cart-menu_item">THANH TOÁN</div>
+
         </div>
 
         <div class="checkout-other-action mt-5 mb-5">
             <div class="action-link">
                 <i class="fa-regular fa-user action-icon"></i>
-                <a href="/login" disabled="<%=logged ? "true":"false"%>" class="action-content">BẤM VÀO ĐÂY ĐỂ ĐĂNG NHẬP</a>
+                <a href="/login" disabled="<%=logged ? "true":"false"%>" class="action-content">BẤM VÀO ĐÂY ĐỂ ĐĂNG
+                    NHẬP</a>
             </div>
         </div>
 
@@ -78,6 +84,8 @@
             <div class="checkout-detail row">
                 <div class="checkout-billing col-12 col-lg-8">
                     <div class="checkout-billing_title">Chi tiết đơn hàng</div>
+                    <input type="hidden" name="toDistrictID">
+                    <input type="hidden" name="toWardID">
                     <c:if test="<%= !error.isEmpty() %>">
                         <div class="color-red mb-3 overflow-hidden">
                             <%= error %>
@@ -99,14 +107,33 @@
                     </div>
                     <div class="input-secondary">
                         <label for="city">Thành phố/ Tỉnh *</label>
-                        <input type="text" id="city" name="city" value="<%= city %>">
+                        <%--                        <input type="text" id="city" name="city" value="<%= city %>">--%>
+                        <select name="city" id="city">
+                            <option value="<%=city%>" name="city" selected>
+                                <%=city%>
+                            </option>
+                        </select>
                     </div>
                     <div class="input-secondary">
                         <label for="district">Quận *</label>
-                        <input type="text" id="district" name="district" value="<%= district %>">
+                        <%--                        <input type="text" id="district" name="district" value="<%= district %>">--%>
+                        <select name="district" id="district">
+                            <option value="<%=district%>" name="district" selected>
+                                <%=district%>
+                            </option>
+
+                        </select>
                     </div>
                     <div class="input-secondary">
-                        <label for="address">Địa chỉ cụ thể *</label>
+                        <label for="ward">Xã  *</label>
+                        <select name="ward" id="ward">
+                            <option value="<%=ward%>" name="ward" selected>
+                                <%=ward%>
+                            </option>
+                        </select>
+                    </div>
+                    <div class="input-secondary">
+                        <label for="address">Địa chỉ cụ thể</label>
                         <input type="text" id="address" name="address" value="<%= address %>">
                     </div>
                     <div class="input-secondary">
@@ -156,5 +183,12 @@
 </div>
 
 <jsp:include page="common/tail.jsp"/>
+<c:if test='<%=token!=""%>'>
+    <input type="hidden" name="token" value="<%=token%>">
+</c:if>
 </body>
 </html>
+<script type="module" src="../../assets/js/login.js"></script>
+<script src="../../assets/js/account.js" type="module">
+</script>
+

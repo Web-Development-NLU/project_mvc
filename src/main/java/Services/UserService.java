@@ -117,6 +117,7 @@ public class UserService extends BaseService<User> {
                         "country = :country, " +
                         "city = :city, " +
                         "district = :district, " +
+                        "ward = :ward, " +
                         "address = :address, " +
                         "status = :status" +
 //                        "isWrong= :isWrong" +
