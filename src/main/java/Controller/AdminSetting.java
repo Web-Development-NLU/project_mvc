@@ -27,14 +27,14 @@ public class AdminSetting extends HttpServlet {
         HttpSession session = request.getSession(true);
         AuthorizationData data = (AuthorizationData) session.getAttribute("adminLogin");
         String errorChangePass = request.getParameter("errorChangePass");
-        if(errorChangePass != null) {
+        if (errorChangePass != null) {
             request.setAttribute("errorChangePass", "Mật khẩu cũ không chính xác");
         }
 
         String success = (request.getParameter("success") == null) ? "" : request.getParameter("success");
-        if(success.equals("changePass")) {
+        if (success.equals("changePass")) {
             request.setAttribute("success", "Thay đổi mật khẩu thành công");
-        }else if(success.equals("changeInfo")){
+        } else if (success.equals("changeInfo")) {
             request.setAttribute("success", "Cập nhật thông tin thành công");
         }
 
@@ -56,6 +56,7 @@ public class AdminSetting extends HttpServlet {
                 request.getParameter("country"),
                 request.getParameter("city"),
                 request.getParameter("district"),
+                null,
                 request.getParameter("address")
         );
         dto.setStatus(StatusAccount.ACTIVE.ordinal());

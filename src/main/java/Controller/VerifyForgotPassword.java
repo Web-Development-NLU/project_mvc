@@ -4,6 +4,7 @@ import DTO.UpdateUserDTO;
 import Model.User;
 import Services.AuthenticationService;
 import Services.UserService;
+import Utils.Utils;
 import at.favre.lib.crypto.bcrypt.BCrypt;
 import org.apache.commons.lang3.RandomStringUtils;
 
@@ -19,12 +20,14 @@ public class VerifyForgotPassword extends HttpServlet {
 
     private UserService userService;
     private AuthenticationService authenticationService;
+    private  Utils util;
 
     @Override
     public void init() throws ServletException {
         super.init();
         this.userService = new UserService("users");
         this.authenticationService = new AuthenticationService();
+        this.util = new Utils();
     }
 
     @Override
@@ -72,7 +75,12 @@ public class VerifyForgotPassword extends HttpServlet {
                     if((timeCurrent-timeSendOTP)>180000){
                         request.setAttribute("error", "Mã otp đã hết hạn sau 3 phút vui lòng gửi lại để nhận mã otp mới");
                         request.getRequestDispatcher("/jsp/client/verifyForgotPassword.jsp").forward(request, response);
-                    }else {
+                    }
+                    if(!util.handleCheckPasswordIsValid(newPassword)){
+                        request.setAttribute("error", "Mật khẩu mới phải tối thểu 6 kí tự và có ít nhất một kí tự in hoa và số");
+                        request.getRequestDispatcher("/jsp/client/verifyForgotPassword.jsp").forward(request, response);
+                    }
+                    else {
                         this.userService.resetPassword(user.getId(), newPassword);
                         this.userService.updateIsWrong(user.getId(), 0);
                         this.userService.updateTimeout(user.getId(), null);
