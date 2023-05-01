@@ -6,6 +6,7 @@ import Model.StatusAccount;
 import Model.TypeAccount;
 import Model.User;
 import Services.AuthenticationService;
+import Services.LogisticService;
 import Services.UserService;
 import org.apache.commons.lang3.RandomStringUtils;
 import org.json.JSONObject;
@@ -21,13 +22,16 @@ import java.util.Base64;
 public class LoginGoogle extends HttpServlet {
     private UserService userService;
     private AuthenticationService authenticationService;
+    private LogisticService logisticService;
 
     @Override
     public void init() throws ServletException {
         super.init();
         this.userService = new UserService("users");
         this.authenticationService = new AuthenticationService();
+        this.logisticService = new LogisticService();
     }
+
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
@@ -41,7 +45,7 @@ public class LoginGoogle extends HttpServlet {
         HttpSession session = request.getSession(true);
         try {
             if (user == null) {
-                if(!data.getBoolean("email_verified")) {
+                if (!data.getBoolean("email_verified")) {
                     request.setAttribute("errorLogin", "Email không chính xác");
                     request.getRequestDispatcher("/jsp/client/authentication.jsp").forward(request, response);
                     return;
@@ -68,8 +72,10 @@ public class LoginGoogle extends HttpServlet {
             AuthorizationData dataAuth = new AuthorizationData(user.getId(), user.getType());
             dataAuth.setCarts(carts);
             session.setAttribute("authorization", dataAuth);
+            String token = this.logisticService.loginLogistic("thanh@1234", "123456", "/auth/login");
+            session.setAttribute("token", token);
             response.sendRedirect("/");
-        }catch (Exception e) {
+        } catch (Exception e) {
             throw new RuntimeException(e);
         }
     }

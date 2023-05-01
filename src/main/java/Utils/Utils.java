@@ -1,11 +1,18 @@
 package Utils;
 
-public class Utils {
-    public  boolean handleCheckPasswordIsValid(String password) {
-        if (!password.matches("\\.*[aA-zZ0-9].*") || !password.matches("\\.*\\w*[A-Z].*")) {
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
-            return false;
+public class Utils {
+    public boolean handleCheckPasswordIsValid(String password) {
+        String regex = "^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d).{6,}$";
+        Pattern pattern = Pattern.compile(regex);
+        Matcher matcher = pattern.matcher(password);
+        if (matcher.matches()) {
+            return true;
         }
-        return true;
+        return false;
+
+
     }
 }
