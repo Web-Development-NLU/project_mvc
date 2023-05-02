@@ -9,7 +9,7 @@ public class Logger {
     private String method;
     private String request;
     private String userId;
-    private String agent;
+    private String agent;//request từ brower nào ip
     private String data;
     private int status;
     private String message;
