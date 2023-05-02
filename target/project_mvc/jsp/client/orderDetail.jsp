@@ -1,5 +1,16 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@ page import="Model.Order" %>
+<%@ page import="Model.StatusOrder" %>
+<%@ page import="Model.ProductOrder" %>
+<%@ page import="java.util.ArrayList" %>
+<%@ page import="Model.Product" %>
+<%@ page import="DTO.ProductOrderDTO" %>
+<%@ page import="java.text.DecimalFormat" %>
+<%@ page import="java.time.LocalDateTime" %>
+<%@ page import="java.time.Instant" %>
+<%@ page import="java.time.ZoneId" %>
+<%@ page import="java.time.LocalDate" %>
+<%@ page import="java.time.format.DateTimeFormatter" %>
 <%@ taglib prefix = "c" uri = "http://java.sun.com/jsp/jstl/core" %>
 <%@ page isELIgnored = "false" %>
 
@@ -14,6 +25,11 @@
     <body>
         <%
             Order order = (Order) request.getAttribute("order");
+            boolean isDone = order.getStatus() == StatusOrder.DONE.ordinal();
+            boolean isDelevering = order.getStatus() == StatusOrder.DELIVERING.ordinal();
+            boolean isOrdered = order.getStatus() == StatusOrder.ORDERED.ordinal();
+            ArrayList<ProductOrderDTO> productOrders = (ArrayList<ProductOrderDTO>) request.getAttribute("productOrders");
+            DateTimeFormatter format = DateTimeFormatter.ofPattern("dd-MM-yyyy");
         %>
         <!--Begin display -->
         <div id="result-payment-container">
@@ -43,12 +59,12 @@
                                         <hr class="my-4">
 
                                         <div class="d-flex flex-row justify-content-between align-items-center align-content-center">
-                                            <span class="big-dot active d-flex justify-content-center align-items-center"><i class="fa fa-check text-white"></i></span>
-                                            <hr class="flex-fill track-line "><span
-                                                class="d-flex justify-content-center align-items-center big-dot dot ">
+                                            <span class="big-dot <%= (isOrdered || isDelevering || isDone) ? "active" : ""%> d-flex justify-content-center align-items-center"><i class="fa fa-check text-white"></i></span>
+                                            <hr class="flex-fill <%= (isDelevering || isDone) ? "active" : ""%> track-line "><span
+                                                class="d-flex justify-content-center align-items-center big-dot dot <%= (isDelevering || isDone) ? "active" : ""%> ">
                                     <i class="fa fa-check text-white"></i></span>
-                                            <hr class="flex-fill track-line"><span
-                                                class="d-flex justify-content-center align-items-center big-dot dot">
+                                            <hr class="flex-fill <%= isDone ? "active" : ""%>  track-line"><span
+                                                class="d-flex justify-content-center align-items-center big-dot dot <%= isDone  ? "active" : ""%>">
                                     <i class="fa fa-check text-white"></i></span>
                                         </div>
 
@@ -63,7 +79,6 @@
                                     <table class="table table-bordered" style="width:1365px">
                                         <thead>
                                         <tr>
-                                            <th>MÃ ĐƠN HÀNG</th>
                                             <th class="smart-cell">SẢN PHẨM</th>
                                             <th>TÊN</th>
                                             <th>Mẫu</th>
@@ -73,20 +88,24 @@
                                         </tr>
                                         </thead>
                                         <tbody class="cart-list">
-                                        <tr>
-                                            <td>MariaAnders</td>
-                                            <td><img src="https://mdbcdn.b-cdn.net/img/Photos/Horizontal/E-commerce/Products/13.webp"
-                                                     class="img-fluid" alt="Phone"></td>
-                                            <td>Maria Anders</td>
-                                            <td>Germany</td>
-                                            <td>Alfreds Futterkiste</td>
-                                            <td>Maria Anders</td>
-                                            <td>Germany</td>
-                                        </tr>
+                                        <c:forEach items="<%=productOrders%>" var="cart">
+                                            <c:set var="sumPrice" value="${cart.price * cart.amount}" scope="request" />
+                                            <tr>
+                                                <td><img src="${cart.image}"
+                                                         class="img-fluid" alt="Phone"></td>
+                                                <td><c:out value="${cart.name}"/></td>
+
+                                                <td><c:out value="${(cart.pattern != null) ? cart.pattern : \"\"}"/></td>
+                                                <td><c:out value="${(cart.color != null) ? cart.color : \"\"}"/></td>
+                                                <td><c:out value="${cart.amount}"/></td>
+                                                <td><%= DecimalFormat.getInstance().format(Double.parseDouble(request.getAttribute("sumPrice").toString())) %> VNĐ</td>
+                                            </tr>
+                                        </c:forEach>
+
                                         <tr>
                                             <td colspan="100" style="text-align: center">
-                                                Thời gian đặt hàng thành công: 15-12-2023<br>
-                                                Thời gian giao hàng dự kiến: 15-12-2023 đến 20-12-2023
+                                                Thời gian đặt hàng thành công: <%= order.getCreatedAt().format(format) %><br>
+                                                Thời gian giao hàng dự kiến: <%= order.getEstimateDate().format(format) %>
                                             </td>
                                         </tr>
                                     </table>

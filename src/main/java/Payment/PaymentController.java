@@ -3,6 +3,8 @@ package Payment;
 import DTO.AuthorizationData;
 import DTO.CartDTO;
 import DTO.OrderDTO;
+import Model.Product;
+import Model.ProductOrder;
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
 

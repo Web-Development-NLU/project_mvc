@@ -16,8 +16,8 @@ public class OrderService extends BaseService<Order> {
     @Override
     public String create(Order model) {
         this.jdbi.useHandle(handle ->
-                handle.createUpdate("INSERT INTO " + this.tableName + "(id, info, transID, username, country, city, district, address, phone, email, createdAt, price, userId,deliveryId,timestamp) VALUES " +
-                                "(:id, :info, :transID, :username, :country, :city, :district, :address, :phone, :email, :createdAt, :price, :userId, :deliveryId,:timestamp)")
+                handle.createUpdate("INSERT INTO " + this.tableName + "(id, info, transID, username, country, city, district, address, phone, email, createdAt, price, userId,deliveryId, estimateDate) VALUES " +
+                                "(:id, :info, :transID, :username, :country, :city, :district, :address, :phone, :email, :createdAt, :price, :userId, :deliveryId,:estimateDate)")
                         .bindBean(model).execute()
         );
         return model.getId();
