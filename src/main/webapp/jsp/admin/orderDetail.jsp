@@ -74,50 +74,93 @@
                 <!-- Content -->
                 <div class="container-xxl flex-grow-1 container-p-y">
                     <h4 class="fw-bold py-3 mb-4"><span class="text-muted fw-light">Đơn hàng /</span> Chi tiết đơn hàng</h4>
-<%--                    <hr class="my-5"/>--%>
-                    <div class="card">
-                        <h5 class="card-header" style="padding: 1rem 0 1rem 1.5rem">Chi tiết đơn hàng</h5>
                         <div class="container mt-5 mb-5" style="margin-top: 0.5rem !important;">
-                            <div class="table-responsive">
-                                <div class="form-group">
-                                    <label >Mã đơn hàng:</label>
-                                    <label><%=order.getId()%></label>
-                                </div>
-                                <c:if test="<%= order.getTransID() != null %>">
-                                    <div class="form-group">
-                                        <label>Mã giao dịch VNPAY:</label>
-                                        <label><%=order.getTransID()%></label>
-                                    </div>
-                                </c:if>
-                                <div class="form-group">
-                                    <label >Tên khách hàng:</label>
-                                    <label><%=order.getUsername()%></label>
-                                </div>
-                                <div class="form-group">
-                                    <label>Quốc gia:</label>
-                                    <label><%=order.getCountry()%></label>
-                                </div>
-                                <div class="form-group">
-                                    <label >Thành phố:</label>
-                                    <label><%=order.getCity()%></label>
-                                </div>
-                                <div class="form-group">
-                                    <label >Quận/Huyện:</label>
-                                    <label><%=order.getDistrict()%></label>
-                                </div>
-                                <div class="form-group">
-                                    <label >Số điện thoại:</label>
-                                    <label><%=order.getPhone()%></label>
-                                </div>
-                                <div class="form-group">
-                                    <label >Email:</label>
-                                    <label><%=order.getEmail()%></label>
-                                </div>
-                            </div>
+                            <section class="h-100 gradient-custom" >
+                                <div class="container py-5 h-100">
 
-                        </div>
-                    </div>
-                </div>
+                                                <div class="card-header">
+                                                    <div class="card-body p-4">
+
+                                                        <div class="d-flex justify-content-between align-items-center">
+                                                            <div class="d-flex flex-column">
+                                                                <span class="lead fw-normal">Trạng thái đơn hàng của bạn</span>
+                                                            </div>
+                                                        </div>
+                                                        <hr class="my-4">
+
+                                                        <div class="d-flex flex-row justify-content-between align-items-center align-content-center">
+                                                            <span class="big-dot active d-flex justify-content-center align-items-center"><i class="fa fa-check text-white"></i></span>
+                                                            <hr class="flex-fill track-line "><span
+                                                                class="d-flex justify-content-center align-items-center big-dot dot">
+                                                                    <i class="fa fa-check text-white"></i></span>
+                                                            <hr class="flex-fill track-line"><span
+                                                                class="d-flex justify-content-center align-items-center big-dot dot ">
+                                                                    <i class="fa fa-check text-white"></i></span>
+                                                        </div>
+
+                                                        <div class="d-flex flex-row justify-content-between align-items-center">
+                                                            <div class="d-flex flex-column align-items-start"><span class="color-black">Đã đặt hàng</span></div>
+                                                            <div class="d-flex flex-column align-items-center"><span class="color-black">Đang giao hàng</span></div>
+                                                            <div class="d-flex flex-column align-items-end"><span class="color-black">Giao hàng thành công</span></div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="cart-table mt-5 col-12 col-md-8">
+                                                    <table class="table table-bordered" style="width: 950px;margin-left: 50px" >
+                                                        <thead>
+                                                        <tr>
+                                                            <th>Mã đơn hàng</th>
+                                                            <td><%=order.getId()%></td>
+                                                        </tr>
+                                                        <tr>
+                                                            <th>Tên khách hàng</th>
+                                                            <td><%=order.getUsername()%></td>
+                                                        </tr>
+                                                        <tr>
+                                                            <th>Số điện thoại</th>
+                                                            <td><%=order.getPhone()%></td>
+                                                        </tr>
+                                                        <tr>
+                                                            <th>Địa chỉ</th>
+                                                            <td><%=order.getCountry()%>-<%=order.getCity()%>-<%=order.getDistrict()%></td>
+                                                        </tr>
+                                                        <tr>
+                                                            <th>Sản phẩm</th>
+                                                            <td>HTML</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <th>Tên</th>
+                                                            <td>CSS</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <th>Mẫu</th>
+                                                            <td>JavaScript</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <th>Màu</th>
+                                                            <td>JavaScript</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <th>Số lượng</th>
+                                                            <td>JavaScript</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <th>Tống</th>
+                                                            <td>JavaScript</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td colspan="100" style="text-align: center">
+                                                                Thời gian đặt hàng thành công: <br>
+                                                                Thời gian giao hàng dự kiến:
+                                                            </td>
+                                                        </tr>
+                                                    </table>
+                                                </div>
+                                    <a href="">
+                                        <button type="button" class="btn btn-outline-dark" style="margin-left:880px">Xác nhận</button>
+                                    </a>
+                                </div>
+                            </section>
                 <!-- Footer -->
                 <footer class="content-footer footer bg-footer-theme">
                     <div class="container-xxl d-flex flex-wrap justify-content-between py-2 flex-md-row flex-column">
@@ -172,4 +215,54 @@
 <!-- Place this tag in your head or just before your close body tag. -->
 <script async defer src="https://buttons.github.io/buttons.js"></script>
 </body>
+<style>
+    .track-line {
+        height: 2px !important;
+        background-color: darkgray;
+        opacity: 1;
+    }
+
+    .dot {
+        height: 10px;
+        width: 10px;
+        margin-left: 3px;
+        margin-right: 3px;
+        margin-top: 0px;
+        background-color: darkgray;
+        border-radius: 50%;
+        display: inline-block
+    }
+
+    .big-dot {
+        height: 25px;
+        width: 25px;
+        margin-left: 0px;
+        margin-right: 0px;
+        margin-top: 0px;
+        background-color: darkgray;
+        border-radius: 50%;
+        display: inline-block;
+    }
+
+    .big-dot i {
+        font-size: 12px;
+    }
+
+    .card-stepper {
+        z-index: 0
+    }
+    .gradient-custom {
+        /* fallback for old browsers */
+        background: white;
+
+        /* Chrome 10-25, Safari 5.1-6 */
+        /*background: -webkit-linear-gradient(to top left, rgba(205, 156, 242, 1), rgba(246, 243, 255, 1));*/
+
+        /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+        /*background: linear-gradient(to top left, rgba(205, 156, 242, 1), rgba(246, 243, 255, 1))*/
+    }
+    .active{
+        background-color: red;
+    }
+</style>
 </html>
