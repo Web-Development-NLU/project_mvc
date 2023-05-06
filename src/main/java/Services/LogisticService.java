@@ -1,10 +1,12 @@
 package Services;
 
+import Utils.Utils;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.gson.Gson;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
+import jdk.jshell.execution.Util;
 import org.apache.http.HttpResponse;
 import org.apache.http.NameValuePair;
 import org.apache.http.client.HttpClient;
@@ -16,12 +18,24 @@ import org.apache.http.message.BasicNameValuePair;
 import org.apache.http.util.EntityUtils;
 
 import java.io.IOException;
+import java.sql.Timestamp;
+import java.text.ParseException;
+import java.time.Instant;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.ZoneId;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 public class LogisticService {
+    private Utils utils;
+
+    public LogisticService() {
+        this.utils = new Utils();
+    }
+
     public String loginLogistic(String email, String password, String endpoint) throws IOException {
         Map<String, String> values = new HashMap<>();
         values.put("email", email);
@@ -62,7 +76,7 @@ public class LogisticService {
 
     }
 
-    public String getEstimateTimeDeliveryOrRegisterDelivery(String fromDistrictId, String fromWardId, String toDistrictId, String toWardId, int height, int length, int width, int weight, String endpoint, String token, int type) throws IOException {
+    public String getEstimateTimeDeliveryOrRegisterDelivery(String fromDistrictId, String fromWardId, String toDistrictId, String toWardId, int height, int length, int width, int weight, String endpoint, String token, int type) throws IOException{
         // Determine the API endpoint
         Map<String, String> values = new HashMap<>();
         values.put("from_district_id", fromDistrictId);
@@ -82,8 +96,11 @@ public class LogisticService {
         JsonObject jsonObject = new Gson().fromJson(data, JsonObject.class);
         JsonArray dataArray = jsonObject.getAsJsonArray("data");
         JsonObject dataObject = dataArray.get(0).getAsJsonObject();
-        long timestamp = dataObject.get("timestamp").getAsLong();
-        return String.valueOf(timestamp);
+        String estimateDate = dataObject.get("formattedDate").getAsString();
+        Instant instant = Instant.parse(estimateDate);
+        ZoneId zone = ZoneId.of("Asia/Ho_Chi_Minh");
+        LocalDate date = LocalDate.ofInstant(instant, zone);
+        return date.toString();
     }
 
     public static void getAllGoodsRegistered(String endpoint, String token) throws IOException {

@@ -2,6 +2,8 @@
 <%@ page import="Model.Order" %>
 <%@ page import="java.text.DecimalFormat" %>
 <%@ page import="java.net.URLEncoder" %>
+<%@ page import="java.time.format.DateTimeFormatter" %>
+<%@ page import="java.time.LocalDate" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page isELIgnored="false" %>
@@ -32,6 +34,7 @@
     int pagination = (int) request.getAttribute("pagination");
     String numPage = DecimalFormat.getIntegerInstance().format(Double.parseDouble(request.getAttribute("numPage").toString()));
     int totalPage = Integer.parseInt(numPage);
+    DateTimeFormatter format = DateTimeFormatter.ofPattern("dd-MM-yyyy");
 %>
 <div id="cart-container">
     <header>
@@ -64,10 +67,11 @@
                             </thead>
                             <tbody>
                             <c:forEach items="<%= orders %>" var="order">
+                                <c:set var="createdAt" value="${order.createdAt}" scope="request" />
                                 <tr style="border-bottom: 1px solid #DEE2E6">
                                     <td style="border-right: 1px solid #DEE2E6"><a href="${pageContext.request.contextPath}/orderDetail?id=${order.id}">${order.id}</a></td>
                                     <td style="border-right: 1px solid #DEE2E6">${order.info}</td>
-                                    <td style="border-left: 1px solid #DEE2E6;">${order.createdAt}</td>
+                                    <td style="border-left: 1px solid #DEE2E6;"><%=LocalDate.parse(request.getAttribute("createdAt").toString()).format(format)%></td>
                                 </tr>
                             </c:forEach>
                             </tbody>
