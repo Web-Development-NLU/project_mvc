@@ -1,4 +1,6 @@
+Services\LoggerService.class
 Controller\AminProduct.class
+DTO\ProductOrderDTO.class
 DTO\UpdateCodeDTO.class
 Model\Category.class
 Controller\AdminSlide.class
@@ -19,11 +21,13 @@ Controller\CreateAccountAdmin.class
 Controller\CreateSlide.class
 Model\TypeShop.class
 Controller\CreateCategory.class
+Controller\LoginGoogle.class
 Controller\ForgotPasswordController.class
 Controller\AccountController.class
 Services\CodeService.class
 DTO\UpdateAboutDTO.class
 Controller\DeleteAccount.class
+Services\UserService$2.class
 Filter\CheckAuthentication.class
 Controller\EditCode.class
 Payment\PaymentController.class
@@ -56,6 +60,7 @@ Model\StatusAccount.class
 Payment\Config.class
 DTO\StatReview.class
 Payment\apiVNPay.class
+Services\UserService$3.class
 Controller\EditPattern.class
 ControllerTest\BrandTest.class
 Controller\AuthenticationContoller.class
@@ -65,7 +70,9 @@ Controller\ResetPasswordAccount.class
 DTO\UpdateBrandDTO.class
 Services\ShopService.class
 Controller\AdminSetting.class
+Model\Satatictis.class
 DTO\UpdateContactDTO.class
+Model\ProductOrder.class
 Controller\AdminContact.class
 Controller\CustomerController.class
 Controller\OrderController.class
@@ -83,6 +90,7 @@ Filter\DataForAdmin.class
 Model\IModel.class
 Model\About.class
 ControllerTest\CodeTest.class
+Model\StatusOrder.class
 Services\ReviewService.class
 Services\UserService$1.class
 Filter\Charset.class
@@ -95,6 +103,7 @@ Controller\createColor.class
 Services\AuthenticationService.class
 Controller\EditSlide.class
 Services\CodeService$1.class
+Model\Logger.class
 Model\TypeAccount.class
 Controller\AdminPattern.class
 Services\CloudinaryService.class
@@ -116,6 +125,7 @@ Services\MailService.class
 Controller\AdminColor.class
 Model\Review.class
 Services\BaseService$1.class
+Services\LogisticService.class
 DTO\UpdateShopDTO.class
 DTO\UpdateUserDTO.class
 Model\Shop.class
@@ -136,6 +146,7 @@ Services\BaseService.class
 Controller\MyAccount.class
 Services\PatternService.class
 ControllerTest\UploadController.class
+Services\ProductOrderService.class
 Controller\CodOrderController.class
 Controller\LogoutAdminController.class
 Controller\CompleteForgotPassword.class

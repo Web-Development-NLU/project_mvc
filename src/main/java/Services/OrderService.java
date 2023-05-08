@@ -2,6 +2,8 @@ package Services;
 
 import DTO.BaseDTO;
 import Model.Order;
+import Model.User;
+import at.favre.lib.crypto.bcrypt.BCrypt;
 import org.jdbi.v3.core.Handle;
 import org.jdbi.v3.core.HandleCallback;
 
@@ -15,11 +17,7 @@ public class OrderService extends BaseService<Order> {
 
     @Override
     public String create(Order model) {
-        this.jdbi.useHandle(handle ->
-                handle.createUpdate("INSERT INTO " + this.tableName + "(id, info, transID, username, country, city, district, address, phone, email, createdAt, price, userId,deliveryId, estimateDate) VALUES " +
-                                "(:id, :info, :transID, :username, :country, :city, :district, :address, :phone, :email, :createdAt, :price, :userId, :deliveryId,:estimateDate)")
-                        .bindBean(model).execute()
-        );
+        this.jdbi.useHandle(handle -> handle.createUpdate("INSERT INTO " + this.tableName + "(id, info, transID, username, country, city, district, address, phone, email, createdAt, price, userId,deliveryId, estimateDate) VALUES " + "(:id, :info, :transID, :username, :country, :city, :district, :address, :phone, :email, :createdAt, :price, :userId, :deliveryId,:estimateDate)").bindBean(model).execute());
         return model.getId();
     }
 
@@ -50,10 +48,7 @@ public class OrderService extends BaseService<Order> {
             data = this.jdbi.withHandle(new HandleCallback<Order, Exception>() {
                 public Order withHandle(Handle handle) throws Exception {
                     try {
-                        return handle.createQuery(
-                                        "SELECT * FROM " + tableName + " WHERE id = ? and userId = ?")
-                                .bind(0, orderId).bind(1, userId)
-                                .mapToBean(Order.class).first();
+                        return handle.createQuery("SELECT * FROM " + tableName + " WHERE id = ? and userId = ?").bind(0, orderId).bind(1, userId).mapToBean(Order.class).first();
                     } catch (IllegalStateException exception) {
                         return null;
                     }
@@ -97,5 +92,12 @@ public class OrderService extends BaseService<Order> {
         return (ArrayList<Order>) this.jdbi.withHandle(handle -> {
             return handle.createQuery("SELECT * FROM " + this.tableName + " WHERE ( id = ? or info like ? ) and transID " + condition).bind(0, infoSearch).bind(1, infoSearchDetail).mapToBean(Order.class).list();
         });
+    }
+
+    public boolean updateStatusOrder(String id, int amount) {
+        Order order = this.findById(id, Order.class);
+        if (order == null) return false;
+        this.jdbi.useHandle(handle -> handle.createUpdate("UPDATE " + this.tableName + " SET status = :status WHERE id = :id").bind("status", amount).bind("id", id).execute());
+        return true;
     }
 }
