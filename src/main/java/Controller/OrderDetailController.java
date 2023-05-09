@@ -2,9 +2,11 @@ package Controller;
 
 import DTO.ProductOrderDTO;
 import Model.Order;
+import Model.Product;
 import Model.ProductOrder;
 import Services.OrderService;
 import Services.ProductOrderService;
+import Services.ProductService;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -14,7 +16,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.ArrayList;
 
-@WebServlet(name="OrderDetailController", value="/orderDetail")
+@WebServlet(name = "OrderDetailController", value = "/orderDetail")
 public class OrderDetailController extends HttpServlet {
     private OrderService orderService;
     private ProductOrderService productOrderService;
@@ -28,12 +30,12 @@ public class OrderDetailController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String id = request.getParameter("id");
-        if(id == null) {
+        if (id == null) {
             response.sendRedirect("/");
             return;
         }
         Order order = this.orderService.findById(id, Order.class);
-        if(order == null) {
+        if (order == null) {
             response.sendRedirect("/");
             return;
         }
