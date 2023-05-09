@@ -81,6 +81,15 @@ public class OrderService extends BaseService<Order> {
         });
     }
 
+    public ArrayList<Order> findOrders(String infoSearch, int status) {
+        String infoSearchDetail = "%" + infoSearch + "%";
+        String condition;
+
+        return (ArrayList<Order>) this.jdbi.withHandle(handle -> {
+            return handle.createQuery("SELECT * FROM " + this.tableName + " WHERE (id = ? or info like ?)and status=?").bind(0, infoSearch).bind(1, infoSearchDetail).bind(2, status).mapToBean(Order.class).list();
+        });
+    }
+
     public ArrayList<Order> findOrders(String infoSearch, boolean isPrepayment) {
         String infoSearchDetail = "%" + infoSearch + "%";
         String condition;
@@ -90,7 +99,7 @@ public class OrderService extends BaseService<Order> {
             condition = "is null";
         }
         return (ArrayList<Order>) this.jdbi.withHandle(handle -> {
-            return handle.createQuery("SELECT * FROM " + this.tableName + " WHERE ( id = ? or info like ? ) and transID " + condition).bind(0, infoSearch).bind(1, infoSearchDetail).mapToBean(Order.class).list();
+            return handle.createQuery("SELECT * FROM " + this.tableName + " WHERE ( id = ? or info like ? ) and status <3 and transID " + condition).bind(0, infoSearch).bind(1, infoSearchDetail).mapToBean(Order.class).list();
         });
     }
 

@@ -22,7 +22,7 @@ public class AdminOrderCanceledController extends HttpServlet {
         String infoSearch = request.getParameter("infoSearch");
         ArrayList<Order> orders;
         if(infoSearch != null && !infoSearch.equals("null")){
-            orders = this.orderService.findOrders(infoSearch, false);
+            orders = this.orderService.findOrders(infoSearch, 3);
         }else{
             orders = this.orderService.findOrdersCanceled();
         }
