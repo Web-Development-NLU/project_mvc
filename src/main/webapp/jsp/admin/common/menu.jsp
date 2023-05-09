@@ -163,6 +163,11 @@
                         <div data-i18n="Without menu">Thanh toán khi nhận hàng</div>
                     </a>
                 </li>
+                <li class="menu-item">
+                    <a href="${pageContext.request.contextPath}/admin/AdminOrderCanceledController" class="menu-link">
+                        <div data-i18n="Without menu">Đơn hàng bị hủy</div>
+                    </a>
+                </li>
             </ul>
         </li>
 

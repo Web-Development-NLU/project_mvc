@@ -96,7 +96,7 @@
 
                                         <div class="d-flex justify-content-between align-items-center">
                                             <div class="d-flex flex-column">
-                                                <span class="lead fw-normal">Trạng thái đơn hàng của bạn</span>
+                                                <span class="lead fw-normal">Trạng thái đơn hàng của bạn </span>
                                             </div>
                                         </div>
                                         <hr class="my-4">
@@ -167,7 +167,8 @@
                                         </tr>
                                         <tr>
                                             <th>Giá</th>
-                                            <td><%=DecimalFormat.getInstance().format(productOrders.get(i).getPrice()) VNĐ%>
+                                            <td><%=DecimalFormat.getInstance().format(productOrders.get(i).getPrice()) %>
+                                                VNĐ
                                             </td>
                                         </tr>
                                         <tr>
@@ -181,6 +182,12 @@
                                             <th>Tống</th>
                                             <td><%=DecimalFormat.getInstance().format(order.getPrice())%> VNĐ</td>
                                         </tr>
+                                        <c:if test="<%=order.getStatus()==3%>">
+                                        <tr>
+                                            <th>Trạng thái</th>
+                                            <td style="color: red; font-weight: bold">Đã hủy</td>
+                                        </tr>
+                                        </c:if>
                                         <tr>
                                             <td colspan="100" style="text-align: center">
                                                 Thời gian đặt hàng thành công: <%=order.getCreatedAt().format(format)%>
@@ -192,7 +199,16 @@
                                     </table>
                                 </div>
                                 <div style="display: flex; gap: 30px; margin-left: 740px">
-                                    <c:if test="<%=order.getStatus()>0%>">
+                                    <c:if test="<%=order.getStatus()<2%>">
+                                        <form method="post"
+                                              action="${pageContext.request.contextPath}/admin/adminOrderDetail?id=<%=order.getId()%>">
+                                            <input type="hidden" name="action" value="cancel">
+                                            <button type="submit" class="btn btn-outline-dark"
+                                            >Hủy đơn hàng
+                                            </button>
+                                        </form>
+                                    </c:if>
+                                    <c:if test="<%=order.getStatus()>0 && order.getStatus()!=3%>">
                                         <form method="post"
                                               action="${pageContext.request.contextPath}/admin/adminOrderDetail?id=<%=order.getId()%>">
                                             <input type="hidden" name="action" value="back">
