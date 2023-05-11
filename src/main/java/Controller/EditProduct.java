@@ -1,5 +1,6 @@
 package Controller;
 
+import DTO.AuthorizationData;
 import DTO.UpdateProductDTO;
 import Model.*;
 
@@ -18,6 +19,7 @@ public class EditProduct extends HttpServlet {
     private PatternService patternService;
     private CategoryServices categoryServices;
     private UploadService uploadService;
+    private LoggerService loggerService;
 
     @Override
     public void init() throws ServletException {
@@ -27,6 +29,7 @@ public class EditProduct extends HttpServlet {
         this.categoryServices = new CategoryServices("category");
         this.patternService = new PatternService("pattern");
         this.uploadService = new UploadService();
+        this.loggerService = new LoggerService();
     }
 
     @Override
@@ -78,6 +81,14 @@ public class EditProduct extends HttpServlet {
         String dimension = request.getParameter("dimension");
         UpdateProductDTO model = new UpdateProductDTO(name, price, shortDescription, size, StatusProduct.AVAILABLE.ordinal(),description, dimension, material, thumbnail, category);
         this.productService.update(id, model);
+        HttpSession session = request.getSession(true);
+        AuthorizationData authorizationData = (AuthorizationData) session.getAttribute("adminLogin");
+        Logger logger = new Logger(
+                request.getMethod(),
+                request.getRequestURI(),
+                null,
+                request.getHeader("USER-AGENT")
+        );
 
         this.productService.deleteColor(id);
         if(colors != null) {
@@ -94,7 +105,11 @@ public class EditProduct extends HttpServlet {
                 this.productService.linkToPattern(id, Integer.parseInt(pattern));
             }
         }
-
+        logger.setStatus(400);
+        logger.setMessage("EDIT_PRODUCT_SUCCESSFULLY");
+        logger.setUserId(authorizationData.getId());
+        logger.setData("Action= EDIT , productId= " +id );
+        this.loggerService.log(logger);
         response.sendRedirect("/admin/editProduct?id=" + id);
     }
 }

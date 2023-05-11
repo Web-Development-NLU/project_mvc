@@ -2,8 +2,10 @@ package Controller;
 
 import DTO.AuthorizationData;
 import DTO.UpdateUserDTO;
+import Model.Logger;
 import Model.StatusAccount;
 import Model.User;
+import Services.LoggerService;
 import Services.UserService;
 
 import javax.servlet.*;
@@ -15,11 +17,13 @@ import java.io.IOException;
 public class AdminSetting extends HttpServlet {
 
     private UserService userService;
+    private LoggerService loggerService;
 
     @Override
     public void init() throws ServletException {
         super.init();
         this.userService = new UserService("users");
+        this.loggerService =new LoggerService();
     }
 
     @Override
@@ -49,6 +53,12 @@ public class AdminSetting extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         HttpSession session = request.getSession(true);
         AuthorizationData data = (AuthorizationData) session.getAttribute("adminLogin");
+        Logger logger = new Logger(
+                request.getMethod(),
+                request.getRequestURI(),
+                null,
+                request.getHeader("USER-AGENT")
+        );
         UpdateUserDTO dto = new UpdateUserDTO(
                 request.getParameter("firstName"),
                 request.getParameter("lastName"),
@@ -62,7 +72,11 @@ public class AdminSetting extends HttpServlet {
         dto.setStatus(StatusAccount.ACTIVE.ordinal());
 
         this.userService.update(data.getId(), dto);
-
+        logger.setStatus(400);
+        logger.setMessage("EDIT_PROFILE_SUCCESSFULLY");
+        logger.setUserId(data.getId());
+        logger.setData("Action= EDIT , type= " + data.getType() );
+        this.loggerService.log(logger);
         response.sendRedirect("/admin/setting?success=changeInfo");
     }
 }

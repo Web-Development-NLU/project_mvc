@@ -3,7 +3,6 @@ package Controller;
 import DTO.AuthorizationData;
 import Model.TypeAccount;
 import Model.User;
-import Services.MailService;
 import Services.UserService;
 
 import javax.servlet.*;
@@ -37,9 +36,7 @@ public class DeleteAccount extends HttpServlet {
             response.sendRedirect("/admin/account?type=" + type);
             return;
         }
-
         this.userService.delete(userId, User.class);
-
         response.sendRedirect("/admin/account?type=" + type);
     }
 

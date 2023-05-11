@@ -1,10 +1,8 @@
 package Controller;
 
 import DTO.AuthorizationData;
-import Model.MailContent;
-import Model.StatusAccount;
-import Model.TypeAccount;
-import Model.User;
+import Model.*;
+import Services.LoggerService;
 import Services.MailService;
 import Services.UserService;
 import at.favre.lib.crypto.bcrypt.BCrypt;
@@ -22,12 +20,14 @@ public class CreateAccountAdmin extends HttpServlet {
 
     private UserService userService;
     private MailService mailService;
+    private LoggerService loggerService;
 
     @Override
     public void init() throws ServletException {
         super.init();
         this.userService = new UserService("users");
         this.mailService = new MailService();
+        this.loggerService=new LoggerService();
     }
 
     @Override
@@ -38,7 +38,6 @@ public class CreateAccountAdmin extends HttpServlet {
 
         HttpSession session = request.getSession(true);
         AuthorizationData data = (AuthorizationData) session.getAttribute("adminLogin");
-
         if(data.getType() != TypeAccount.ROOT_ADMIN.ordinal()){
             response.sendRedirect("/admin");
             return;
@@ -61,7 +60,12 @@ public class CreateAccountAdmin extends HttpServlet {
         User user = this.userService.findByEmail(email);
         HttpSession session = request.getSession(true);
         AuthorizationData data = (AuthorizationData) session.getAttribute("adminLogin");
-
+        Logger logger = new Logger(
+                request.getMethod(),
+                request.getRequestURI(),
+                null,
+                request.getHeader("USER-AGENT")
+        );
         if(data.getType() != TypeAccount.ROOT_ADMIN.ordinal()){
             response.sendRedirect("/admin");
             return;
@@ -77,6 +81,12 @@ public class CreateAccountAdmin extends HttpServlet {
         User model = new User(email, BCrypt.withDefaults().hashToString(8, password.toCharArray()), StatusAccount.ACTIVE.ordinal(), TypeAccount.ADMIN.ordinal());
 
         this.userService.create(model);
+
+        logger.setUserId(data.getId());
+        logger.setMessage("CREATE_ADMIN_SUCCESSFULLY");
+        logger.setStatus(400);
+        logger.setData("Email= " + email);
+        this.loggerService.log(logger);
         MailContent mailContent = new MailContent("Tài khoản admin", "email: " + email + "\n password: " + password);
         try {
             this.mailService.send(email,mailContent);
