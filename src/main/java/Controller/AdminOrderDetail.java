@@ -63,6 +63,11 @@ public class AdminOrderDetail extends HttpServlet {
                 }
                 return;
             }
+            case "cancel": {
+                this.orderService.updateStatusOrder(id, 3);
+                response.sendRedirect("/admin/adminOrderDetail?id=" + id);
+                return;
+            }
             default:
                 response.sendRedirect("/admin/adminOrderDetail?id=" + id);
         }
