@@ -1,5 +1,6 @@
 package Controller;
 
+import DTO.AuthorizationData;
 import Model.*;
 import Services.*;
 
@@ -22,6 +23,7 @@ public class CreateProduct extends HttpServlet {
     private CategoryServices categoryServices;
     private PatternService patternService;
     private ProductService productService;
+    private LoggerService loggerService;
     @Override
     public void init() throws ServletException {
         super.init();
@@ -29,6 +31,7 @@ public class CreateProduct extends HttpServlet {
         this.categoryServices = new CategoryServices("category");
         this.patternService = new PatternService("pattern");
         this.productService = new ProductService("product");
+        this.loggerService = new LoggerService();
     }
 
     @Override
@@ -45,7 +48,14 @@ public class CreateProduct extends HttpServlet {
 
         String[] colors = request.getParameterValues("color");
         String[] patterns = request.getParameterValues("pattern");
-
+        Logger logger = new Logger(
+                request.getMethod(),
+                request.getRequestURI(),
+                null,
+                request.getHeader("USER-AGENT")
+        );
+        HttpSession session = request.getSession(true);
+        AuthorizationData authorizationData = (AuthorizationData) session.getAttribute("adminLogin");
         String name = request.getParameter("name");
         int price = Integer.parseInt(request.getParameter("price"));
         int category = Integer.parseInt(request.getParameter("category"));
@@ -58,7 +68,11 @@ public class CreateProduct extends HttpServlet {
         String dimension = request.getParameter("dimension");
         Product model = new Product(name, price, shortDescription, size, StatusProduct.AVAILABLE.ordinal(),description, dimension, material, thumbnail, category);
         String productId = this.productService.create(model);
-
+        logger.setStatus(400);
+        logger.setMessage("CREATE_PRODUCT_SUCCESSFULLY");
+        logger.setUserId(authorizationData.getId());
+        logger.setData("Action= CREATE" );
+        this.loggerService.log(logger);
 
         if(colors != null) {
             for(String color : colors) {

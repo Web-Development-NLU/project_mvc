@@ -78,6 +78,7 @@
 
           <hr class="my-5" />
           <!-- Basic Bootstrap Table -->
+
           <div class="card">
             <h5 class="card-header">Thông tin</h5>
             <div class="table-responsive text-nowrap">

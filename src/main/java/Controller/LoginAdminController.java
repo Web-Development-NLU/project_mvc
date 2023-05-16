@@ -1,8 +1,10 @@
 package Controller;
 import DTO.AuthorizationData;
+import Model.Logger;
 import Model.StatusAccount;
 import Model.TypeAccount;
 import Model.User;
+import Services.LoggerService;
 import Services.UserService;
 import at.favre.lib.crypto.bcrypt.BCrypt;
 
@@ -15,12 +17,14 @@ import java.io.IOException;
 public class LoginAdminController extends HttpServlet {
 
     private UserService userService;
+    private LoggerService loggerService;
 
     @Override
     public void init() throws ServletException {
         super.init();
 
         this.userService = new UserService("users");
+        this.loggerService = new LoggerService();
     }
 
     @Override
@@ -41,10 +45,19 @@ public class LoginAdminController extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String email = request.getParameter("email");
         String password = request.getParameter("password");
-
+        Logger logger = new Logger(
+                request.getMethod(),
+                request.getRequestURI(),
+                null,
+                request.getHeader("USER-AGENT")
+        );
         User user = this.userService.findByEmail(email);
 
         if((user == null) || !((user.getType() >= TypeAccount.ADMIN.ordinal()) && BCrypt.verifyer().verify(password.toCharArray(), user.getPassword()).verified)){
+            logger.setMessage("NO_ADMIN_OR_EMAIL_OR_PASSWORD_INVALID");
+            logger.setStatus(400);
+            logger.setData("Email= " + email);
+            this.loggerService.log(logger);
             response.sendRedirect("/dashboard?error=error&email=" + email);
             return;
         }
@@ -54,6 +67,11 @@ public class LoginAdminController extends HttpServlet {
         session.setAttribute("adminLogin", data);
 
         response.sendRedirect("/admin");
+        logger.setStatus(200);
+        logger.setMessage("ADMIN_SUCCESSFULLY");
+        logger.setUserId(user.getId());
+        logger.setData("Email= " + user.getEmail());
+        this.loggerService.log(logger);
     }
 }
 

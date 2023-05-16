@@ -2,6 +2,9 @@ package Services;
 
 import DTO.BaseDTO;
 import Model.Color;
+import Model.Pattern;
+import org.jdbi.v3.core.Handle;
+import org.jdbi.v3.core.HandleCallback;
 
 import java.util.ArrayList;
 
@@ -57,6 +60,25 @@ public class ColorService extends BaseService<Color>{
                     .mapToBean(Color.class)
                     .list();
         });
+    }
+    public Color getColor(String name){
+        try {
+            return this.jdbi.withHandle(new HandleCallback<Color, Exception>() {
+                public Color withHandle(Handle handle) throws Exception{
+                    try {
+                        return handle.createQuery(
+                                        "SELECT * FROM " + tableName + " WHERE name = ?")
+                                .bind(0, name)
+                                .mapToBean(Color.class).first();
+                    }catch (IllegalStateException exception) {
+                        return null;
+                    }
+
+                }
+            });
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
     }
 
 }

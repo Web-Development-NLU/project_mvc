@@ -95,7 +95,7 @@
                                     </div>
                                     <div class="row justify-content-end">
                                         <div class="col-sm-10">
-                                            <button type="submit" class="btn btn-primary">Tạo</button>
+                                            <button type="submit" name="action" value="CREATE" class="btn btn-primary">Tạo</button>
                                         </div>
                                     </div>
                                 </form>
