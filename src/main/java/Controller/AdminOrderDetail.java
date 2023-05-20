@@ -3,21 +3,28 @@ package Controller;
 import DTO.ProductOrderDTO;
 import Model.Order;
 import Model.Product;
+import Model.Statistics;
 import Services.OrderService;
 import Services.ProductOrderService;
 import Services.ProductService;
+import Services.StatisticsService;
 
 import javax.servlet.*;
 import javax.servlet.http.*;
 import javax.servlet.annotation.*;
 import java.io.IOException;
+import java.sql.Timestamp;
+import java.time.LocalDate;
+import java.time.Month;
 import java.util.ArrayList;
+import java.util.Calendar;
 
 @WebServlet(name = "AdminOrderDetail", value = "/admin/adminOrderDetail")
 public class AdminOrderDetail extends HttpServlet {
     private OrderService orderService;
     private ProductService productService;
     private ProductOrderService productOrderService;
+    private StatisticsService statisticsService;
 
     @Override
     public void init() throws ServletException {
@@ -25,6 +32,7 @@ public class AdminOrderDetail extends HttpServlet {
         orderService = new OrderService("orders");
         this.productOrderService = new ProductOrderService();
         this.productService = new ProductService("product");
+        this.statisticsService= new StatisticsService();
     }
 
     @Override
@@ -50,9 +58,18 @@ public class AdminOrderDetail extends HttpServlet {
 
         switch (action) {
             case "next": {
-                if (Integer.parseInt(status) < 2) {
+                if (Integer.parseInt(status) <= 2) {
                     this.orderService.updateStatusOrder(id, Integer.parseInt(status) + 1);
                     response.sendRedirect("/admin/adminOrderDetail?id=" + id);
+                    int totalOrder=this.statisticsService.getOrder();
+                    int totalOrderByDate= this.statisticsService.getTotalOrderByDate(LocalDate.now());
+                    int totalSales= this.statisticsService.getSales();
+                    int totalSalesByDate= this.statisticsService.getSalesByDate(LocalDate.now());
+                    Timestamp createAt= new Timestamp(System.currentTimeMillis());
+                    Statistics statistics=new Statistics(totalOrder,totalOrderByDate,totalSales,totalSalesByDate,createAt,null);
+                    if(Integer.parseInt(status) <= 2) {
+                        this.statisticsService.create(statistics);
+                    }
                 }
                 return;
             }
@@ -69,8 +86,12 @@ public class AdminOrderDetail extends HttpServlet {
                 return;
             }
             default:
+
                 response.sendRedirect("/admin/adminOrderDetail?id=" + id);
+
+
         }
     }
+
 }
 
