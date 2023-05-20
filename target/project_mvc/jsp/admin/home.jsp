@@ -91,7 +91,7 @@
                                                     <!-- Content -->
 
 
-                                                        <div class="cart-table mt-5 col-12 col-md-8">
+                                                        <div class="cart-table mt-5 col-12 col-md-8 mx-auto">
                                                         <table class="table table-bordered">
                                                             <thead>
                                                             <tr>
@@ -123,7 +123,7 @@
                                                         </div>
                                                     </div>
                                                     </div>
-                                                    <div class="wrapper-chart-stistics">
+                                                    <div class="wrapper-chart-stistics mx-auto">
                                                     <div class="chart-container" >
                                                         <canvas id="myChart" style="width: 1150px"></canvas>
                                                     </div>
@@ -325,8 +325,8 @@
                                                                 margin-top: 2rem;
                                                             }
                                                             .cart-table {
-                                                                margin-left: 50px;
                                                                 width: 1150px;
+                                                                margin: auto;
                                                             }
                                                             thead{
                                                                 background-color: #5bc0de;
@@ -413,7 +413,7 @@
                                                             }
 
                                                             div#revenue {
-                                                                margin-left: 500px;
+
                                                                 font-size: 1rem;
                                                                 color: black;
 
@@ -421,7 +421,9 @@
                                                             #select-revenue-year {
                                                                 display: flex;
                                                                 align-items: center;
+                                                                justify-content: center;
                                                             }
+
                                                         </style>
                                                         <div>
 <%--                                                            Số lượng--%>
@@ -531,6 +533,7 @@
                                         },
                                     },
                                 });
+
                             </script>
                         </body>
 
