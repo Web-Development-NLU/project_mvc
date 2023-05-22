@@ -199,7 +199,7 @@
                                     </table>
                                 </div>
                                 <div style="display: flex; gap: 30px; margin-left: 740px">
-                                    <c:if test="<%=order.getStatus()<2%>">
+                                    <c:if test="<%=order.getStatus()<StatusOrder.DELIVERING.ordinal()%>">
                                         <form method="post"
                                               action="${pageContext.request.contextPath}/admin/adminOrderDetail?id=<%=order.getId()%>">
                                             <input type="hidden" name="action" value="cancel">
@@ -218,7 +218,7 @@
 <%--                                            </button>--%>
 <%--                                        </form>--%>
 <%--                                    </c:if>--%>
-                                    <c:if test="<%=order.getStatus()<2%>">
+                                    <c:if test="<%=order.getStatus()<StatusOrder.DONE.ordinal()%>">
                                         <form method="post"
                                               action="${pageContext.request.contextPath}/admin/adminOrderDetail?id=<%=order.getId()%>">
                                             <input type="hidden" name="action" value="next">
