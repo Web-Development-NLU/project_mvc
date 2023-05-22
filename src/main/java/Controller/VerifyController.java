@@ -90,7 +90,7 @@ public class VerifyController extends HttpServlet {
                         UpdateUserDTO dto = new UpdateUserDTO(user);
                         this.userService.update(id, dto);
 
-                        String token = this.logisticService.loginLogistic("thanh@1234", "123456", "/auth/login");
+                        String token = this.logisticService.loginLogistic("thai123@gmail.com", "123456", "/auth/login");
                         session.setAttribute("token", token);
 
                         this.userService.updateTimeout(user.getId(), null);

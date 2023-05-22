@@ -172,8 +172,8 @@ public class LogisticService {
 
     public static void main(String[] args) throws IOException {
         String token = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOi8vMTQwLjIzOC41NC4xMzYvYXBpL2F1dGgvbG9naW4iLCJpYXQiOjE2ODI3NjI5MDQsImV4cCI6MTY4Mjc2MzUwNCwibmJmIjoxNjgyNzYyOTA0LCJqdGkiOiJUZDVlQ2tHb245R2tKTE9vIiwic3ViIjoiNTdiM2M0NjI5YTM1NDY1OGE0ZDM2ZDhjYjQ0N2FmMWQiLCJwcnYiOiIyM2JkNWM4OTQ5ZjYwMGFkYjM5ZTcwMWM0MDA4NzJkYjdhNTk3NmY3In0.6zmu7Oh2poQddEykMmaBo_ITd4qKNr-Q7O1j5iMNxu4";
-//        new LogisticService().loginLogistic("thanh@1234", "123456", "/auth/login");
-//        LogisticService.signupLogistic("thanh@1234", "123456","thanh","123456","/auth/login");
+//        new LogisticService().loginLogistic("thai123@gmail.com", "123456", "/auth/login");
+//        LogisticService.signupLogistic("thai123@gmail.com", "123456","thanh","123456","/auth/login");
 //        LogisticService.getDistrictByProvince("269", "/district", token);
 //        LogisticService.getWardByDistrict("2264", "/ward",token);
 //        new LogisticService().getEstimateTimeDeliveryOrRegisterDelivery("2264", "90816", "2270", "231013", 100, 100, 100, 100, "/leadTime", token, 0);

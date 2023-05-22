@@ -73,7 +73,7 @@ public class LoginGoogle extends HttpServlet {
             AuthorizationData dataAuth = new AuthorizationData(user.getId(), user.getType());
             dataAuth.setCarts(carts);
             session.setAttribute("authorization", dataAuth);
-            String token = this.logisticService.loginLogistic("thanh@1234", "123456", "/auth/login");
+            String token = this.logisticService.loginLogistic("thai123@gmail.com", "123456", "/auth/login");
             session.setAttribute("token", token);
             response.sendRedirect("/");
         } catch (Exception e) {

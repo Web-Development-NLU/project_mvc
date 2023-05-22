@@ -199,15 +199,15 @@
                                     </table>
                                 </div>
                                 <div style="display: flex; gap: 30px; margin-left: 740px">
-                                    <c:if test="<%=order.getStatus()<2%>">
-                                        <form method="post"
-                                              action="${pageContext.request.contextPath}/admin/adminOrderDetail?id=<%=order.getId()%>">
-                                            <input type="hidden" name="action" value="cancel">
-                                            <button type="submit" class="btn btn-outline-dark"
-                                            >Hủy đơn hàng
-                                            </button>
-                                        </form>
-                                    </c:if>
+<%--                                    <c:if test="<%=order.getStatus()<2%>">--%>
+<%--                                        <form method="post"--%>
+<%--                                              action="${pageContext.request.contextPath}/admin/adminOrderDetail?id=<%=order.getId()%>">--%>
+<%--                                            <input type="hidden" name="action" value="cancel">--%>
+<%--                                            <button type="submit" class="btn btn-outline-dark"--%>
+<%--                                            >Hủy đơn hàng--%>
+<%--                                            </button>--%>
+<%--                                        </form>--%>
+<%--                                    </c:if>--%>
                                     <c:if test="<%=order.getStatus()>0 && order.getStatus()!=3%>">
                                         <form method="post"
                                               action="${pageContext.request.contextPath}/admin/adminOrderDetail?id=<%=order.getId()%>">

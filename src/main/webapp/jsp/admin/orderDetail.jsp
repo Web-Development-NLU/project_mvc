@@ -208,16 +208,16 @@
                                             </button>
                                         </form>
                                     </c:if>
-                                    <c:if test="<%=order.getStatus()>0 && order.getStatus()!=3%>">
-                                        <form method="post"
-                                              action="${pageContext.request.contextPath}/admin/adminOrderDetail?id=<%=order.getId()%>">
-                                            <input type="hidden" name="action" value="back">
-                                            <input type="hidden" name="status" value="<%=order.getStatus()%>">
-                                            <button type="submit" class="btn btn-outline-dark"
-                                            >Quay lại
-                                            </button>
-                                        </form>
-                                    </c:if>
+<%--                                    <c:if test="<%=order.getStatus()>0 && order.getStatus()!=3%>">--%>
+<%--                                        <form method="post"--%>
+<%--                                              action="${pageContext.request.contextPath}/admin/adminOrderDetail?id=<%=order.getId()%>">--%>
+<%--                                            <input type="hidden" name="action" value="back">--%>
+<%--                                            <input type="hidden" name="status" value="<%=order.getStatus()%>">--%>
+<%--                                            <button type="submit" class="btn btn-outline-dark"--%>
+<%--                                            >Quay lại--%>
+<%--                                            </button>--%>
+<%--                                        </form>--%>
+<%--                                    </c:if>--%>
                                     <c:if test="<%=order.getStatus()<2%>">
                                         <form method="post"
                                               action="${pageContext.request.contextPath}/admin/adminOrderDetail?id=<%=order.getId()%>">

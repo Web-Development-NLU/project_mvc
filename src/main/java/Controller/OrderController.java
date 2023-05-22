@@ -44,7 +44,7 @@ public class OrderController extends HttpServlet {
             request.setAttribute("user", session.getAttribute("user"));
         }
         if (session.getAttribute("token") == null) {
-            String token = this.logisticService.loginLogistic("thanh@1234", "123456", "/auth/login");
+            String token = this.logisticService.loginLogistic("thai123@gmail.com", "123456", "/auth/login");
             session.setAttribute("token", token);
         }
 
