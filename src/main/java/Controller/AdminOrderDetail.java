@@ -57,17 +57,19 @@ public class AdminOrderDetail extends HttpServlet {
                 }
                 return;
             }
-            case "back": {
-                if (Integer.parseInt(status) > StatusOrder.ORDERED.ordinal()) {
-                    this.orderService.updateStatusOrder(id, Integer.parseInt(status) - 1);
-                    response.sendRedirect("/admin/adminOrderDetail?id=" + id);
-                }
-                return;
-            }
+//            case "back": {
+//                if (Integer.parseInt(status) > StatusOrder.ORDERED.ordinal()) {
+//                    this.orderService.updateStatusOrder(id, Integer.parseInt(status) - 1);
+//                    response.sendRedirect("/admin/adminOrderDetail?id=" + id);
+//                }
+//                return;
+//            }
             case "cancel": {
-                this.orderService.updateStatusOrder(id, 3);
-                response.sendRedirect("/admin/adminOrderDetail?id=" + id);
-                return;
+                if (Integer.parseInt(status) < StatusOrder.DONE.ordinal()) {
+                    this.orderService.updateStatusOrder(id, StatusOrder.CANCELED.ordinal());
+                    response.sendRedirect("/admin/adminOrderDetail?id=" + id);
+                    return;
+                }
             }
             default:
                 response.sendRedirect("/admin/adminOrderDetail?id=" + id);

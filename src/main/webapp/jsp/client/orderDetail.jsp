@@ -131,7 +131,7 @@
                 <c:if test="<%=order.getStatus()<StatusOrder.DELIVERING.ordinal()%>">
                     <div style="display: flex; gap: 30px; margin-left: 740px">
                         <form method="post"
-                              action="${pageContext.request.contextPath}/admin/adminOrderDetail?id=<%=order.getId()%>">
+                              action="${pageContext.request.contextPath}/CancelOrderController?id=<%=order.getId()%>">
                             <input type="hidden" name="action" value="cancel">
                             <button type="submit" class="btn btn-outline-dark"
                             >Hủy đơn hàng
