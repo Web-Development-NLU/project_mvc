@@ -4,6 +4,7 @@ import DTO.ProductOrderDTO;
 import Model.Order;
 import Model.Product;
 import Model.Statistics;
+import Model.StatusOrder;
 import Services.OrderService;
 import Services.ProductOrderService;
 import Services.ProductService;
@@ -58,7 +59,7 @@ public class AdminOrderDetail extends HttpServlet {
 
         switch (action) {
             case "next": {
-                if (Integer.parseInt(status) <= 2) {
+                if (Integer.parseInt(status) < StatusOrder.DONE.ordinal()) {
                     this.orderService.updateStatusOrder(id, Integer.parseInt(status) + 1);
                     response.sendRedirect("/admin/adminOrderDetail?id=" + id);
                     int totalOrder=this.statisticsService.getOrder();
