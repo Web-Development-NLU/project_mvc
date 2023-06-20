@@ -65,15 +65,15 @@
                                 <hr class="my-4">
 
                                 <div class="d-flex flex-row justify-content-between align-items-center align-content-center">
-                                    <span class="big-dot <%= (isOrdered || isDelevering || isDone) ? "active" : ""%> d-flex justify-content-center align-items-center"><i
+                                    <span class='big-dot <%= (isOrdered || isDelevering || isDone) ? "active" : ""%> d-flex justify-content-center align-items-center'><i
                                             class="fa fa-check text-white"></i></span>
                                     <hr class="flex-fill <%= (isDelevering || isDone) ? "active" : ""%> track-line ">
                                     <span
-                                            class="d-flex justify-content-center align-items-center big-dot dot <%= (isDelevering || isDone) ? "active" : ""%> ">
+                                            class='d-flex justify-content-center align-items-center big-dot dot <%= (isDelevering || isDone) ? "active" : ""%> '>
                                     <i class="fa fa-check text-white"></i></span>
                                     <hr class="flex-fill <%= isDone ? "active" : ""%>  track-line">
                                     <span
-                                            class="d-flex justify-content-center align-items-center big-dot dot <%= isDone  ? "active" : ""%>">
+                                            class='d-flex justify-content-center align-items-center big-dot dot <%= isDone  ? "active" : ""%>'>
                                     <i class="fa fa-check text-white"></i></span>
                                 </div>
 
@@ -107,8 +107,8 @@
                                              class="img-fluid" alt="Phone"></td>
                                     <td><c:out value="${cart.name}"/></td>
 
-                                    <td><c:out value="${(cart.pattern != null) ? cart.pattern : \"\"}"/></td>
-                                    <td><c:out value="${(cart.color != null) ? cart.color : \"\"}"/></td>
+                                    <td><c:out value="${(cart.pattern != null) ? cart.pattern : \"Không có\"}"/></td>
+                                    <td><c:out value="${(cart.color != null) ? cart.color : \"Không có\"}"/></td>
                                     <td><c:out value="${cart.amount}"/></td>
                                     <td><%= DecimalFormat.getInstance().format(Double.parseDouble(request.getAttribute("sumPrice").toString())) %>
                                         VNĐ
@@ -124,8 +124,21 @@
                                 </tr>
                             </table>
                         </div>
+
                     </div>
+
                 </div>
+                <c:if test="<%=order.getStatus()<StatusOrder.DELIVERING.ordinal()%>">
+                    <div style="display: flex; gap: 30px; margin-left: 740px">
+                        <form method="post"
+                              action="${pageContext.request.contextPath}/CancelOrderController?id=<%=order.getId()%>">
+                            <input type="hidden" name="action" value="cancel">
+                            <button type="submit" class="btn btn-outline-dark"
+                            >Hủy đơn hàng
+                            </button>
+                        </form>
+                    </div>
+                </c:if>
             </div>
         </div>
     </section>
