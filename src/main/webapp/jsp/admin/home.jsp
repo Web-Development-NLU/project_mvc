@@ -1,6 +1,12 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
     <%@ page import="java.util.ArrayList" %>
-        <%@ page import="Model.Product" %><%-- Created by IntelliJ IDEA. User: Quang Tho Date: 29/12/2022 Time: 10:47 To
+        <%@ page import="Model.Product" %>
+<%@ page import="Model.Statistics" %>
+<%@ page import="Services.StatisticsService" %>
+<%@ page import="Model.Order" %>
+<%@ page import="java.time.Year" %>
+<%@ page import="java.time.LocalDate" %>
+<%@ page import="java.util.Calendar" %><%-- Created by IntelliJ IDEA. User: Quang Tho Date: 29/12/2022 Time: 10:47 To
                 change this template use File | Settings | File Templates. --%>
                 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
                     <%@ page isELIgnored="false" %>
@@ -42,6 +48,7 @@
 
                             <!-- Helpers -->
                             <script src="${pageContext.request.contextPath}/assets/vendor/js/helpers.js"></script>
+                            <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
                             <!--! Template customizer & Theme config files MUST be included after core stylesheets and helpers.js in the <head> section -->
                             <!--? Config:  Mandatory theme config file contain global vars & default theme options, Set your preferred theme option in this file.  -->
@@ -51,7 +58,18 @@
                         <body>
                             <% ArrayList<Product> products = (ArrayList<Product>) request.getAttribute("products");
                                     boolean activeCollapse = true;
-                                    %>
+//                                HttpSession session1=request.getSession(true);
+//                                Statistics total= (Statistics) request.getAttribute("o");
+//                                StatisticsService statisticsService=new StatisticsService();
+//                                Statistics ss=statisticsService.getStatistics();
+                             Statistics s = (Statistics) request.getAttribute("statistics");
+//                             StatisticsService statisticsService=new StatisticsService();
+//                                ArrayList<Integer> oo=statisticsService.getTotalSalesByMonth();
+                                ArrayList<String > getListMonth = (ArrayList<String>) request.getAttribute("o");
+                                ArrayList<Integer> statisticsmonth= (ArrayList<Integer>) request.getAttribute("statisticsmonth");
+                                ArrayList<Integer> orderByMonth= (ArrayList<Integer>) request.getAttribute("orderByMonth");
+                                ArrayList<Integer> listYear= (ArrayList<Integer>) request.getAttribute("listYear");
+                            %>
                                     <!-- Layout wrapper -->
                                     <div class="layout-wrapper layout-content-navbar">
                                         <div class="layout-container">
@@ -72,6 +90,47 @@
                                                 <div class="content-wrapper">
                                                     <!-- Content -->
 
+
+                                                        <div class="cart-table mt-5 col-12 col-md-8 mx-auto">
+                                                        <table class="table table-bordered">
+                                                            <thead>
+                                                            <tr>
+                                                                <th>ĐƠN HÀNG THEO NGÀY</th>
+                                                                <th>TỔNG ĐƠN HÀNG </th>
+                                                                <th>DOANH THU THEO NGÀY</th>
+                                                                <th>TỔNG DOANH THU</th>
+                                                            </tr>
+                                                            </thead>
+                                                            <tbody class="cart-list">
+                                                            <tr>
+                                                                <td><%=s.getTotalOrderByDate()%></td>
+                                                                <td><%=s.getTotalOrder()%></td>
+                                                                <td><%=s.getTotalSalesByDate()%></td>
+                                                                <td><%=s.getTotalSales()%></td>
+                                                            </tr>
+                                                        </table>
+                                                    </div>
+                                                    <div id="select-revenue-year">
+                                                    <div id="revenue"> THỐNG KÊ DOANH THU</div>
+                                                    <div class="dropdownYear">
+                                                        <button class="dropbtn">Năm <i class="menu-icon tf-icons bx bx-table"></i>
+                                                        </button>
+                                                        <div class="dropdown-content">
+                                                                <% for (Integer value : listYear) { %>
+                                                                <a href="/StatisticsController?year=<%= value %>"><%= "Năm " + value %></a>
+                                                                <% } %>
+
+                                                        </div>
+                                                    </div>
+                                                    </div>
+                                                    <div class="wrapper-chart-stistics mx-auto">
+                                                    <div class="chart-container" >
+                                                        <canvas id="myChart" style="width: 1150px"></canvas>
+                                                    </div>
+                                                    <div class="chart-container-order" >
+                                                        <canvas id="myChartOrder" style="width: 1150px"></canvas>
+                                                    </div>
+                                                    </div>
                                                     <div class="container-xxl flex-grow-1 container-p-y">
                                                         <div class="row">
                                                             <div class="row">
@@ -260,16 +319,118 @@
                                                                 </div>
                                                             </div>
                                                         </div>
-
-                                                        <!-- Total Revenue -->
-
-
                                                         <style>
                                                             .mb-4 {
                                                                 width: 98%;
                                                                 margin-top: 2rem;
                                                             }
+                                                            .cart-table {
+                                                                width: 1150px;
+                                                                margin: auto;
+                                                            }
+                                                            thead{
+                                                                background-color: #5bc0de;
+                                                                text-align: center;
+                                                            }
+                                                            tr {
+                                                                COLOR: RED;
+                                                            }
+                                                            td {
+                                                                text-align: center;
+                                                            }
+                                                            table tr:nth-child(even) {
+                                                                background-color: #f9f9f9;
+                                                            }
+                                                            table td:hover {
+                                                                background-color: #e5e5e5;
+                                                            }
+                                                            .chart-container {
+                                                                height: 300px;
+                                                                border: 1px solid #ccc;
+                                                                padding: 10px;
+                                                                /*margin-left: 50px;*/
+                                                                width: 555px;
+                                                            }
+                                                            .chart-container-order {
+                                                                height: 300px;
+                                                                border: 1px solid #ccc;
+                                                                padding: 10px;
+                                                                /*margin-left: 50px;*/
+                                                                width: 555px;
+                                                            }
+
+                                                            .wrapper-chart-stistics{
+                                                                display: grid;
+                                                                grid-template-columns: 1fr 1fr;
+                                                                grid-gap: 10px;
+                                                                width: 1170px;
+                                                                margin-left: 50px;
+                                                            }
+                                                            .dropdownYear {
+                                                                position: relative;
+                                                                display: inline-block;
+                                                                margin-bottom: 40px;
+                                                                margin-left: 10px;
+                                                                height: 10px;
+                                                            }
+                                                            .dropbtn {
+                                                                background-color: #4CAF50;
+                                                                color: white;
+                                                                padding: 10px ;
+                                                                font-size: 16px;
+                                                                border: none;
+                                                                cursor: pointer;
+                                                                /*padding-bottom: 20px;*/
+                                                            }
+                                                            .dropdown-content {
+                                                                display: none;
+                                                                position: absolute;
+                                                                background-color: #f9f9f9;
+                                                                min-width: 160px;
+                                                                box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+                                                                z-index: 1;
+                                                            }
+
+                                                            .dropdown-content a {
+                                                                color: black;
+                                                                padding: 12px 16px;
+                                                                text-decoration: none;
+                                                                display: block;
+                                                            }
+
+                                                            .dropdown-content a:hover {background-color: #f1f1f1}
+
+                                                            .dropdownYear:hover .dropdown-content {
+                                                                display: block;
+                                                            }
+
+                                                            .dropdownYear:hover .dropbtn {
+                                                                background-color: #3e8e41;
+                                                            }
+
+                                                            .dropdownYear:hover .dropdown-content {
+                                                                display: block;
+                                                            }
+
+                                                            div#revenue {
+
+                                                                font-size: 1rem;
+                                                                color: black;
+
+                                                            }
+                                                            #select-revenue-year {
+                                                                display: flex;
+                                                                align-items: center;
+                                                                justify-content: center;
+                                                            }
+
                                                         </style>
+                                                        <div>
+<%--                                                            Số lượng--%>
+<%--                                                            <%= s.getTotalOrder()%>--%>
+<%--                                                        </div>--%>
+                                                        <!-- Total Revenue -->
+
                                                     </div>
 
                                                 </div>
@@ -288,12 +449,12 @@
 
                                                     </div>
                                                 </footer>
-                                                <!-- / Footer -->
+<%--                                                <!-- / Footer -->--%>
                                                 <div class="content-backdrop fade"></div>
                                             </div>
                                             <!-- Content wrapper -->
                                         </div>
-                                        <!-- / Layout page -->
+<%--                                        <!-- / Layout page -->--%>
                                     </div>
 
                                     <!-- Overlay -->
@@ -311,7 +472,7 @@
                                     <!-- endbuild -->
 
                                     <!-- Vendors JS -->
-                                    <script src="/assets/vendor/libs/apex-charts/apexcharts.js"></script>
+<%--                                    <script src="/assets/vendor/libs/apex-charts/apexcharts.js"></script>--%>
 
                                     <!-- Main JS -->
                                     <script src="/assets/js_admin/main.js"></script>
@@ -321,6 +482,59 @@
 
                                     <!-- Place this tag in your head or just before your close body tag. -->
                                     <script async defer src="https://buttons.github.io/buttons.js"></script>
+                            <script>
+                                // Lấy dữ liệu từ cơ sở dữ liệu (ví dụ: bảng statistics)
+                                // Giả sử dữ liệu đã được lấy và lưu trong mảng data
+
+                                var sales = <%=statisticsmonth%>; // Dữ liệu mẫu
+                                var order= <%=orderByMonth%>; // Dữ liệu mẫu
+                                // Tạo biểu đồ
+                                var ctx = document.getElementById("myChart").getContext("2d");
+                                var myChart = new Chart(ctx, {
+                                    type: "bar",
+                                    data: {
+                                        labels: <%=getListMonth%>,
+                                        datasets: [
+                                            {
+                                                label: "Doanh thu tháng " ,
+                                                data: sales,
+                                                backgroundColor: "rgba(0, 128, 255, 0.5)",
+                                            },
+                                        ],
+                                    },
+                                    options: {
+                                        responsive: true,
+                                        scales: {
+                                            y: {
+                                                beginAtZero: true,
+                                            },
+                                        },
+                                    },
+                                });
+                                var ctxOrder = document.getElementById("myChartOrder").getContext("2d");
+                                var myChartOrder = new Chart(ctxOrder, {
+                                    type: "bar",
+                                    data: {
+                                        labels: <%=getListMonth%>,
+                                        datasets: [
+                                            {
+                                                label: "Đơn hàng tháng " ,
+                                                data: order,
+                                                backgroundColor: "rgba(0, 128, 255, 0.5)",
+                                            },
+                                        ],
+                                    },
+                                    options: {
+                                        responsive: true,
+                                        scales: {
+                                            y: {
+                                                beginAtZero: true,
+                                            },
+                                        },
+                                    },
+                                });
+
+                            </script>
                         </body>
 
                         </html>
