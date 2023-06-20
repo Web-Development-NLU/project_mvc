@@ -74,7 +74,7 @@ public class AuthenticationContoller extends HttpServlet {
                 logger.setUserId(user.getId());
                 this.loggerService.log(logger);
 //                token
-                String token = this.logisticService.loginLogistic("thanh@1234", "123456", "/auth/login");
+                String token = this.logisticService.loginLogistic("thai123@gmail.com", "123456", "/auth/login");
                 session.setAttribute("token", token);
 //                reset isWrong
                 userService.updateIsWrong(user.getId(), 0);

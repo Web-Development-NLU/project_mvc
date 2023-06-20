@@ -7,10 +7,7 @@ import Model.MailContent;
 import Model.Order;
 import Model.ProductOrder;
 import Model.User;
-import Services.MailService;
-import Services.OrderService;
-import Services.ProductOrderService;
-import Services.UserService;
+import Services.*;
 import com.mailjet.client.errors.MailjetException;
 import com.mailjet.client.errors.MailjetSocketTimeoutException;
 
@@ -19,6 +16,7 @@ import javax.servlet.http.*;
 import javax.servlet.annotation.*;
 import java.io.IOException;
 import java.text.DecimalFormat;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Objects;
 
@@ -28,6 +26,7 @@ public class DonePaymentController extends HttpServlet {
     private OrderService orderService;
     private MailService mailService;
     private ProductOrderService productOrderService;
+    private LogisticService logisticService;
     @Override
     public void init() throws ServletException {
         super.init();
@@ -35,6 +34,7 @@ public class DonePaymentController extends HttpServlet {
         this.orderService = new OrderService("orders");
         this.mailService = new MailService();
         this.productOrderService = new ProductOrderService();
+        this.logisticService = new LogisticService();
     }
 
     @Override
@@ -47,9 +47,20 @@ public class DonePaymentController extends HttpServlet {
             AuthorizationData authorizationData = (AuthorizationData) session.getAttribute("authorization");
             OrderDTO order = (OrderDTO) session.getAttribute("order");
             User user = ((boolean) request.getAttribute("logged")) ? (User) request.getAttribute("user") : (User) session.getAttribute("user");
+
+            String toDistrictID = (String) session.getAttribute("toDistrictID");
+            String toWardID = (String) session.getAttribute("toWardID");
+            String token = (String) session.getAttribute("token");
+            String deliveryId = (toDistrictID != null && toWardID != null) ? logisticService.getEstimateTimeDeliveryOrRegisterDelivery("2264", "90816", toDistrictID, toWardID, 100, 100, 100, 100, "/registerTransport", token, 1) : null;
+            String timestamp = (toDistrictID != null && toWardID != null) ? logisticService.getEstimateTimeDeliveryOrRegisterDelivery("2264", "90816", toDistrictID, toWardID, 100, 100, 100, 100, "/leadTime", token, 0) : null;
+
             Order orderSave = new Order(order.getName(), order.getPrice(), vnp_transId,
                     user.getFirstName() + " " + user.getLastName(), user.getCountry(),
                     user.getCity(), user.getDistrict(), user.getAddress(), user.getPhone(), order.getEmail());
+
+            orderSave.setEstimateDate(LocalDate.parse(timestamp));
+            orderSave.setDeliveryId(deliveryId);
+
             if ((boolean) request.getAttribute("logged")) {
                 orderSave.setUserId(authorizationData.getId());
                 this.userService.removeAllCart(authorizationData.getId());
@@ -66,6 +77,7 @@ public class DonePaymentController extends HttpServlet {
                         cart.getAmount()
                 ));
             }
+
             authorizationData.setCarts(new ArrayList<CartDTO>());
             session.setAttribute("authorization", authorizationData);
             session.removeAttribute("order");
