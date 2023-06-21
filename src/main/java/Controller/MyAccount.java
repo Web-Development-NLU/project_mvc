@@ -3,6 +3,7 @@ package Controller;
 import DTO.AuthorizationData;
 import DTO.UpdateUserDTO;
 import Model.StatusAccount;
+import Services.LogisticService;
 import Services.UserService;
 
 import javax.servlet.*;
@@ -13,11 +14,14 @@ import java.io.IOException;
 @WebServlet(name = "MyAccount", value = "/myAccount")
 public class MyAccount extends HttpServlet {
     private UserService userService;
+    private LogisticService logisticService;
 
     @Override
     public void init() throws ServletException {
         super.init();
         this.userService = new UserService("users");
+        this.logisticService = new LogisticService();
+
     }
 
     @Override
@@ -37,6 +41,8 @@ public class MyAccount extends HttpServlet {
             } else if (success.equals("changeInfo")) {
                 request.setAttribute("success", "Cập nhật thông tin thành công");
             }
+            String token = this.logisticService.loginLogistic("thai123@gmail.com", "123456", "/auth/login");
+//        session.setAttribute("token", token);
 
             request.getRequestDispatcher("/jsp/client/myAccount.jsp").forward(request, response);
         }

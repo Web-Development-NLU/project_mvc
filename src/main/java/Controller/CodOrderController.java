@@ -51,8 +51,9 @@ public class CodOrderController extends HttpServlet {
 
         String toDistrictID = (String) session.getAttribute("toDistrictID");
         String toWardID = (String) session.getAttribute("toWardID");
-
-        String token = (String) session.getAttribute("token");
+        String token = this.logisticService.loginLogistic("thai123@gmail.com", "123456", "/auth/login");
+//        session.setAttribute("token", token);
+//        String token = (String) session.getAttribute("token");
         String deliveryId = (toDistrictID != null && toWardID != null) ? logisticService.getEstimateTimeDeliveryOrRegisterDelivery("2264", "90816", toDistrictID, toWardID, 100, 100, 100, 100, "/registerTransport", token, 1) : null;
         String timestamp = (toDistrictID != null && toWardID != null) ? logisticService.getEstimateTimeDeliveryOrRegisterDelivery("2264", "90816", toDistrictID, toWardID, 100, 100, 100, 100, "/leadTime", token, 0) : null;
 

@@ -26,6 +26,8 @@
     String email = (user.getEmail() != null) ? user.getEmail() : "";
     String ward = (user.getWard() != null) ? user.getWard() : "";
     String success = (request.getAttribute("success") == null) ? null : request.getAttribute("success").toString();
+    String token = session.getAttribute("token") != null ? (String) session.getAttribute("token") : "";
+
 %>
 <body>
 <div id="myAccount_container">
@@ -141,8 +143,12 @@
 </div>
 
 <jsp:include page="common/tail.jsp"/>
+s<c:if test='<%=token!=""%>'>
+    <input type="hidden" name="token" value="<%=token%>">
+</c:if>
 </body>
 </html>
+<script type="module" src="../../assets/js/login.js"></script>
 <script src="../../assets/js/account.js" type="module">
 
 </script>
