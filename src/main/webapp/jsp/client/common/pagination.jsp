@@ -13,7 +13,7 @@
         <li class="page-item pagination-item"><a class="page-link color-black" style="padding: 0.62rem 0.75rem;"
                                                  href="${pageContext.request.contextPath}/${param.path}?infoSearch=${param.search}&page=${param.active - 1}"><i
                 class="fa-solid fa-angle-left"></i></a></li>
-        <c:forEach begin="${param.active -4 > 0 ? param.active -4 : 1}" end="${param.active-1 >0 ? param.active : 0}"
+        <c:forEach begin="${param.active -4 > 0 ? param.active -4 : 1}" end="${param.active-1}"
                    var="i">
             <li class="page-item pagination-item"><a class="page-link color-black"
                                                      href="${pageContext.request.contextPath}/${param.path}?infoSearch=${param.search}&page=${i}"><c:out
